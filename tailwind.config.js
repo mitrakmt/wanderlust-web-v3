@@ -1,0 +1,93 @@
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./public/**/*.html",
+    "./node_modules/flowbite-react/**/*.js",
+ 
+    // Or if using `src` directory:
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  mode: 'jit',
+  darkMode: 'class',
+  theme: {
+    fontFamily: {
+      'body': [
+        'Roboto', 
+        'ui-sans-serif', 
+        'system-ui', 
+        '-apple-system', 
+        'system-ui', 
+        'Segoe UI', 
+        'Roboto', 
+        'Helvetica Neue', 
+        'Arial', 
+        'Noto Sans', 
+        'sans-serif', 
+        'Apple Color Emoji', 
+        'Segoe UI Emoji', 
+        'Segoe UI Symbol', 
+        'Noto Color Emoji'
+      ],
+          'sans': [
+        'Roboto', 
+        'ui-sans-serif', 
+        'system-ui', 
+        '-apple-system', 
+        'system-ui', 
+        'Segoe UI', 
+        'Roboto', 
+        'Helvetica Neue', 
+        'Arial', 
+        'Noto Sans', 
+        'sans-serif', 
+        'Apple Color Emoji', 
+        'Segoe UI Emoji', 
+        'Segoe UI Symbol', 
+        'Noto Color Emoji'
+      ]
+    },
+    extend: {
+      colors: {
+        primary: {"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"}
+      },
+      blur: {
+        '2xs': '1px',
+        xs: '2px',
+      },
+      height: {
+        300: '300px',
+        500: '500px'
+      },
+      brightness: {
+        25: '.25',
+        175: '1.75',
+      },
+      gridTemplateColumns: {
+        '6': 'repeat(6, minmax(0, 1fr))',
+      },
+      
+      // that is animation class
+      animation: {
+        fade: 'fadeIn 1s ease-in-out',
+      },
+
+      // that is actual animation
+      keyframes: theme => ({
+        fadeIn: {
+          '0%': { backgroundColor: theme('colors.black') },
+          '100%': { backgroundColor: theme('colors.transparent') },
+        },
+      }),
+    },
+  },
+  plugins: [
+      require('@tailwindcss/aspect-ratio'),
+      require('flowbite/plugin'),
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/line-clamp'),
+      require('@tailwindcss/typography'),
+      require('flowbite/plugin')
+  ],
+}

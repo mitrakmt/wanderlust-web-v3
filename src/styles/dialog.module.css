@@ -1,0 +1,59 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog {
+  position: relative;
+  z-index: 100;
+  width: 50%;
+  max-width: 100%;
+  padding: var(--modal-padding-y) var(--modal-padding-x);
+  color: var(--body-color);
+  backdrop-filter: blur(35px);
+  background: var(--background-color);
+  background-clip: padding-box;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.55);
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: 0.5s fade-in;
+  filter: saturate(-1);
+}
+
+.dialog > header {
+  position: -webkit-sticky;
+  position: sticky;
+  height: 80px;
+  top: calc(var(--modal-padding-y) * -1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--modal-padding-y) var(--modal-padding-x);
+  margin: calc(var(--modal-padding-y) * -1) calc(var(--modal-padding-x) * -1)
+    var(--modal-padding-y);
+  color: var(--emphasis-color);
+  background-color: inherit;
+  border-bottom: 1px solid var(--border-color);
+  font-family: "Promopt Bold";
+  font-size: 24px;
+}
+
+.dialog > header [data-close] {
+  margin-right: -0.25rem;
+}
+
+[open] + .backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(208, 2, 2, 0.25);
+}
