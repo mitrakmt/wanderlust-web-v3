@@ -15,6 +15,8 @@ import ProIcon from './icons/ProIcon';
 import SearchIcon from './icons/SearchIcon';
 import SettingsIcon from './icons/SettingsIcon';
 import TravelListIcon from './icons/TravelListIcon';
+import ContactIcon from './icons/ContactIcon';
+import LoginIcon from './icons/LoginIcon';
 
 // Context
 import { themeContext } from '../../context/ThemeProvider';
@@ -128,6 +130,21 @@ function Sidebar({ user, router, userLoading, logout }) {
             authRequired: true,
             premiumRequired: false
         },
+        {
+            title: 'Login',
+            path: '/login',
+            icon: <LoginIcon />,
+            authRequired: false,
+            premiumRequired: false,
+            hideIfLoggedIn: true
+        },
+        {
+            title: 'Help',
+            path: '/contact',
+            icon: <ContactIcon />,
+            authRequired: false,
+            premiumRequired: false
+        }
     ];
     
     // Functions
@@ -166,9 +183,6 @@ function Sidebar({ user, router, userLoading, logout }) {
         setProfileDropdownOpen(false);
     }
 
-    // const isPremium = !!user?.premium || false;
-
-    // if (isLoading) return <p>Loading...</p>
     if (userLoading) return <p>Loading</p>
 
     return (
@@ -225,6 +239,16 @@ function Sidebar({ user, router, userLoading, logout }) {
                                 </div>
                             </a>
                         </div> */}
+                        {
+                            !user && (
+                                <div className="flex items-center">
+                                    <a onClick={() => router.push('/login')} className="cursor-pointer mr-2 inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-transparent rounded-md shadow-sm hover:bg-gray-50 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                        <svg aria-hidden="true" className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fillRule="evenodd" d="M3 10a7 7 0 1114 0 7 7 0 01-14 0zM10 2a8 8 0 100 16A8 8 0 0010 2z" clipRule="evenodd"></path></svg>
+                                        Sign in
+                                    </a>
+                                </div>
+                            )
+                        }
                         {/* <!-- Menu --> */}
                         <button onClick={() => setMenuDropdownOpen(!menuDropdownOpen)} className="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <svg aria-hidden="true" className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
@@ -241,12 +265,18 @@ function Sidebar({ user, router, userLoading, logout }) {
                                         </div>
                                         <div className="grid grid-cols-3 gap-4 p-4">
                                             {
-                                                navbarTabs.map(({ title, icon, path, authRequired, premiumRequired }) => (
-                                                    <a key={`navbarTabs-mobile-${title}`} onClick={() => changePage(path)} className={`${premiumRequired && !user.premium ? "disabled cursor-not-allowed" : ""} flex flex-col items-center justify-center cursor-pointer p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group`}>
-                                                        {icon}
-                                                        <div className="text-sm text-gray-900 dark:text-white">{title}</div>
-                                                    </a>
-                                                ))
+                                                navbarTabs.map(({ title, icon, path, authRequired, premiumRequired, adminOnly }) => {
+                                                    if (authRequired && !user) return null;
+                                                    if (premiumRequired && !user?.is_premium) return null;
+                                                    if (adminOnly && !user?.role === 'superadmin') return null;
+                                            
+                                                    return (
+                                                        <a key={`navbarTabs-mobile-${title}`} onClick={() => changePage(path)} className={`${premiumRequired && !user?.premium ? "disabled cursor-not-allowed" : ""} flex flex-col items-center justify-center cursor-pointer p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group`}>
+                                                            {icon}
+                                                            <div className="text-xs mt-1 text-gray-900 dark:text-white">{title}</div>
+                                                        </a>
+                                                    )
+                                                })
                                             }
                                         </div>
                                     </div>
@@ -272,14 +302,18 @@ function Sidebar({ user, router, userLoading, logout }) {
                                         </div>
                                         <ul className="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
                                             {
-                                                profileTabs.map(({ title, icon, path }) => (
-                                                    <li key={`menuTabs-mobile-${title}`}>
-                                                        <a onClick={() => changePage(path)} className="flex cursor-pointer items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                            {icon}
-                                                            <span className="ml-2">{title}</span>
-                                                        </a>
-                                                    </li>
-                                                ))
+                                                profileTabs.map(({ title, icon, path, hideIfLoggedIn }) => {
+                                                    if (hideIfLoggedIn && user) return null;
+                                            
+                                                    return (
+                                                        <li key={`menuTabs-mobile-${title}`}>
+                                                            <a onClick={() => changePage(path)} className="flex cursor-pointer items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                                {icon}
+                                                                <span className="ml-2">{title}</span>
+                                                            </a>
+                                                        </li>
+                                                    )
+                                                })
                                             }
                                             {
                                                 !user?.premium && (
@@ -341,6 +375,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                         {
                             profileTabs.map((item) => {
                                 if (item.authRequired && !user) return null;
+                                if (item.hideIfLoggedIn && user) return null;
 
                                 return (
                                     <li key={`profileTabs-desktop-${item.title}`}>

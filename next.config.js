@@ -5,6 +5,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  basePath: '',
   images: {
     minimumCacheTTL: 60,
     remotePatterns: [
