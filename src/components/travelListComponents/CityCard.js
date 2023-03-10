@@ -52,7 +52,7 @@ export default function CityCard({ isPublicMap, id, city, country, removeCity, v
                     </button>
                 </div>
                 <div className="flex flex-col items-center pb-4">
-                    <Image className="relative object-cover w-full h-24 mb-3 shadow-lg" height={30} width={30} src={image} alt={`${city}, ${country}`} />
+                    <Image className="relative object-cover w-full h-24 mb-3 shadow-lg" height={80} width={80} src={image} alt={`${city}, ${country}`} />
                     <h5 className="mb-1 text-lg font-medium text-gray-900 dark:text-white px-4">{`${city}, ${country}`}</h5>
                     <div className="flex mt-4 justify-center w-full">
                         <a onClick={() => viewCity(city)} className="cursor-pointer inline-flex items-center mx-1 px-4 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">View</a>

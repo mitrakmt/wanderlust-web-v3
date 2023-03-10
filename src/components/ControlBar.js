@@ -65,7 +65,7 @@ const ControlBar = ({ refresh, openInfoModal, cityId, currentImageFavoriteStatus
         <ShareIcon city={city} country={country} countryInfo={countryInfo} attribution={attribution} />
         {
           cityId && 
-            <FavoriteControl toggleFavorite={toggleFavorite} currentImageFavoriteStatus={currentImageFavoriteStatus} showBackground={true} />
+          <FavoriteControl toggleFavorite={toggleFavorite} currentImageFavoriteStatus={currentImageFavoriteStatus} showBackground={true} forHomePage={true} />
         }
       </div>
     </div>

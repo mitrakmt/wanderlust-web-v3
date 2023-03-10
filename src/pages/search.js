@@ -6,6 +6,7 @@ import LoadingCityCard from '../components/LoadingCityCard/LoadingCityCard';
 
 // Hooks
 import { useRouter } from 'next/router';
+import { useAuth } from '../hooks/useAuth';
 
 // Context
 import { featuredCitiesContext } from '../context/FeaturedCitiesProvider';
@@ -33,6 +34,7 @@ export default function Search() {
 
     // Hooks
     const router = useRouter();
+    const { user } = useAuth();
 
     // State search
     const [searchLocationsSearchTerm, setSearchLocationsSearchTerm] = useState("");
@@ -193,7 +195,7 @@ export default function Search() {
                         </svg> ) : locations?.map((city, index) => (
                         <CityCard key={`searchCityCard-${city.id}-${index}`} breadcrumb="Search" keyId={`searchCityCard-${city.id}-${index}`} data={{
                             city
-                        }} index={index} favorites={favorites} toggleFavorite={toggleFavorite} />
+                        }} index={index} user={user} favorites={favorites} toggleFavorite={toggleFavorite} />
                     ))
                 }
             </div>

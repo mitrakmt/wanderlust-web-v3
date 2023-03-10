@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import { toVisitContext } from '../context/ToVisitProvider';
 
 // New Components
-import InputWithAddon from '../components/InputWithAddon/InputWithAddon';
+import Input from '../components/Input/Input';
 import TextH2 from '../components/Text/TextH2';
 import TextH5 from '../components/Text/TextH5';
 import CustomButton from '../components/Button/Button';
@@ -32,6 +32,9 @@ export default function TravelList() {
 
     // Context
     const [toVisit, setToVisit] = useContext(toVisitContext);
+
+    // State
+    const [showSidebar, setShowSidebar] = useState(false);
 
     // State search
     const [citiesSearchTerm, setCitiesSearchTerm] = useState("");
@@ -52,6 +55,10 @@ export default function TravelList() {
                 setToVisit(res.data || []);
             })
     }, [])
+
+    const toggleSidebar = () => {
+        setShowSidebar(!showSidebar);
+    }
 
     // Functions
     const clearCitySearch = () => {
@@ -114,49 +121,39 @@ export default function TravelList() {
     if (userLoading) return null;
 
     return (
-        <section className="relative ml-0 sm:ml-16 px-6 py-8">
+        <section className="relative w-full min-h-screen overflow-hidden">
             <Map isPublicMap={false} toVisit={toVisit} defaultZoom={2.5} coordinates={[115.1317479, -8.6531344]} user={user} viewCity={viewCity} removeCity={removeCity} setUser={setUser} />
-                <div className="px-2 md:px-8 py-2 w-full z-50">
-                    <div className="pointer-events-none">
-                        <TextH2 styles={{ position: 'relative', marginBottom: 0, fontWeight: 800 }}>Travel List</TextH2>
-                        <p className="mt-0 relative font-bold text-sm md:text-md text-black dark:text-white text-wrap mb-2">Keep track of the places you want to visit around the world.</p>
-                    </div>
-                    <div className="w-full">
-                        <div className="rounded-lg bg-gray-50 dark:bg-gray-800 w-full" id="search" role="tabpanel" aria-labelledby="search">
+
+            <div className="pointer-events-none ml-20">
+                <TextH2 styles={{ position: 'relative', marginBottom: 0, fontWeight: 800 }}>Travel List</TextH2>
+                <p className="mt-0 relative font-bold text-sm md:text-md text-black dark:text-white text-wrap mb-2">Keep track of the places you want to visit around the world.</p>
+            </div>
+
+            {/* SIDEBAR  */}
+            <div className="text-center m-5 fixed bottom-5 right-0 z-50">
+                <button onClick={toggleSidebar} className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" type="button">
+                    Add New City
+                </button>
+            </div>
+
+            {/* <!-- drawer component --> */}
+            <div className={`absolute top-0 ${showSidebar ? "right-0" : "-right-80"} z-50 w-80 h-screen p-4 transition-all bg-white dark:bg-gray-800`} tabIndex="-1">
+                <h5 id="drawer-label" className="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">New Place</h5>
+                <button type="button" onClick={toggleSidebar} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+                    <span className="sr-only">Close menu</span>
+                </button>
+                <div action="#">
+                    <div className="rounded-lg bg-gray-50 dark:bg-gray-800 w-full" id="search" role="tabpanel" aria-labelledby="search">
                             <div className="flex w-full">
-                                {
-                                    citiesSearchTerm?.length > 0 &&
-                                        <button
-                                            style={{ marginBottom: '4px', marginRight: '8px', marginTop: '30px' }}
-                                            className="flex items-center justify-center h-8 px-5 py-5 button button-close"
-                                            onClick={clearCitySearch}
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="24"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                className="feather feather-x-circle featherButton"
-                                            >
-                                                <circle cx="12" cy="12" r="10"></circle>
-                                                <line x1="15" y1="9" x2="9" y2="15"></line>
-                                                <line x1="9" y1="9" x2="15" y2="15"></line>
-                                            </svg>
-                                        </button>
-                                }
+                              
                                 <div className="w-full">   
                                     <div className="relative">
-                                        <InputWithAddon
+                                        <Input
                                             onChange={(e) => updateSearchTerm(e.target.value)}
                                             onKeyUp={searchCity}
                                             label="Search"
                                             value={citiesSearchTerm}
-                                            symbol={<svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>}
                                             type="text"
                                             placeholder="Search for a place..."
                                         />
@@ -164,7 +161,7 @@ export default function TravelList() {
                                             <CustomButton disabled={searchCitiesLoading ? true : false} onClick={searchCity} text="Search" />
                                         </div>
                                     </div>
-                                    <div className="p-2 relative">
+                                    <div className="mt-2 relative">
                                         {
                                             citiesSearchTerm.length !== 0 ? cities?.length > 0 && <div className="overflow-x-auto shadow-md sm:rounded-lg absolute w-full scroll max-h-80" style={{ zIndex: 100 }}>
                                                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -177,9 +174,6 @@ export default function TravelList() {
                                                                 Country
                                                             </th>
                                                             <th scope="col" className="px-6 py-3">
-                                                                Population
-                                                            </th>
-                                                            <th scope="col" className="px-6 py-3">
                                                                 Action
                                                             </th>
                                                         </tr>
@@ -189,13 +183,10 @@ export default function TravelList() {
                                                             cities.map((city, index) => (
                                                                 <tr key={`citiesList-${city.name}-${index}`} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                                                     <td className="px-6 py-4">
-                                                                        <TextH5>{city?.name}</TextH5>
+                                                                        {city?.name}
                                                                     </td>
                                                                     <td className="px-6 py-4">
                                                                         {city.country?.name}
-                                                                    </td>
-                                                                    <td className="px-6 py-4">
-                                                                        {city.population}
                                                                     </td>
                                                                     <td className="px-6 py-4">
                                                                         <button onClick={() => addToVisit(city)} disabled={addToVisitLoading} className="mt-2 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add</button>
@@ -207,12 +198,21 @@ export default function TravelList() {
                                                 </table>
                                             </div> : <div></div>
                                         }
-                                    </div>
+                                </div>
+                                <div className="bottom-0 left-0 flex justify-center w-full pb-4 space-x-4 md:px-4 md:absolute">
+                                    <button type="submit" onClick={addToVisit} className="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                        Add place
+                                    </button>
+                                    <button type="button" onClick={toggleSidebar} className="inline-flex w-full justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                        <svg aria-hidden="true" className="w-5 h-5 -ml-1 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        Cancel
+                                    </button>
+                                </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
+            </div>
         </section>
     )
 }

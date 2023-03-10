@@ -38,6 +38,7 @@ export default function Places() {
     const [citiesSearchDropdownOpen, setCitiesSearchDropdownOpen] = useState(false);
     const [selectedCity, setSelectedCity] = useState(null);
     const [citySearching, setCitySearching] = useState(false);
+    const [showSidebar, setShowSidebar] = useState(false);
 
     // UseEffects
     useEffect(() => {
@@ -132,6 +133,10 @@ export default function Places() {
         debouncedCitySearch(text)
     }
 
+    const toggleSidebar = () => {
+        setShowSidebar(!showSidebar);
+    }
+
     const debouncedCitySearch = useDebouncedCallback(
         (text) => {
             if (text.length < 3) {
@@ -147,121 +152,149 @@ export default function Places() {
         300
     );
 
+    const clearAddPlaceInfo = () => {
+        setSelectedPlace(null);
+        setNewPlaceNotes('');
+        setSelectedCity(null);
+        setSearchCitiesText('');
+        setCities([]);
+        setCitiesSearchDropdownOpen(false);
+        setShowSidebar(false);
+    }
+
     if (userLoading) return null;
 
     return (
-        <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <div className="w-auto relative z-50 px-2">
-                <div className="pointer-events-none">
-                    <TextH2 styles={{ position: 'relative', marginBottom: 0, fontWeight: 800 }}>Places</TextH2>
-                    <p className="mt-0 relative font-bold text-sm md:text-md text-black dark:text-white text-wrap mb-2">Add your favorite places to keep track of amazing restaurants and sights in each city.</p>
-                </div>
-                <div className="pointer-events-auto">
-                    <GooglePlacesAutocomplete
-                        apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-                        minLengthAutocomplete={3}
-                        apiOptions={{
-                            language: 'en'
-                        }}
-                        selectProps={{
-                            selectedPlace,
-                            onChange: setSelectedPlace,
-                        }}
-                        style="w-auto"
-                    />
-                </div>
-                {
-                    selectedPlace && (
-                        <div className="relative">
-                            {/* city searching loading indicator  */}
-                            {
-                                citySearching && (
-                                    <div className="absolute z-10 top-16 left-0 right-0 bg-white rounded-lg shadow-lg">
-                                        <div className="p-2.5">
-                                            <div className="flex items-center">
-                                                <div className="w-4 h-4 mr-2 bg-gray-300 rounded-full animate-pulse"></div>
-                                                <div className="w-4 h-4 mr-2 bg-gray-300 rounded-full animate-pulse"></div>
-                                                <div className="w-4 h-4 mr-2 bg-gray-300 rounded-full animate-pulse"></div>
+        <section className="relative w-full min-h-screen overflow-hidden">
+            <Map isPublicMap={false} defaultZoom={2.5} coordinates={[115.1317479, -8.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} removePlace={removePlace} />
+
+            <div className="pointer-events-none ml-20">
+                <TextH2 styles={{ position: 'relative', marginBottom: 0, fontWeight: 800 }}>Places</TextH2>
+                <p className="mt-0 relative font-bold text-sm md:text-md text-black dark:text-white text-wrap mb-2">Add your favorite places to keep track of amazing restaurants and sights in each city.</p>
+            </div>
+
+            {/* SIDEBAR  */}
+            <div className="text-center m-5 fixed bottom-5 right-0 z-50">
+                <button onClick={toggleSidebar} className="cursor-pointer text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" type="button">
+                    Add New Place
+                </button>
+            </div>
+
+            {/* <!-- drawer component --> */}
+            <div style={{ zIndex: 1000 }} className={`absolute top-0 ${showSidebar ? "right-0" : "-right-80"} w-80 h-screen p-4 transition-all bg-white dark:bg-gray-800`} tabIndex="-1">
+                <h5 id="drawer-label" className="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">New Place</h5>
+                <button type="button" onClick={clearAddPlaceInfo} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+                    <span className="sr-only">Close menu</span>
+                </button>
+                <div className="w-full">
+                    <div className="pointer-events-auto">
+                        <GooglePlacesAutocomplete
+                            apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+                            minLengthAutocomplete={3}
+                            apiOptions={{
+                                language: 'en'
+                            }}
+                            selectProps={{
+                                selectedPlace,
+                                onChange: setSelectedPlace,
+                            }}
+                        />
+                    </div>
+                    {
+                        selectedPlace && (
+                            <div className="relative">
+                                {
+                                    citySearching && (
+                                        <div className="absolute z-10 top-16 left-0 right-0 bg-white rounded-lg shadow-lg">
+                                            <div className="p-2.5">
+                                                <div className="flex items-center">
+                                                    <div className="w-4 h-4 mr-2 bg-gray-300 rounded-full animate-pulse"></div>
+                                                    <div className="w-4 h-4 mr-2 bg-gray-300 rounded-full animate-pulse"></div>
+                                                    <div className="w-4 h-4 mr-2 bg-gray-300 rounded-full animate-pulse"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )
-                            }
-                            
-                            <input onChange={(e) => searchCities(e.target.value)} value={searchCitiesText} className="relative z-1 mt-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Search for a city..." />
-                            {
-                                cities.length > 0 && citiesSearchDropdownOpen && (
-                                    <div className="absolute z-10 top-16 left-0 right-0 bg-white rounded-lg shadow-lg">
-                                        {
-                                            cities.map((city) => {
-                                                return (
-                                                    <div key={`places-citySearch-${city.id}`} className="p-2.5 cursor-pointer hover:bg-gray-100" onClick={() => {
-                                                        setSelectedCity(city)
-                                                        setCitiesSearchDropdownOpen(false);
-                                                        setSearchCitiesText(`${city.name}, ${city.country_name}`)
-                                                    }}>{city.name}, {city.country_name}</div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                )
-                            }
+                                    )
+                                }
+                                
+                                <input onChange={(e) => searchCities(e.target.value)} value={searchCitiesText} className="relative z-1 mt-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Search for a city..." />
+                                {
+                                    cities.length > 0 && citiesSearchDropdownOpen && (
+                                        <div className="absolute z-10 top-16 left-0 right-0 bg-white rounded-lg shadow-lg">
+                                            {
+                                                cities.map((city) => {
+                                                    return (
+                                                        <div key={`places-citySearch-${city.id}`} className="p-2.5 cursor-pointer hover:bg-gray-100" onClick={() => {
+                                                            setSelectedCity(city)
+                                                            setCitiesSearchDropdownOpen(false);
+                                                            setSearchCitiesText(`${city.name}, ${city.country_name}`)
+                                                        }}>{city.name}, {city.country_name}</div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        )
+                    }
+                    {
+                        selectedPlace && (
+                            <textarea onChange={(e) => setNewPlaceNotes(e.target.value)} value={newPlaceNotes} rows="2" className="relative z-1 mt-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Write your notes here..."></textarea>
+                        )
+                    }
+                    {
+                        successMessage && (
+                            <div className="mt-2 relative text-green-500">{successMessage}</div>
+                        )
+                    }
+                    {
+                        errorMessage && (
+                            <div className="mt-2 relative text-red-500">{errorMessage}</div>
+                        )
+                    }
+                    <div className="flex justify-center w-full pb-4 space-x-4 md:px-4 mt-4">
+                        <button type="submit" onClick={addPlace} className="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Add place
+                        </button>
+                        <button type="button" onClick={clearAddPlaceInfo} className="inline-flex w-full justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            <svg aria-hidden="true" className="w-5 h-5 -ml-1 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            Cancel
+                        </button>
+                    </div>
+                    <div className="fixed bottom-8 md:bottom-4 w-auto right-0 left-0 justify-center flex flex-wrap z-50 mt-4 ml-0 sm:ml-16">
+                        <div className="flex items-center mr-4 mb-2">
+                            <input checked={!selectedFilter} onChange={() => setSelectedFilter(null)} type="radio" value="" className="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
                         </div>
-                    )
-                }
-                {
-                    selectedPlace && (
-                        <textarea onChange={(e) => setNewPlaceNotes(e.target.value)} value={newPlaceNotes} rows="2" className="relative z-1 mt-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Write your notes here..."></textarea>
-                    )
-                }
-                {
-                    successMessage && (
-                        <div className="mt-2 relative text-green-500">{successMessage}</div>
-                    )
-                }
-                {
-                    errorMessage && (
-                        <div className="mt-2 relative text-red-500">{errorMessage}</div>
-                    )
-                }
-                {
-                    selectedPlace && (
-                        <button onClick={addPlace} disabled={addPlaceLoading} className="mt-2 cursor-pointer relative text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add</button>
-                    )
-                }
-                {/* filters  */}
-                <div className="fixed bottom-8 md:bottom-4 right-0 left-0 justify-center flex flex-wrap z-50 mt-4 ml-16">
-                    <div className="flex items-center mr-4 mb-2">
-                        <input checked={!selectedFilter} onChange={() => setSelectedFilter(null)} type="radio" value="" className="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
-                    </div>
-                    <div className="flex items-center mr-4 mb-2">
-                        <input checked={selectedFilter === 'point_of_interest'} onChange={() => setSelectedFilter('point_of_interest')} type="radio" value="" className="cursor-pointer w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Point of Interest</label>
-                    </div>
-                    <div className="flex items-center mr-4 mb-2">
-                        <input checked={selectedFilter === 'food'} onChange={() => setSelectedFilter('food')} type="radio" value="" className="cursor-pointer w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Food</label>
-                    </div>
-                    <div className="flex items-center mr-4 mb-2">
-                        <input checked={selectedFilter === 'cafe'} onChange={() => setSelectedFilter('cafe')} type="radio" value="" className="cursor-pointer w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cafe</label>
-                    </div>
-                    <div className="flex items-center mr-4 mb-2">
-                        <input checked={selectedFilter === 'bar'} onChange={() => setSelectedFilter('bar')} type="radio" value="" className="cursor-pointer w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
-                    </div>
-                    <div className="flex items-center mr-4 mb-2">
-                        <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
-                    </div>
-                    <div className="flex items-center mr-4 mb-2">
-                        <input checked={selectedFilter === 'museum'} onChange={() => setSelectedFilter('museum')} type="radio" value="" className="cursor-pointer w-4 h-4 text-brown-600 bg-gray-100 border-gray-300 focus:ring-brown-500 dark:focus:ring-brown-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Museum</label>
+                        <div className="flex items-center mr-4 mb-2">
+                            <input checked={selectedFilter === 'point_of_interest'} onChange={() => setSelectedFilter('point_of_interest')} type="radio" value="" className="cursor-pointer w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Point of Interest</label>
+                        </div>
+                        <div className="flex items-center mr-4 mb-2">
+                            <input checked={selectedFilter === 'food'} onChange={() => setSelectedFilter('food')} type="radio" value="" className="cursor-pointer w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Food</label>
+                        </div>
+                        <div className="flex items-center mr-4 mb-2">
+                            <input checked={selectedFilter === 'cafe'} onChange={() => setSelectedFilter('cafe')} type="radio" value="" className="cursor-pointer w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cafe</label>
+                        </div>
+                        <div className="flex items-center mr-4 mb-2">
+                            <input checked={selectedFilter === 'bar'} onChange={() => setSelectedFilter('bar')} type="radio" value="" className="cursor-pointer w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
+                        </div>
+                        <div className="flex items-center mr-4 mb-2">
+                            <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
+                        </div>
+                        <div className="flex items-center mr-4 mb-2">
+                            <input checked={selectedFilter === 'museum'} onChange={() => setSelectedFilter('museum')} type="radio" value="" className="cursor-pointer w-4 h-4 text-brown-600 bg-gray-100 border-gray-300 focus:ring-brown-500 dark:focus:ring-brown-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Museum</label>
+                        </div>
                     </div>
                 </div>
             </div>
-            <Map isPublicMap={false} defaultZoom={2.5} coordinates={[115.1317479, -8.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} removePlace={removePlace} />
         </section>
     )
 }

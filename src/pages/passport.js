@@ -73,7 +73,7 @@ export default function Countries() {
 
     return (
         <section className="relative py-4 px-4">
-            <div className="flex w-full mb-4 space-between relative z-50">
+            <div className="flex w-full mb-4 space-between ml-0 sm:ml-16 relative z-50">
                 <div className="px-2 md:px-4 mr-4 text-gray-700 bg-gray-300 rounded-md dark:text-gray-400 dark:bg-gray-700">
                     <TextP classes="px-1 md:px-4 py-2">Countries Visited: {user?.countries_visited.length}</TextP>
                 </div>
