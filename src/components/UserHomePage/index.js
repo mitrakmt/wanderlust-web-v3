@@ -16,7 +16,7 @@ export default function UserHomePage({ router, user, userLoading }) {
     if (userLoading) return null;
 
     return(
-        <section className="w-full absolute overflow-scroll top-0 left-0 ml-0 sm:ml-16 md:ml-16 lg:ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/70 dark:bg-gray-900/70" style={{ zIndex: 99 }}>
+        <section className="w-full absolute overflow-scroll top-0 left-0 ml-0 sm:ml-16 md:ml-16 lg:ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/70 dark:bg-gray-900/70" style={{ zIndex: 49 }}>
             <div className="w-full sm:w-3/4 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto mt-56 mb-44 max-w-screen-md sm:text-center">
                     <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">Let's Get Traveling</h2>

@@ -183,6 +183,16 @@ function Sidebar({ user, router, userLoading, logout }) {
         setProfileDropdownOpen(false);
     }
 
+    const toggleProfileDropdown = () => {
+        setProfileDropdownOpen(!profileDropdownOpen)
+        setMenuDropdownOpen(false)
+    }
+
+    const toggleMenuDropdown = () => {
+        setProfileDropdownOpen(false)
+        setMenuDropdownOpen(!menuDropdownOpen)
+    }
+
     if (userLoading) return <p>Loading</p>
 
     return (
@@ -250,7 +260,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                             )
                         }
                         {/* <!-- Menu --> */}
-                        <button onClick={() => setMenuDropdownOpen(!menuDropdownOpen)} className="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <button onClick={toggleMenuDropdown} className="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <svg aria-hidden="true" className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
                             <svg aria-hidden="true" className="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                             <span className="sr-only">Toggle sidebar</span>
@@ -286,7 +296,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                         
                         {
                             user && (
-                                <button type="button" onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} className="flex items-center justify-center mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                                <button type="button" onClick={toggleProfileDropdown} className="flex items-center justify-center mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                                     <Image className="w-8 h-8 rounded-full ml-2" width={30} height={30} src={user?.profile_image || "https://wanderlust-extension.s3.us-west-2.amazonaws.com/no-user.webp"} alt={`${user?.name} Profile Picture`} />
                                 </button>
                             )
@@ -342,7 +352,7 @@ function Sidebar({ user, router, userLoading, logout }) {
             </nav>
 
             {/* DESKTOP SIDEBAR  */}
-            <nav className={`sm:fixed h-full top-0 bottom-0 left-0 ${expanded ? user?.premium ? 'w-52' : 'w-64' : 'w-16'} transition-all`} style={{ zIndex: 3000 }} aria-label="Sidebar">
+            <nav className={`hidden sm:fixed sm:flex sm:visible h-full top-0 bottom-0 left-0 ${expanded ? user?.premium ? 'w-52' : 'w-64' : 'w-16'} transition-all`} style={{ zIndex: 3000 }} aria-label="Sidebar">
                 <div className={`overflow-hidden relative flex flex-col bg-blend-overlay justify-between h-full px-3 py-4 overflow-y-auto rounded backdrop-blur-sm ${expanded ? 'dark:bg-gray-800/80' : "dark:bg-gray-800/50"} ${expanded ? 'bg-gray-200/80' : "bg-gray-200/50"}`}>
                     <div className={`absolute overflow-visible cursor-pointer top-4 ${expanded ? "-right-6" : "-right-8"}`} onClick={toggleSidebar}>
                         {

@@ -1,6 +1,6 @@
 export default function GuestHomePage({ router }) {
     return(
-        <div className="w-full absolute overflow-scroll top-0 left-0 ml-0 sm:ml-16 md:ml-16 lg:ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/90 dark:bg-gray-900/90" style={{ zIndex: 99 }}>
+        <div className="w-full absolute overflow-scroll top-0 left-0 ml-0 sm:ml-16 md:ml-16 lg:ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/90 dark:bg-gray-900/90" style={{ zIndex: 49 }}>
             <div className="w-4/5 py-8 max-w-screen-xl text-center my-32">
                 <a href="#" className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 rounded-full dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700" role="alert">
                     <span className="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span className="text-sm font-medium">Wanderlust 3.0 is out!</span> 
