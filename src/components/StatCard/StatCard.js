@@ -3,7 +3,7 @@ export default function StatCard({ stat, label, svg }) {
       <div className="mt-4 mr-4 text-center">
               <div className="inline-block w-auto border rounded-lg shadow">
                   <div className="flex p-5">
-                      <div className="p-4 m-2 text-white bg-blue-600 rounded">
+                      <div className="p-4 m-2 text-white bg-primary-600 rounded">
                           {svg}
                       </div>
                       <div className="w-auto mx-4 my-auto">

@@ -55,7 +55,7 @@ export default function CityCard({ isPublicMap, id, city, country, removeCity, v
                     <Image className="relative object-cover w-full h-24 mb-3 shadow-lg" height={30} width={30} src={image} alt={`${city}, ${country}`} />
                     <h5 className="mb-1 text-lg font-medium text-gray-900 dark:text-white px-4">{`${city}, ${country}`}</h5>
                     <div className="flex mt-4 justify-center w-full">
-                        <a onClick={() => viewCity(city)} className="cursor-pointer inline-flex items-center mx-1 px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View</a>
+                        <a onClick={() => viewCity(city)} className="cursor-pointer inline-flex items-center mx-1 px-4 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">View</a>
                         {
                             !isPublicMap && (
                                 <a onClick={() => { removeCity(id); closeCityOverlay(); }} className="cursor-pointer inline-flex items-center mx-1 px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Remove</a>

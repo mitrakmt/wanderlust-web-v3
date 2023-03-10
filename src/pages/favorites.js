@@ -87,7 +87,7 @@ export default function Favorites() {
                     <ToggleSwitch checked={showFavoriteTypeCities} text={showFavoriteTypeCities ? "Cities" : "Countries"} onChange={() => setShowFavoriteTypeCities(!showFavoriteTypeCities)} />
                     <div className="relative">
                         {
-                            !showFavoriteTypeCities && <button onClick={toggleFilterDropdown} data-dropdown-toggle="dropdownRadioBgHover" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Filter 
+                            !showFavoriteTypeCities && <button onClick={toggleFilterDropdown} data-dropdown-toggle="dropdownRadioBgHover" className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="button">Filter 
                                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
                         }
@@ -97,19 +97,19 @@ export default function Favorites() {
                                     <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200">
                                         <li>
                                         <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                            <input id={""} onChange={setFilter} type="radio" value={""} checked={selectedFilter === ""} name="All" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <input id={""} onChange={setFilter} type="radio" value={""} checked={selectedFilter === ""} name="All" className="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 cursor-pointer focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">All</label>
                                         </div>
                                         </li>
                                         <li>
                                         <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                            <input id="visited" onChange={setFilter} type="radio" checked={selectedFilter === 'visited'} value="visited" name="Visited" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <input id="visited" onChange={setFilter} type="radio" checked={selectedFilter === 'visited'} value="visited" name="Visited" className="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 cursor-pointer focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Visited</label>
                                         </div>
                                         </li>
                                         <li>
                                         <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                            <input id="notvisited" onChange={setFilter} type="radio" checked={selectedFilter === 'notvisited'} value="notvisited" name="Not Visited" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <input id="notvisited" onChange={setFilter} type="radio" checked={selectedFilter === 'notvisited'} value="notvisited" name="Not Visited" className="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 cursor-pointer focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
                                             <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Not Visited</label>
                                         </div>
                                         </li>

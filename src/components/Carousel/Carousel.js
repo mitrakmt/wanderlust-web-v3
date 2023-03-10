@@ -52,7 +52,7 @@ const Carousel = ({ images, propertyName }) => {
         <div className="absolute flex justify-between w-full h-full top left">
           <button
             onClick={movePrev}
-            className="z-10 w-10 h-full p-0 m-0 text-center text-white transition-all duration-300 ease-in-out opacity-75 hover:bg-blue-900/75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed"
+            className="z-10 w-10 h-full p-0 m-0 text-center text-white transition-all duration-300 ease-in-out opacity-75 hover:bg-primary-900/75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed"
             disabled={isDisabled('prev')}
           >
             <svg
@@ -73,7 +73,7 @@ const Carousel = ({ images, propertyName }) => {
           </button>
           <button
             onClick={moveNext}
-            className="z-10 w-10 h-full p-0 m-0 text-center text-white transition-all duration-300 ease-in-out opacity-75 hover:bg-blue-900/75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed"
+            className="z-10 w-10 h-full p-0 m-0 text-center text-white transition-all duration-300 ease-in-out opacity-75 hover:bg-primary-900/75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed"
             disabled={isDisabled('next')}
           >
             <svg

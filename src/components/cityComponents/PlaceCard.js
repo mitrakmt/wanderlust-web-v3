@@ -59,12 +59,12 @@ export default function PlaceCard({ id, tags, google_id, name, closePlaceOverlay
                     <div className="flex flex-wrap items-center justify-center">
                         {
                             tags.map((tag) => (
-                                <span key={`placeCard-tags-${id}-${tag}`} className={`bg-blue-100 mr-1 mb-1 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300`}>{tag}</span>
+                                <span key={`placeCard-tags-${id}-${tag}`} className={`bg-primary-100 mr-1 mb-1 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300`}>{tag}</span>
                             ))
                         }
                     </div>
                     <div className="flex mt-4 justify-center w-full">
-                        <a onClick={viewPlace} className="cursor-pointer inline-flex items-center mx-1 px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View</a>
+                        <a onClick={viewPlace} className="cursor-pointer inline-flex items-center mx-1 px-4 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">View</a>
                     </div>
                 </div>
             </div>

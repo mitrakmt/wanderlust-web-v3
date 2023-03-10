@@ -82,6 +82,9 @@ export default function CityCard({ data, keyId, favorites, index, toggleFavorite
                   src={data.city?.image_url_thumb}
                   alt={data.city?.name}
                   fill
+                  sizes="(max-width: 768px) 30vw,
+                    (max-width: 1200px) 20vw,
+                    33vw"
                   className="object-cover object-center w-full h-full rounded-md lg:w-full lg:h-full brightness-50"
               />
           </div>

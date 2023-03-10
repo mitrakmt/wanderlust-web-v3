@@ -3,13 +3,13 @@ import styles from "../styles/dialog.module.css";
 
 const Dialog = ({
   modalId = "wanderlust-modal",
-  title = "Example modal",
-  body = <p>test</p>
+  title = "Wanderlust Modal",
+  body = <p></p>
 }) => {
   return (
-    <dialog id={modalId} className={`${styles.dialog} dark:bg-black/30 bg-white/30`} style={{ position: 'fixed' }}>
+    <dialog id={modalId} className={`${styles.dialog} bg-gray-100/80 dark:bg-gray-800/80`} style={{ position: 'fixed' }}>
       <header>
-        {title}
+        <p className="text-3xl text-gray-900 dark:text-gray-200">{title}</p>
         <button
           className="outline-none button button-close"
           onClick={() => {
@@ -23,6 +23,7 @@ const Dialog = ({
             height="26"
             viewBox="0 0 24 24"
             fill="none"
+            className="text-gray-900 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-800 transition-colors"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"

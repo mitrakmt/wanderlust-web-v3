@@ -57,6 +57,7 @@ export default function Community() {
     useEffect(() => {
         request(`/users/public/popular`)
             .then(res => {
+                console.log('res.data', res.data);
                 setCommunity(res.data);
                 setSearchCommunityLoading(false);
             })
@@ -84,11 +85,6 @@ export default function Community() {
     }, [])
 
     // Functions
-    const viewUserProfile = (username) => {
-        trackStat({ type: 'clicks', property: 'viewUserProfile' })
-        router.push(`/${username}`);
-    }
-
     const clearCommunitySearch = () => {
         request(`/users/public/popular`)
             .then(res => {
@@ -169,20 +165,20 @@ export default function Community() {
                 <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
                     <ul className="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#tabs" role="tablist">
                         <li className="mr-2" role="presentation">
-                            <button onClick={changeTab} className={`inline-block p-4 rounded-t-lg ${selectedTab === 'search' ? "text-blue-600 border-b-2 border-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 dark:border-blue-500" : "text-gray-500 border-b-2 border-transparent border-gray-100 hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent dark:text-gray-400 dark:border-gray-700"} `} id="search" data-tabs-target="#search" type="button" role="tab" aria-controls="search">Search</button>
+                            <button onClick={changeTab} className={`inline-block p-4 rounded-t-lg ${selectedTab === 'search' ? "text-primary-600 border-b-2 border-primary-600 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-500 dark:border-primary-500" : "text-gray-500 border-b-2 border-transparent border-gray-100 hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent dark:text-gray-400 dark:border-gray-700"} `} id="search" data-tabs-target="#search" type="button" role="tab" aria-controls="search">Search</button>
                         </li>
                         <li className="mr-2" role="presentation">
-                            <button onClick={changeTab} className={`inline-block p-4 rounded-t-lg ${selectedTab === 'followers' ? "text-blue-600 border-b-2 border-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 dark:border-blue-500" : "text-gray-500 border-b-2 border-transparent border-gray-100 hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent dark:text-gray-400 dark:border-gray-700"} `} id="followers" data-tabs-target="#followers" type="button" role="tab" aria-controls="followers">Followers</button>
+                            <button onClick={changeTab} className={`inline-block p-4 rounded-t-lg ${selectedTab === 'followers' ? "text-primary-600 border-b-2 border-primary-600 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-500 dark:border-primary-500" : "text-gray-500 border-b-2 border-transparent border-gray-100 hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent dark:text-gray-400 dark:border-gray-700"} `} id="followers" data-tabs-target="#followers" type="button" role="tab" aria-controls="followers">Followers</button>
                         </li>
                         <li className="mr-2" role="presentation">
-                            <button onClick={changeTab} className={`inline-block p-4 rounded-t-lg ${selectedTab === 'following' ? "text-blue-600 border-b-2 border-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 dark:border-blue-500" : "text-gray-500 border-b-2 border-transparent border-gray-100 hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent dark:text-gray-400 dark:border-gray-700"} `} id="following" data-tabs-target="#following" type="button" role="tab" aria-controls="following">Following</button>
+                            <button onClick={changeTab} className={`inline-block p-4 rounded-t-lg ${selectedTab === 'following' ? "text-primary-600 border-b-2 border-primary-600 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-500 dark:border-primary-500" : "text-gray-500 border-b-2 border-transparent border-gray-100 hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent dark:text-gray-400 dark:border-gray-700"} `} id="following" data-tabs-target="#following" type="button" role="tab" aria-controls="following">Following</button>
                         </li>
                     </ul>
                 </div>
                 <div id="tabs">
                     {
                         selectedTab === 'search' && 
-                            <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="search" role="tabpanel" aria-labelledby="search">
+                            <div className="p-4 rounded-lg" id="search" role="tabpanel" aria-labelledby="search">
                                 <div className="flex items-end">
                                     {
                                         communitySearchTerm.length > 0 &&
@@ -233,7 +229,7 @@ export default function Community() {
                                                 <LoadingProfileCard key={`community-loadingProfile-${index}`} />
                                             )) :
                                             community?.map((publicUser, index) => (
-                                                <ProfileCard user={publicUser} currentUserId={user.id} viewUserProfile={viewUserProfile} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${user.id}-${index}`} />
+                                                <ProfileCard user={publicUser} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${user.id}-${index}`} />
                                             ))
                                     }
                                 </div>
@@ -241,11 +237,11 @@ export default function Community() {
                     }
                     {
                         selectedTab === 'followers' && 
-                            <div className="p-0 md:p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="followers" role="tabpanel" aria-labelledby="followers">
+                            <div className="p-0 md:p-4 rounded-lg" id="followers" role="tabpanel" aria-labelledby="followers">
                                 <div className="grid grid-cols-1 mt-6 mb-8 gap-y-0 gap-x-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                     {
                                         followers.length > 0 && followers?.map((follow, index) => (
-                                            <ProfileCard user={follow.user} currentUserId={user.id} viewUserProfile={viewUserProfile} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />
+                                            <ProfileCard user={follow.user} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />
                                         ))
                                     }
                                 </div>
@@ -259,11 +255,11 @@ export default function Community() {
                     }
                     {
                         selectedTab === 'following' && following.length > 0 &&
-                            <div className="p-0 md:p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="following" role="tabpanel" aria-labelledby="following">
+                            <div className="p-0 md:p-4 rounded-lg" id="following" role="tabpanel" aria-labelledby="following">
                                 <div className="grid grid-cols-1 mt-6 mb-8 gap-y-0 gap-x-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                     {
                                         following?.map((follow, index) => (
-                                            <ProfileCard user={follow.following} currentUserId={user.id} viewUserProfile={viewUserProfile} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />
+                                            <ProfileCard user={follow.following} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />
                                         ))
                                     }
                                 </div>                                

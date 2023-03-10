@@ -25,31 +25,31 @@ function InfoDialog({ city, country, attribution, countryInfo, cityInfo }) {
   return (
     <Dialog
         modalId="infodialog"
-        theme={theme}
         title={`${city ? city : country}${city ? `, ${country}${countryInfo?.emoji ? ` ${countryInfo?.emoji}` : ''}` : null}`}
         body={
             <div>
                 {
-                    countryInfo && <div className="">
-                        <TextH5 classes="text-lg mt-1 mb-0">Capital: {countryInfo?.capital}</TextH5>
+                    countryInfo && <div>
+                        <p className="text-lg mt-1 mb-0 text-gray-900 dark:text-gray-200">Capital: {countryInfo?.capital}</p>
                         {
-                            continentKeys[countryInfo?.continent] && <TextH5 classes="text-lg mt-1 mb-0">Continent: {continentKeys[countryInfo?.continent]}</TextH5>
+                            continentKeys[countryInfo?.continent] && <p className="text-lg mt-1 mb-0 text-gray-900 dark:text-gray-200">Continent: {continentKeys[countryInfo?.continent]}</p>
                         }
                     </div>
                 }
                 {
-                    cityInfo && <div className="">
-                        <TextH5 classes="text-lg mt-1 mb-0">Region: {cityInfo?.region}</TextH5>
-                        <TextH5 classes="text-lg mt-1 mb-0">City Population: {cityInfo?.population?.toLocaleString("en-US")}</TextH5>
-                        <TextH5 classes="text-lg mt-1 mb-0">Nomad Cost of Living: ${cityInfo?.cost_for_nomad_in_usd?.toLocaleString("en-US")}</TextH5>
+                    cityInfo && <div>
+                        <p className="text-lg mt-1 mb-0 text-gray-900 dark:text-gray-200">Region: {cityInfo?.region}</p>
+                        <p className="text-lg mt-1 mb-0 text-gray-900 dark:text-gray-200">City Population: {cityInfo?.population?.toLocaleString("en-US")}</p>
+                        <p className="text-lg mt-1 mb-0 text-gray-900 dark:text-gray-200">Nomad Cost of Living: ${cityInfo?.cost_for_nomad_in_usd?.toLocaleString("en-US")}</p>
+
                         {
                             cityInfo?.top_sights?.length > 0 && 
                                 <div>
-                                    <TextH5 classes="text-lg mt-1 mb-0">Sights to see:</TextH5>
+                                    <p className="text-lg mt-1 mb-0 text-gray-900 dark:text-gray-200">Sights to see:</p>
                                     <div className="flex flex-wrap">
                                         {
                                             cityInfo?.top_sights.map((sight, index) => {
-                                                return <p className="px-5 py-2 mx-1 my-1 text-sm dark:text-white bg-slate-800 rounded-xl" key={`sights-to-see-${index}`}>{sight}</p>
+                                                return <p className="px-5 py-2 mx-1 my-1 text-sm text-gray-900 dark:text-gray-200 bg-slate-800 rounded-xl" key={`sights-to-see-${index}`}>{sight}</p>
                                             })
                                         }
                                     </div>
@@ -57,7 +57,7 @@ function InfoDialog({ city, country, attribution, countryInfo, cityInfo }) {
                             }
                     </div>
                 }
-                <TextP classes="mt-8 text-white">
+                <p className="mt-8 text-xs text-gray-400 dark:text-gray-600">
                     See{" "}
                     <a
                         href={`${attribution?.originalImageLink}?utm_source=your_app_name&utm_medium=referral `}
@@ -86,7 +86,7 @@ function InfoDialog({ city, country, attribution, countryInfo, cityInfo }) {
                     >
                         Unsplash
                     </a>
-                </TextP>
+                </p>
             </div>
         }
     />

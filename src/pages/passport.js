@@ -13,7 +13,7 @@ import Map from '../components/passport/Map';
 
 export default function Countries() {
     // Hooks
-    const { user, setUser } = useAuth();
+    const { user, setUser, userLoading } = useAuth();
 
     useEffect(() => {
         if (!user?.premium) {
@@ -68,6 +68,8 @@ export default function Countries() {
               // TODO: handle error, revert
             })
     }
+
+    if (userLoading) return null;
 
     return (
         <section className="relative py-4 px-4">

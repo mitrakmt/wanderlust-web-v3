@@ -9,13 +9,14 @@ const InfoIcon = ({ openInfoModal }) => {
                 <div className="flex items-center justify-center w-12 h-12 transition-all bg-gray-200 rounded-full cursor-pointer dark:bg-gray-700/80 hover:scale-110">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width={28}
-                    height={28}
-                    viewBox="0 0 24 24"
+                    width={22}
+                    height={22}
+                    viewBox="0 0 22 22"
+                    className="overflow-visible"
                     onMouseEnter={() => setIconHovered(true)}
                     onMouseLeave={() => setIconHovered(false)}
-                    fill={iconHovered ? "#b1b1b1" : "none"}
-                    stroke={iconHovered ? "#b1b1b1" : "#c3c2c7"}
+                    fill={iconHovered ? "#b91c1b" : "none"}
+                    stroke={iconHovered ? "#b91c1b" : "#b4b3b8"}
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"

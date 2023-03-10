@@ -21,7 +21,7 @@ import CustomButton from '../components/Button/Button';
 
 export default function TravelList() {
     // Hooks
-    const { user, setUser } = useAuth();
+    const { user, setUser, userLoading } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
@@ -111,6 +111,8 @@ export default function TravelList() {
         setCitiesSearchTerm(term)
     }
 
+    if (userLoading) return null;
+
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Map isPublicMap={false} toVisit={toVisit} defaultZoom={2.5} coordinates={[115.1317479, -8.6531344]} user={user} viewCity={viewCity} removeCity={removeCity} setUser={setUser} />
@@ -196,7 +198,7 @@ export default function TravelList() {
                                                                         {city.population}
                                                                     </td>
                                                                     <td className="px-6 py-4">
-                                                                        <button onClick={() => addToVisit(city)} disabled={addToVisitLoading} className="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+                                                                        <button onClick={() => addToVisit(city)} disabled={addToVisitLoading} className="mt-2 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add</button>
                                                                     </td>
                                                                 </tr>
                                                             ))

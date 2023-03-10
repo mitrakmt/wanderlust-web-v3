@@ -16,7 +16,7 @@ import Map from '../components/places/Map';
 
 export default function Places() {
     // Hooks
-    const { user } = useAuth();
+    const { user, userLoading } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
@@ -147,6 +147,8 @@ export default function Places() {
         300
     );
 
+    if (userLoading) return null;
+
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <div className="w-auto relative z-50 px-2">
@@ -186,7 +188,7 @@ export default function Places() {
                                 )
                             }
                             
-                            <input onChange={(e) => searchCities(e.target.value)} value={searchCitiesText} className="relative z-1 mt-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Search for a city..." />
+                            <input onChange={(e) => searchCities(e.target.value)} value={searchCitiesText} className="relative z-1 mt-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Search for a city..." />
                             {
                                 cities.length > 0 && citiesSearchDropdownOpen && (
                                     <div className="absolute z-10 top-16 left-0 right-0 bg-white rounded-lg shadow-lg">
@@ -209,7 +211,7 @@ export default function Places() {
                 }
                 {
                     selectedPlace && (
-                        <textarea onChange={(e) => setNewPlaceNotes(e.target.value)} value={newPlaceNotes} rows="2" className="relative z-1 mt-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your notes here..."></textarea>
+                        <textarea onChange={(e) => setNewPlaceNotes(e.target.value)} value={newPlaceNotes} rows="2" className="relative z-1 mt-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Write your notes here..."></textarea>
                     )
                 }
                 {
@@ -224,7 +226,7 @@ export default function Places() {
                 }
                 {
                     selectedPlace && (
-                        <button onClick={addPlace} disabled={addPlaceLoading} className="mt-2 cursor-pointer relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+                        <button onClick={addPlace} disabled={addPlaceLoading} className="mt-2 cursor-pointer relative text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add</button>
                     )
                 }
                 {/* filters  */}
@@ -250,7 +252,7 @@ export default function Places() {
                         <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
                     </div>
                     <div className="flex items-center mr-4 mb-2">
-                        <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
                     </div>
                     <div className="flex items-center mr-4 mb-2">

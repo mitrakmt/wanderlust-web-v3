@@ -168,7 +168,7 @@ export default function Pro() {
                     </div>
                 </div>
                 <div className="grid grid-cols-4 px-4 py-5 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                    <div className="text-gray-500 dark:text-gray-400">Keep track of the countries you&apos;ve visited (<a href="https://www.wanderlustapp.io/blog/version-2" className="text-blue-600 hover:underline" target="_blank">view demo</a>)</div>
+                    <div className="text-gray-500 dark:text-gray-400">Keep track of the countries you&apos;ve visited (<a href="https://www.wanderlustapp.io/blog/version-2" className="text-primary-600 hover:underline" target="_blank">view demo</a>)</div>
                     <div>
                         <svg className="w-5 h-5 text-red-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                     </div>

@@ -203,7 +203,7 @@ export default function Profile({ publicUser }) {
         } else if (!publicUser) {
             fetchData(user?.id);
         }
-      }, []);
+      }, [profileUser]);
 
     useEffect(() => {
         async function fetchData(userId) {
@@ -469,10 +469,10 @@ export default function Profile({ publicUser }) {
                                     {
                                         publicUser ?
                                             isFollowed ?
-                                                <button onClick={removeFollow} className="px-4 py-2 mb-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-pink-500 rounded shadow outline-none active:bg-pink-600 hover:shadow-md focus:outline-none sm:mr-2" type="button">
+                                                <button onClick={removeFollow} className="px-4 py-2 mb-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-gray-500 rounded shadow outline-none active:bg-gray-600 hover:shadow-md focus:outline-none sm:mr-2" type="button">
                                                     Unfollow
                                                 </button> :
-                                                <button onClick={followUser} className="px-4 py-2 mb-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-pink-500 rounded shadow outline-none active:bg-pink-600 hover:shadow-md focus:outline-none sm:mr-2" type="button">
+                                                <button onClick={followUser} className="px-4 py-2 mb-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-primary-500 rounded shadow outline-none active:bg-primary-600 hover:shadow-md focus:outline-none sm:mr-2" type="button">
                                                     Follow
                                                 </button> :
                                             editing ?
@@ -526,7 +526,7 @@ export default function Profile({ publicUser }) {
                                                     {
                                                         imageUploadLoading ?
                                                             <div role="status" className="my-24">
-                                                                <svg className="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <svg className="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-primary-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                                                     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                                                                 </svg>
@@ -746,7 +746,7 @@ export default function Profile({ publicUser }) {
                                     </div>
                             }
                         </div>
-                        <div className="py-10 mt-10 text-center border-t border-blueGray-200">
+                        <div className="py-10 mt-10 text-center border-t border-primary-200">
                             {
                                 profileUser?.countries_visited && <div className="flex flex-wrap justify-center">
                                     <TextH3>My Travels</TextH3>
@@ -788,7 +788,7 @@ export default function Profile({ publicUser }) {
                                                 <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
                                             </div>
                                             <div className="flex items-center mr-4">
-                                                <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                                <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                                 <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
                                             </div>
                                             <div className="flex items-center mr-4">
@@ -801,14 +801,14 @@ export default function Profile({ publicUser }) {
                         </div>
                         {
                             feed.length > 0 && 
-                                <div className="p-2 md:p-10 mt-10 border-t border-blueGray-200">
+                                <div className="p-2 md:p-10 mt-10 border-t border-primary-200">
                                     <TextH2>Feed</TextH2>
                                     <div className="flex flex-wrap justify-center px-8 mt-4">
                                         <ol className="relative border-l border-gray-200 dark:border-gray-700">                  
                                             {
                                                 feed.map(post => (
                                                     <li className="mb-10 ml-6" key={`publicProfile-reviews-${post?.id}`}>
-                                                        <span className="absolute flex items-center justify-center bg-blue-200 rounded-full w-14 h-14 -left-7 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                                                        <span className="absolute flex items-center justify-center bg-primary-200 rounded-full w-14 h-14 -left-7 ring-8 ring-white dark:ring-gray-900 dark:bg-primary-900">
                                                             {
                                                                 post.city.image_url_thumb ? 
                                                                     <Image className="h-12 rounded-full shadow-lg w-14" height={30} width={30} src={post.city.image_url_thumb} alt={post.city.name} /> :
@@ -829,14 +829,14 @@ export default function Profile({ publicUser }) {
                         }
                         {
                             reviews.length > 0 && 
-                                <div className="p-2 md:p-10 mt-10 border-t border-blueGray-200">
+                                <div className="p-2 md:p-10 mt-10 border-t border-primary-200">
                                     <TextH2>City Reviews</TextH2>
                                     <div className="flex flex-wrap justify-center pl-8 pr-2 sm:pl-8 sm:pr-8 mt-4">
                                         <ol className="relative border-l border-gray-200 dark:border-gray-700">                  
                                             {
                                                 reviews.map(review => (
                                                     <li className="mb-10 ml-6" key={`publicProfile-reviews-${review?.id}`}>
-                                                        <span className="absolute flex items-center justify-center bg-blue-200 rounded-full w-14 h-14 -left-7 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                                                        <span className="absolute flex items-center justify-center bg-primary-200 rounded-full w-14 h-14 -left-7 ring-8 ring-white dark:ring-gray-900 dark:bg-primary-900">
                                                             {
                                                                 review.city.image_url_thumb ? 
                                                                     <Image height={30} width={30} className="h-12 rounded-full shadow-lg w-14" src={review.city.image_url_thumb} alt={`${review.city.name} City Review`} /> :

@@ -1,11 +1,16 @@
 import Head from 'next/head';
-
 import React, { useEffect, useRef, useState } from 'react';
+
+// Hooks
+import { useAuth } from '../hooks/useAuth';
+import { useRouter } from 'next/router';
 
 // Main components
 import ControlBar from "../components/ControlBar";
 import InfoDialog from "../components/InfoDialog/InfoDialog";
 import LoadImage from "../components/LoadImage";
+import GuestHomePage from "../components/GuestHomePage";
+import UserHomePage from "../components/UserHomePage";
 
 // Styling
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -16,11 +21,14 @@ import request from "../utils/request";
 import preloadImages, { getQueuedLocation } from "../shared_components/preloadImages";
 import trackStat from "../utils/trackStat";
 
-// const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
-  const [currentImageFavoriteStatus, setCurrentImageFavoriteStatus] = useState(false);
-    const [locationId, setLocationId] = useState(null);
+  // Hooks
+  const { user, userLoading } = useAuth();
+  const router = useRouter();
+
+  // State
+    const [currentImageFavoriteStatus, setCurrentImageFavoriteStatus] = useState(false);
+    const [, setLocationId] = useState(null);
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [cityId, setCityId] = useState(null);
@@ -88,41 +96,45 @@ export default function Home() {
     trackStat({ type: 'clicks', property: 'locationInfo' })
   }
 
+  if (userLoading) return null;
+
   return (
-    <section className="relative">
+    <section className="relative min-h-screen overflow-scroll">
       <Head>
         <title>Wanderlust App</title>
         <meta name="description" content="Explore the world one place at a time." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full relative h-full">
-          <ControlBar
-              cityId={cityId}
-              currentImageFavoriteStatus={currentImageFavoriteStatus}
-              setCurrentImageFavoriteStatus={setCurrentImageFavoriteStatus}
-              refresh={refresh}
-              openInfoModal={openInfoModal}
-              countryInfo={countryInfo}
-              attribution={attribution}
+      {/* NEW USER HOMGEPAGE  */}
+      {
+        !user ? <GuestHomePage router={router} /> : <UserHomePage router={router} user={user} userLoading={userLoading} />
+      }
+      <ControlBar
+          cityId={cityId}
+          currentImageFavoriteStatus={currentImageFavoriteStatus}
+          setCurrentImageFavoriteStatus={setCurrentImageFavoriteStatus}
+          refresh={refresh}
+          openInfoModal={openInfoModal}
+          countryInfo={countryInfo}
+          attribution={attribution}
+          city={city}
+          country={country}
+          setShowAuthModal={() => { }}
+      />
+      <InfoDialog city={city} fact={fact} country={country} attribution={attribution} countryInfo={countryInfo} cityInfo={cityInfo} />
+      <div className="w-full h-full fixed">
+        {
+          imageUrl && (
+            <LoadImage
               city={city}
               country={country}
-              setShowAuthModal={() => { }}
-          />
-          <InfoDialog city={city} fact={fact} country={country} attribution={attribution} countryInfo={countryInfo} cityInfo={cityInfo} />
-          <div className="w-full h-full fixed">
-            {
-              imageUrl && (
-                <LoadImage
-                  city={city}
-                  country={country}
-                  alt={`${city} ${country}`}
-                  largeImageSrc={imageUrl}
-                  smallImageSrc={smallImageUrl}
-                />
-              )
-            }
-          </div>
+              alt={`${city} ${country}`}
+              largeImageSrc={imageUrl}
+              smallImageSrc={smallImageUrl}
+            />
+          )
+        }
       </div>
     </section>
   )

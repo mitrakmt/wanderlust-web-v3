@@ -155,7 +155,7 @@ export default function Layout({ children }) {
         }
         <Toasts toasts={toasts} />
         <Sidebar user={user} router={router} userLoading={userLoading} logout={logout} />
-        <main className="overflow-scroll scroll-smooth">{children}</main>
+        <main className="overflow-scroll scroll-smooth min-h-screen">{children}</main>
     </div>
   )
 }

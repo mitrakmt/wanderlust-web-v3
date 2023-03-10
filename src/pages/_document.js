@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="w-full overflow-scroll scroll-smooth">
+      <body className="w-full">
         <Main className="overflow-scroll scroll-smooth" />
         <script
           type="text/javascript"

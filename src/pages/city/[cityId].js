@@ -389,7 +389,7 @@ export default function CityView() {
                         <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
                     </div>
                     <div className="flex items-center mr-4">
-                        <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
                     </div>
                     <div className="flex items-center mr-4">
@@ -464,12 +464,12 @@ export default function CityView() {
                                         </div>
                                         <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Reviewed on <time dateTime={review.createdAt}>{moment(review.createdAt).format('MMMM Do YYYY')}</time></p></footer>
                                         <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{review.body}</p>
-                                        {/* <a href="#" className="block mb-5 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Read more</a> */}
+                                        {/* <a href="#" className="block mb-5 text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Read more</a> */}
                                         {/* <aside>
                                             <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">19 people found this helpful</p>
                                             <div className="flex items-center mt-3 space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
                                                 <a href="#" className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Helpful</a>
-                                                <a href="#" className="pl-4 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Report abuse</a>
+                                                <a href="#" className="pl-4 text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Report abuse</a>
                                             </div>
                                         </aside> */}
                                     </article>

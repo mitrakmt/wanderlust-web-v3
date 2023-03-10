@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image'
 
 // Components
-import TextH2 from '../components/Text/TextH2';
+import TextH1 from '../components/Text/TextH1';
 import Button from '../components/Button/Button';
 
 // Hooks
@@ -22,7 +22,7 @@ export default function NomadTools() {
     ]);
 
     // Hooks
-    const { user } = useAuth();
+    const { user, userLoading } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
@@ -35,7 +35,8 @@ export default function NomadTools() {
     
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <TextH2>Nomad Tools</TextH2>
+            {/* Page header  */}
+            <h1 className="text-5xl font-bold text-gray-800 dark:text-gray-100 mb-6">Nomad Tools</h1>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -62,7 +63,7 @@ export default function NomadTools() {
                             offers?.map((offer) => (
                                 <tr key={`nomadTools-${offer.name}`} className="bg-white border-b h-28 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td className="flex w-32 h-full p-4 overflow-hidden justify-center">
-                                        <Image height={30} width={30} src={offer.image} alt={offer.name} className="mt-auto mb-auto relative w-20 h-20 rounded-full" />
+                                        <Image height={80} width={80} src={offer.image} alt={offer.name} className="mt-auto mb-auto relative w-20 h-20 rounded-full" />
                                     </td>
                                     <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                                         {offer.name}

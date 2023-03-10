@@ -14,7 +14,7 @@ import RefreshIcon from "../icons/refreshIcon";
 
 const ControlBar = ({ refresh, openInfoModal, cityId, currentImageFavoriteStatus, setCurrentImageFavoriteStatus, setShowAuthModal, city, country, countryInfo, attribution }) => {
   // Hooks
-  const { user } = useAuth();
+  const { user, userLoading } = useAuth();
   
   const toggleFavorite = () => {
     if (!user?.isLoggedIn) {
@@ -55,16 +55,18 @@ const ControlBar = ({ refresh, openInfoModal, cityId, currentImageFavoriteStatus
     }
   }
 
+  if (userLoading) return null;
+
   return (
-    <div className="fixed bottom-0 right-0 pr-6 pb-6 w-full h-26 transition-all flex justify-end" style={{ zIndex: 999 }}>
-      <div className="flex">
+    <div className="hidden sm:flex fixed top-6 right-0 pr-4 pb-6 w-20 h-26 transition-all justify-end" style={{ zIndex: 999 }}>
+      <div className="flex flex-col space-y-4">
+        <RefreshIcon refresh={refresh} />
+        <InfoIcon openInfoModal={openInfoModal} />
+        <ShareIcon city={city} country={country} countryInfo={countryInfo} attribution={attribution} />
         {
           cityId && 
             <FavoriteControl toggleFavorite={toggleFavorite} currentImageFavoriteStatus={currentImageFavoriteStatus} showBackground={true} />
         }
-        <RefreshIcon refresh={refresh} />
-        <InfoIcon openInfoModal={openInfoModal} />
-        <ShareIcon city={city} country={country} countryInfo={countryInfo} attribution={attribution} />
       </div>
     </div>
   );
