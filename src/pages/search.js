@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import Image from 'next/image'
 
 // Components
 import CityCard from '../components/CityCard/CityCard';
@@ -24,9 +23,6 @@ import addFavorite from '../utils/addFavorite';
 import request from '../utils/request';
 import trackClick from '../utils/trackClick';
 import trackStat from '../utils/trackStat';
-
-// Styles
-// import '@../styles/search.module.scss';
 
 export default function Search() {
     // Context
@@ -127,7 +123,7 @@ export default function Search() {
         setSearchRandomCityLoading(true);
         request(`/cities/random`)
             .then(res => {
-                router.push(`/city/${res.data._id || res.data.id}`, { state: { breadcrumb: 'search' } })
+                router.push(`/city/${res.data?._id || res.data?.id}`, { query: { breadcrumb: 'search' } })
                 setSearchRandomCityLoading(false);
             })
     }
@@ -136,7 +132,7 @@ export default function Search() {
         setSearchRandomCityByRegionLoading(true);
         request(`/cities/random/region?region=${region}`)
             .then(res => {
-                router.push(`/city/${res.data._id || res.data.id}`, { state: { breadcrumb: 'search' } })
+                router.push(`/city/${res.data?._id || res.data?.id}`, { query: { breadcrumb: 'search' } })
                 setSearchRandomCityByRegionLoading(false);
             })
     }

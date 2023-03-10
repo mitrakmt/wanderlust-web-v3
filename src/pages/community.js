@@ -222,7 +222,7 @@ export default function Community() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-1 mt-6 mb-8 gap-y-0 gap-x-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                                <div className="grid mt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 xl:gap-8">
                                     {
                                         searchCommunityLoading ? 
                                             new Array(6).fill(6).map((val, index) => (
@@ -238,7 +238,7 @@ export default function Community() {
                     {
                         selectedTab === 'followers' && 
                             <div className="p-0 md:p-4 rounded-lg" id="followers" role="tabpanel" aria-labelledby="followers">
-                                <div className="grid grid-cols-1 mt-6 mb-8 gap-y-0 gap-x-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                                <div className="grid mt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 xl:gap-8">
                                     {
                                         followers.length > 0 && followers?.map((follow, index) => (
                                             <ProfileCard user={follow.user} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />
@@ -256,7 +256,7 @@ export default function Community() {
                     {
                         selectedTab === 'following' && following.length > 0 &&
                             <div className="p-0 md:p-4 rounded-lg" id="following" role="tabpanel" aria-labelledby="following">
-                                <div className="grid grid-cols-1 mt-6 mb-8 gap-y-0 gap-x-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                                <div className="grid mt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 xl:gap-8">
                                     {
                                         following?.map((follow, index) => (
                                             <ProfileCard user={follow.following} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />

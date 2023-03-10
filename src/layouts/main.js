@@ -149,7 +149,7 @@ export default function Layout({ children }) {
     
     
   return (
-    <div className="overflow-scroll scroll-smooth bg:bg-gray-200 dark:bg-gray-900 min-h-screen w-full">
+    <div className="overflow-scroll scroll-smooth bg-gray-100 dark:bg-gray-900 min-h-screen w-full">
         {
             showOfflineSnackbar && <OfflineSnackbar closeSnackbar={() => setShowOfflineSnackbar(false)} />
         }

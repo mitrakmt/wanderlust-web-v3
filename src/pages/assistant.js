@@ -132,7 +132,7 @@ export default function Trips() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <TextH2>AI Travel Assistant</TextH2>
             {/* chatbox  */}
-            <div className="p-2 md:p-6 bg-gray-200 dark:bg-gray-700 w-full rounded-lg overflow-scroll scroll" style={{ height: '80vh' }}>
+            <div className="p-2 md:p-6 bg-gray-200 dark:bg-gray-800 dark:border-gray-700 w-full rounded-lg overflow-scroll scroll" style={{ height: '80vh' }}>
                 {
                     chatThread.map((message, index) => {
                         return (

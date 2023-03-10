@@ -1,7 +1,7 @@
 export default function GuestHomePage({ router }) {
     return(
         <div className="w-full absolute overflow-scroll top-0 left-0 ml-0 sm:ml-16 md:ml-16 lg:ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/90 dark:bg-gray-900/90" style={{ zIndex: 99 }}>
-            <div className="py-8 mx-auto max-w-screen-xl text-center w-auto my-32">
+            <div className="w-4/5 py-8 max-w-screen-xl text-center my-32">
                 <a href="#" className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 rounded-full dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700" role="alert">
                     <span className="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span className="text-sm font-medium">Wanderlust 3.0 is out!</span> 
                     <svg className="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
@@ -52,62 +52,62 @@ export default function GuestHomePage({ router }) {
                     </div>
                 </div> 
             </div>
-            <div className="py-8 grow px-4 mx-auto flex items-center justify-center flex-col max-w-screen-xl ml-0 sm:ml-16 sm:py-16 lg:px-6 my-20">
+            <div className="w-4/5 text-center py-8 grow px-4 flex items-center justify-center flex-col max-w-screen-xl ml-0 sm:ml-16 sm:py-16 lg:px-6 my-20">
                 <div className="max-w-screen-md mb-8 lg:mb-16">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Built for Digital Nomads by Digital Nomads</h2>
                     <p className="text-gray-500 sm:text-xl dark:text-gray-400">We built Wanderlust to give travelers and digital nomads all the tools that you'll need to get the most out of each place you visit.</p>
                 </div>
                 <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
-                    <div>
+                    <div className="flex flex-col items-center">
                         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
                             <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                         </div>
                         <h3 className="mb-2 text-xl font-bold dark:text-white">See beautiful images from around the world</h3>
                         <p className="text-gray-500 dark:text-gray-400">Track all thep places you want to travel to. Track all thep places you want to travel to.</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center">
                         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
                             <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path></svg>
                         </div>
                         <h3 className="mb-2 text-xl font-bold dark:text-white">Search and see basic information about cities</h3>
                         <p className="text-gray-500 dark:text-gray-400">Track all thep places you want to travel to. Track all thep places you want to travel to.</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center">
                         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
                             <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd"></path><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path></svg>                    
                         </div>
                         <h3 className="mb-2 text-xl font-bold dark:text-white">Travel Bucket List</h3>
                         <p className="text-gray-500 dark:text-gray-400">Track all thep places you want to travel to. Track all thep places you want to travel to.</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center">
                         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
                             <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd"></path></svg>
                         </div>
                         <h3 className="mb-2 text-xl font-bold dark:text-white">Virtual Passport</h3>
                         <p className="text-gray-500 dark:text-gray-400">Track all thep places you want to travel to. Track all thep places you want to travel to.</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center">
                         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
                             <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
                         </div>
                         <h3 className="mb-2 text-xl font-bold dark:text-white">Share your favorites</h3>
                         <p className="text-gray-500 dark:text-gray-400">Track all thep places you want to travel to. Track all thep places you want to travel to.</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center">
                         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
                             <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"></path></svg>
                         </div>
                         <h3 className="mb-2 text-xl font-bold dark:text-white">Local Favorites</h3>
                         <p className="text-gray-500 dark:text-gray-400">Track all thep places you want to travel to. Track all thep places you want to travel to.</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center">
                         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
                             <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"></path></svg>
                         </div>
                         <h3 className="mb-2 text-xl font-bold dark:text-white">Nomad Community</h3>
                         <p className="text-gray-500 dark:text-gray-400">Track all thep places you want to travel to. Track all thep places you want to travel to.</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center">
                         <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
                             <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"></path></svg>
                         </div>
@@ -117,7 +117,7 @@ export default function GuestHomePage({ router }) {
                 </div>
             </div>
             {/* CONTENT */}
-            <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+            <div className="w-4/5 gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
                 <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">We didn't reinvent the wheel</h2>
                     <p className="mb-4">We are strategists, designers and developers. Innovators and problem solvers. Small enough to be simple and quick, but big enough to deliver the scope you want at the pace you need. Small enough to be simple and quick, but big enough to deliver the scope you want at the pace you need.</p>
@@ -129,7 +129,7 @@ export default function GuestHomePage({ router }) {
                 </div>
             </div>
             {/* CTA  */}
-            <div className="py-8 mx-auto max-w-screen-xl text-center w-auto my-32">
+            <div className="w-4/5 py-8 mx-auto max-w-screen-xl text-center my-32">
                 <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Start Exploring</h1>
                 <p className="mb-8 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300 my-8">Wanderlust App let's you to find, explore and share the best places around the world, and gives you the tools to plan everything you'd need.</p>
                 <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
@@ -143,7 +143,7 @@ export default function GuestHomePage({ router }) {
                 </div>
             </div>
             {/* QUOTE  */}
-            <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6 my-20">
+            <div className="w-4/5 max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6 my-20">
                 <figure className="max-w-screen-md mx-auto">
                     <svg className="h-12 mx-auto mb-3 text-gray-400 dark:text-gray-600" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
@@ -161,7 +161,7 @@ export default function GuestHomePage({ router }) {
                 </figure>
             </div>
             {/* BLOG  */}
-            <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div className="w-4/5 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
                     <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Digital Nomad Blog</h2>
                     <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">We help you to learn about the best places around the world, the most beautiful places to see, and everything you'd need as a nomad.</p>
@@ -310,7 +310,7 @@ export default function GuestHomePage({ router }) {
                     <button onClick={() => router.push('/blog')} className="py-3 px-5 w-30 text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Explore More of our Articles</button>
                 </div>
             </div>
-            <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 my-20">
+            <div className="w-4/5 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 my-20">
                 <div className="mx-auto max-w-screen-md sm:text-center">
                     <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">Sign up for our newsletter</h2>
                     <p className="mx-auto mb-8 max-w-2xl font-light text-gray-600 md:mb-12 sm:text-xl dark:text-gray-300">Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email.</p>

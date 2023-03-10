@@ -51,7 +51,7 @@ function Sidebar({ user, router, userLoading, logout }) {
         {
             title: 'Favorites',
             path: '/favorites',
-            icon: <FavoriteIcon />,
+            icon: <FavoriteIcon disabled={user ? false : true} />,
             authRequired: true,
             premiumRequired: false
         },
@@ -356,16 +356,19 @@ function Sidebar({ user, router, userLoading, logout }) {
                     <ul className="mt-10 space-y-2">
                         {
                             navbarTabs.map((item) => {
-                                if (item.adminOnly && !user?.role !== 'superadmin') return null
+                                if (item.adminOnly && user?.role !== 'superadmin') return null
                                 if (item.authRequired && !user) return null
                                 if (item.hideIfPremium && user?.premium) return null
 
                                 return (
-                                    <li key={`navbarTabs-desktop-${item.title}`}>
-                                        <a onClick={() => { changePage(item.path) }  } className={`${item.premiumRequired && !user?.premium ? "disabled pointer-events-none" : ""} flex items-center p-2 text-sm font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${currentPath === item.path ? 'bg-gray-100 dark:bg-gray-700' : ''}`}>
+                                    <li key={`navbarTabs-desktop-${item.title}`} className="flex items-center relative">
+                                        <a onClick={() => { changePage(item.path) }  } className={`${item.premiumRequired && !user?.premium ? "disabled pointer-events-none" : ""} flex items-center p-2 text-sm font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 w-full dark:hover:bg-gray-700 ${currentPath === item.path ? 'bg-gray-100 dark:bg-gray-700' : ''}`}>
                                             {item.icon}
-                                            <span className="ml-5">{item.title}</span>
+                                            {expanded && <span className="ml-5">{item.title}</span>}
                                         </a>
+                                        {
+                                            item.premiumRequired && expanded && <span className="absolute right-0 inline-flex items-center justify-center px-2 h-6 text-sm font-medium text-gray-100 bg-primary-600 rounded-full dark:bg-primary-700 dark:text-gray-200">Premium</span>
+                                        }
                                     </li>
                                 )
                             })
@@ -381,7 +384,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                                     <li key={`profileTabs-desktop-${item.title}`}>
                                         <a onClick={() => changePage(item.path)} className="flex items-center p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
                                             {item.icon}
-                                            <span className="ml-5">{item.title}</span>
+                                            {expanded && <span className={`ml-5 ${item.authRequired && user ? "text-gray-400" : ""}`}>{item.title}</span>}
                                         </a>
                                     </li>
                                 )
@@ -390,13 +393,13 @@ function Sidebar({ user, router, userLoading, logout }) {
                         <li>
                             <a onClick={toggleTheme} className="flex items-center p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
                                 {
-                                    theme === 'dark' ? <svg xmlns="http://www.w3.org/2000/svg" className={`flex-shrink-0 w-6 h-6 mr-8 text-gray-800 transition duration-75 dark:text-gray-200 group-hover:text-gray-900 dark:group-hover:text-white`} viewBox="0 0 20 20" fill="currentColor">
+                                    theme === 'dark' ? <svg xmlns="http://www.w3.org/2000/svg" className={`flex-shrink-0 w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-200 hover:text-primary-700 dark:hover:text-primary-600 transition-colors`} viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                                        </svg> : <svg xmlns="http://www.w3.org/2000/svg" className={`flex-shrink-0 w-6 h-6 mr-8 text-gray-800 transition duration-75 dark:text-gray-200 group-hover:text-gray-900 dark:group-hover:text-white`} viewBox="0 0 20 20" fill="currentColor">
+                                        </svg> : <svg xmlns="http://www.w3.org/2000/svg" className={`flex-shrink-0 w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-200 hover:text-primary-700 dark:hover:text-primary-600 transition-colors`} viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                                         </svg>
                                 }
-                                <span className="ml-3">Theme</span>
+                                {expanded && <span className="ml-3">Theme</span>}
                             </a>
                         </li>
                     </ul>

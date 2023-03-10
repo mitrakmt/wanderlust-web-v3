@@ -40,7 +40,7 @@ export default function Admin() {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <TextH3 classes="mb-2">User Counts</TextH3>
-            <div className="flex mb-6">
+            <div className="flex mb-6 flex-wrap">
                 {/* users counts */}
                 <StatCard
                     label="Total Users"
@@ -67,7 +67,7 @@ export default function Admin() {
                 />
             </div>
             <TextH3 classes="mb-2">Counts</TextH3>
-            <div className="flex mb-6">
+            <div className="flex mb-6 flex-wrap">
                 {/* Action counts  */}
                 <StatCard
                     label="Favorite Count"
@@ -85,7 +85,7 @@ export default function Admin() {
                 />
             </div>
             <TextH3 classes="mb-2">Actions</TextH3>
-            <div className="flex mb-6">
+            <div className="flex mb-6 flex-wrap">
                 {/* Clicks */}
                 <StatCard
                     label="Favorite Click"
@@ -124,7 +124,7 @@ export default function Admin() {
                 />
             </div>
             <TextH3 classes="mb-2">Page Views</TextH3>
-            <div className="flex mb-6">
+            <div className="flex mb-6 flex-wrap">
                 <StatCard
                     label="App loads"
                     stat={stats?.clicks?.['app-load']}

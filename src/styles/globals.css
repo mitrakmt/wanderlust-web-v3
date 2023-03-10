@@ -27,6 +27,10 @@
   }
 }
 
+img {
+  object-fit: cover;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -44,13 +48,6 @@ body {
   overflow: scroll;
   height: 100vh;
   z-index: -1;
-}
-
-img {
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-  object-fit: cover;
 }
 
 .wanderlustContainer {
