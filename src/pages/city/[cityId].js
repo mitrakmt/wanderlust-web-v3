@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import moment from 'moment';
-import Image from 'next/image'
+import Image from 'next/image';
+import Link from 'next/link';
 
 // Utils 
 import trackStat from "../../utils/trackStat";
@@ -38,8 +39,6 @@ export default function CityView() {
     const { user } = useAuth();
     const router = useRouter()
     const { cityId, breadcrumb } = router.query
-
-    console.log('cityId, cityId', cityId);
 
     // Context
     const [favorites, setFavorites] = useContext(favoritesContext);
@@ -130,66 +129,78 @@ export default function CityView() {
 
     useEffect(() => {
         // Request city details and then set as citySelected
-        request(`/cities/${cityId}`)
-            .then(res => {
-                setCitySelected(res.data);
-            }
-        )
-    }, [])
+        if (cityId) {
+            request(`/cities/${cityId}`)
+                .then(res => {
+                    setCitySelected(res.data);
+                }
+            )
+        }
+    }, [cityId])
 
     useEffect(() => {
         if (citySelected?.country) {
             request(`/holiday/country/${citySelected?.country_code}`)
                 .then(res => {
+                    console.log('res', res);
                     setHolidays(getNotUnique(res.data));
                 })
         }
-    }, [citySelected])
+    }, [citySelected, cityId])
 
     // Fetch places by city
     useEffect(() => {
-        request(`/place/city/${cityId}`)
-            .then(res => {
-                setPlaces(res.data || []);
-                setPlacesLoading(false);
-            })
-    }, []);
+        if (user?.premium && cityId) {
+            request(`/place/city/${cityId}`)
+                .then(res => {
+                    setPlaces(res.data || []);
+                    setPlacesLoading(false);
+                })
+        }
+    }, [cityId]);
 
     // Fetch locations for current city
     useEffect(() => {
-        request(`/locations/city/${cityId}`)
-            .then(res => {
-                setLocations(res.data || []);
-                setImagesLoading(false);
-            })
-    }, []);
+        if (cityId) {
+            request(`/locations/city/${cityId}`)
+                .then(res => {
+                    setLocations(res.data || []);
+                    setImagesLoading(false);
+                })
+        }
+    }, [cityId]);
 
     useEffect(() => {
-        request(`/reviews/${cityId}`)
-            .then(res => {
-                setReviews(res.data || []);
+        if (cityId) {
+            request(`/reviews/${cityId}`)
+                .then(res => {
+                    setReviews(res.data || []);
+                    console.log('res', res);
 
-                // Calculate average
-                if (res.data.length === 0) {
-                    setReviewsAverage(null)
-                } else if (res.data.length === 1) {
-                    setReviewsAverage(res.data[0].rating);
-                } else {
-                    const average = res.data.reduce((a, b) => a.rating + b.rating, 0) / res.data.length;
-                    setReviewsAverage(average.toFixed(2));
-                }
-                
-                setReviewsLoading(false);
-            })
-    }, []);
+                    // Calculate average
+                    if (res?.data?.length === 0) {
+                        setReviewsAverage(null)
+                    } else if (res?.data?.length === 1) {
+                        setReviewsAverage(res.data[0].rating);
+                    } else {
+                        const average = res.data?.reduce((a, b) => a.rating + b.rating, 0) / res.data?.length;
+                        setReviewsAverage(average.toFixed(2));
+                    }
+                    
+                    setReviewsLoading(false);
+                })
+        }
+    }, [cityId]);
 
     useEffect(() => {
-        request(`/favorites/city/${cityId}`)
-            .then(res => {
-                setFavorited(res.data?.favorited);
-                setFavoritesLoading(false);
-            })
-    }, [])
+        if (cityId && user) {
+            request(`/favorites/city/${cityId}`)
+                .then(res => {
+                    setFavorited(res.data?.favorited);
+                    setFavoritesLoading(false);
+                })
+        }
+    }, [cityId])
 
     // Functions
     function getNotUnique(a) {
@@ -304,12 +315,14 @@ export default function CityView() {
                     <div className={`sm:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full`}> 
                         <TextH2 classes="z-10">{citySelected?.name}, {citySelected?.country_name}</TextH2>
                         <div className="flex items-center sm:ml-auto">
-                            <FavoriteControl
-                                toggleFavorite={toggleFavorite}
-                                hideTooltip={true}
-                                currentImageFavoriteStatus={favorited}
-                                style={{ height: 20, width: 20, marginRight: 0, wrapperWidth: 45 }}
-                            />
+                            {
+                                user && <FavoriteControl
+                                    toggleFavorite={toggleFavorite}
+                                    hideTooltip={true}
+                                    currentImageFavoriteStatus={favorited}
+                                    style={{ height: 20, width: 20, marginRight: 0, wrapperWidth: 45 }}
+                                />
+                            }
                             <TextH5 classes="ml-2 z-50">{citySelected?.favorite_count} favorites</TextH5>
                         </div>
                     </div>
@@ -366,7 +379,17 @@ export default function CityView() {
             <div className="w-full my-12">
                 <TextH3>Local Favorites</TextH3>
                 {
-                    citySelected?.longitude && <PlacesMap coordinates={[citySelected?.longitude, citySelected?.latitude]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} />
+                    user?.premium ?
+                        citySelected?.longitude && <PlacesMap coordinates={[citySelected?.longitude, citySelected?.latitude]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} />
+                        : <div className="w-full h-96 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                            <div className="flex flex-col items-center">
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Unlock this feature</h3>
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">with a pro account</h3>
+                                <Link href="/pro">
+                                    <p className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">Get Pro</p>
+                                </Link>
+                            </div>
+                        </div>
                 }
                 {/* filters  */}
                 <div className="w-full justify-center flex flex-wrap z-0 mt-4">
