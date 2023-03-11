@@ -1,6 +1,5 @@
 import { useEffect, useContext, useState } from 'react';
 import moment from 'moment';
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 // Utils 
@@ -29,6 +28,7 @@ import PlacesMap from '../../components/cityComponents/Map';
 
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
+import { useRouter } from 'next/router'
 
 // Context
 import { favoritesContext } from '../../context/FavoritesProvider';
@@ -38,6 +38,8 @@ export default function CityView() {
     const { user } = useAuth();
     const router = useRouter()
     const { cityId, breadcrumb } = router.query
+
+    console.log('cityId, cityId', cityId);
 
     // Context
     const [favorites, setFavorites] = useContext(favoritesContext);
