@@ -16,7 +16,7 @@ export default function UserHomePage({ router, user, userLoading }) {
     if (userLoading) return null;
 
     return (
-        <div className="pl-16">
+        <div className="pl-16 flex flex-col items-center">
             <div className="w-full sm:w-3/4 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto mt-56 mb-44 max-w-screen-md sm:text-center">
                     <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">Let's Get Traveling</h2>
