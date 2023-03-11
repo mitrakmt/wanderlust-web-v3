@@ -99,7 +99,7 @@ export default function Home() {
   if (userLoading) return null;
 
   return (
-    <section className="relative min-h-screen overflow-scroll">
+    <section className="relative min-h-screen overflow-scroll max-w-full">
       <Head>
         <title>Wanderlust App</title>
         <meta name="description" content="Explore the world one place at a time." />
@@ -107,9 +107,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* NEW USER HOMGEPAGE  */}
-      {
-        !user ? <GuestHomePage router={router} /> : <UserHomePage router={router} user={user} userLoading={userLoading} />
-      }
+      <section className="w-full absolute overflow-hidden top-0 left-0 right-0 ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/70 dark:bg-gray-900/70" style={{ zIndex: 49 }}>
+        {
+          !user ? <GuestHomePage router={router} /> : <UserHomePage router={router} user={user} userLoading={userLoading} />
+        }
+      </section>
       <ControlBar
           cityId={cityId}
           currentImageFavoriteStatus={currentImageFavoriteStatus}
