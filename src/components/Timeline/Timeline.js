@@ -3,7 +3,7 @@ import { useState } from 'react';
 const month = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export default function Timeline({ data }) {
-    const [currentMonth, setCurrentMonth] = useState(month[new Date().getMonth()]);
+    const [currentMonth] = useState(month[new Date().getMonth()]);
     
     const humanizeDate = (date_str) => {
         let date_arr = date_str.split('-');
@@ -21,7 +21,7 @@ export default function Timeline({ data }) {
         <ol className="relative border-l border-gray-200 dark:border-gray-700">                  
             {
                 data.map(({ name, description, date: { iso }, link }) => (
-                    <li className="mb-6 ml-4" key={`timeline-${name}`}>
+                    <li className="mb-6 ml-4" key={`timeline-${name}-${iso}`}>
                         <div className={`absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border ${getMonth(iso) === currentMonth ? "border-green-500 dark:border-green-500 dark:bg-green-500 bg-green-500" : "dark:bg-gray-700 border-white dark:border-gray-900"}`}></div>
                         <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{humanizeDate(iso)}</time>
                         <h3 className="font-semibold text-gray-900 text-md dark:text-white">{name}</h3>

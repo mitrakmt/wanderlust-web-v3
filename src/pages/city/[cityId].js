@@ -381,7 +381,7 @@ export default function CityView() {
                 {
                     user?.premium ?
                         citySelected?.longitude && <PlacesMap coordinates={[citySelected?.longitude, citySelected?.latitude]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} />
-                        : <div className="w-full h-96 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                        : <div className="w-full h-96 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center">
                             <div className="flex flex-col items-center">
                                 <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Unlock this feature</h3>
                                 <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">with a pro account</h3>
@@ -392,36 +392,38 @@ export default function CityView() {
                         </div>
                 }
                 {/* filters  */}
-                <div className="w-full justify-center flex flex-wrap z-0 mt-4">
-                    <div className="flex items-center mr-4">
-                        <input checked={!selectedFilter} onChange={() => setSelectedFilter(null)} type="radio" value="" className="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
+                {
+                    user?.premium && <div className="w-full justify-center flex flex-wrap z-0 mt-4">
+                        <div className="flex items-center mr-4">
+                            <input checked={!selectedFilter} onChange={() => setSelectedFilter(null)} type="radio" value="" className="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
+                        </div>
+                        <div className="flex items-center mr-4">
+                            <input checked={selectedFilter === 'point_of_interest'} onChange={() => setSelectedFilter('point_of_interest')} type="radio" value="" className="cursor-pointer w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Point of Interest</label>
+                        </div>
+                        <div className="flex items-center mr-4">
+                            <input checked={selectedFilter === 'food'} onChange={() => setSelectedFilter('food')} type="radio" value="" className="cursor-pointer w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Food</label>
+                        </div>
+                        <div className="flex items-center mr-4">
+                            <input checked={selectedFilter === 'cafe'} onChange={() => setSelectedFilter('cafe')} type="radio" value="" className="cursor-pointer w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cafe</label>
+                        </div>
+                        <div className="flex items-center mr-4">
+                            <input checked={selectedFilter === 'bar'} onChange={() => setSelectedFilter('bar')} type="radio" value="" className="cursor-pointer w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
+                        </div>
+                        <div className="flex items-center mr-4">
+                            <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
+                        </div>
+                        <div className="flex items-center mr-4">
+                            <input checked={selectedFilter === 'museum'} onChange={() => setSelectedFilter('museum')} type="radio" value="" className="cursor-pointer w-4 h-4 text-brown-600 bg-gray-100 border-gray-300 focus:ring-brown-500 dark:focus:ring-brown-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Museum</label>
+                        </div>
                     </div>
-                    <div className="flex items-center mr-4">
-                        <input checked={selectedFilter === 'point_of_interest'} onChange={() => setSelectedFilter('point_of_interest')} type="radio" value="" className="cursor-pointer w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Point of Interest</label>
-                    </div>
-                    <div className="flex items-center mr-4">
-                        <input checked={selectedFilter === 'food'} onChange={() => setSelectedFilter('food')} type="radio" value="" className="cursor-pointer w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Food</label>
-                    </div>
-                    <div className="flex items-center mr-4">
-                        <input checked={selectedFilter === 'cafe'} onChange={() => setSelectedFilter('cafe')} type="radio" value="" className="cursor-pointer w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cafe</label>
-                    </div>
-                    <div className="flex items-center mr-4">
-                        <input checked={selectedFilter === 'bar'} onChange={() => setSelectedFilter('bar')} type="radio" value="" className="cursor-pointer w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
-                    </div>
-                    <div className="flex items-center mr-4">
-                        <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
-                    </div>
-                    <div className="flex items-center mr-4">
-                        <input checked={selectedFilter === 'museum'} onChange={() => setSelectedFilter('museum')} type="radio" value="" className="cursor-pointer w-4 h-4 text-brown-600 bg-gray-100 border-gray-300 focus:ring-brown-500 dark:focus:ring-brown-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Museum</label>
-                    </div>
-                </div>
+                }
             </div>
             <div className="w-full my-12">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4">
@@ -439,7 +441,9 @@ export default function CityView() {
                             <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">{reviews.length} review{reviews.length === 1 ? "" : "s"}</p>
                         </div>
                     </div>
-                    <Button text="Write a review now!" onClick={() => setShowWriteAReview(true)} />
+                    {
+                        user && <Button text="Write a review now!" onClick={() => setShowWriteAReview(true)} />
+                    }
                 </div>
                 {
                     showWriteAReview && <div className="block w-full p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -524,7 +528,7 @@ export default function CityView() {
             <div className="w-full my-12">
                 <TextH3>Airbnbs</TextH3>
                 <div className="flex flex-col items-center w-full h-auto bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
-                    <Image height={30} width={30} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://images.unsplash.com/photo-1591825729269-caeb344f6df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3540&q=80" alt={`Airbnbs in ${citySelected?.name}`} />
+                    <Image height={150} width={150} quality={80} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://images.unsplash.com/photo-1591825729269-caeb344f6df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3540&q=80" alt={`Airbnbs in ${citySelected?.name}`} />
                     <div className="flex flex-col justify-between w-full p-4 leading-normal">
                         <div className="flex">
                             <h5 className="mb-2 mr-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">COMING SOON</h5>
