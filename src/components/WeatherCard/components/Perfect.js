@@ -1,5 +1,3 @@
-import '../../../styles/weather.module.scss';
-
 export default function PerfectWeather({ temp, text }) {
     return (
         <div icon="cloudy" data-label={text}>

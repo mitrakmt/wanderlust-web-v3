@@ -2,10 +2,7 @@ import React, { useContext, useState } from 'react';
 import Map, { Layer, Source } from 'react-map-gl';
 
 // Context
-import { themeContext } from '../../context/ThemeProvider';
-
-// Styles
-import '../../styles/map.module.scss';
+import { themeContext } from '../../../context/ThemeProvider';
 
 // Mapbox token array
 const mapBoxArray = [
@@ -53,6 +50,8 @@ export default function Passport({ coordinates, addCountry, removeCountry, user 
             addCountry(clickedFeature.properties.iso_3166_1_alpha_3);
         }
     };
+
+    if (!user) return null;
 
     return (
         <Map

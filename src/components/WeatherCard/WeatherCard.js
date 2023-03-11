@@ -10,8 +10,6 @@ import Cool from './components/Cool';
 import Chilly from './components/Chilly';
 import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
 
-import '../../styles/WeatherCard.module.scss';
-
 export default function WeatherCard({ current, forecast, location }) {
     const [weatherType, setWeatherType] = useState(localStorage.getItem('weatherType'));
 
@@ -50,7 +48,7 @@ export default function WeatherCard({ current, forecast, location }) {
                     forecast?.forecastday?.map(day => (
                         <div className="flex flex-col items-center justify-center h-10 mx-3 w-14" key={`weather-forecast-${day.date_epoch}`}>
                             <p className="text-gray-900 dark:text-gray-400">{Moment(day?.date).format("ddd")}</p>
-                            <Image src={require(`./icons/day/${day?.day?.condition.icon.substring(day?.day?.condition.icon.lastIndexOf('/') + 1)}`)} alt="Weather Image" className="w-8 h-8" width={30} height={30} />
+                            <Image src={`/icons/day/${day?.day?.condition.icon.substring(day?.day?.condition.icon.lastIndexOf('/') + 1)}`} alt="Weather Image" className="w-8 h-8" width={30} height={30} />
                             <div className="flex">
                                 <p className="flex mx-1 text-xs text-gray-900 dark:text-gray-400">{weatherType === "F" ? day?.day.mintemp_f.toFixed(0) : day?.day.mintemp_c.toFixed(0)}°</p>
                                 <p className="flex mx-1 text-xs text-gray-900 dark:text-gray-400">{weatherType === "F" ? day?.day.maxtemp_f.toFixed(0) : day?.day.maxtemp_c.toFixed(0)}°</p>

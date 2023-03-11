@@ -4,8 +4,6 @@ import Map, {Layer, Source } from 'react-map-gl';
 // Context
 import { themeContext } from '../../../context/ThemeProvider';
 
-import '../../../styles/map.module.scss';
-
 // Mapbox token array
 const mapBoxArray = [
     process.env.NEXT_PUBLIC_MAPBOX_TOKEN1,

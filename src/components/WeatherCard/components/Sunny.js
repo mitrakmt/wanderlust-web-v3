@@ -1,5 +1,3 @@
-import '../../../styles/weather.module.scss';
-
 export default function SunnyWeather({ temp, text }) {
     return (
         <div icon="sunny" data-label={text}>

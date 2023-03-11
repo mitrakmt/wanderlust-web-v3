@@ -1,5 +1,3 @@
-import '../../../styles/weather.module.scss';
-
 export default function CoolWeather({ temp, text }) {
     return (
         <div icon="supermoon" data-label={text}>

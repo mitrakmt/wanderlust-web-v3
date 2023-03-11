@@ -149,13 +149,13 @@ export default function Layout({ children }) {
     
     
   return (
-    <div className="overflow-scroll scroll-smooth bg-gray-100 dark:bg-gray-900 min-h-screen w-full">
+    <div className="overflow-scroll scroll-smooth bg-gray-100 dark:bg-gray-900 min-h-screen max-h-screen w-full">
         {
             showOfflineSnackbar && <OfflineSnackbar closeSnackbar={() => setShowOfflineSnackbar(false)} />
         }
         <Toasts toasts={toasts} />
         <Sidebar user={user} router={router} userLoading={userLoading} logout={logout} />
-        <main className="overflow-scroll scroll-smooth min-h-screen">{children}</main>
+        <main className="overflow-scroll scroll-smooth min-h-screen max-h-screen">{children}</main>
     </div>
   )
 }

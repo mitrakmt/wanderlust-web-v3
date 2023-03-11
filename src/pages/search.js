@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import Link from 'next/link';
 
 // Components
 import CityCard from '../components/CityCard/CityCard';

@@ -1,5 +1,3 @@
-import '../../../styles/weather.module.scss';
-
 export default function SoggyWeather({ temp, text  }) {
     return (
         <div icon="stormy" data-label={text}>

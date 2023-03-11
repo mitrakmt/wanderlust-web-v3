@@ -7,8 +7,6 @@ import { themeContext } from '../../../../src/context/ThemeProvider';
 // Components
 import PlaceCard from './PlaceCard';
 
-import '../../../styles/map.module.scss';
-
 // Mapbox token array
 const mapBoxArray = [
     process.env.NEXT_PUBLIC_MAPBOX_TOKEN1,

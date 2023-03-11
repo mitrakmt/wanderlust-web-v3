@@ -1,36 +1,18 @@
-import { useEffect, useState } from 'react';
-import GooglePlacesAutocomplete, { geocodeByPlaceId } from 'react-google-places-autocomplete';
+import React, { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
-// Hooks
-import { useAuth } from '../hooks/useAuth';
-import { useRouter } from 'next/router';
-
 // Utils
-import request from '../utils/request';
-import trackStat from '../utils/trackStat';
+import request from '../../../utils/request';
 
-// New Components
-import TextH2 from '../components/Text/TextH2';
-import Map from '../components/places/Map';
+// Components
+import Map from './Map';
 
-export default function Places() {
-    // Hooks
-    const { user, userLoading } = useAuth();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (!user?.premium) {
-            router.push('/pro')
-        }
-    }, [user])
-
+export default function PlacesTab({ places, setPlaces, geocodeByPlaceId, GooglePlacesAutocomplete }) {
     // State
     const [selectedPlace, setSelectedPlace] = useState(null);
-    const [places, setPlaces] = useState([]);
     const [successMessage, setSuccessMessage] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
-    const [addPlaceLoading, setAddPlaceLoading] = useState(false);
+    const [, setAddPlaceLoading] = useState(false);
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [newPlaceNotes, setNewPlaceNotes] = useState('');
     const [searchCitiesText, setSearchCitiesText] = useState('');
@@ -39,19 +21,9 @@ export default function Places() {
     const [selectedCity, setSelectedCity] = useState(null);
     const [citySearching, setCitySearching] = useState(false);
     const [showSidebar, setShowSidebar] = useState(false);
+    const [searchActive, setSearchActive] = useState(false);
 
-    // UseEffects
-    useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'places' })
-    }, [])
-
-    useEffect(() => {
-        request(`/place`)
-            .then(res => {
-                setPlaces(res.data || []);
-            })
-    }, [])
-
+    // Functions
     const addPlace = async () => {
         setAddPlaceLoading(true);
         const geo = await geocodeByPlaceId(selectedPlace.value.place_id, {
@@ -137,6 +109,10 @@ export default function Places() {
         setShowSidebar(!showSidebar);
     }
 
+    const toggleSearchActive = () => {
+        setSearchActive(!searchActive);
+    }
+
     const debouncedCitySearch = useDebouncedCallback(
         (text) => {
             if (text.length < 3) {
@@ -162,26 +138,40 @@ export default function Places() {
         setShowSidebar(false);
     }
 
-    if (userLoading) return null;
-
     return (
-        <section className="relative w-full min-h-screen overflow-hidden">
+        <div className="relative">
             <Map isPublicMap={false} defaultZoom={2.5} coordinates={[115.1317479, -8.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} removePlace={removePlace} />
-
-            <div className="pointer-events-none ml-20">
-                <TextH2 styles={{ position: 'relative', marginBottom: 0, fontWeight: 800 }}>Places</TextH2>
-                <p className="mt-0 relative font-bold text-sm md:text-md text-black dark:text-white text-wrap mb-2">Add your favorite places to keep track of amazing restaurants and sights in each city.</p>
+        
+            <div className="pointer-events-none ml-4 sm:ml-20 pt-4">
+                <p className="text-xl relative font-bold text-gray-900 dark:text-gray-200">Favorite Places</p>
+                <p className="mt-0 relative font-bold text-sm md:text-md text-black dark:text-white text-wrap mb-2">Keep track of your favorite places around the world (restaurants, experiences, etc).</p>
             </div>
-
+            
             {/* SIDEBAR  */}
-            <div className="text-center m-5 fixed bottom-5 right-0 z-50">
-                <button onClick={toggleSidebar} className="cursor-pointer text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" type="button">
-                    Add New Place
+            <div className="text-center flex flex-col m-5 fixed top-32 sm:top-16 right-0 z-50">
+                <button onClick={toggleSidebar} className="cursor-pointer text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-full text-sm p-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
                 </button>
+                <div className="flex items-center relative w-full">
+                    <div className={`absolute transition-all ${searchActive ? "z-10 w-80 right-20": "w-0 right-10"}`}>
+                        <input type="text" className={`${searchActive ? "p-2.5" : "px-0 py-2.5"} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`} placeholder="Navigate on the map" />
+                    </div>
+                    <button onClick={toggleSearchActive} className="z-20 cursor-pointer text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-full text-sm p-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            {
+                                searchActive ? 
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    : <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            }
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             {/* <!-- drawer component --> */}
-            <div style={{ zIndex: 1000 }} className={`absolute top-0 ${showSidebar ? "right-0" : "-right-80"} w-80 h-screen p-4 transition-all bg-white dark:bg-gray-800`} tabIndex="-1">
+            <div className={`fixed z-50 top-0 ${showSidebar ? "right-0" : "-right-96"} w-80 h-screen p-4 transition-all bg-white dark:bg-gray-800`} tabIndex="-1">
                 <h5 id="drawer-label" className="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">New Place</h5>
                 <button type="button" onClick={clearAddPlaceInfo} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                     <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -190,7 +180,7 @@ export default function Places() {
                 <div className="w-full">
                     <div className="pointer-events-auto">
                         <GooglePlacesAutocomplete
-                            apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+                            apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                             minLengthAutocomplete={3}
                             apiOptions={{
                                 language: 'en'
@@ -263,38 +253,39 @@ export default function Places() {
                             Cancel
                         </button>
                     </div>
-                    <div className="fixed bottom-8 md:bottom-4 w-auto right-0 left-0 justify-center flex flex-wrap z-50 mt-4 ml-0 sm:ml-16">
-                        <div className="flex items-center mr-4 mb-2">
-                            <input checked={!selectedFilter} onChange={() => setSelectedFilter(null)} type="radio" value="" className="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
-                        </div>
-                        <div className="flex items-center mr-4 mb-2">
-                            <input checked={selectedFilter === 'point_of_interest'} onChange={() => setSelectedFilter('point_of_interest')} type="radio" value="" className="cursor-pointer w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Point of Interest</label>
-                        </div>
-                        <div className="flex items-center mr-4 mb-2">
-                            <input checked={selectedFilter === 'food'} onChange={() => setSelectedFilter('food')} type="radio" value="" className="cursor-pointer w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Food</label>
-                        </div>
-                        <div className="flex items-center mr-4 mb-2">
-                            <input checked={selectedFilter === 'cafe'} onChange={() => setSelectedFilter('cafe')} type="radio" value="" className="cursor-pointer w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cafe</label>
-                        </div>
-                        <div className="flex items-center mr-4 mb-2">
-                            <input checked={selectedFilter === 'bar'} onChange={() => setSelectedFilter('bar')} type="radio" value="" className="cursor-pointer w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
-                        </div>
-                        <div className="flex items-center mr-4 mb-2">
-                            <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
-                        </div>
-                        <div className="flex items-center mr-4 mb-2">
-                            <input checked={selectedFilter === 'museum'} onChange={() => setSelectedFilter('museum')} type="radio" value="" className="cursor-pointer w-4 h-4 text-brown-600 bg-gray-100 border-gray-300 focus:ring-brown-500 dark:focus:ring-brown-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Museum</label>
-                        </div>
+                </div>
+                <div className="fixed bottom-8 md:bottom-4 w-auto right-0 left-0 justify-center flex flex-wrap mt-4 ml-0 sm:ml-16">
+                    <div className="flex items-center mr-4 mb-2">
+                        <input checked={!selectedFilter} onChange={() => setSelectedFilter(null)} type="radio" value="" className="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
+                    </div>
+                    <div className="flex items-center mr-4 mb-2">
+                        <input checked={selectedFilter === 'point_of_interest'} onChange={() => setSelectedFilter('point_of_interest')} type="radio" value="" className="cursor-pointer w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Point of Interest</label>
+                    </div>
+                    <div className="flex items-center mr-4 mb-2">
+                        <input checked={selectedFilter === 'food'} onChange={() => setSelectedFilter('food')} type="radio" value="" className="cursor-pointer w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Food</label>
+                    </div>
+                    <div className="flex items-center mr-4 mb-2">
+                        <input checked={selectedFilter === 'cafe'} onChange={() => setSelectedFilter('cafe')} type="radio" value="" className="cursor-pointer w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cafe</label>
+                    </div>
+                    <div className="flex items-center mr-4 mb-2">
+                        <input checked={selectedFilter === 'bar'} onChange={() => setSelectedFilter('bar')} type="radio" value="" className="cursor-pointer w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
+                    </div>
+                    <div className="flex items-center mr-4 mb-2">
+                        <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
+                    </div>
+                    <div className="flex items-center mr-4 mb-2">
+                        <input checked={selectedFilter === 'museum'} onChange={() => setSelectedFilter('museum')} type="radio" value="" className="cursor-pointer w-4 h-4 text-brown-600 bg-gray-100 border-gray-300 focus:ring-brown-500 dark:focus:ring-brown-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Museum</label>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     )
 }
+

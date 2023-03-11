@@ -71,7 +71,7 @@ export default function CityView() {
         if (citySelected) {
             baseRequest(`https://api.weatherapi.com/v1/forecast.json`, {
                 query: {
-                    "key": process.env.REACT_APP_WEATHER_API,
+                    "key": process.env.NEXT_PUBLIC_WEATHER_API,
                     "q": `${citySelected?.latitude},${citySelected?.longitude}`,
                     "days": 5
                 }
@@ -522,18 +522,20 @@ export default function CityView() {
                     </div>
                 )
             }
-            <div className="w-full my-8">
+            {/* <div className="w-full my-8">
                 <TextH3 classes="mb-4">Country Information</TextH3>
                 <div className="flex flex-col w-full h-auto px-10 pl-0 bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
                     <div className="flex flex-col w-full p-8 ml-8 leading-normal">
                         <TextH2>{citySelected?.country_name}</TextH2>
                         <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Region: {citySelected?.region}</p>
-                        <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
+                    <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
                         <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Currency: {citySelected?.country?.currency}</p>
                     </div>
-                    <Image height={30} width={30} className="static object-cover w-full my-8 rounded-md h-96 md:h-auto md:w-96" src={citySelected?.country?.image_url_medium || citySelected?.image_url_medium} alt={`${citySelected?.country_name}`} />
+                    {
+                       citySelected?.country?.image_url_medium || citySelected?.image_url_medium && <Image height={30} width={30} className="static object-cover w-full my-8 rounded-md h-96 md:h-auto md:w-96" src={citySelected?.country?.image_url_medium || citySelected?.image_url_medium} alt={`${citySelected?.country_name}`} />
+                    }
                 </div>
-            </div>
+            </div> */}
         </section>
     )
 }

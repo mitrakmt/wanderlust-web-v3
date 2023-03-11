@@ -1,5 +1,3 @@
-import '../../../styles/weather.module.scss';
-
 export default function ChillyWeather({ temp, text }) {
     return (
         <div icon="snowy" data-label={text} className="whitespace-nowrap">

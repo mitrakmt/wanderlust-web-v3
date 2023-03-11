@@ -1,6 +1,9 @@
 import React, { useState, useContext } from "react";
 import Image from "next/image";
 
+// Loading Components
+import LoadingSidebar from "../../loading_components/Sidebar";
+
 // Icons
 import HomeIcon from "./icons/HomeIcon";
 import AdminIcon from "./icons/AdminIcon";
@@ -9,12 +12,10 @@ import CommunityIcon from './icons/CommunityIcon';
 import FavoriteIcon from './icons/FavoriteIcon';
 import MapIcon from './icons/MapIcon';
 import NomadIcon from './icons/NomadIcon';
-import PlacesIcon from './icons/PlacesIcon';
 import ProfileIcon from './icons/ProfileIcon';
 import ProIcon from './icons/ProIcon';
 import SearchIcon from './icons/SearchIcon';
 import SettingsIcon from './icons/SettingsIcon';
-import TravelListIcon from './icons/TravelListIcon';
 import ContactIcon from './icons/ContactIcon';
 import LoginIcon from './icons/LoginIcon';
 
@@ -65,22 +66,8 @@ function Sidebar({ user, router, userLoading, logout }) {
         },
         {
             title: 'Map',
-            path: '/passport',
+            path: '/maps',
             icon: <MapIcon />,
-            authRequired: false,
-            premiumRequired: true
-        },
-        {
-            title: 'Places',
-            path: '/places',
-            icon: <PlacesIcon />,
-            authRequired: false,
-            premiumRequired: true
-        },
-        {
-            title: 'Travel List',
-            path: '/travel-list',
-            icon: <TravelListIcon />,
             authRequired: false,
             premiumRequired: true
         },
@@ -193,7 +180,7 @@ function Sidebar({ user, router, userLoading, logout }) {
         setMenuDropdownOpen(!menuDropdownOpen)
     }
 
-    if (userLoading) return <p>Loading</p>
+    if (userLoading) return <LoadingSidebar />
 
     return (
         <header>

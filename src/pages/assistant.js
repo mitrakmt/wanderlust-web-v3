@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import request from '../utils/request';
 import trackStat from '../utils/trackStat';
 
-export default function Trips() {
+export default function Assistant() {
     // State search
     const [currentQuestion, setCurrentQuestion] = useState("countries");
     const [tripParameters, setTripParameters] = useState({});
@@ -27,10 +27,12 @@ export default function Trips() {
     // Hooks
     const { user } = useAuth();
     const router = useRouter();
-
-    if (!user?.premium) {
-        router.push('/pro')
-    }
+  
+    useEffect(() => {
+        if (!user?.premium) {
+            router.push('/pro');
+        }
+    }, [user])
     
     // UseEffects
     useEffect(() => {

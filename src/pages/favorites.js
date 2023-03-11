@@ -2,9 +2,6 @@ import { useEffect, useContext, useState } from 'react';
 import request from '../utils/request';
 import trackStat from '../utils/trackStat';
 
-// Pages
-import CityView from './city/[cityId]';
-
 // Utils
 import removeFavorite from '../utils/removeFavorite';
 

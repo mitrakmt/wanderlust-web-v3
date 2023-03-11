@@ -22,12 +22,14 @@ import Layout from '../layouts/main';
 // Styles
 import '@/styles/globals.css'
 import 'mapbox-gl/dist/mapbox-gl.css';
+import '../styles/weather.scss';
+import '../styles/weatherCard.scss';
 
 export { reportWebVitals } from 'next-axiom';
 
 export default function MyApp({ Component, pageProps }) {
     return (
-        <div className="overflow-scroll h-full scroll-smooth">
+        <div className="overflow-scroll h-full max-h-screen scroll-smooth">
             <Head>
                 <meta charSet="UTF-8" />
                 <meta name="keywords" content="titla, meta, nextjs" />

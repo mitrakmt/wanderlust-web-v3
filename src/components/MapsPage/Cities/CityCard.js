@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Image from 'next/image'
 
 // Context
-import { themeContext } from '../../context/ThemeProvider';
+import { themeContext } from '../../../../context/ThemeProvider';
 
 export default function CityCard({ isPublicMap, id, city, country, removeCity, viewCity, closeCityOverlay, image }) {
     // Context
