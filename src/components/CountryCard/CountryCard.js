@@ -23,12 +23,16 @@ export default function CountryCard({ name, image_url_small, visited = false, in
             </div>
           }
           <div className="w-full bg-gray-200 rounded-md min-h-80 aspect-w-1 aspect-h-1 lg:h-80 lg:aspect-none" style={{ position: 'absolute', height: "100%" }}>
-                <Image
-                    src={image_url_small}
-                    alt={name}
-                    fill
-                    className="object-cover object-center w-full h-full rounded-md lg:w-full lg:h-full brightness-50"
-                />
+              <Image
+                  src={image_url_small}
+                  alt={name}
+                  fill
+                  quality={100}
+                  sizes="(max-width: 768px) 30vw,
+                    (max-width: 1200px) 20vw,
+                    33vw"
+                  className="object-cover object-center w-full h-full rounded-md lg:w-full lg:h-full brightness-50"
+              />
           </div>
       </div>
     </span>

@@ -90,6 +90,7 @@ module.exports = {
       require('@tailwindcss/forms'),
       require('@tailwindcss/line-clamp'),
       require('@tailwindcss/typography'),
+      require('flowbite-typography'),
       require('flowbite/plugin')
   ],
 }

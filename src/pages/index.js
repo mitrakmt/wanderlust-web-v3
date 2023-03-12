@@ -39,6 +39,7 @@ export default function Home() {
     const [smallImageUrl, setSmallImageUrl] = useState("");
     const [countryInfo, setCountryInfo] = useState(null);
     const [cityInfo, setCityInfo] = useState(null);
+    const [posts, setPosts] = useState([]);
     const [attribution, setAttribution] = useState({
         name: "",
         links: {
@@ -55,6 +56,15 @@ export default function Home() {
           refresh();
         }
         main();
+    }, []);
+  
+    useEffect(() => {
+      request('/blog')
+        .then(res => {
+            if (res?.data) {
+              setPosts(res.data);
+            }
+          })
     }, []);
 
     const refresh = async () => {
@@ -110,7 +120,7 @@ export default function Home() {
       {/* NEW USER HOMGEPAGE  */}
       <section className="w-full absolute overflow-hidden pr-0 top-0 left-0 right-0 ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/80 dark:bg-gray-900/80" style={{ zIndex: 49 }}>
         {
-          !user ? <GuestHomePage router={router} request={request} /> : <UserHomePage router={router} user={user} userLoading={userLoading} request={request} />
+          !user ? <GuestHomePage router={router} request={request} posts={posts} /> : <UserHomePage router={router} user={user} userLoading={userLoading} request={request} posts={posts} />
         }
         <div className="pl-0 sm:pl-16 w-full">
           <Footer />

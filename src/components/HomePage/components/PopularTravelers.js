@@ -32,7 +32,7 @@ export default function PopularTravelers() {
                 <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Popular Nomads</h2>
                 <p className="font-normal text-gray-800 lg:mb-16 sm:text-xl dark:text-gray-200">Every traveler has a wealth of information waiting to be shared</p>
             </div>
-            <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+            <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-2">
                 {travelers.map((traveler) => (
                     <div key={`popularTravelers-${traveler.name}`} className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                         <Link href={`/profile/${traveler.username}`}>

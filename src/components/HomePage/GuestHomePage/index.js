@@ -1,8 +1,8 @@
 import Features from './components/Features';
 import PopularTravelers from '../components/PopularTravelers';
-import Blog from './components/Blog';
+import BlogCard from '../../BlogCard';
 
-export default function GuestHomePage({ router, request }) {
+export default function GuestHomePage({ router, request, posts }) {
     return (
         <div className="px-0 sm:pl-16 pr-0 flex flex-col items-center">
             <div className="w-4/5 py-8 max-w-screen-xl text-center my-36">
@@ -83,7 +83,22 @@ export default function GuestHomePage({ router, request }) {
                 </figure>
             </div>
             {/* BLOG  */}
-            <Blog router={router} />
+            <div className="w-4/5 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+                <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
+                    <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Digital Nomad Blog</h2>
+                    <p className="font-normal text-gray-900 sm:text-xl dark:text-gray-100">We help you to learn about the best places around the world, the most beautiful places to see, and everything you'd need as a nomad.</p>
+                </div> 
+                <div className="grid gap-8 lg:grid-cols-2">
+                    {
+                        posts.map(post => (
+                            <BlogCard post={post} />
+                        ))
+                    }
+                </div>  
+                <div className="w-full flex justify-center items-center mt-6">
+                    <button onClick={() => router.push('/blog')} className="py-3 px-5 w-30 text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Explore More of our Articles</button>
+                </div>
+            </div>
             {/* NEWSLETTER  */}
             {/* <div className="w-4/5 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 my-20">
                 <div className="mx-auto max-w-screen-md sm:text-center">

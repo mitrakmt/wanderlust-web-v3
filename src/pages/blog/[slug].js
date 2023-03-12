@@ -2,12 +2,6 @@ export default function BlogPost() {
     // Hooks
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            {/* <!-- 
-            Install the "flowbite-typography" NPM package to apply styles and format the article content: 
-
-            URL: https://flowbite.com/docs/components/typography/ 
-            --> */}
-
             <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900">
                 <div className="flex justify-between px-4 mx-auto max-w-screen-xl ">
                     <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
