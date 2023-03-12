@@ -59,10 +59,12 @@ export default function Search() {
     }, []);
     
     useEffect(() => {
-        request('/favorites')
-            .then(res => {
-                setFavorites(res.data);
-            })
+        if (user) {
+            request('/favorites')
+                .then(res => {
+                    setFavorites(res.data);
+                })
+        }
     }, []);
 
     useEffect(() => {

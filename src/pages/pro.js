@@ -30,7 +30,7 @@ export default function Pro() {
                     <div className="space-y-8 lg:grid lg:grid-cols-2 sm:gap-6 xl:gap-10 lg:space-y-0">
                         <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                             <h3 className="mb-4 text-2xl font-semibold">Basic</h3>
-                            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">Our free version helps you to discover new places around the world.</p>
+                            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">Our free version helps you to discover new places around the world with ease.</p>
                             <div className="flex justify-center items-baseline my-8">
                                 <span className="mr-2 text-5xl font-extrabold">Free</span>
                             </div>
@@ -52,7 +52,7 @@ export default function Pro() {
                         </div>
                         <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                             <h3 className="mb-4 text-2xl font-semibold">Pro</h3>
-                            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">Our pro version is built to make finding, living and sharing the best places and experiences around the world.</p>
+                            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">Our pro version is built to make finding, living and sharing the best places and experiences around the world fast and easy.</p>
                             <div className="flex justify-center items-baseline my-8">
                                 <span className="mr-2 text-5xl font-extrabold">$3.99</span>
                                 <span className="text-gray-500 dark:text-gray-400">/month</span>
@@ -69,6 +69,10 @@ export default function Pro() {
                                 <li className="flex items-center space-x-3">
                                     <svg className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
                                     <span><span className="font-semibold">Share your favorites:</span> A public profile to share your favorites places with your friends.</span>
+                                </li>
+                                <li className="flex items-center space-x-3">
+                                    <svg className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+                                    <span><span className="font-semibold">AI Travel Assistant:</span> The first AI assistant to help you plan your vacation or travels with ease.</span>
                                 </li>
                                 <li className="flex items-center space-x-3">
                                     <svg className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
@@ -97,7 +101,7 @@ export default function Pro() {
                                 : <StripeForm stripeCustomerId={user?.stripeCustomerId} />
                         }
                         {
-                            !user && <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">An account is required before going premium. <a onClick={() => router.push('signup')} className="text-primary-600 hover:text-primary-500 dark:hover:text-primary-400 dark:text-primary-300">Sign up</a> or <a onClick={() => router.push('login')} className="text-primary-600 hover:text-primary-500 dark:hover:text-primary-400 dark:text-primary-300">Login</a></p>
+                            !user && <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">An account is required before going premium. <a onClick={() => router.push('signup')} className="cursor-pointer text-primary-600 hover:text-primary-500 dark:hover:text-primary-400 dark:text-primary-300">Sign up</a> or <a onClick={() => router.push('login')} className="cursor-pointer text-primary-600 hover:text-primary-500 dark:hover:text-primary-400 dark:text-primary-300">Login</a></p>
                         }
                         </div>
                     </div>

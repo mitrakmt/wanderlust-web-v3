@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import request from '../../../../src/utils/request';
+import request from '../../../utils/request';
 
 // Hooks
 import { useRouter } from 'next/router';
 
 // Context
-import { themeContext } from '../../../../src/context/ThemeProvider';
+import { themeContext } from '../../../context/ThemeProvider';
 
 export default function PlaceCard({ id, tags, google_id, name, closePlaceOverlay, user, selectedMarker, userPlaces, setUserPlaces }) {
     // Context

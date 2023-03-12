@@ -9,8 +9,9 @@ import { useRouter } from 'next/router';
 import ControlBar from "../components/ControlBar";
 import InfoDialog from "../components/InfoDialog/InfoDialog";
 import LoadImage from "../components/LoadImage";
-import GuestHomePage from "../components/GuestHomePage";
-import UserHomePage from "../components/UserHomePage";
+import GuestHomePage from "../components/HomePage/GuestHomePage";
+import UserHomePage from "../components/HomePage/UserHomePage";
+import Footer from "../components/Footer";
 
 // Styling
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -107,10 +108,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* NEW USER HOMGEPAGE  */}
-      <section className="w-full absolute overflow-hidden top-0 left-0 right-0 ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/70 dark:bg-gray-900/70" style={{ zIndex: 49 }}>
+      <section className="w-full absolute overflow-hidden pr-0 top-0 left-0 right-0 ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/80 dark:bg-gray-900/80" style={{ zIndex: 49 }}>
         {
-          !user ? <GuestHomePage router={router} /> : <UserHomePage router={router} user={user} userLoading={userLoading} />
+          !user ? <GuestHomePage router={router} request={request} /> : <UserHomePage router={router} user={user} userLoading={userLoading} request={request} />
         }
+        <div className="pl-0 sm:pl-16 w-full">
+          <Footer />
+        </div>
       </section>
       <ControlBar
           cityId={cityId}

@@ -4,7 +4,7 @@ import trackStat from '../../../utils/trackStat';
 
 // Components
 // import CityView from './city/[cityId]';
-import Map from '../../MapsPage/Cities/Map';
+import Map from './Map';
 
 // Hooks
 import { useAuth } from '../../../hooks/useAuth';

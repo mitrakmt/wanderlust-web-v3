@@ -8,7 +8,7 @@ import Soggy from './components/Soggy';
 import Perfect from './components/Perfect';
 import Cool from './components/Cool';
 import Chilly from './components/Chilly';
-import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 
 export default function WeatherCard({ current, forecast, location }) {
     const [weatherType, setWeatherType] = useState(localStorage.getItem('weatherType'));

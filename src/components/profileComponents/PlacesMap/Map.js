@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import Map, {Marker} from 'react-map-gl';
 
 // Context
-import { themeContext } from '../../../../src/context/ThemeProvider';
+import { themeContext } from '../../../context/ThemeProvider';
 
 // Components
 import PlaceCard from './PlaceCard';

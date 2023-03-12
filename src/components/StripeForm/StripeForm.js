@@ -43,7 +43,7 @@ const ProductDisplay = ({ loading, setLoading, stripeCustomerId }) => {
     )
   } else {
     return (
-      <button type="button" onClick={() => checkout({ setLoading, stripeCustomerId })} className="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Unlock Premium Features</button>
+      <button type="button" onClick={() => checkout({ setLoading, stripeCustomerId })} className="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center" >Unlock Premium Features</button>
     )
   }
 }
@@ -102,7 +102,7 @@ export default function StripeForm({ stripeCustomerId }) {
     }, [sessionId]);
 
     return (
-      <div className="flex items-center justify-center w-full h-full bg-gray-800">
+      <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-800">
         {
           !success && message === '' ? <ProductDisplay loading={loading} setLoading={setLoading} stripeCustomerId={stripeCustomerId} /> : success && sessionId !== '' ? <SuccessDisplay sessionId={sessionId} /> : <Message message={message} />
         }
