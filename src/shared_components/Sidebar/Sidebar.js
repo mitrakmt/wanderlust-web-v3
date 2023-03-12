@@ -364,7 +364,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                                             {expanded && <span className="ml-5">{item.title}</span>}
                                         </a>
                                         {
-                                            item.premiumRequired && !user?.premium && expanded && <span className="absolute right-0 inline-flex items-center justify-center px-2 h-6 text-sm font-medium text-gray-100 bg-primary-600 rounded-full dark:bg-primary-700 dark:text-gray-200">Premium</span>
+                                            item.premiumRequired && !user?.premium && expanded && <span className="absolute right-0 inline-flex items-center justify-center px-2 h-6 text-sm font-medium text-gray-100 bg-primary-600 rounded-full dark:bg-primary-700 dark:text-gray-200">Pro</span>
                                         }
                                     </li>
                                 )
