@@ -339,7 +339,7 @@ function Sidebar({ user, router, userLoading, logout }) {
             </nav>
 
             {/* DESKTOP SIDEBAR  */}
-            <nav className={`hidden sm:fixed sm:flex sm:visible h-full w-full top-0 bottom-0 left-0`} style={{ zIndex: 3000 }} aria-label="Sidebar">
+            <nav className={`hidden sm:fixed sm:flex sm:visible h-full ${expanded ? user?.premium ? 'w-52' : 'w-64' : 'w-16'} top-0 bottom-0 left-0`} style={{ zIndex: 3000 }} aria-label="Sidebar">
                 <div className={`overflow-hidden relative flex flex-col bg-blend-overlay justify-between h-full px-3 py-4 overflow-y-auto rounded backdrop-blur-sm ${expanded ? user?.premium ? 'w-52' : 'w-64' : 'w-16'} transition-all ${expanded ? 'dark:bg-gray-800/80' : "dark:bg-gray-800/50"} ${expanded ? 'bg-gray-200/80' : "bg-gray-200/50"}`}>
                     <div className={`absolute overflow-visible cursor-pointer top-4 ${expanded ? "-right-6" : "-right-8"}`} onClick={toggleSidebar}>
                         {

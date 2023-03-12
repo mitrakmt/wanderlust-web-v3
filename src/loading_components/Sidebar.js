@@ -37,7 +37,7 @@ function LoadingSidebar() {
             </nav>
 
             {/* DESKTOP SIDEBAR  */}
-            <nav className={`hidden sm:fixed sm:flex sm:visible h-full top-0 bottom-0 left-0 w-16 transition-all`} style={{ zIndex: 3000 }} aria-label="Sidebar">
+            <nav className={`hidden sm:fixed sm:flex sm:visible h-full top-0 bottom-0 left-0 w-16 transition-all`} aria-label="Sidebar">
                 <div className={`overflow-hidden relative flex flex-col bg-blend-overlay w-20 justify-between h-full px-3 py-4 overflow-y-auto rounded backdrop-blur-sm dark:bg-gray-800/50 bg-gray-200/50`}>
                     <div className={`absolute overflow-visible cursor-pointer top-4 -right-8}`}>
                         {/* {

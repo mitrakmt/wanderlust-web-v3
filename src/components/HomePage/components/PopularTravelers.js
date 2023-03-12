@@ -36,7 +36,7 @@ export default function PopularTravelers() {
                 {travelers.map((traveler) => (
                     <div key={`popularTravelers-${traveler.name}`} className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                         <Link href={`/profile/${traveler.username}`}>
-                            <Image className="w-80 rounded-lg sm:rounded-none h-36 object-cover sm:rounded-l-lg" src={traveler.avatar} alt={`${traveler.name} Avatar`} width={80} height={80} />
+                            <Image className="w-48 sm:w-80 rounded-lg sm:rounded-none h-36 object-cover sm:rounded-l-lg" src={traveler.avatar} alt={`${traveler.name} Avatar`} width={80} height={80} />
                         </Link>
                         <div className="p-5">
                             <div className="flex justify-between">

@@ -27,11 +27,6 @@ export default function Footer() {
                         <Link href="/contact"><li className="mb-4">
                             <p className="hover:underline">Contact Us</p>
                         </li></Link>
-                    </ul>
-                </div>
-                <div>
-                    <h2 className="mb-6 text-sm font-bold text-gray-500 uppercase dark:text-gray-400">Legal</h2>
-                    <ul className="text-gray-500 dark:text-gray-400">
                         <Link href="/privacy"><li className="mb-4">
                             <p className="hover:underline">Privacy Policy</p>
                         </li></Link>
