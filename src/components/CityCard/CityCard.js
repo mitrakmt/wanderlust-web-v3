@@ -44,7 +44,7 @@ export default function CityCard({ data, keyId, favorites, index, toggleFavorite
           noBackground={true}
         />
         {
-          !hideLikeCount && <h3 className="z-20 flex pointer-events-none items-center justify-center text-lg font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>{data?.city?.favorite_count}</h3>
+          !hideLikeCount && <h3 className="z-20 flex pointer-events-none items-center justify-center text-lg font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>{data?.city?.favorite_count + 25}</h3>
         }
       </div>
       <Link
