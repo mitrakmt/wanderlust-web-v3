@@ -30,11 +30,16 @@ export default function UserHomePage({ router, user, userLoading, request, posts
             })
     }
 
+    const navigateTo = (id) => {
+        clearCitiesSearch();
+        router.push(`/city/${id}`, { query: { breadcrumb: 'search' } })
+    }
+
     const findRandomLocation = () => {
         setSearchRandomCityLoading(true);
         request(`/cities/random`)
             .then(res => {
-                router.push(`/city/${res.data?._id || res.data?.id}`, { query: { breadcrumb: 'search' } })
+                navigateTo(res.data?._id || res.data?.id)
                 setSearchRandomCityLoading(false);
             })
     }
@@ -43,8 +48,7 @@ export default function UserHomePage({ router, user, userLoading, request, posts
         setSearchRandomCityByRegionLoading(true);
         request(`/cities/random/region?region=${region}`)
             .then(res => {
-                console.log('res', res);
-                router.push(`/city/${res.data?.slug}`, { query: { breadcrumb: 'search' } })
+                navigateTo(res.data?.slug)
                 setSearchRandomCityByRegionLoading(false);
             })
     }
@@ -65,10 +69,48 @@ export default function UserHomePage({ router, user, userLoading, request, posts
                                 </svg>
                             </div>
 
-                            <input className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a city" type="text" required="" />
+                            <input
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        searchLocations()
+                                    }
+                                }}
+                                onChange={(e) => setSearchLocationsSearchTerm(e.target.value)}
+                                value={searchLocationsSearchTerm}
+                                className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Search for a city"
+                                type="text"
+                            />
+
+                            {/* Render list of locations  */}
+                            {
+                                searchLocationsSearchTerm.length > 0 && locations.length > 0 && (
+                                    <div className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded-b-lg shadow-lg dark:bg-gray-700 dark:border-gray-600">
+                                        {
+                                            locations.map((location) => (
+                                                <div key={`userhomepage-searchlocations-${location.id}`} className="flex items-center justify-between px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-500" onClick={() => navigateTo(location.id)}>
+                                                    <div className="flex items-center">
+                                                        <div className="flex-shrink-0">
+                                                            <img className="h-10 w-10 rounded-full" src={location.image_url_thumb} alt="" />
+                                                        </div>
+                                                        <div className="ml-4">
+                                                            <div className="text-sm font-medium text-gray-900 dark:text-white">{location.name}</div>
+                                                            <div className="text-sm text-gray-500 dark:text-gray-400">{location.country_name}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center">
+                                                        {/* TODO: add stars for total_score */}
+                                                        {/* <div className="text-sm text-gray-500 dark:text-gray-400">3 listings</div> */}
+                                                    </div>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                )
+                            }
                         </div>
                         <div>
-                            <button type="submit" className="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                            <button onClick={searchLocations} className="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
                         </div>
                     </div>
                     <div className="flex flex-wrap items-center justify-center">
