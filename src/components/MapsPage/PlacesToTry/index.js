@@ -7,7 +7,7 @@ import request from '../../../utils/request';
 // Components
 import Map from './Map';
 
-export default function PlacesTab({ places, setPlaces, geocodeByPlaceId, GooglePlacesAutocomplete }) {
+export default function PlacesToTryTab({ places, setPlaces, geocodeByPlaceId, GooglePlacesAutocomplete }) {
     // State
     const [selectedPlace, setSelectedPlace] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
@@ -46,7 +46,7 @@ export default function PlacesTab({ places, setPlaces, geocodeByPlaceId, GoogleP
             }
         }
 
-        request(`/place`, {
+        request(`/placesToTry`, {
             method: 'POST',
             body: JSON.stringify({
                 google_id: selectedPlace.value.place_id,
@@ -87,7 +87,7 @@ export default function PlacesTab({ places, setPlaces, geocodeByPlaceId, GoogleP
     const removePlace = (placeId) => {
         setPlaces(places?.filter((place) => place.id !== placeId))
 
-        request(`/place/${placeId}`, {
+        request(`/placesToTry/${placeId}`, {
             method: 'DELETE'
         })
     }

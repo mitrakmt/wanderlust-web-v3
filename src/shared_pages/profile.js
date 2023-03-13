@@ -64,6 +64,7 @@ export default function Profile({ publicUser }) {
     const [places, setPlaces] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [userPlaces, setUserPlaces] = useState([]);
+    const [userPlacesToTry, setUserPlacesToTry] = useState([]);
     
     // Loading states
     const [imageUploadLoading, setImageUploadLoading] = useState(false);
@@ -228,6 +229,20 @@ export default function Profile({ publicUser }) {
             })
     
             setUserPlaces(response.data)
+        }
+
+        if (user) {
+            fetchData();
+        }
+    }, []); 
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await request(`/placesToTry`, {
+                method: 'GET'
+            })
+    
+            setUserPlacesToTry(response.data)
         }
 
         if (user) {
@@ -754,7 +769,7 @@ export default function Profile({ publicUser }) {
                                             <CountriesMap
                                                 user={profileUser}
                                                 defaultZoom={2.5}
-                                                coordinates={[115.1317479, -8.6531344]}
+                                                coordinates={[17.1317479, 41.6531344]}
                                             />
                                         </div>
                                     </div>
@@ -763,7 +778,7 @@ export default function Profile({ publicUser }) {
                                 places?.length > 0 && <div className="flex flex-wrap justify-center mt-4">
                                     <TextH3>Favorite Places Around the World</TextH3>
                                         <div className="w-full px-2 md:px-4 relative">
-                                        <PlacesMap userPlaces={userPlaces} setUserPlaces={setUserPlaces} user={user} zoom={2.5} coordinates={[115.1317479, -8.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} />
+                                            <PlacesMap userPlacesToTry={userPlacesToTry} setUserPlacesToTry={setUserPlacesToTry} user={user} zoom={2.5} coordinates={[115.1317479, -8.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} />
                                         </div>
                                         {/* filters  */}
                                         <div className="w-full justify-center flex flex-wrap z-0 mt-4">

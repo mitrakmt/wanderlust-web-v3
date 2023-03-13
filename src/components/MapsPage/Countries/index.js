@@ -87,7 +87,7 @@ export default function Countries() {
                 removeCountry={removeCountry}
                 addCountry={addCountry}
                 defaultZoom={2.5}
-                coordinates={[115.1317479, -8.6531344]}
+                coordinates={[17.1317479, 41.6531344]}
             />
         </div>
     )

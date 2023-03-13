@@ -1,7 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function BlogCard({ post }) {
+    // Hooks
+    const { navigate } = useRouter();
+
+    const navigateToProfile = () => {
+        navigate(`/profile/${post.author.username}`)
+    }
+
     return (
         <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div className="flex justify-between items-center mb-5 text-gray-500">
@@ -14,10 +22,10 @@ export default function BlogCard({ post }) {
             <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><Link href={`/blog/${post.slug}`}>{ post.title }</Link></h2>
             <p className="mb-5 font-light text-gray-500 dark:text-gray-400">{post.summary}</p>
             <div className="flex justify-between items-center">
-                <div className="flex items-center space-x-4">
-                    <Image className="w-7 h-7 relative rounded-full" src={post.author.profile_image} alt={post.title} />
-                    <span className="font-medium dark:text-white">
-                        {post.author.name}
+                <div className="flex items-center space-x-4 cursor-pointer" onClick={navigateToProfile}>
+                    <Image className="w-7 h-7 relative rounded-full" src={post.author.profile_image} alt={post.title} height={40} width={40} />
+                    <span className="font-medium dark:text-white hover:text-red-700 transition-colors">
+                        @{post.author.username}
                     </span>
                 </div>
                 <Link href={`/blog/${post.slug}`} className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">

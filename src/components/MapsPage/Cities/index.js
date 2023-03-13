@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
+
+// Utils
 import request from '../../../utils/request';
 import trackStat from '../../../utils/trackStat';
 
 // Components
-// import CityView from './city/[cityId]';
 import Map from './Map';
 
 // Hooks
@@ -15,7 +16,6 @@ import { toVisitContext } from '../../../context/ToVisitProvider';
 
 // New Components
 import Input from '../../Input/Input';
-import TextH2 from '../../Text/TextH2';
 import CustomButton from '../../Button/Button';
 
 export default function TravelList() {
@@ -127,12 +127,7 @@ export default function TravelList() {
 
     return (
         <div className="relative">
-            <Map isPublicMap={false} toVisit={toVisit} defaultZoom={2.5} coordinates={[115.1317479, -8.6531344]} user={user} viewCity={viewCity} removeCity={removeCity} setUser={setUser} />
-
-            <div className="pointer-events-none ml-4 sm:ml-20 pt-4">
-                <p className="text-xl relative font-bold text-gray-900 dark:text-gray-200">Travel List</p>
-                <p className="mt-0 relative font-bold text-sm md:text-md text-black dark:text-white text-wrap mb-2">Keep track of the places you want to visit around the world.</p>
-            </div>
+            <Map isPublicMap={false} toVisit={toVisit} defaultZoom={2.5} coordinates={[17.1317479, 41.6531344]} user={user} viewCity={viewCity} removeCity={removeCity} setUser={setUser} />
 
             {/* SIDEBAR  */}
             <div className="text-center m-5 fixed top-32 sm:top-16 right-0 z-50">
