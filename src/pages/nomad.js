@@ -18,7 +18,7 @@ export default function NomadTools() {
         {
             name: "Wise",
             type: "Money",
-            link: "https://wise.com/invite/u/michaelm10753",
+            link: "https://wise.prf.hn/l/eYNoY28",
             image: "https://wanderlust-extension.s3.us-west-2.amazonaws.com/wise_logo.jpg",
             description: "Send & receive money internationally to any currency, at the real exchange rate. No hidden fees.",
             details: "Free $600 Transfer"
@@ -42,7 +42,7 @@ export default function NomadTools() {
             <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                 <div className="max-w-screen-md mb-8 lg:mb-16">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Deals & Tools for Nomads</h2>
-                    <p className="text-gray-500 sm:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+                    <p className="text-gray-500 sm:text-xl dark:text-gray-400">We find the best deals on the market for tools that travelers and nomads get the most benefit from.</p>
                 </div>
                 <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
                     {
