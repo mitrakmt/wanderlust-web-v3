@@ -34,7 +34,35 @@ import { useRouter } from 'next/router'
 // Context
 import { favoritesContext } from '../../context/FavoritesProvider';
 
-export default function CityPage() {
+export async function getStaticProps({ params: { slug } }) {
+    const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
+    const citySelected = await response.json()
+
+    return {
+        props: {
+            citySelected: citySelected.data
+        },
+    };
+}
+
+export async function getStaticPaths() {
+    const response = await fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/cities')
+    const cities = await response.json()
+    const paths = cities.map((city) => (
+        {
+            params: {
+                slug: city.slug,
+            },
+        }
+    ))
+
+    return {
+        paths,
+        fallback: true,
+    }
+}
+
+export default function CityPage({ citySelected }) {
     // Hooks
     const { user } = useAuth();
     const router = useRouter()
@@ -44,7 +72,6 @@ export default function CityPage() {
     const [favorites, setFavorites] = useContext(favoritesContext);
 
     // State
-    const [citySelected, setCitySelected] = useState(null);
     const [cityId, setCityId] = useState(null);
     const [holidays, setHolidays] = useState([]);
     const [locations, setLocations] = useState([]);
@@ -95,7 +122,17 @@ export default function CityPage() {
     //     "description": citySelected?.description
     // });
 
+    if (router.isFallback) {
+        return <div>Loading...</div>
+    }
+
     // UseEffects
+    useEffect(() => {
+        if (citySelected) {
+            setCityId(citySelected?.id)
+        }
+    }, [citySelected]);
+    
     useEffect(() => {
         if (citySelected) {
             baseRequest(`https://api.weatherapi.com/v1/forecast.json`, {
@@ -122,21 +159,21 @@ export default function CityPage() {
         }
     }, [citySelected])
 
-    useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'cityView' })
-    }, [])
+    // useEffect(() => {
+    //     trackStat({ type: 'tabViews', property: 'cityView' })
+    // }, [])
 
-    useEffect(() => {
-        // Request city details and then set as citySelected
-        if (slug) {
-            request(`/cities/slug/${slug}`)
-                .then(res => {
-                    setCitySelected(res.data);
-                    setCityId(res.data?.id);
-                }
-            )
-        }
-    }, [slug])
+    // useEffect(() => {
+    //     // Request city details and then set as citySelected
+    //     if (slug) {
+    //         request(`/cities/slug/${slug}`)
+    //             .then(res => {
+    //                 setCitySelected(res.data);
+    //                 setCityId(res.data?.id);
+    //             }
+    //         )
+    //     }
+    // }, [slug])
 
     useEffect(() => {
         if (citySelected?.country) {

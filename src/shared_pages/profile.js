@@ -89,7 +89,7 @@ export default function Profile({ publicUser }) {
     useEffect(() => {
         if (publicUser) {
             if (profileUser) {
-                if (follows.find(followUserId => followUserId === profileUser.id)) {
+                if (follows?.find(followUserId => followUserId === profileUser.id)) {
                     setIsFollowed(true);
                 } else {
                     setIsFollowed(false);
@@ -106,8 +106,8 @@ export default function Profile({ publicUser }) {
     }, [])
 
     useEffect(() => {
-        const currentCountryFound = countries.find(country => country?.id === user?.currentCountry?.id);
-        const homeCountryFound = countries.find(country => country?.id === user?.homeCountry?.id);
+        const currentCountryFound = countries?.find(country => country?.id === user?.currentCountry?.id);
+        const homeCountryFound = countries?.find(country => country?.id === user?.homeCountry?.id);
 
         if (currentCountryFound) {
           setCurrentCountrySelect(currentCountryFound);
@@ -531,7 +531,7 @@ export default function Profile({ publicUser }) {
                                                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                                                         Upload a Profile Picture
                                                     </h3>
-                                                    <button onClick={closeProfileModal} type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+                                                    <button onClick={closeProfileModal} type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                                                         <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                                                         <span className="sr-only">Close modal</span>
                                                     </button>
@@ -778,7 +778,7 @@ export default function Profile({ publicUser }) {
                                 places?.length > 0 && <div className="flex flex-wrap justify-center mt-4">
                                     <TextH3>Favorite Places Around the World</TextH3>
                                         <div className="w-full px-2 md:px-4 relative">
-                                            <PlacesMap userPlacesToTry={userPlacesToTry} setUserPlacesToTry={setUserPlacesToTry} user={user} zoom={2.5} coordinates={[115.1317479, -8.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} />
+                                            <PlacesMap userPlacesToTry={userPlacesToTry} setUserPlacesToTry={setUserPlacesToTry} user={user} zoom={2.5} coordinates={[115.1317479, -8.6531344]} places={selectedFilter ? places.filter(place => { return place?.tags?.find(element => element === selectedFilter) }) : places} />
                                         </div>
                                         {/* filters  */}
                                         <div className="w-full justify-center flex flex-wrap z-0 mt-4">
@@ -832,7 +832,7 @@ export default function Profile({ publicUser }) {
                                                         </span>
                                                         <article className="px-8">
                                                             <h4 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">{post.city.name}, {post.city.country_name}</h4>
-                                                            <footer className="mb-5 text-sm text-left text-gray-500 dark:text-gray-400"><p>posted on <time dateTime={post.createdAt}>{moment(post.createdAt, ['MMMM Do YYYY'])}</time></p></footer>
+                                                            <footer className="mb-5 text-sm text-left text-gray-500 dark:text-gray-400"><p>posted on <time dateTime={post.createdAt}>{moment(post.createdAt).format('MMMM Do YYYY')}</time></p></footer>
                                                             <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{post.body}</p>
                                                         </article>
                                                     </li>
@@ -870,7 +870,7 @@ export default function Profile({ publicUser }) {
                                                                 </div>
                                                                 <h3 className="ml-2 text-sm font-semibold text-gray-900 dark:text-white">{review.title}</h3>
                                                             </div>
-                                                            <footer className="mb-5 text-sm text-left text-gray-500 dark:text-gray-400"><p>Reviewed on <time dateTime={review.createdAt}>{moment(review.createdAt, ['MMMM Do YYYY'])}</time></p></footer>
+                                                            <footer className="mb-5 text-sm text-left text-gray-500 dark:text-gray-400"><p>Reviewed on <time dateTime={review.createdAt}>{moment(review.createdAt).format('MMMM Do YYYY')}</time></p></footer>
                                                             <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{review.body}</p>
                                                         </article>
                                                     </li>

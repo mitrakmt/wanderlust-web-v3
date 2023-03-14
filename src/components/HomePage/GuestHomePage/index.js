@@ -2,7 +2,7 @@ import Features from './components/Features';
 import PopularTravelers from '../components/PopularTravelers';
 import BlogCard from '../../BlogCard';
 
-export default function GuestHomePage({ router, request, posts }) {
+export default function GuestHomePage({ router, posts }) {
     return (
         <div className="px-0 sm:pl-16 pr-0 flex flex-col items-center">
             <div className="w-4/5 py-8 max-w-screen-xl text-center my-36">

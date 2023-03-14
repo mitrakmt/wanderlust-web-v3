@@ -16,7 +16,19 @@ import { countriesContext } from '../context/CountriesProvider';
 import { useAuth } from '../hooks/useAuth';
 import { useRouter } from 'next/router';
 
-export default function Layout({ children }) {
+export async function getStaticProps() {
+    // fetch no longer needs to be imported from isomorphic-unfetch
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/countries`);
+    const countries = await res.json();
+  
+    return {
+      props: {
+        countries: countries.data,
+      },
+    };
+}
+
+export default function Layout({ children, countries }) {
     // State
     const [showOfflineSnackbar, setShowOfflineSnackbar] = useState(false);
     const [, setCookiesBarOpen] = useState(false);
@@ -44,6 +56,10 @@ export default function Layout({ children }) {
             localStorage.setItem('color-theme', 'light');
         }
     }, [])
+
+    useEffect(() => {
+        setCountries(countries);
+    }, [countries])
 
     useEffect(() => {
         // Check if user is logged in and JWT not expired
@@ -86,20 +102,6 @@ export default function Layout({ children }) {
         }
     }, [])
 
-    // useEffect(() => {
-    //     if (!localStorage.getItem('cookiesAccepted')) {
-    //         setCookiesBarOpen(true);
-    //     }
-    // }, [])
-    
-    useEffect(() => {
-        async function fetchData() {
-            const response = await request(`/countries`)
-            setCountries(response.data)
-        }
-        fetchData();
-    }, []);
-
     useEffect(() => {
         window.addEventListener('offline', (e) => {
             setShowOfflineSnackbar(true)
@@ -110,11 +112,6 @@ export default function Layout({ children }) {
     }, [])
 
     // Functions
-    const acceptCookies = () => {
-        localStorage.setItem('cookiesAccepted', true);
-        setCookiesBarOpen(false);
-    }
-
     const parseJwt = (token) => {
         try {
             return JSON.parse(atob(token.split('.')[1]));

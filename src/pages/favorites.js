@@ -118,9 +118,17 @@ export default function Favorites() {
                 <div className="grid grid-cols-2 mt-6 mb-8 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:gap-x-8">
                 {
                     showFavoriteTypeCities ?
-                        favorites && favorites?.map((favorite, index) => (
-                            <CityCard key={`favorites-${favorite.id}-${index}`} user={user} breadcrumb="Favorites" setCitySelected={setCitySelected} keyId={`favorites-city-${favorite.id}-${index}`} data={favorite} index={index} favorites={favorites} hideLikeCount toggleFavorite={removeFavoriteAction} />
-                        )) :
+                        favorites && favorites?.filter((item, index, self) =>
+                            index === self.findIndex((favoritedCity) => (
+                                favoritedCity?.city?.name === item?.city?.name
+                            ))).map((favorite, index) => {
+                                if (!favorite.city) {
+                                    return null;
+                                }
+                                return (
+                                    <CityCard key={`favorites-${favorite?.id}-${index}`} user={user} breadcrumb="favorites" setCitySelected={setCitySelected} keyId={`favorites-city-${favorite?.id}-${index}`} data={favorite} index={index} favorites={favorites} hideLikeCount toggleFavorite={removeFavoriteAction} />
+                                )
+                            }) :
                         favorites && favorites?.filter((item, index, self) =>
                             index === self.findIndex((favoritedCity) => (
                                 favoritedCity.city.country_name === item.city.country_name
@@ -133,7 +141,7 @@ export default function Favorites() {
                                     return true
                                 }
                                 }).map((favorite, index) => (
-                                    <CountryCard key={`favorites-${favorite.id}-${index}`} keyId={`favorites-country-${favorite.id}-${index}`}index={index} visited={countriesVisited[favorite.city.country.map_country_code]} name={favorite.city.country.name} image_url_small={favorite.city.country.image_url_small} />
+                                    <CountryCard key={`favorites-${favorite?.id}-${index}`} keyId={`favorites-country-${favorite?.id}-${index}`}index={index} visited={countriesVisited[favorite.city.country.map_country_code]} name={favorite.city?.country_name} image_url_small={favorite.city.country.image_url_small} />
                                 ))
                         }
             </div>

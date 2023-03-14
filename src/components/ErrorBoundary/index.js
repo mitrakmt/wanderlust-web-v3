@@ -29,7 +29,6 @@ class ErrorBoundary extends React.Component {
                     type="button"
                     className="px-4 py-2 mt-4 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                     onClick={() => {
-                        window.location.href = "https://wanderlustapp.io";
                         this.setState({ hasError: false });
                     }}
                 >

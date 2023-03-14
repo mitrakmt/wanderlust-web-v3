@@ -1,20 +1,25 @@
-import FavoriteControl from '../../icons/likeIcon';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
 
-// Hooks
-import { useRouter } from 'next/router';
+// Components
+import FavoriteControl from '../../icons/likeIcon';
 
-export default function CityCard({ data, keyId, favorites, index, toggleFavorite, hideLikeCount, breadcrumb, user }) {
-  // Hooks
-  const router = useRouter();
+export default function CityCard({ data, keyId, favorites, index, toggleFavorite, hideLikeCount }) {
+  // State
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  // UseEffect
+  useEffect(() => {
+    setIsFavorited(checkIfCityFavorited(data.city?.id));
+  }, [favorites]);
 
   // Functions
   const checkIfCityFavorited = (cityId) => {
     // Check if cityId is included in favorites array
     if (favorites?.length > 0) {
       const isFound = favorites.some(favorite => {
-        if (favorite?.city.id === cityId) {
+        if (favorite?.city?.id === cityId) {
           return true;
         }
 
@@ -28,21 +33,21 @@ export default function CityCard({ data, keyId, favorites, index, toggleFavorite
     return false;
   }
 
+  const clickFavorite = () => {
+    // toggleFavorite(data.city?.id, checkIfCityFavorited(data.city?.id), data.city);
+    toggleFavorite(data.city?.id, isFavorited, data.city);
+    setIsFavorited(!isFavorited);
+  }
+
   return (
     <span className="relative transition-all hover:scale-105">
       <div style={{ top: 0, right: 0, padding: '10px 15px', zIndex: 100 }} className="absolute z-20 flex">
-        <FavoriteControl
-          toggleFavorite={() => {
-            if (!user) {
-              router.push('/login');
-              return;
-            }
-            toggleFavorite(data.city?.id, checkIfCityFavorited(data.city?.id), data.city);
-          }}
-          hideTooltip={true}
-          currentImageFavoriteStatus={checkIfCityFavorited(data?.city?.id)}
-          noBackground={true}
-        />
+          <FavoriteControl
+            toggleFavorite={clickFavorite}
+            hideTooltip={true}
+            currentImageFavoriteStatus={isFavorited}
+            noBackground={true}
+          />
         {
           !hideLikeCount && <h3 className="z-20 flex pointer-events-none items-center justify-center text-lg font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>{data?.city?.favorite_count + 25}</h3>
         }

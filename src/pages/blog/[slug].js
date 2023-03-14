@@ -12,7 +12,40 @@ import { useAuth } from '../../hooks/useAuth';
 // Components
 import Footer from '../../components/Footer';
 
-export default function BlogPost() {
+export async function getStaticProps({ params: { slug } }) {
+    if (!slug) {
+        return;
+    }
+
+    const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/${slug}`)
+    const blog = await response.json()
+
+    return {
+        props: {
+            blog: blog.data
+        },
+    };
+}
+
+export async function getStaticPaths() {
+    // const paths = getCitiesList();
+    const response = await fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/blogs')
+    const blogs = await response.json()
+    const paths = blogs.data.map((blog) => (
+        {
+            params: {
+                slug: blog.slug,
+            },
+        }
+    ))
+
+    return {
+        paths,
+        fallback: true,
+    }
+}
+
+export default function BlogPost({ blog }) {
     // Hooks
     const router = useRouter();
     const { user } = useAuth();
@@ -20,24 +53,35 @@ export default function BlogPost() {
     // Query Params
     const { slug } = router.query;
 
+    if (router.isFallback) {
+        return <div>Loading...</div>
+    }
+
     // State
-    const [post, setPost] = useState(null);
+    // const [post, setPost] = useState(null);
     const [comments, setBlogComments] = useState([]);
     const [comment, setComment] = useState("");
     const [showCommentDropdown, setShowCommentDropdown] = useState(null);
 
     // UseEffect
     useEffect(() => {
-        request(`/blog/${slug}`)
-            .then(res => {
-                setPost(res.data);
+        if (blog) {
+            request(`/blog-comment/${blog.id}`)
+                .then(res => {
+                    setBlogComments(res.data);
+                })
+        }
+    }, [blog]);
 
-                request(`/blog-comment/${res.data.id}`)
-                    .then(res => {
-                        setBlogComments(res.data);
-                    })
-            })
-    }, []);
+    // useEffect(() => {
+    //     if (!blog) {
+    //         request(`/blog/${slug}`)
+    //             .then(res => {
+    //                 setBlog(res.data);
+    //             }
+    //         )
+    //     }
+    // }, [blog]);
 
     // Functions
     const removeComment = (id) => {
@@ -57,7 +101,7 @@ export default function BlogPost() {
             return;
         }
 
-        request(`/blog-comment/${post.id}`, {
+        request(`/blog-comment/${blog.id}`, {
             body: {
                 text: comment,
             },
@@ -69,7 +113,7 @@ export default function BlogPost() {
             })
     }
 
-    if (!post) return null;
+    if (!blog) return null;
 
     // Hooks
     return (
@@ -80,18 +124,18 @@ export default function BlogPost() {
                         <header className="mb-4 lg:mb-6 not-format">
                             <address className="flex items-center mb-6 not-italic">
                                 <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                                    <Image className="relative mr-4 w-16 h-16 rounded-full" src={post.author.profile_image} alt={`${post.author.name} Avatar`} height={120} width={120} />
+                                    <Image className="relative mr-4 w-16 h-16 rounded-full" src={blog.author.profile_image} alt={`${blog.author.name} Avatar`} height={120} width={120} />
                                     <div>
-                                        <Link href={`/profile/${post.author.username}`} className="text-xl font-bold text-gray-900 dark:text-white">{post.author.username}</Link>
-                                        <p className="text-base font-light text-gray-500 dark:text-gray-400">{post.author.job}</p>
-                                        <p className="text-base font-light text-gray-500 dark:text-gray-400"><time pubdate="true" dateTime="2022-02-08" title="February 8th, 2022">{post.publishedOn}</time></p>
+                                        <Link href={`/profile/${blog.author.username}`} className="text-xl font-bold text-gray-900 dark:text-white">{blog.author.username}</Link>
+                                        <p className="text-base font-light text-gray-500 dark:text-gray-400">{blog.author.job}</p>
+                                        <p className="text-base font-light text-gray-500 dark:text-gray-400"><time pubdate="true" dateTime="2022-02-08" title="February 8th, 2022">{blog.publishedOn}</time></p>
                                     </div>
                                 </div>
                             </address>
-                            <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{post.title}</h1>
+                            <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{blog.title}</h1>
                         </header>
                         {
-                            post.content.map((content, index) => {
+                            blog.content.map((content, index) => {
                                 switch (content.type) {
                                     case 'p':
                                         return (

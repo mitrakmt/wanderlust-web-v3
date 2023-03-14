@@ -22,7 +22,19 @@ import request from "../utils/request";
 import preloadImages, { getQueuedLocation } from "../shared_components/preloadImages";
 import trackStat from "../utils/trackStat";
 
-export default function Home() {
+export async function getStaticProps() {
+  // fetch no longer needs to be imported from isomorphic-unfetch
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const posts = await res.json();
+
+  return {
+    props: {
+      posts: posts.data,
+    },
+  };
+}
+
+export default function Home({ posts}) {
   // Hooks
   const { user, userLoading } = useAuth();
   const router = useRouter();
@@ -39,7 +51,6 @@ export default function Home() {
     const [smallImageUrl, setSmallImageUrl] = useState("");
     const [countryInfo, setCountryInfo] = useState(null);
     const [cityInfo, setCityInfo] = useState(null);
-    const [posts, setPosts] = useState([]);
     const [attribution, setAttribution] = useState({
         name: "",
         links: {
@@ -56,15 +67,6 @@ export default function Home() {
           refresh();
         }
         main();
-    }, []);
-  
-    useEffect(() => {
-      request('/blog')
-        .then(res => {
-            if (res?.data) {
-              setPosts(res.data);
-            }
-          })
     }, []);
 
     const refresh = async () => {
