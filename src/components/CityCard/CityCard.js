@@ -49,7 +49,7 @@ export default function CityCard({ data, keyId, favorites, index, toggleFavorite
       </div>
       <Link
         href={{
-          pathname: `/city/${data.city?.id}`,
+          pathname: `/city/${data.city?.slug}`,
           query: { breadcrumb: 'search' },
         }}
       >

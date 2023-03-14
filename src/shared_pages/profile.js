@@ -832,7 +832,7 @@ export default function Profile({ publicUser }) {
                                                         </span>
                                                         <article className="px-8">
                                                             <h4 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">{post.city.name}, {post.city.country_name}</h4>
-                                                            <footer className="mb-5 text-sm text-left text-gray-500 dark:text-gray-400"><p>posted on <time dateTime={post.createdAt}>{moment(post.createdAt).format('MMMM Do YYYY')}</time></p></footer>
+                                                            <footer className="mb-5 text-sm text-left text-gray-500 dark:text-gray-400"><p>posted on <time dateTime={post.createdAt}>{moment(post.createdAt, ['MMMM Do YYYY'])}</time></p></footer>
                                                             <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{post.body}</p>
                                                         </article>
                                                     </li>
@@ -870,7 +870,7 @@ export default function Profile({ publicUser }) {
                                                                 </div>
                                                                 <h3 className="ml-2 text-sm font-semibold text-gray-900 dark:text-white">{review.title}</h3>
                                                             </div>
-                                                            <footer className="mb-5 text-sm text-left text-gray-500 dark:text-gray-400"><p>Reviewed on <time dateTime={review.createdAt}>{moment(review.createdAt).format('MMMM Do YYYY')}</time></p></footer>
+                                                            <footer className="mb-5 text-sm text-left text-gray-500 dark:text-gray-400"><p>Reviewed on <time dateTime={review.createdAt}>{moment(review.createdAt, ['MMMM Do YYYY'])}</time></p></footer>
                                                             <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{review.body}</p>
                                                         </article>
                                                     </li>

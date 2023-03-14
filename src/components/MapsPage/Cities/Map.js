@@ -36,7 +36,7 @@ export default function TravelListMap({ isPublicMap, coordinates, removeCity, to
     }
 
     const viewCity = () => {
-        router.push(`/city/${selectedMarker.id}`)
+        router.push(`/city/${selectedMarker.slug}`)
     }
 
     return (

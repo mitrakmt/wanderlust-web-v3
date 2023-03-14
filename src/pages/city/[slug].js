@@ -34,17 +34,18 @@ import { useRouter } from 'next/router'
 // Context
 import { favoritesContext } from '../../context/FavoritesProvider';
 
-export default function CityView() {
+export default function CityPage() {
     // Hooks
     const { user } = useAuth();
     const router = useRouter()
-    const { cityId, breadcrumb } = router.query
+    const { slug, breadcrumb } = router.query
 
     // Context
     const [favorites, setFavorites] = useContext(favoritesContext);
 
     // State
     const [citySelected, setCitySelected] = useState(null);
+    const [cityId, setCityId] = useState(null);
     const [holidays, setHolidays] = useState([]);
     const [locations, setLocations] = useState([]);
     const [reviews, setReviews] = useState([]);
@@ -67,6 +68,33 @@ export default function CityView() {
     const [, setReviewsLoading] = useState(true);
     const [, setPlacesLoading] = useState(true);
 
+    // const structuredDataText = JSON.stringify({
+    //     "@context": "https://schema.org",
+    //     "@type": "Article",
+    //     "mainEntityOfPage": {
+    //         "@type": "WebPage",
+    //         "@id": `https://www.explore.wanderlustapp.io/city/${citySelected?.id}`
+    //     },
+    //     "headline": citySelected?.name,
+    //     "image": [
+    //         citySelected?.image_url_large
+    //     ],
+    //     "datePublished": moment(citySelected?.created_at, ['MMMM Do YYYY']),
+    //     "author": {
+    //         "@type": "Person",
+    //         "name": "Wanderlust"
+    //     },
+    //     "publisher": {
+    //         "@type": "Organization",
+    //         "name": "Wanderlust",
+    //         "logo": {
+    //             "@type": "ImageObject",
+    //             "url": "https://wanderlust-extension.s3.us-west-2.amazonaws.com/logo.jpg"
+    //         }
+    //     },
+    //     "description": citySelected?.description
+    // });
+
     // UseEffects
     useEffect(() => {
         if (citySelected) {
@@ -81,35 +109,6 @@ export default function CityView() {
                     setWeatherCurrent(res.current)
                     setWeatherForecast(res.forecast)
                     setWeatherLocation(res.location)
-
-                    const structuredDataText = JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "Article",
-                        "mainEntityOfPage": {
-                            "@type": "WebPage",
-                            "@id": `https://www.explore.wanderlustapp.io/city/${citySelected?.id}`
-                        },
-                        "headline": citySelected?.name,
-                        "image": [
-                            citySelected?.image_url_large
-                        ],
-                        "datePublished": moment(citySelected?.created_at).format('YYYY-MM-DD'),
-                        "author": {
-                            "@type": "Person",
-                            "name": "Wanderlust"
-                        },
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "Wanderlust",
-                            "logo": {
-                                "@type": "ImageObject",
-                                "url": "https://wanderlust-extension.s3.us-west-2.amazonaws.com/logo.jpg"
-                            }
-                        },
-                        "description": citySelected?.description
-                    });
-
-                    // TODO: fix this
 
                     const script = document.createElement('script');
                     script.setAttribute('type', 'application/ld+json');
@@ -129,24 +128,24 @@ export default function CityView() {
 
     useEffect(() => {
         // Request city details and then set as citySelected
-        if (cityId) {
-            request(`/cities/${cityId}`)
+        if (slug) {
+            request(`/cities/slug/${slug}`)
                 .then(res => {
                     setCitySelected(res.data);
+                    setCityId(res.data?.id);
                 }
             )
         }
-    }, [cityId])
+    }, [slug])
 
     useEffect(() => {
         if (citySelected?.country) {
             request(`/holiday/country/${citySelected?.country_code}`)
                 .then(res => {
-                    console.log('res', res);
                     setHolidays(getNotUnique(res.data));
                 })
         }
-    }, [citySelected, cityId])
+    }, [citySelected, slug])
 
     // Fetch places by city
     useEffect(() => {
@@ -175,7 +174,6 @@ export default function CityView() {
             request(`/reviews/${cityId}`)
                 .then(res => {
                     setReviews(res.data || []);
-                    console.log('res', res);
 
                     // Calculate average
                     if (res?.data?.length === 0) {
@@ -266,7 +264,7 @@ export default function CityView() {
                             rating: reviewRating,
                             city: citySelected,
                             user: {
-                                name: user.name,
+                                name: user.username,
                             }
                         }],
                         ...reviews,
@@ -289,20 +287,6 @@ export default function CityView() {
             return calculation
         }
     }
-
-    {/* 
-    coutry_chinese: "墨西哥"
-    name_chinese: "墨西哥城"
-    state_chinese: "" */}
-
-    {/* popular_neighborhoods: []
-    population: 8918653
-    rank: 14
-    region: "Latin America"
-    similar_to: []
-    state: ""
-    tags: []
-    top_sights: [] */}
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
@@ -430,15 +414,17 @@ export default function CityView() {
                     <div className="flex flex-col sm:flex-row items-start sm:items-center">
                         <TextH3 classes="mr-4">Reviews</TextH3>
                         <div className="flex items-center mb-2">
-                            <div className="flex">
-                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 1 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 2 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 3 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 4 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 5 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            </div>
+                            {
+                                reviewsAverage && <div className="flex">
+                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 1 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 2 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 3 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 4 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 5 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                </div>
+                            }
                             <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                            <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">{reviews.length} review{reviews.length === 1 ? "" : "s"}</p>
+                            <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">{reviews?.length} review{reviews?.length === 1 ? "" : "s"}</p>
                         </div>
                     </div>
                     {
@@ -473,12 +459,12 @@ export default function CityView() {
                     reviews.length > 0 ?
                         <div className="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                             {
-                                reviews.map((review, index) => (
-                                    <article key={`reviews-${index}`}>
+                                reviews.map((review) => (
+                                    <article key={`reviews-${review.id}`}>
                                         <div className="flex items-center mb-4 space-x-4">
-                                            {/* <Image height={30} width={30} className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="" /> */}
+                                            <Image height={30} width={30} className="w-10 h-10 rounded-full" src={review?.user?.profile_image} alt="" />
                                             <div className="space-y-1 font-medium dark:text-white">
-                                                <p>{review.user.name} <time dateTime="2014-08-16 19:00" className="block text-sm text-gray-500 dark:text-gray-400">Joined on {moment(review.user.createdAt).format('MMMM Do YYYY')}</time></p>
+                                                <p>{review?.user?.username} <time dateTime="2014-08-16 19:00" className="block text-sm text-gray-500 dark:text-gray-400">Joined on {moment(review?.user.createdAt).format('MMMM Do YYYY')}</time></p>
                                             </div>
                                         </div>
                                         <div className="flex flex-col sm:flex-row items-start sm:items-center mb-1">
@@ -489,10 +475,10 @@ export default function CityView() {
                                                 <svg aria-hidden="true" className={`w-5 h-5 ${review.rating >= 4 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                                 <svg aria-hidden="true" className={`w-5 h-5 ${review.rating >= 5 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                             </div>
-                                            <h3 className="ml-2 text-sm font-semibold text-gray-900 dark:text-white">{review.title}</h3>
+                                            <h3 className="ml-2 text-sm font-semibold text-gray-900 dark:text-white">{review?.title}</h3>
                                         </div>
-                                        <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Reviewed on <time dateTime={review.createdAt}>{moment(review.createdAt).format('MMMM Do YYYY')}</time></p></footer>
-                                        <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{review.body}</p>
+                                        <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Reviewed on <time dateTime={review?.createdAt}>{moment(review?.createdAt).format('MMMM Do YYYY')}</time></p></footer>
+                                        <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{review?.body}</p>
                                         {/* <a href="#" className="block mb-5 text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Read more</a> */}
                                         {/* <aside>
                                             <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">19 people found this helpful</p>

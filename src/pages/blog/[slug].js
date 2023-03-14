@@ -30,12 +30,10 @@ export default function BlogPost() {
     useEffect(() => {
         request(`/blog/${slug}`)
             .then(res => {
-                console.log('blog post', res.data)
                 setPost(res.data);
 
                 request(`/blog-comment/${res.data.id}`)
                     .then(res => {
-                        console.log('blog post', res.data)
                         setBlogComments(res.data);
                     })
             })

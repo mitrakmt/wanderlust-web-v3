@@ -107,7 +107,7 @@ export default function TravelList() {
     }
 
     const viewCity = (city) => {
-        router.push(`/city/${city.id}`, { state: { breadcrumb: 'TravelList' } })
+        router.push(`/city/${city.slug}`, { state: { breadcrumb: 'TravelList' } })
     }
 
     const updateSearchTerm = (term) => {

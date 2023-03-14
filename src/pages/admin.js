@@ -31,7 +31,6 @@ export default function Admin() {
             const stats = await request(`/superadmin/stats`, {
                 method: "GET"
             })
-            console.log('stats.data', stats.data);
             setStats(stats.data)
         }
         fetchData();

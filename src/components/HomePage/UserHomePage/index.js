@@ -4,10 +4,9 @@ import { useState } from "react";
 import BlogCard from "../../BlogCard";
 import PopularTravelers from "../components/PopularTravelers";
 
-export default function UserHomePage({ router, user, userLoading, request, posts }) {
+export default function UserHomePage({ router, userLoading, request, posts }) {
     // State
     const [searchLocationsSearchTerm, setSearchLocationsSearchTerm] = useState("");
-    const [, setListsLoading] = useState(false);
     const [locations, setLocations] = useState([]);
 
     // State loading
@@ -30,16 +29,19 @@ export default function UserHomePage({ router, user, userLoading, request, posts
             })
     }
 
-    const navigateTo = (id) => {
+    const navigateTo = (slug) => {
+        router.push({
+            pathname: `/city/${slug}`,
+            query: { breadcrumb: 'search' }
+        });
         clearCitiesSearch();
-        router.push(`/city/${id}`, { query: { breadcrumb: 'search' } })
     }
 
     const findRandomLocation = () => {
         setSearchRandomCityLoading(true);
         request(`/cities/random`)
             .then(res => {
-                navigateTo(res.data?._id || res.data?.id)
+                navigateTo(res.data?.slug)
                 setSearchRandomCityLoading(false);
             })
     }

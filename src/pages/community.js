@@ -57,7 +57,6 @@ export default function Community() {
     useEffect(() => {
         request(`/users/public/popular`)
             .then(res => {
-                console.log('res.data', res.data);
                 setCommunity(res.data);
                 setSearchCommunityLoading(false);
             })

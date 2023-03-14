@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import Link from 'next/link';
 
 // Components
 import CityCard from '../components/CityCard/CityCard';
@@ -15,9 +14,9 @@ import { favoritesContext } from '../context/FavoritesProvider';
 import { listsContext } from '../context/ListsProvider';
 
 // New Components
-import InputWithAddon from '../components/InputWithAddon/InputWithAddon';
 import TextH2 from '../components/Text/TextH2';
-import CustomButton from '../components/Button/Button';
+import InputWithAddon from '@/components/InputWithAddon/InputWithAddon';
+import CustomButton from '@/components/Button/Button';
 
 // Utils
 import removeFavorite from '../utils/removeFavorite';
@@ -128,7 +127,10 @@ export default function Search() {
         setSearchRandomCityLoading(true);
         request(`/cities/random`)
             .then(res => {
-                router.push(`/city/${res.data?._id || res.data?.id}`, { query: { breadcrumb: 'search' } })
+                router.push({
+                    pathname: `/city/${res.data?.slug}`,
+                    query: { breadcrumb: 'search' }
+                });
                 setSearchRandomCityLoading(false);
             })
     }
@@ -137,7 +139,10 @@ export default function Search() {
         setSearchRandomCityByRegionLoading(true);
         request(`/cities/random/region?region=${region}`)
             .then(res => {
-                router.push(`/city/${res.data?._id || res.data?.id}`, { query: { breadcrumb: 'search' } })
+                router.push({
+                    pathname: `/city/${res.data?.slug}`,
+                    query: { breadcrumb: 'search' }
+                });
                 setSearchRandomCityByRegionLoading(false);
             })
     }
@@ -159,11 +164,11 @@ export default function Search() {
                                 height="24"
                                 viewBox="0 0 24 24"
                                 fill="none"
+                                className="text-black dark:text-white"
                                 stroke="currentColor"
                                 strokeWidth="2"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                className="feather feather-x-circle featherButton"
                             >
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <line x1="15" y1="9" x2="9" y2="15"></line>

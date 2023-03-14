@@ -17,7 +17,6 @@ export default function Blog() {
     useEffect(() => {
         request('/blog')
             .then(res => {
-                console.log('res', res.data);
                 setPosts(res.data);
             })
     }, []);

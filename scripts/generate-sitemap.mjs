@@ -21,21 +21,18 @@ async function generateSitemap() {
   fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/blogs')
     .then((response) => response.json())
     .then((blogsData) => {
-      // console.log('blogs', blogsData)
 
       blogPages = blogsData.data.map((blog) => `/blog/${blog.slug}`);
 
       fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/users')
         .then((response) => response.json())
         .then((usersData) => {
-          // console.log('users', usersData)
 
           profilePages = usersData.data.map((profile) => `/profile/${profile.username}`);
     
           fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/cities')
             .then((response) => response.json())
             .then((citiesData) => {
-              console.log('cities', citiesData)
         
               cityPages = citiesData.map((city) => `/city/${city.slug}`);
 

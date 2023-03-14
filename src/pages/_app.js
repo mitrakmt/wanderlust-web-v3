@@ -18,6 +18,7 @@ import ToVisitProvider from '../context/ToVisitProvider';
 
 // Layouts
 import Layout from '../layouts/main';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 // Styles
 import '@/styles/globals.css'
@@ -27,9 +28,18 @@ import '../styles/weatherCard.scss';
 
 export { reportWebVitals } from 'next-axiom';
 
+// Fonts
+import { Roboto } from 'next/font/google'
+
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['300', '400', '500', '700', '900'],
+    variable: '--font-roboto',
+})
+
 export default function MyApp({ Component, pageProps }) {
     return (
-        <div className="overflow-scroll h-full max-h-screen scroll-smooth">
+        <div className={`overflow-scroll h-full max-h-screen scroll-smooth ${roboto.variable} font-sans`}>
             <Head>
                 <meta charSet="UTF-8" />
                 <meta name="keywords" content="titla, meta, nextjs" />
@@ -49,7 +59,9 @@ export default function MyApp({ Component, pageProps }) {
                                                     <FavoritesProvider>
                                                         <CommunityProvider>
                                                             <Layout>
-                                                                <Component {...pageProps} />
+                                                                <ErrorBoundary>
+                                                                    <Component {...pageProps} />
+                                                                </ErrorBoundary>
                                                             </Layout>
                                                         </CommunityProvider>
                                                     </FavoritesProvider>

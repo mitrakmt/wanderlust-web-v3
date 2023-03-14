@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
 export default function Document() {
   return (
@@ -6,7 +7,7 @@ export default function Document() {
       <Head />
       <body className="w-full">
         <Main className="overflow-scroll scroll-smooth" />
-        <script
+        <Script
           type="text/javascript"
           src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
         />
