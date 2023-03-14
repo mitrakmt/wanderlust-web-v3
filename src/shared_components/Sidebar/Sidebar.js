@@ -18,6 +18,7 @@ import SearchIcon from './icons/SearchIcon';
 import SettingsIcon from './icons/SettingsIcon';
 import ContactIcon from './icons/ContactIcon';
 import LoginIcon from './icons/LoginIcon';
+import GuidesIcon from './icons/GuidesIcon';
 
 // Context
 import { themeContext } from '../../context/ThemeProvider';
@@ -46,6 +47,13 @@ function Sidebar({ user, router, userLoading, logout }) {
             title: 'Search',
             path: '/search',
             icon: <SearchIcon />,
+            authRequired: false,
+            premiumRequired: false
+        },
+        {
+            title: 'Guides',
+            path: '/blog',
+            icon: <GuidesIcon />,
             authRequired: false,
             premiumRequired: false
         },

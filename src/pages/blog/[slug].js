@@ -65,7 +65,7 @@ export default function BlogPost({ blog }) {
 
     // UseEffect
     useEffect(() => {
-        if (blog) {
+        if (blog && user) {
             request(`/blog-comment/${blog.id}`)
                 .then(res => {
                     setBlogComments(res.data);
@@ -73,18 +73,10 @@ export default function BlogPost({ blog }) {
         }
     }, [blog]);
 
-    // useEffect(() => {
-    //     if (!blog) {
-    //         request(`/blog/${slug}`)
-    //             .then(res => {
-    //                 setBlog(res.data);
-    //             }
-    //         )
-    //     }
-    // }, [blog]);
-
     // Functions
     const removeComment = (id) => {
+        if (!user) return;
+
         setShowCommentDropdown(null);
         request(`/blog-comment/comment/${id}`, {
             method: 'DELETE'
@@ -97,6 +89,8 @@ export default function BlogPost({ blog }) {
     }
 
     const addComment = () => {
+        if (!user) return;
+
         if (comment.length === 0) {
             return;
         }
@@ -193,18 +187,29 @@ export default function BlogPost({ blog }) {
                             <div className="flex justify-between items-center mb-6">
                                 <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion ({ comments.length })</h2>
                             </div>
-                            <div className="mb-6">
-                                <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                                    <label htmlFor="comment" className="sr-only">Your comment</label>
-                                    <textarea id="comment" rows="6" value={comment} onChange={(e) => setComment(e.target.value)}
-                                        className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                                        placeholder="Write a comment..."></textarea>
+                            {/* Show UI that adding comments is for logged in users only */}
+                            {
+                                !user && <div className="mb-6">
+                                    <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                        <p className="text-sm text-gray-900 dark:text-white">You must be logged in to comment.</p>
+                                    </div>
                                 </div>
-                                <button type="submit" onClick={addComment}
-                                    className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                                    Post comment
-                                </button>
-                            </div>
+                            }
+                            {
+                                user && <div className="mb-6">
+                                    <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                        <label htmlFor="comment" className="sr-only">Your comment</label>
+                                        <textarea id="comment" rows="6" value={comment} onChange={(e) => setComment(e.target.value)}
+                                            className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                            placeholder="Write a comment..."></textarea>
+                                    </div>
+                                    <button type="submit" onClick={addComment}
+                                        className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                        Post comment
+                                    </button>
+                                </div>
+                            }
+                            
                             {
                                 comments.map((comment) => (
                                     <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">

@@ -24,7 +24,7 @@ export default function GuestHomePage({ router, posts }) {
                         Search for a place
                     </a> 
                 </div>
-                <div className="px-4 mx-auto flex flex-col items-center justify-center text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
+                <div className="px-4 mx-auto flex mt-4 flex-col items-center justify-center text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
                     <span className="font-semibold text-gray-700 uppercase dark:text-gray-300">FEATURED IN</span>
                     <div className="flex flex-wrap justify-center items-center mt-8 px-4 py-2 rounded-full text-gray-700 dark:text-gray-300 sm:justify-between bg-gray-100 dark:bg-gray-700">
                         <svg className="h-11" viewBox="0 0 208 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +44,7 @@ export default function GuestHomePage({ router, posts }) {
                     <p className="mb-4 text-gray-700 dark:text-white">I've always been fascinated by the idea of travel and exploring new places. As a digital nomad myself, I know firsthand the joys and challenges that come with constantly being on the move. While travel can be incredibly rewarding, it can also be overwhelming and stressful at times - especially when you're in a new and unfamiliar place.</p>
                     <p className="mb-4 text-gray-700 dark:text-white">If you're ready to embark on your next adventure, join the Wanderlust App community today and let's start exploring the world together!</p>
                 </div>
-                <div className="grid grid-cols-2 gap-4 mt-8">
+                <div className="hidden sm:grid grid-cols-2 gap-4 mt-8 ">
                     <div className="rounded-lg border h-80 overflow-hidden -mt-10 border-gray-300 dark:border-gray-700">
                         <Image className="relative w-full h-full object-cover" height={340} quality={80} width={230} src={'/guestHomeImage1.png'} alt="Wanderlust App" />
                     </div>
@@ -54,7 +54,7 @@ export default function GuestHomePage({ router, posts }) {
                 </div>
             </div>
             {/* CTA  */}
-            <div className="w-4/5 py-8 mx-auto max-w-screen-xl text-center my-32 bg-white/90 dark:bg-gray-800/90 rounded-lg">
+            <div className="px-4 w-4/5 py-8 mx-auto max-w-screen-xl text-center my-32 bg-white/90 dark:bg-gray-800/90 rounded-lg">
                 <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Start Exploring</h1>
                 <p className="mb-8 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300 my-8">Wanderlust App let's you to find, explore and share the best places around the world, and gives you the tools to plan everything you'd need.</p>
                 <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
