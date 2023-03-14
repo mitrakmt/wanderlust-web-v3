@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 
 export default function BlogCard({ post }) {
     // Hooks
-    const { navigate } = useRouter();
+    const router = useRouter();
 
     const navigateToProfile = () => {
-        navigate(`/profile/${post.author.username}`)
+        router.push(`/profile/${post.author.username}`)
     }
 
     return (

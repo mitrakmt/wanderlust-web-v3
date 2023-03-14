@@ -1,26 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-
 // Components
 import BlogCard from '../../components/BlogCard';
 
-// Utils
-import request from '../../utils/request';
+export async function getStaticProps() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+    const posts = await res.json();
+  
+    return {
+      props: {
+        posts: posts.data,
+      },
+    };
+  }
 
-export default function Blog() {
-    // State
-    const [posts, setPosts] = useState([]);
-
-    // Hooks
-    const router = useRouter();
-
-    useEffect(() => {
-        request('/blog')
-            .then(res => {
-                setPosts(res.data);
-            })
-    }, []);
-
+export default function Blog({ posts }) {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">

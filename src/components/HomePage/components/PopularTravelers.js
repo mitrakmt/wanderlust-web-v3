@@ -34,7 +34,7 @@ export default function PopularTravelers() {
             </div>
             <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-2">
                 {travelers.map((traveler) => (
-                    <div key={`popularTravelers-${traveler.name}`} className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
+                    <div key={`popularTravelers-${traveler.username}`} className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                         <Link href={`/profile/${traveler.username}`}>
                             <Image className="w-48 sm:w-80 rounded-lg sm:rounded-none h-36 object-cover sm:rounded-l-lg" src={traveler.avatar} alt={`${traveler.name} Avatar`} width={80} height={80} />
                         </Link>

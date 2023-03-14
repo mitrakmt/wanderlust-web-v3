@@ -34,7 +34,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ posts}) {
+export default function Home({ posts }) {
   // Hooks
   const { user, userLoading } = useAuth();
   const router = useRouter();
