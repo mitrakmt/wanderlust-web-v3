@@ -1,10 +1,10 @@
 import { useEffect, useContext, useState } from 'react';
 import request from '../utils/request';
-import trackStat from '../utils/trackStat';
 import Footer from '../components/Footer';
 
 // Utils
 import removeFavorite from '../utils/removeFavorite';
+import trackClick from "../utils/trackClick";
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -31,10 +31,6 @@ export default function Favorites() {
         }
     }, [user])
 
-    useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'favorites' })
-    }, [])
-
     // Context
     const [favorites, setFavorites] = useContext(favoritesContext);
 
@@ -49,7 +45,7 @@ export default function Favorites() {
 
     // UseEffects
     useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'favorites' })
+        trackClick('favorites')
     }, [])
 
     useEffect(() => {

@@ -27,6 +27,9 @@ import WeatherCard from '../../components/WeatherCard/WeatherCard';
 import ProBanner from '../../components/ProBanner/ProBanner';
 import PlacesMap from '../../components/cityComponents/Map';
 
+// Utils
+import trackClick from '../../utils/trackClick';
+
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
 import { useRouter } from 'next/router'
@@ -163,17 +166,9 @@ export default function CityPage({ citySelected }) {
         trackStat({ type: 'tabViews', property: 'cityView' })
     }, [])
 
-    // useEffect(() => {
-    //     // Request city details and then set as citySelected
-    //     if (slug) {
-    //         request(`/cities/slug/${slug}`)
-    //             .then(res => {
-    //                 setCitySelected(res.data);
-    //                 setCityId(res.data?.id);
-    //             }
-    //         )
-    //     }
-    // }, [slug])
+    useEffect(() => {
+        trackClick('city-view')
+    }, [])
 
     useEffect(() => {
         if (citySelected?.country) {

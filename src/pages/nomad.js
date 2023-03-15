@@ -5,6 +5,9 @@ import Image from 'next/image'
 import { useAuth } from '../hooks/useAuth';
 import { useRouter } from 'next/router';
 
+// Utils
+import trackClick from "../utils/trackClick";
+
 export default function NomadTools() {
     const [offers] = useState([
         {
@@ -30,7 +33,7 @@ export default function NomadTools() {
     const router = useRouter();
 
     useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'offers' })
+        trackClick('nomad-view')
     }, [])
 
     useEffect(() => {

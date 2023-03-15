@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 // Utils
 import request from '../utils/request';
-import trackStat from '../utils/trackStat';
+import trackClick from "../utils/trackClick";
 
 export default function Assistant() {
     // State search
@@ -36,7 +36,7 @@ export default function Assistant() {
     
     // UseEffects
     useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'trips' })
+        trackClick('assistant-view')
     }, [])
 
     const updateParameters = (key, value) => {

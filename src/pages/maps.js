@@ -3,7 +3,7 @@ import GooglePlacesAutocomplete, { geocodeByPlaceId } from 'react-google-places-
 
 // Utils
 import request from '../utils/request';
-import trackStat from '../utils/trackStat';
+import trackClick from "../utils/trackClick";
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -31,7 +31,7 @@ export default function Maps() {
     }, [user])
 
     useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'map' })
+        trackClick('map-view')
     }, [])
 
     useEffect(() => {

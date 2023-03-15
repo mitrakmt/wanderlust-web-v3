@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -23,9 +23,12 @@ function Login() {
     const [, setAuthLoading] = useState(false);
     const [authError, setAuthError] = useState(null);
 
+    useEffect(() => {
+        trackClick('login')
+    }, [])
+
     const startLogin = async () => {
         setAuthLoading(true);
-        trackClick('login')
         
         request('/auth/login', {
             method: 'POST',

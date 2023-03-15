@@ -4,6 +4,7 @@ import { useDebouncedCallback } from 'use-debounce';
 // Utils
 import request from '../utils/request'
 import trackStat from '../utils/trackStat';
+import trackClick from "../utils/trackClick";
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -32,7 +33,7 @@ export default function Settings() {
     }, [user])
 
     useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'settings' })
+        trackClick('settings-view')
     }, [])
 
     // Context

@@ -54,7 +54,7 @@ export default function Search({ featuredCities }) {
     
     // UseEffects
     useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'dashboard' })
+        trackClick('search-view')
     }, [])
     
     useEffect(() => {

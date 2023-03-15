@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -26,11 +26,14 @@ function Signup() {
     const [authLoading, setAuthLoading] = useState(false);
     const [authError, setAuthError] = useState(null);
 
+    useEffect(() => {
+        trackClick('register')
+    }, [])
+
     const register = async () => {
         if (hasExistingAccount || !email || !password) {
             return;
         }
-        trackClick('register')
         trackStat({ type: 'general', property: 'signups' })
 
         setAuthLoading(true);

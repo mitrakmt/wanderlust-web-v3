@@ -7,7 +7,7 @@ import { Modal } from 'flowbite';
 
 // Utils
 import request from '../utils/request';
-import trackStat from "../utils/trackStat";
+import trackClick from '../utils/trackClick';
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -85,10 +85,10 @@ export default function Profile({ publicUser }) {
     useEffect(() => {
         if (publicUser) {
             if (username) {
-                trackStat({ type: 'tabViews', property: 'publicProfile' })
+                trackClick('publicProfile-view')
             }
         } else {
-            trackStat({ type: 'tabViews', property: 'profile' })
+            trackClick('profile-view')
         }
     }, [username])
 

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 // Utils
 import request from '../../utils/request';
+import trackClick from "../../utils/trackClick";
 
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
@@ -52,9 +53,6 @@ export default function BlogPost({ blog }) {
     const router = useRouter();
     const { user } = useAuth();
 
-    // Query Params
-    const { slug } = router.query;
-
     if (router.isFallback) {
         return <div>Loading...</div>
     }
@@ -74,6 +72,10 @@ export default function BlogPost({ blog }) {
                 })
         }
     }, [blog]);
+
+    useEffect(() => {
+        trackClick('blog-view')
+    }, [])
 
     // Functions
     const removeComment = (id) => {
