@@ -18,7 +18,6 @@ import CustomButton from '../components/Button/Button';
 import DangerButton from '../components/Button/DangerButton';
 import Button from '../components/Button/Button';
 import TextH2 from '../components/Text/TextH2';
-import TextH5 from '../components/Text/TextH5';
 import StripeForm from '../components/StripeForm/StripeForm';
 
 export default function Settings() {
@@ -31,6 +30,10 @@ export default function Settings() {
             router.push('/')
         }
     }, [user])
+
+    useEffect(() => {
+        trackStat({ type: 'tabViews', property: 'settings' })
+    }, [])
 
     // Context
     const [toasts, setToasts] = useContext(toastsContext);

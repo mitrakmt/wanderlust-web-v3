@@ -159,9 +159,9 @@ export default function CityPage({ citySelected }) {
         }
     }, [citySelected])
 
-    // useEffect(() => {
-    //     trackStat({ type: 'tabViews', property: 'cityView' })
-    // }, [])
+    useEffect(() => {
+        trackStat({ type: 'tabViews', property: 'cityView' })
+    }, [])
 
     // useEffect(() => {
     //     // Request city details and then set as citySelected

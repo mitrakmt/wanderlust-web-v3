@@ -16,6 +16,10 @@ import { countriesContext } from '../context/CountriesProvider';
 import { useAuth } from '../hooks/useAuth';
 import { useRouter } from 'next/router';
 
+// Utils
+import trackClick from '../utils/trackClick';
+import trackStat from '../utils/trackStat';
+
 export async function getStaticProps() {
     // fetch no longer needs to be imported from isomorphic-unfetch
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/countries`);
@@ -55,6 +59,10 @@ export default function Layout({ children, countries }) {
             document.documentElement.classList.remove('dark');
             localStorage.setItem('color-theme', 'light');
         }
+    }, [])
+
+    useEffect(() => {
+        trackClick('app-load')
     }, [])
 
     useEffect(() => {

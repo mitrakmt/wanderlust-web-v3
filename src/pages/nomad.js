@@ -30,6 +30,10 @@ export default function NomadTools() {
     const router = useRouter();
 
     useEffect(() => {
+        trackStat({ type: 'tabViews', property: 'offers' })
+    }, [])
+
+    useEffect(() => {
         if (!user?.premium) {
             router.push('/pro')
         }

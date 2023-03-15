@@ -31,7 +31,7 @@ export default function Maps() {
     }, [user])
 
     useEffect(() => {
-        trackStat({ type: 'maps', property: 'map' })
+        trackStat({ type: 'tabViews', property: 'map' })
     }, [])
 
     useEffect(() => {

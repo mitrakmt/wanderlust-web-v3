@@ -26,21 +26,6 @@ function Signup() {
     const [authLoading, setAuthLoading] = useState(false);
     const [authError, setAuthError] = useState(null);
 
-    const sendResetPassword = () => {
-        if (!email) {
-            return;
-        }
-        request(`/auth/forgot-password`, {
-            method: "POST",
-            body: {
-                email
-            }
-        })
-            .then(() => {
-                setResetPasswordSent(true);
-            })
-    }
-
     const register = async () => {
         if (hasExistingAccount || !email || !password) {
             return;
@@ -104,7 +89,7 @@ function Signup() {
                     priority
                     className="fixed top-0 left-0 w-full h-full bg-cover opacity-40 z-0"
                 />
-                <div className="max-w-md w-full space-y-8 z-10">
+                <div className="max-w-lg bg-gray-100/90 dark:bg-gray-800/90 rounded-lg p-4 w-full space-y-8 z-10">
                     <div>
                         <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
                             Sign Up
@@ -160,7 +145,7 @@ function Signup() {
                         </div>
 
                         <div className="text-sm">
-                            <Link href="/reset-password" className="font-medium text-primary-600 hover:text-primary-500">
+                            <Link href="/forgot-password" className="font-medium text-primary-600 hover:text-primary-500">
                                 Forgot your password?
                             </Link>
                         </div>

@@ -7,42 +7,26 @@ import Link from "next/link";
 // Utils
 import request from "../utils/request";
 
-function PasswordReset() {
+function ForgotPassword() {
     // Change password state
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmNewPassword, setConfirmNewPassword] = useState("");
-    const [newPasswordError, setNewPasswordError] = useState(null);
+    const [resetPasswordError, setResetPasswordError] = useState(null);
+    const [email, setEmail] = useState("");
+    const [resetPasswordSent, setResetPasswordSent] = useState(false);
 
-    // Params
-    const searchParams = useSearchParams();
-
-    // Hooks
-    const router = useRouter();
-
-    const resetPassword = async () => {
-        if (!newPassword || !confirmNewPassword) {
+    const sendResetPassword = () => {
+        if (!email) {
             return;
         }
 
-        if (newPassword !== confirmNewPassword) {
-            setNewPasswordError("Passwords don't match");
-            return;
-        }
-
-        const response = await request('/auth/reset-password', {
-            method: 'POST',
-            query: `token=${searchParams.get("token")}`,
+        request(`/auth/forgot-password`, {
+            method: "POST",
             body: {
-                password: newPassword,
-            },
+                email
+            }
         })
-
-        if (response.message) {
-            setNewPasswordError(response.message);
-            return;
-        }
-
-        router.push("/login")
+            .then(response => {
+                setResetPasswordSent(true);
+            })
     }
 
     return (
@@ -54,23 +38,20 @@ function PasswordReset() {
                 priority
                 className="fixed top-0 left-0 w-full h-full bg-cover opacity-40 z-0"
             />
-            <div className="max-w-md w-full space-y-8 z-10">
-                <div>
-                    <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-                        Password Reset
-                    </h1>
-                </div>
+            <div className="max-w-lg bg-gray-100/90 dark:bg-gray-800/90 rounded-lg p-4 w-full space-y-8 z-10">
+                <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
+                    Forgot Password
+                </h1>
                 <div className="mt-4 space-y-4 lg:mt-5 md:space-y-5">
                     <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Password</label>
-                        <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                        <input type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} name="confirm-password" id="confirm-password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} name="email" placeholder="your@email.com" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
                     </div>
                     {
-                        newPasswordError && <p className="text-sm text-red-700">{newPasswordError}</p>
+                        resetPasswordError && <p className="text-sm text-red-700">{resetPasswordError}</p>
+                    }
+                    {
+                        resetPasswordSent && <p className="text-sm text-green-700">Password reset email sent!</p>
                     }
                     <div>
                         <div className="flex items-center justify-between my-4">
@@ -83,7 +64,7 @@ function PasswordReset() {
 
                         <div>
                             <button
-                                onClick={resetPassword}
+                                onClick={sendResetPassword}
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                             >
                                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -109,4 +90,4 @@ function PasswordReset() {
     );
 }
 
-export default PasswordReset;
+export default ForgotPassword;

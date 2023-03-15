@@ -31,6 +31,10 @@ export default function Favorites() {
         }
     }, [user])
 
+    useEffect(() => {
+        trackStat({ type: 'tabViews', property: 'favorites' })
+    }, [])
+
     // Context
     const [favorites, setFavorites] = useContext(favoritesContext);
 
