@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 
 // Components
-import FavoriteControl from '../../icons/LikeIcon';
+import FavoriteControl from '../../icons/likeIcon';
 
 export default function CityCard({ data, keyId, favorites, index, toggleFavorite, hideLikeCount }) {
   // State
