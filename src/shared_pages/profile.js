@@ -92,17 +92,32 @@ export default function Profile({ publicUser }) {
         }
     }, [username])
 
-    useEffect(() => {
-        // Get suggested users
-    }, [])
+    // useEffect(() => {
+    //     // Get suggested users
+    //     request('/users/suggested', {
+    //         method: 'GET'
+    //     }).then(res => {
+    //         setFollowSuggestions(res?.data || []);
+    //     })
+    // }, [])
 
-    useEffect(() => {
-        // Get suggested blogs
-    }, [])
+    // useEffect(() => {
+    //     // Get suggested blogs
+    //     request('/blogs/suggested', {
+    //         method: 'GET'
+    //     }).then(res => {
+    //         setSuggestedBlogs(res?.data || []);
+    //     })
+    // }, [])
 
-    useEffect(() => {
-        // Get recent image likes
-    }, [])
+    // useEffect(() => {
+    //     // Get recent image likes
+    //     request('/favorite/likes/recent', {
+    //         method: 'GET'
+    //     }).then(res => {
+    //         setRecentLikes(res?.data || []);
+    //     })
+    // }, [])
 
     useEffect(() => {
         if (publicUser) {
