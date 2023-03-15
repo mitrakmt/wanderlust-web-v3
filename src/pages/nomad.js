@@ -54,7 +54,7 @@ export default function NomadTools() {
                 <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
                     {
                         offers.map((offer) => (
-                            <div key={`nomad-tools-${offer.name}`}>
+                            <div key={`nomad-tools-${offer.name}`} href={offer.link} taraget="_blank">
                                 <div className="flex justify-center items-center overflow-hidden mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
                                     <Image src={offer.image} alt={offer.name} width={50} height={50} className="h-full" />
                                 </div>

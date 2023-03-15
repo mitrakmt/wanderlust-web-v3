@@ -10,5 +10,5 @@ const trackClick = (type) => {
         })
     }
 }
-
+x
 export default trackClick;
