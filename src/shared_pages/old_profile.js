@@ -328,7 +328,6 @@ export default function Profile({ publicUser }) {
             })
             .catch(function (err) {
                 // TODO: add error logging in some service
-                console.log(err);
             });
     };
 
