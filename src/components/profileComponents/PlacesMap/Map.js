@@ -117,8 +117,8 @@ export default function PlacesMap({ coordinates, userPlacesToTry, setUserPlacesT
             renderWorldCopies={true}
             style={{
                 width: '100%',
-                height: '600px',
-                borderRadius: '15px'
+                height: '700px',
+                borderBottomRadius: '15px',
             }}
             mapboxAccessToken={mapBoxArray[randomNumberSelected]}
             mapStyle={theme === 'light' ? 'mapbox://styles/mapbox/light-v11' : 'mapbox://styles/mapbox/dark-v11'}

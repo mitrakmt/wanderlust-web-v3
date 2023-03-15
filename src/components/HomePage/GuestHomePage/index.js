@@ -9,10 +9,10 @@ export default function GuestHomePage({ router, posts }) {
     return (
         <div className="px-0 sm:pl-16 pr-0 flex flex-col items-center">
             <div className="w-4/5 py-8 max-w-screen-xl text-center my-36">
-                <a href="" target="_blank" className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 rounded-full dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" role="alert">
+                {/* <a href="" target="_blank" className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 rounded-full dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" role="alert">
                     <span className="text-xs font-bold bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span className="text-sm font-bold">Wanderlust 3.0 is out!</span> 
                     <svg className="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
-                </a>
+                </a> */}
                 <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Helping you to explore the world</h1>
                 <p className="mb-8 text-lg font-bold text-gray-800 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300">Wanderlust App let's you to find, explore and share the best places around the world, and gives you the tools to plan everything you'd need.</p>
                 <div className="flex flex-col mt-4 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">

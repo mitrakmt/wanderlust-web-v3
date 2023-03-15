@@ -11,6 +11,7 @@ import { useAuth } from '../../hooks/useAuth';
 
 // Components
 import Footer from '../../components/Footer';
+import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
 
 export async function getStaticProps({ params: { slug } }) {
     if (!slug) {
@@ -24,6 +25,7 @@ export async function getStaticProps({ params: { slug } }) {
         props: {
             blog: blog.data
         },
+        revalidate: 320,
     };
 }
 
@@ -112,8 +114,9 @@ export default function BlogPost({ blog }) {
     // Hooks
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900">
-                <div className="flex justify-between px-4 mx-auto max-w-screen-xl ">
+            <BreadCrumb breadCrumbHome={"Blogs"} goToHome={() => router.push('/blog')} secondName={blog.title} />
+            <main className="pt-8 mt-4 pb-16 lg:pt-16 lg:pb-24 dark:bg-gray-900">
+                <div className="flex flex-col justify-between px-4 mx-auto max-w-screen-xl ">
                     <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                         <header className="mb-4 lg:mb-6 not-format">
                             <address className="flex items-center mb-6 not-italic">

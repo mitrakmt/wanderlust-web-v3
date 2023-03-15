@@ -39,9 +39,9 @@ export default function PlacesMap({ coordinates, user }) {
             attributionControl={false}
             renderWorldCopies={true}
             style={{
-                height: '500px',
+                height: '700px',
                 width: '100%',
-                borderRadius: '15px'
+                borderBottomRadius: '15px'
             }}
             mapboxAccessToken={mapBoxArray[randomNumberSelected]}
             mapStyle={theme === 'light' ? 'mapbox://styles/mapbox/light-v11' : 'mapbox://styles/mapbox/dark-v11'}

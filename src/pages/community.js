@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import request from '../utils/request';
 import trackStat from '../utils/trackStat';
 import { useRouter } from 'next/router';
+import Footer from '../components/Footer';
 
 // Components
 import ProfileCard from '../components/ProfileCard/ProfileCard';
@@ -273,6 +274,7 @@ export default function Community() {
                     }
                 </div>
             </div>
+            <Footer />
         </section>
     )
 }

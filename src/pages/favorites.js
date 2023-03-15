@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import request from '../utils/request';
 import trackStat from '../utils/trackStat';
+import Footer from '../components/Footer';
 
 // Utils
 import removeFavorite from '../utils/removeFavorite';
@@ -156,6 +157,7 @@ export default function Favorites() {
                         <TextP> icon :)</TextP>
                     </div>
             }
+            <Footer />
         </section>
     )
 }

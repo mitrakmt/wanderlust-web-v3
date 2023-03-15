@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Dropzone from 'react-dropzone'
+import React, { useContext, useEffect, useState } from 'react';
+import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import moment from 'moment';
 import Image from 'next/image'
@@ -34,7 +34,7 @@ export default function Profile({ publicUser }) {
     // Hooks
     const { user, setUser } = useAuth();
     const router = useRouter();
-    const { username } = router.query
+    const { username } = router.query;
     
     // Context
     const [countries, ] = useContext(countriesContext);
@@ -654,7 +654,6 @@ export default function Profile({ publicUser }) {
                                             {profileUser?.bio}
                                         </p>
                                 }
-                                
                             </div>
                             {
                                 editing ?
