@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import moment from 'moment';

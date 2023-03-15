@@ -2,11 +2,11 @@ const { withAxiom } = require('next-axiom');
 
 const nextConfig = {
   reactStrictMode: true,
-  compiler: {
-    styledComponents: true
-  },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  compiler: {
+    styledComponents: true
   },
   basePath: '',
   rewrites: async () => [

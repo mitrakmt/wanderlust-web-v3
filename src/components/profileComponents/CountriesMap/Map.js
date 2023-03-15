@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import Map, {Layer, Source } from 'react-map-gl';
 
 // Context

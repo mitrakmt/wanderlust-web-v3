@@ -1,5 +1,4 @@
-import React from "react";
-import styles from "../styles/dialog.module.css";
+import Styles from "../styles/dialog.module.css";
 
 const Dialog = ({
   modalId = "wanderlust-modal",
@@ -7,7 +6,7 @@ const Dialog = ({
   body = <p></p>
 }) => {
   return (
-    <dialog id={modalId} className={`${styles.dialog} bg-gray-100/80 dark:bg-gray-800/80`} style={{ position: 'fixed' }}>
+    <dialog id={modalId} className={`${Styles.dialog} bg-gray-100/80 dark:bg-gray-800/80`} style={{ position: 'fixed' }}>
       <header>
         <p className="text-3xl text-gray-900 dark:text-gray-200">{title}</p>
         <button

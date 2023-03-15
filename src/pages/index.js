@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -68,6 +68,10 @@ export default function Home({ posts }) {
         }
         main();
     }, []);
+  
+  useEffect(() => {
+    console.log('posts', posts)
+  }, [posts])
 
     const refresh = async () => {
       const location = getQueuedLocation();

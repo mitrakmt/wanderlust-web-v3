@@ -22,10 +22,10 @@ import Button from '../../components/Button/Button';
 import Timeline from '../../components/Timeline/Timeline';
 import Input from '../../components/Input/Input';
 import TextArea from '../../components/TextArea/TextArea';
-import FavoriteControl from '../../icons/likeIcon';
+import FavoriteControl from '../../icons/LikeIcon';
 import WeatherCard from '../../components/WeatherCard/WeatherCard';
 import ProBanner from '../../components/ProBanner/ProBanner';
-import PlacesMap from '../../components/cityComponents/Map';
+import PlacesMap from '../../components/CityComponents/Map';
 
 // Utils
 import trackClick from '../../utils/trackClick';

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Map, { Marker } from 'react-map-gl';
 import request from '../../../utils/request';
 

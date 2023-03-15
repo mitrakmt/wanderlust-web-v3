@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import moment from 'moment';
@@ -93,6 +93,18 @@ export default function Profile({ publicUser }) {
     }, [username])
 
     useEffect(() => {
+        // Get suggested users
+    }, [])
+
+    useEffect(() => {
+        // Get suggested blogs
+    }, [])
+
+    useEffect(() => {
+        // Get recent image likes
+    }, [])
+
+    useEffect(() => {
         if (publicUser) {
             if (profileUser) {
                 if (follows?.find(followUserId => followUserId === profileUser.id)) {
@@ -122,7 +134,7 @@ export default function Profile({ publicUser }) {
         if (homeCountryFound) {
           setHomeCountrySelect(homeCountryFound);
         }
-    }, []);
+    }, [countries]);
   
     useEffect(() => {
         async function fetchData() {
@@ -470,6 +482,8 @@ export default function Profile({ publicUser }) {
         })
     }
 
+    if (!profileUser) return null;
+
     return (
         // Profile page similar to twitter profile  
         <section className="relative ml-0 sm:ml-16 px-2 sm:px-6 py-8">
@@ -484,8 +498,8 @@ export default function Profile({ publicUser }) {
                     {/* Banner image  */}
                     <div className="w-full h-48 bg-gray-200 rounded-lg mb-4">
                         {
-                            profileUser?.banner_image ? (
-                                <img src={profileUser?.banner_image} className="w-full h-full object-cover rounded-lg" />
+                            profileUser?.bannerImage ? (
+                                <img src={profileUser?.bannerImage} className="w-full h-full object-cover rounded-lg" />
                             ) : (
                                 <div className="w-full h-full bg-gray-200 dark:bg-gray-800 rounded-lg"></div>
                             )
@@ -512,7 +526,9 @@ export default function Profile({ publicUser }) {
                             </div>
                         )}
                         {/* Profile image  */}
-                        <Image src={profileUser?.profile_image} quality={80} width={150} height={150} className="-mt-24 rounded-full border-4 border-white" />
+                        {
+                            profileUser?.profile_image && <Image src={profileUser?.profile_image} alt={`${profileUser?.username} Profile Image`} quality={80} width={150} height={150} className="-mt-24 rounded-full border-4 border-white" />
+                        }
 
                         {/* FOLLOWERS, STATS */}
                         <div className="flex justify-center w-full py-4 pt-8 lg:pt-4 flex-wrap">

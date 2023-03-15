@@ -10,7 +10,7 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
     const [locations, setLocations] = useState([]);
 
     // State loading
-    const [searchLocationsLoading, setSearchLocationsLoading] = useState(false);
+    const [, setSearchLocationsLoading] = useState(false);
     const [searchRandomCityLoading, setSearchRandomCityLoading] = useState(false);
     const [searchRandomCityByRegionLoading, setSearchRandomCityByRegionLoading] = useState(false);
         
@@ -61,7 +61,7 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
         <div className=" px-2 sm:pl-16 pr-0 flex flex-col items-center">
             <div className="w-full sm:w-3/4 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto mt-56 mb-44 max-w-screen-md sm:text-center sm:flex sm:flex-col sm:items-center sm:justify-center">
-                    <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">Let's Get Traveling</h2>
+                    <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">Let's Get Traveling!</h2>
                     <div className="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0 w-full">
                         <div className="relative w-full">
                             <label htmlFor="email" className="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">City</label>

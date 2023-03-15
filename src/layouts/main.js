@@ -18,7 +18,6 @@ import { useRouter } from 'next/router';
 
 // Utils
 import trackClick from '../utils/trackClick';
-import trackStat from '../utils/trackStat';
 
 export async function getStaticProps() {
     // fetch no longer needs to be imported from isomorphic-unfetch
@@ -32,10 +31,9 @@ export async function getStaticProps() {
     };
 }
 
-export default function Layout({ children, countries }) {
+export default function Main({ children, countries }) {
     // State
     const [showOfflineSnackbar, setShowOfflineSnackbar] = useState(false);
-    const [, setCookiesBarOpen] = useState(false);
 
     // Context
     const [, setTheme] = useContext(themeContext);
@@ -66,7 +64,16 @@ export default function Layout({ children, countries }) {
     }, [])
 
     useEffect(() => {
-        setCountries(countries);
+        async function fetchNewCountries() {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/countries`);
+            const newCountries = await res.json();
+            setCountries(newCountries.data);
+        }
+        if (!countries) {
+            fetchNewCountries()
+        } else {
+            setCountries(countries);
+        }
     }, [countries])
 
     useEffect(() => {

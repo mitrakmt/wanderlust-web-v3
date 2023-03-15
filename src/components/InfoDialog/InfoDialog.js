@@ -1,17 +1,7 @@
-import React, { useContext } from "react";
-
 // Components
 import Dialog from "../Dialog";
-import TextH5 from "../Text/TextH5";
-import TextP from "../Text/TextP";
-
-// Context
-import { themeContext } from '../../context/ThemeProvider';
 
 function InfoDialog({ city, country, attribution, countryInfo, cityInfo }) {
-    // Context
-    const [theme] = useContext(themeContext);
-
     const continentKeys = {
         "AS": "Asia",
         "EU": "Europe",

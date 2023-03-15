@@ -1,4 +1,3 @@
-import React from "react";
 import request from "../utils/request";
 import trackClick from "../utils/trackClick";
 import trackStat from "../utils/trackStat";
@@ -7,10 +6,10 @@ import trackStat from "../utils/trackStat";
 import { useAuth } from "../hooks/useAuth";
 
 // Components
-import FavoriteControl from "../icons/likeIcon";
-import ShareIcon from "../icons/shareIcon";
-import InfoIcon from "../icons/infoIcon";
-import RefreshIcon from "../icons/refreshIcon";
+import FavoriteControl from "../icons/LikeIcon";
+import ShareIcon from "../icons/ShareIcon";
+import InfoIcon from "../icons/InfoIcon";
+import RefreshIcon from "../icons/RefreshIcon";
 
 const ControlBar = ({ refresh, openInfoModal, cityId, currentImageFavoriteStatus, setCurrentImageFavoriteStatus, setShowAuthModal, city, country, countryInfo, attribution }) => {
   // Hooks

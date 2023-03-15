@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import Map, { Marker } from 'react-map-gl';
 import Image from 'next/image';
 
