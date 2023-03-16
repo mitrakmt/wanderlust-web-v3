@@ -49,7 +49,7 @@ export default function PlacesMap({ coordinates, userPlacesToTry, setUserPlacesT
     }
 
     const addToMyTravelToList = () => {
-        if (!user.premium) {
+        if (!user?.premium) {
             router.push('/premium');
             return;
         }
