@@ -8,7 +8,7 @@ import { useAuth } from "../hooks/useAuth";
 // Components
 import FavoriteControl from "../icons/likeIcon";
 import ShareIcon from "../icons/shareIcon";
-import InfoIcon from "../icons/InfoIcon";
+import InfoIcon from "../icons/infoIcon";
 import RefreshIcon from "../icons/refreshIcon";
 
 const ControlBar = ({ refresh, openInfoModal, cityId, currentImageFavoriteStatus, setCurrentImageFavoriteStatus, setShowAuthModal, city, country, countryInfo, attribution }) => {

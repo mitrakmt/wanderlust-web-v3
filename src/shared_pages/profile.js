@@ -19,7 +19,7 @@ import { toastsContext } from '../context/ToastsProvider';
 import { followsContext } from '../context/FollowsProvider';
 
 import Trending from './components/Trending';
-import RecentLikes from './components/RecentLikes';
+import LocationSuggestions from './components/LocationSuggestions';
 import FollowSuggestions from './components/FollowSuggestions';
 import Blogs from './components/Blogs';
 
@@ -91,33 +91,6 @@ export default function Profile({ publicUser }) {
             trackClick('profile-view')
         }
     }, [username])
-
-    // useEffect(() => {
-    //     // Get suggested users
-    //     request('/users/suggested', {
-    //         method: 'GET'
-    //     }).then(res => {
-    //         setFollowSuggestions(res?.data || []);
-    //     })
-    // }, [])
-
-    // useEffect(() => {
-    //     // Get suggested blogs
-    //     request('/blogs/suggested', {
-    //         method: 'GET'
-    //     }).then(res => {
-    //         setSuggestedBlogs(res?.data || []);
-    //     })
-    // }, [])
-
-    // useEffect(() => {
-    //     // Get recent image likes
-    //     request('/favorite/likes/recent', {
-    //         method: 'GET'
-    //     }).then(res => {
-    //         setRecentLikes(res?.data || []);
-    //     })
-    // }, [])
 
     useEffect(() => {
         if (publicUser) {
@@ -739,10 +712,6 @@ export default function Profile({ publicUser }) {
                                 </div>
                             </div>
                     }
-                    {/* SHOW ON MOBILE */}
-                    <div className="block sm:hidden m-4">
-                        <RecentLikes />
-                    </div>
                     {
                         reviews.length > 0 && 
                             <div className="p-2 md:p-10 mt-10">
@@ -783,7 +752,7 @@ export default function Profile({ publicUser }) {
                     }
                 </div>
                 <div className="hidden md:flex w-full mt-4 md:w-1/3 gap-y-4 flex-col items-center sm:items-end sticky bottom-0">
-                    <RecentLikes />
+                    <LocationSuggestions />
                     <FollowSuggestions />
                     <Blogs />
                     <Trending />
