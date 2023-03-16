@@ -1,4 +1,4 @@
-export default function Tabs({ tabs }) {
+export default function Tabs() {
     return(
         <>
             <div className="border-b border-gray-200 dark:border-gray-700">
