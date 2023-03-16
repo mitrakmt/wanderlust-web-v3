@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import request from '../../utils/request';
 import Image from 'next/image';
+import Link from 'next/link';
 
-export default function FollowSuggestions() {
+export default function FollowSuggestions({ follows, followUser, removeFollow }) {
     const [recommendedUsers, setRecommendedUsers] = useState([]);
 
     useEffect(() => {
@@ -19,7 +20,7 @@ export default function FollowSuggestions() {
             <div className="flex items-center justify-between mb-4">
                 <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">You might like</h5>
             </div>
-            <div className="">
+            <div>
                 <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
                     {
                         recommendedUsers.map(user => (
@@ -37,17 +38,28 @@ export default function FollowSuggestions() {
                                         }
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                            {user?.name || user?.username}
-                                        </p>
+                                        <Link href={`/profile/${user?.username}`} passHref>
+                                            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                {user?.name || user?.username}
+                                            </p>
+                                        </Link>
                                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                                             {user?.job}
                                         </p>
                                     </div>
                                     <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        <button className="px-3 py-1 text-sm font-medium leading-4 text-white transition-colors duration-200 transform bg-primary-600 rounded-md dark:bg-primary-500 hover:bg-primary-500 focus:outline-none focus:bg-primary-500">
-                                            Follow
-                                        </button>
+                                        {
+                                            // Follows is an array of objects with a _id property
+                                            follows.includes(user._id) ? (
+                                                <button onClick={() => removeFollow(user._id)} className="px-2 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-500 border border-transparent rounded-lg active:bg-gray-600 hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray">
+                                                    Unfollow
+                                                </button>
+                                            ) : (
+                                                <button onClick={() => followUser(user._id)} className="px-2 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-primary-500 border border-transparent rounded-lg active:bg-primary-600 hover:bg-primary-600 focus:outline-none focus:shadow-outline-primary">
+                                                    Follow
+                                                </button>
+                                            )
+                                        }
                                     </div>
                                 </div>
                             </li>

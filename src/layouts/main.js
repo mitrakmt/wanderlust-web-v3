@@ -11,6 +11,7 @@ import request from '../utils/request';
 import { themeContext } from '../context/ThemeProvider';
 import { toastsContext } from '../context/ToastsProvider';
 import { countriesContext } from '../context/CountriesProvider';
+import { followsContext } from '../context/FollowsProvider';
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -39,6 +40,7 @@ export default function Main({ children, countries }) {
     const [, setTheme] = useContext(themeContext);
     const [toasts] = useContext(toastsContext);
     const [, setCountries] = useContext(countriesContext);
+    const [, setFollows] = useContext(followsContext);
 
     // Hooks
     const { login, user, userLoading, setUserLoading, logout } = useAuth();
@@ -64,6 +66,21 @@ export default function Main({ children, countries }) {
     }, [])
 
     useEffect(() => {
+        // Get user's follows
+        async function fetchData() {
+            const response = await request(`/follows/all`, {
+                method: 'GET'
+            })
+
+            setFollows(response.data)
+        }
+
+        if (user) {
+            fetchData();
+        }
+    }, []);
+
+    useEffect(() => {
         async function fetchNewCountries() {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/countries`);
             const newCountries = await res.json();
@@ -85,6 +102,13 @@ export default function Main({ children, countries }) {
         if (urlParams.has("accessToken")) {
             // Check path for accessToken param
             accessToken = urlParams.get("accessToken");
+
+            if (!accessToken) {
+                setUserLoading(false);
+                router.push('/')
+                return;
+            }
+
             const theme = urlParams.get("colorTheme");
             const refreshToken = urlParams.get("refreshToken");
             forwardPath = urlParams.get("forwardPath");

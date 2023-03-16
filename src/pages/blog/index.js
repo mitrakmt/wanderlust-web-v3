@@ -30,7 +30,9 @@ export default function Blog({ posts }) {
                 </div> 
                 <div className="grid gap-8 lg:grid-cols-2">
                     {posts.map(post => (
-                        <BlogCard post={post} />
+                        <div key={`blogsPage-${post.id}`}>
+                            <BlogCard post={post} />
+                        </div>
                     ))} 
                 </div>  
             </div>

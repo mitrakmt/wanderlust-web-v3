@@ -95,7 +95,9 @@ export default function GuestHomePage({ router, posts }) {
                 <div className="grid gap-8 lg:grid-cols-2">
                     {
                         posts.map(post => (
-                            <BlogCard post={post} />
+                            <div key={`guestHomePage-${post.id}-${post.slug}`}>
+                                <BlogCard post={post} />
+                            </div>
                         ))
                     }
                 </div>  

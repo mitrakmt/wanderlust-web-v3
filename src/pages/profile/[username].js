@@ -31,8 +31,27 @@ import Profile from '../../shared_pages/profile';
 //     }
 // }
 
-export default function PublicProfile() {
+export async function getStaticProps({ paths }) {
+    const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/locations/recommendations`)
+    const recommendedLocations = await response.json()
+
+    return {
+        props: {
+            recommendedLocations: recommendedLocations.data
+        },
+        revalidate: 300
+    };
+}
+
+export async function getStaticPaths() {
+    return {
+        paths: [],
+        fallback: true
+    }
+}
+
+export default function PublicProfile({ recommendedLocations }) {
     return (
-        <Profile publicUser={true} />
+        <Profile publicUser={true} recommendedLocations={recommendedLocations} />
     )
 }

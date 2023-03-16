@@ -6,7 +6,7 @@ export default function ProfileCard({ user, currentUserId, followUser, removeFol
     const [isFollowed, setIsFollowed] = useState(false);
 
     useEffect(() => {
-        if (follows.find(followUserId => followUserId === user.id)) {
+        if (follows.includes(user._id)) {
             setIsFollowed(true);
         } else {
             setIsFollowed(false);
@@ -37,8 +37,8 @@ export default function ProfileCard({ user, currentUserId, followUser, removeFol
                     user.id === currentUserId ?
                         <></> :
                         isFollowed ? 
-                            <a onClick={() => removeFollow(user.id)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg cursor-pointer hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-red-700 dark:focus:ring-primary-800">Following</a> :
-                            <a onClick={() => followUser(user.id)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg cursor-pointer hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Follow</a>
+                            <a onClick={() => removeFollow(user.id)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-primary-900 rounded-lg cursor-pointer hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-900 dark:hover:bg-red-700 dark:focus:ring-primary-800">Following</a> :
+                            <a onClick={() => followUser(user.id)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-primary-500 rounded-lg cursor-pointer hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-500 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Follow</a>
                 }
                 <Link
                     href={`/profile/${encodeURIComponent(user.username)}`}

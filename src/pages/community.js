@@ -64,10 +64,12 @@ export default function Community() {
     }, [])
 
     useEffect(() => {
-        request(`/follows/all`)
-            .then(res => {
-                setFollows(res.data);
-            })
+        if (user) {
+            request(`/follows/all`)
+                .then(res => {
+                    setFollows(res.data);
+                })
+        }
     }, [])
 
     useEffect(() => {

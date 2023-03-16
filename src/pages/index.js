@@ -68,10 +68,6 @@ export default function Home({ posts }) {
         }
         main();
     }, []);
-  
-  useEffect(() => {
-    console.log('posts', posts)
-  }, [posts])
 
     const refresh = async () => {
       const location = getQueuedLocation();
