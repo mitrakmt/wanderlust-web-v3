@@ -10,7 +10,6 @@ export default function FollowSuggestions() {
         request('/users/recommendations', {
             method: 'GET'
         }).then(res => {
-            console.log('res users', res.data)
             setRecommendedUsers(res?.data || []);
         })
     }, [])

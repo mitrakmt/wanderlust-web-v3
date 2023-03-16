@@ -10,7 +10,6 @@ export default function Blogs() {
         request('/blog/recommendations', {
             method: 'GET'
         }).then(res => {
-            console.log('res blogs', res.data)
             setRecommendedBlogs(res?.data || []);
         })
     }, [])

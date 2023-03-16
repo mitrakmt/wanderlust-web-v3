@@ -515,7 +515,7 @@ export default function Profile({ publicUser }) {
                         )}
                         {/* Profile image  */}
                         {
-                            profileUser?.profile_image && <Image src={profileUser?.profile_image} alt={`${profileUser?.username} Profile Image`} quality={80} width={150} height={150} className="-mt-24 rounded-full border-4 border-white" />
+                            profileUser?.profile_image && <Image priority src={profileUser?.profile_image} alt={`${profileUser?.username} Profile Image`} quality={80} width={150} height={150} className="-mt-24 rounded-full border-4 border-white" />
                         }
 
                         {/* FOLLOWERS, STATS */}
