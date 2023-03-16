@@ -81,9 +81,6 @@ export default function Profile({ publicUser, recommendedLocations }) {
     const [, setLoadingReviewCount] = useState(true);
     const [, setLoadingFollowCount] = useState(true);
 
-    useEffect(() => {
-        console.log('recommendedLocations', recommendedLocations);
-    }, [recommendedLocations])
 
     // UseEffects
     useEffect(() => {
@@ -570,7 +567,7 @@ export default function Profile({ publicUser, recommendedLocations }) {
                     <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 relative">
                         {
                             showEditBannerIcon && !publicUser && (
-                                <div onMouseLeave={!publicUser ? () => hideEditBanner() : undefined} onClick={showBannerModal} className="cursor-pointer absolute top-0 left-0 z-50 w-full h-full bg-gray-900 text-white dark:bg-gray-300 dark:text-black bg-opacity-50 dark:bg-opacity-50 flex items-center justify-center">
+                                <div onMouseLeave={!publicUser ? () => hideEditBanner() : undefined} onClick={showBannerModal} className="cursor-pointer absolute top-0 left-0 z-30 w-full h-full bg-gray-900 text-white dark:bg-gray-300 dark:text-black bg-opacity-50 dark:bg-opacity-50 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                                         <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
                                         <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
@@ -644,7 +641,7 @@ export default function Profile({ publicUser, recommendedLocations }) {
                             </div>
                         )}
                         {/* Profile image  */}
-                        <div className="relative w-52 h-52 -mt-24 rounded-full">
+                        <div className="relative w-52 h-52 -mt-24 rounded-full z-50">
                             {/* Show edit icon svg over profile image with dark background shade */}
                             {
                                 showEditProfilePhotoIcon && !publicUser && (
@@ -653,7 +650,6 @@ export default function Profile({ publicUser, recommendedLocations }) {
                                             <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
                                             <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
                                         </svg>
-
                                     </div>
                                 )
                             }
@@ -785,14 +781,14 @@ export default function Profile({ publicUser, recommendedLocations }) {
                                         }
                                         {
                                             editing ?
-                                                <div className="flex flex-col w-full">
-                                                    <label className="text-sm font-bold text-gray-700 tracking-wide dark:text-white">Username</label>
-                                                    <input type="text" value={editedValues?.username || profileUser?.username} onChange={(e) => updateEditedValues('username', e.target.value)} className="mb-4 w-full px-4 py-2 text-lg font-semibold text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 focus:border-blue-500 focus:outline-none focus:ring" placeholder="Job" />
-                                                </div> :
+                                                <InputWithAddon containerClassnames="mt-4" value={(editedValues?.username || editedValues?.username === "") ? editedValues?.username  : profileUser?.username} onBlur={checkUsernameTaken} label="Username" symbol={"@"} onChange={(e) => updateEditedValues('username', e.target.value)} /> :
                                                 <p className="text-sm mb-4 text-gray-600 dark:text-gray-400">@{profileUser?.username}</p>
                                         }
+                                        {
+                                            usernameTaken && <p className="text-sm text-red-500">Username is already taken</p>
+                                        }
                                     </div>
-                                    <div className="flex">
+                                    <div className="flex mt-4">
                                         <div className="mx-4 mt-0 mb-2 text-sm font-bold leading-normal text-gray-700 uppercase dark:text-white">
                                             <div className="text-left">
                                                 <p className="text-xs font-normal text-gray-700 dark:text-gray-400">From:</p>
