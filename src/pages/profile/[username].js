@@ -1,4 +1,4 @@
-import Profile from '../../shared_pages/Profile';
+import Profile from '../../shared_pages/profile';
 
 // Update for reviews 
 // Revalidate? or something

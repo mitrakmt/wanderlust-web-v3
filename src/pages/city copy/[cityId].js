@@ -1,7 +1,6 @@
 import { useEffect, useContext, useState } from 'react';
 import moment from 'moment';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 // Utils 
 import trackStat from "../../utils/trackStat";
@@ -22,60 +21,28 @@ import Button from '../../components/Button/Button';
 import Timeline from '../../components/Timeline/Timeline';
 import Input from '../../components/Input/Input';
 import TextArea from '../../components/TextArea/TextArea';
-import FavoriteControl from '../../icons/likeIcon';
+import FavoriteControl from '../../shared/likeIcon';
 import WeatherCard from '../../components/WeatherCard/WeatherCard';
 import ProBanner from '../../components/ProBanner/ProBanner';
 import PlacesMap from '../../components/cityComponents/Map';
 
-// Utils
-import trackClick from '../../utils/trackClick';
-
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
-import { useRouter } from 'next/router'
 
 // Context
 import { favoritesContext } from '../../context/FavoritesProvider';
 
-export async function getStaticProps({ params: { slug } }) {
-    const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
-    const citySelected = await response.json()
-
-    return {
-        props: {
-            citySelected: citySelected.data
-        },
-    };
-}
-
-export async function getStaticPaths() {
-    const response = await fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/cities')
-    const cities = await response.json()
-    const paths = cities.map((city) => (
-        {
-            params: {
-                slug: city.slug,
-            },
-        }
-    ))
-
-    return {
-        paths,
-        fallback: true,
-    }
-}
-
-export default function CityPage({ citySelected }) {
+export default function CityView() {
     // Hooks
     const { user } = useAuth();
     const router = useRouter()
-    const { slug, breadcrumb } = router.query
+    const { cityId, breadcrumb } = router.query
 
     // Context
     const [favorites, setFavorites] = useContext(favoritesContext);
 
     // State
-    const [cityId, setCityId] = useState(null);
+    const [citySelected, setCitySelected] = useState(null);
     const [holidays, setHolidays] = useState([]);
     const [locations, setLocations] = useState([]);
     const [reviews, setReviews] = useState([]);
@@ -98,49 +65,12 @@ export default function CityPage({ citySelected }) {
     const [, setReviewsLoading] = useState(true);
     const [, setPlacesLoading] = useState(true);
 
-    // const structuredDataText = JSON.stringify({
-    //     "@context": "https://schema.org",
-    //     "@type": "Article",
-    //     "mainEntityOfPage": {
-    //         "@type": "WebPage",
-    //         "@id": `https://www.explore.wanderlustapp.io/city/${citySelected?.id}`
-    //     },
-    //     "headline": citySelected?.name,
-    //     "image": [
-    //         citySelected?.image_url_large
-    //     ],
-    //     "datePublished": moment(citySelected?.created_at, ['MMMM Do YYYY']),
-    //     "author": {
-    //         "@type": "Person",
-    //         "name": "Wanderlust"
-    //     },
-    //     "publisher": {
-    //         "@type": "Organization",
-    //         "name": "Wanderlust",
-    //         "logo": {
-    //             "@type": "ImageObject",
-    //             "url": "https://wanderlust-extension.s3.us-west-2.amazonaws.com/logo.jpg"
-    //         }
-    //     },
-    //     "description": citySelected?.description
-    // });
-
-    if (router.isFallback) {
-        return <div>Loading...</div>
-    }
-
     // UseEffects
-    useEffect(() => {
-        if (citySelected) {
-            setCityId(citySelected?.id)
-        }
-    }, [citySelected]);
-    
     useEffect(() => {
         if (citySelected) {
             baseRequest(`https://api.weatherapi.com/v1/forecast.json`, {
                 query: {
-                    "key": process.env.NEXT_PUBLIC_WEATHER_API,
+                    "key": process.env.REACT_APP_WEATHER_API,
                     "q": `${citySelected?.latitude},${citySelected?.longitude}`,
                     "days": 5
                 }
@@ -149,6 +79,35 @@ export default function CityPage({ citySelected }) {
                     setWeatherCurrent(res.current)
                     setWeatherForecast(res.forecast)
                     setWeatherLocation(res.location)
+
+                    const structuredDataText = JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Article",
+                        "mainEntityOfPage": {
+                            "@type": "WebPage",
+                            "@id": `https://www.explore.wanderlustapp.io/city/${citySelected?.id}`
+                        },
+                        "headline": citySelected?.name,
+                        "image": [
+                            citySelected?.image_url_large
+                        ],
+                        "datePublished": moment(citySelected?.created_at).format('YYYY-MM-DD'),
+                        "author": {
+                            "@type": "Person",
+                            "name": "Wanderlust"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "Wanderlust",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://wanderlust-extension.s3.us-west-2.amazonaws.com/logo.jpg"
+                            }
+                        },
+                        "description": citySelected?.description
+                    });
+
+                    // TODO: fix this
 
                     const script = document.createElement('script');
                     script.setAttribute('type', 'application/ld+json');
@@ -167,7 +126,12 @@ export default function CityPage({ citySelected }) {
     }, [])
 
     useEffect(() => {
-        trackClick('city-view')
+        // Request city details and then set as citySelected
+        request(`/cities/${cityId}`)
+            .then(res => {
+                setCitySelected(res.data);
+            }
+        )
     }, [])
 
     useEffect(() => {
@@ -177,60 +141,52 @@ export default function CityPage({ citySelected }) {
                     setHolidays(getNotUnique(res.data));
                 })
         }
-    }, [citySelected, slug])
+    }, [citySelected])
 
     // Fetch places by city
     useEffect(() => {
-        if (user?.premium && cityId) {
-            request(`/place/city/${cityId}`)
-                .then(res => {
-                    setPlaces(res.data || []);
-                    setPlacesLoading(false);
-                })
-        }
-    }, [cityId]);
+        request(`/place/city/${cityId}`)
+            .then(res => {
+                setPlaces(res.data || []);
+                setPlacesLoading(false);
+            })
+    }, []);
 
     // Fetch locations for current city
     useEffect(() => {
-        if (cityId) {
-            request(`/locations/city/${cityId}`)
-                .then(res => {
-                    setLocations(res.data || []);
-                    setImagesLoading(false);
-                })
-        }
-    }, [cityId]);
+        request(`/locations/city/${cityId}`)
+            .then(res => {
+                setLocations(res.data || []);
+                setImagesLoading(false);
+            })
+    }, []);
 
     useEffect(() => {
-        if (cityId) {
-            request(`/reviews/${cityId}`)
-                .then(res => {
-                    setReviews(res.data || []);
+        request(`/reviews/${cityId}`)
+            .then(res => {
+                setReviews(res.data || []);
 
-                    // Calculate average
-                    if (res?.data?.length === 0) {
-                        setReviewsAverage(null)
-                    } else if (res?.data?.length === 1) {
-                        setReviewsAverage(res.data[0].rating);
-                    } else {
-                        const average = res.data?.reduce((a, b) => a.rating + b.rating, 0) / res.data?.length;
-                        setReviewsAverage(average.toFixed(2));
-                    }
-                    
-                    setReviewsLoading(false);
-                })
-        }
-    }, [cityId]);
+                // Calculate average
+                if (res.data.length === 0) {
+                    setReviewsAverage(null)
+                } else if (res.data.length === 1) {
+                    setReviewsAverage(res.data[0].rating);
+                } else {
+                    const average = res.data.reduce((a, b) => a.rating + b.rating, 0) / res.data.length;
+                    setReviewsAverage(average.toFixed(2));
+                }
+                
+                setReviewsLoading(false);
+            })
+    }, []);
 
     useEffect(() => {
-        if (cityId && user) {
-            request(`/favorites/city/${cityId}`)
-                .then(res => {
-                    setFavorited(res.data?.favorited);
-                    setFavoritesLoading(false);
-                })
-        }
-    }, [cityId])
+        request(`/favorites/city/${cityId}`)
+            .then(res => {
+                setFavorited(res.data?.favorited);
+                setFavoritesLoading(false);
+            })
+    }, [])
 
     // Functions
     function getNotUnique(a) {
@@ -296,7 +252,7 @@ export default function CityPage({ citySelected }) {
                             rating: reviewRating,
                             city: citySelected,
                             user: {
-                                name: user.username,
+                                name: user.name,
                             }
                         }],
                         ...reviews,
@@ -320,8 +276,22 @@ export default function CityPage({ citySelected }) {
         }
     }
 
+    {/* 
+    coutry_chinese: "墨西哥"
+    name_chinese: "墨西哥城"
+    state_chinese: "" */}
+
+    {/* popular_neighborhoods: []
+    population: 8918653
+    rank: 14
+    region: "Latin America"
+    similar_to: []
+    state: ""
+    tags: []
+    top_sights: [] */}
+
     return (
-        <section className="relative ml-0 sm:ml-16 px-6 py-8">
+        <div className="relative ml-16 px-6 py-8">
             <div id="cityStructuredData" />
             <div>
                 {
@@ -331,14 +301,12 @@ export default function CityPage({ citySelected }) {
                     <div className={`sm:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full`}> 
                         <TextH2 classes="z-10">{citySelected?.name}, {citySelected?.country_name}</TextH2>
                         <div className="flex items-center sm:ml-auto">
-                            {
-                                user && <FavoriteControl
-                                    toggleFavorite={toggleFavorite}
-                                    hideTooltip={true}
-                                    currentImageFavoriteStatus={favorited}
-                                    style={{ height: 20, width: 20, marginRight: 0, wrapperWidth: 45 }}
-                                />
-                            }
+                            <FavoriteControl
+                                toggleFavorite={toggleFavorite}
+                                hideTooltip={true}
+                                currentImageFavoriteStatus={favorited}
+                                style={{ height: 20, width: 20, marginRight: 0, wrapperWidth: 45 }}
+                            />
                             <TextH5 classes="ml-2 z-50">{citySelected?.favorite_count} favorites</TextH5>
                         </div>
                     </div>
@@ -395,73 +363,57 @@ export default function CityPage({ citySelected }) {
             <div className="w-full my-12">
                 <TextH3>Local Favorites</TextH3>
                 {
-                    user?.premium ?
-                        citySelected?.longitude && <PlacesMap coordinates={[citySelected?.longitude, citySelected?.latitude]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} />
-                        : <div className="w-full h-96 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                            <div className="flex flex-col items-center">
-                                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Unlock this feature</h3>
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">with a pro account</h3>
-                                <Link href="/pro">
-                                    <p className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">Get Pro</p>
-                                </Link>
-                            </div>
-                        </div>
+                    citySelected?.longitude && <PlacesMap coordinates={[citySelected?.longitude, citySelected?.latitude]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} />
                 }
                 {/* filters  */}
-                {
-                    user?.premium && <div className="w-full justify-center flex flex-wrap z-0 mt-4">
-                        <div className="flex items-center mr-4">
-                            <input checked={!selectedFilter} onChange={() => setSelectedFilter(null)} type="radio" value="" className="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
-                        </div>
-                        <div className="flex items-center mr-4">
-                            <input checked={selectedFilter === 'point_of_interest'} onChange={() => setSelectedFilter('point_of_interest')} type="radio" value="" className="cursor-pointer w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Point of Interest</label>
-                        </div>
-                        <div className="flex items-center mr-4">
-                            <input checked={selectedFilter === 'food'} onChange={() => setSelectedFilter('food')} type="radio" value="" className="cursor-pointer w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Food</label>
-                        </div>
-                        <div className="flex items-center mr-4">
-                            <input checked={selectedFilter === 'cafe'} onChange={() => setSelectedFilter('cafe')} type="radio" value="" className="cursor-pointer w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cafe</label>
-                        </div>
-                        <div className="flex items-center mr-4">
-                            <input checked={selectedFilter === 'bar'} onChange={() => setSelectedFilter('bar')} type="radio" value="" className="cursor-pointer w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
-                        </div>
-                        <div className="flex items-center mr-4">
-                            <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
-                        </div>
-                        <div className="flex items-center mr-4">
-                            <input checked={selectedFilter === 'museum'} onChange={() => setSelectedFilter('museum')} type="radio" value="" className="cursor-pointer w-4 h-4 text-brown-600 bg-gray-100 border-gray-300 focus:ring-brown-500 dark:focus:ring-brown-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Museum</label>
-                        </div>
+                <div className="w-full justify-center flex flex-wrap z-0 mt-4">
+                    <div className="flex items-center mr-4">
+                        <input checked={!selectedFilter} onChange={() => setSelectedFilter(null)} type="radio" value="" className="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
                     </div>
-                }
+                    <div className="flex items-center mr-4">
+                        <input checked={selectedFilter === 'point_of_interest'} onChange={() => setSelectedFilter('point_of_interest')} type="radio" value="" className="cursor-pointer w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Point of Interest</label>
+                    </div>
+                    <div className="flex items-center mr-4">
+                        <input checked={selectedFilter === 'food'} onChange={() => setSelectedFilter('food')} type="radio" value="" className="cursor-pointer w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Food</label>
+                    </div>
+                    <div className="flex items-center mr-4">
+                        <input checked={selectedFilter === 'cafe'} onChange={() => setSelectedFilter('cafe')} type="radio" value="" className="cursor-pointer w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cafe</label>
+                    </div>
+                    <div className="flex items-center mr-4">
+                        <input checked={selectedFilter === 'bar'} onChange={() => setSelectedFilter('bar')} type="radio" value="" className="cursor-pointer w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bar</label>
+                    </div>
+                    <div className="flex items-center mr-4">
+                        <input checked={selectedFilter === 'tourist_attraction'} onChange={() => setSelectedFilter('tourist_attraction')} type="radio" value="" className="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tourist Attraction</label>
+                    </div>
+                    <div className="flex items-center mr-4">
+                        <input checked={selectedFilter === 'museum'} onChange={() => setSelectedFilter('museum')} type="radio" value="" className="cursor-pointer w-4 h-4 text-brown-600 bg-gray-100 border-gray-300 focus:ring-brown-500 dark:focus:ring-brown-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Museum</label>
+                    </div>
+                </div>
             </div>
             <div className="w-full my-12">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center">
                         <TextH3 classes="mr-4">Reviews</TextH3>
                         <div className="flex items-center mb-2">
-                            {
-                                reviewsAverage && <div className="flex">
-                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 1 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 2 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 3 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 4 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 5 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                </div>
-                            }
+                            <div className="flex">
+                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 1 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 2 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 3 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 4 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg aria-hidden="true" className={`w-5 h-5 ${reviewsAverage >= 5 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            </div>
                             <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                            <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">{reviews?.length} review{reviews?.length === 1 ? "" : "s"}</p>
+                            <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">{reviews.length} review{reviews.length === 1 ? "" : "s"}</p>
                         </div>
                     </div>
-                    {
-                        user && <Button text="Write a review now!" onClick={() => setShowWriteAReview(true)} />
-                    }
+                    <Button text="Write a review now!" onClick={() => setShowWriteAReview(true)} />
                 </div>
                 {
                     showWriteAReview && <div className="block w-full p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -491,12 +443,12 @@ export default function CityPage({ citySelected }) {
                     reviews.length > 0 ?
                         <div className="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                             {
-                                reviews.map((review) => (
-                                    <article key={`reviews-${review.id}`}>
+                                reviews.map((review, index) => (
+                                    <article key={`reviews-${index}`}>
                                         <div className="flex items-center mb-4 space-x-4">
-                                            <Image height={30} width={30} className="w-10 h-10 rounded-full" src={review?.user?.profile_image} alt="" />
+                                            {/* <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="" /> */}
                                             <div className="space-y-1 font-medium dark:text-white">
-                                                <p>{review?.user?.username} <time dateTime="2014-08-16 19:00" className="block text-sm text-gray-500 dark:text-gray-400">Joined on {moment(review?.user.createdAt).format('MMMM Do YYYY')}</time></p>
+                                                <p>{review.user.name} <time dateTime="2014-08-16 19:00" className="block text-sm text-gray-500 dark:text-gray-400">Joined on {moment(review.user.createdAt).format('MMMM Do YYYY')}</time></p>
                                             </div>
                                         </div>
                                         <div className="flex flex-col sm:flex-row items-start sm:items-center mb-1">
@@ -507,16 +459,16 @@ export default function CityPage({ citySelected }) {
                                                 <svg aria-hidden="true" className={`w-5 h-5 ${review.rating >= 4 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                                 <svg aria-hidden="true" className={`w-5 h-5 ${review.rating >= 5 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                             </div>
-                                            <h3 className="ml-2 text-sm font-semibold text-gray-900 dark:text-white">{review?.title}</h3>
+                                            <h3 className="ml-2 text-sm font-semibold text-gray-900 dark:text-white">{review.title}</h3>
                                         </div>
-                                        <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Reviewed on <time dateTime={review?.createdAt}>{moment(review?.createdAt).format('MMMM Do YYYY')}</time></p></footer>
-                                        <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{review?.body}</p>
-                                        {/* <a href="#" className="block mb-5 text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Read more</a> */}
+                                        <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Reviewed on <time dateTime={review.createdAt}>{moment(review.createdAt).format('MMMM Do YYYY')}</time></p></footer>
+                                        <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{review.body}</p>
+                                        {/* <a href="#" className="block mb-5 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Read more</a> */}
                                         {/* <aside>
                                             <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">19 people found this helpful</p>
                                             <div className="flex items-center mt-3 space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
                                                 <a href="#" className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Helpful</a>
-                                                <a href="#" className="pl-4 text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Report abuse</a>
+                                                <a href="#" className="pl-4 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Report abuse</a>
                                             </div>
                                         </aside> */}
                                     </article>
@@ -546,7 +498,7 @@ export default function CityPage({ citySelected }) {
             <div className="w-full my-12">
                 <TextH3>Airbnbs</TextH3>
                 <div className="flex flex-col items-center w-full h-auto bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
-                    <Image height={150} width={150} quality={80} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://images.unsplash.com/photo-1591825729269-caeb344f6df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3540&q=80" alt={`Airbnbs in ${citySelected?.name}`} />
+                    <img className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://images.unsplash.com/photo-1591825729269-caeb344f6df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3540&q=80" alt={`Airbnbs in ${citySelected?.name}`} />
                     <div className="flex flex-col justify-between w-full p-4 leading-normal">
                         <div className="flex">
                             <h5 className="mb-2 mr-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">COMING SOON</h5>
@@ -569,20 +521,18 @@ export default function CityPage({ citySelected }) {
                     </div>
                 )
             }
-            {/* <div className="w-full my-8">
+            <div className="w-full my-8">
                 <TextH3 classes="mb-4">Country Information</TextH3>
                 <div className="flex flex-col w-full h-auto px-10 pl-0 bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
                     <div className="flex flex-col w-full p-8 ml-8 leading-normal">
                         <TextH2>{citySelected?.country_name}</TextH2>
                         <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Region: {citySelected?.region}</p>
-                    <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
+                        <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
                         <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Currency: {citySelected?.country?.currency}</p>
                     </div>
-                    {
-                       citySelected?.country?.image_url_medium || citySelected?.image_url_medium && <Image height={30} width={30} className="static object-cover w-full my-8 rounded-md h-96 md:h-auto md:w-96" src={citySelected?.country?.image_url_medium || citySelected?.image_url_medium} alt={`${citySelected?.country_name}`} />
-                    }
+                    <img className="static object-cover w-full my-8 rounded-md h-96 md:h-auto md:w-96" src={citySelected?.country?.image_url_medium || citySelected?.image_url_medium} alt={`${citySelected?.country_name}`} />
                 </div>
-            </div> */}
-        </section>
+            </div>
+        </div>
     )
 }

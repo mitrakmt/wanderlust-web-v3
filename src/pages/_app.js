@@ -17,7 +17,7 @@ import CommunityProvider from '../context/CommunityProvider';
 import ToVisitProvider from '../context/ToVisitProvider';
 
 // Layouts
-import Layout from '../layouts/Main';
+import Layout from '../layouts/main';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 // Styles
