@@ -103,7 +103,7 @@ export default function CityPage({ citySelected }) {
     //     "@type": "Article",
     //     "mainEntityOfPage": {
     //         "@type": "WebPage",
-    //         "@id": `https://www.explore.wanderlustapp.io/city/${citySelected?.id}`
+    //         "@id": `https://www.wanderlustapp.io/city/${citySelected?.id}`
     //     },
     //     "headline": citySelected?.name,
     //     "image": [
