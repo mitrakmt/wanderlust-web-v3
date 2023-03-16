@@ -977,7 +977,7 @@ export default function Profile({ publicUser, recommendedLocations }) {
                     <LocationSuggestions recommendedLocations={recommendedLocations} />
                     <FollowSuggestions follows={follows} followUser={followUser} removeFollow={removeFollow} />
                     <Blogs />
-                    <Trending />
+                    {/* <Trending /> */}
                 </div>
             </div>
         </section>

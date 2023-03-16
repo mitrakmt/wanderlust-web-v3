@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Analytics } from '@vercel/analytics/react';
 
 // Hooks
 import { AuthProvider } from "../hooks/useAuth";
@@ -61,6 +62,7 @@ export default function MyApp({ Component, pageProps }) {
                                                             <Layout>
                                                                 <ErrorBoundary>
                                                                     <Component {...pageProps} />
+                                                                    <Analytics />
                                                                 </ErrorBoundary>
                                                             </Layout>
                                                         </CommunityProvider>
