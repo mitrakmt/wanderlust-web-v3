@@ -103,7 +103,7 @@ export default function Main({ children, countries }) {
             // Check path for accessToken param
             accessToken = urlParams.get("accessToken");
 
-            if (!accessToken) {
+            if (!accessToken || accessToken === 'null') {
                 setUserLoading(false);
                 router.push('/')
                 return;
