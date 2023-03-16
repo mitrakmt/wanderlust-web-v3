@@ -882,30 +882,34 @@ export default function Profile({ publicUser, recommendedLocations }) {
                             </div>
                     }
                     {/* Maps  */}
-                    <div className="flex flex-col mt-8 w-full">
-                        <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
-                            <li className="mr-2">
-                                <a onClick={() => setSelectedMap('favorites')} className={`${selectedMap === 'favorites' ? "active bg-gray-100 text-primary-600 dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"} transition-colors cursor-pointer inline-block p-4 rounded-t-lg`}>Favorites</a>
-                            </li>
-                            <li className="mr-2">
-                                <a onClick={() => setSelectedMap('passport')} className={`${selectedMap === 'passport' ? "active bg-gray-100 text-primary-600 dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"} transition-colors cursor-pointer inline-block p-4 rounded-t-lg`}>Passport</a>
-                            </li>
-                        </ul>
-                        {
-                            selectedMap === 'favorites' && (
-                                <PlacesMap userPlacesToTry={userPlacesToTry} setUserPlacesToTry={setUserPlacesToTry} user={user} zoom={2.5} coordinates={[17.1317479, 41.6531344]}  places={selectedFilter ? places.filter(place => { return place?.tags?.find(element => element === selectedFilter) }) : places} />
-                            )
-                        }
-                        {
-                            selectedMap === 'passport' && (
-                                <CountriesMap
-                                    user={profileUser}
-                                    defaultZoom={2.5}
-                                    coordinates={[17.1317479, 41.6531344]} 
-                                />
-                            )
-                        }
-                    </div>
+                    {/* HIDE MAPS UNLESS USER IS PREMIUM */}
+                    {
+                        profileUser && profileUser.premium &&
+                        <div className="flex flex-col mt-8 w-full">
+                            <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+                                <li className="mr-2">
+                                    <a onClick={() => setSelectedMap('favorites')} className={`${selectedMap === 'favorites' ? "active bg-gray-100 text-primary-600 dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"} transition-colors cursor-pointer inline-block p-4 rounded-t-lg`}>Favorites</a>
+                                </li>
+                                <li className="mr-2">
+                                    <a onClick={() => setSelectedMap('passport')} className={`${selectedMap === 'passport' ? "active bg-gray-100 text-primary-600 dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"} transition-colors cursor-pointer inline-block p-4 rounded-t-lg`}>Passport</a>
+                                </li>
+                            </ul>
+                            {
+                                selectedMap === 'favorites' && (
+                                    <PlacesMap userPlacesToTry={userPlacesToTry} setUserPlacesToTry={setUserPlacesToTry} user={user} zoom={2.5} coordinates={[17.1317479, 41.6531344]}  places={selectedFilter ? places.filter(place => { return place?.tags?.find(element => element === selectedFilter) }) : places} />
+                                )
+                            }
+                            {
+                                selectedMap === 'passport' && (
+                                    <CountriesMap
+                                        user={profileUser}
+                                        defaultZoom={2.5}
+                                        coordinates={[17.1317479, 41.6531344]} 
+                                    />
+                                )
+                            }
+                        </div>
+                    }
                     {
                         feed.length > 0 && 
                             <div className="p-2 md:p-10 mt-10 border-t border-primary-200">
