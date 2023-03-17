@@ -264,7 +264,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                         {
                             menuDropdownOpen && (
                                 <div className="relative">
-                                    <div className="absolute right-0 top-0 z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                    <div className="absolute z-50 right-0 top-0 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                         <div className="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Menu
                                         </div>
@@ -291,7 +291,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                         
                         {
                             user && (
-                                <button type="button" onClick={toggleProfileDropdown} className="flex items-center justify-center mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                                <button type="button" onClick={toggleProfileDropdown} className="flex items-center justify-center mr-3 text-sm bg-gray-800 rounded-full">
                                     <Image className="w-8 h-8 rounded-full ml-2" width={30} height={30} src={user?.profile_image || "https://wanderlust-extension.s3.us-west-2.amazonaws.com/no-user.webp"} alt={`${user?.name} Profile Picture`} />
                                 </button>
                             )
@@ -299,7 +299,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                         {/* <!-- Dropdown menu --> */}
                         {
                             profileDropdownOpen && (
-                                <div className="relative">
+                                <div className="relative z-50">
                                     <div className="absolute right-0 top-0 z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                         <div className="py-3 px-4">
                                             <span className="block text-sm font-semibold text-gray-900 dark:text-white">{user.name}</span>

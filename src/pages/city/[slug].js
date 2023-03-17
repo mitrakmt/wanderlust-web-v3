@@ -91,6 +91,7 @@ export default function CityPage({ citySelected }) {
     const [weatherLocation, setWeatherLocation] = useState(null);
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [places, setPlaces] = useState([]);
+    const [userPlacesToTry, setUserPlacesToTry] = useState([]);
 
     // Loading states
     const [imagesLoading, setImagesLoading] = useState(true);
@@ -161,6 +162,20 @@ export default function CityPage({ citySelected }) {
                 })
         }
     }, [citySelected])
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await request(`/placesToTry`, {
+                method: 'GET'
+            })
+    
+            setUserPlacesToTry(response.data)
+        }
+
+        if (user) {
+            fetchData();
+        }
+    }, []); 
 
     useEffect(() => {
         trackStat({ type: 'tabViews', property: 'cityView' })
@@ -339,7 +354,7 @@ export default function CityPage({ citySelected }) {
                                     style={{ height: 20, width: 20, marginRight: 0, wrapperWidth: 45 }}
                                 />
                             }
-                            <TextH5 classes="ml-2 z-50">{citySelected?.favorite_count} favorites</TextH5>
+                            <TextH5 classes="ml-2 z-20">{citySelected?.favorite_count} favorites</TextH5>
                         </div>
                     </div>
                 </div>
@@ -392,11 +407,11 @@ export default function CityPage({ citySelected }) {
                     </div>
                 </div>
             </div>
-            <div className="w-full my-12">
+            <div className="w-full my-12 relative h-full">
                 <TextH3>Local Favorites</TextH3>
                 {
                     user?.premium ?
-                        citySelected?.longitude && <PlacesMap coordinates={[citySelected?.longitude, citySelected?.latitude]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} />
+                        citySelected?.longitude && <PlacesMap userPlacesToTry={userPlacesToTry} setUserPlacesToTry={setUserPlacesToTry} user={user} zoom={2.5} coordinates={[citySelected?.longitude, citySelected?.latitude]}  places={selectedFilter ? places.filter(place => { return place?.tags?.find(element => element === selectedFilter) }) : places} />
                         : <div className="w-full h-96 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center">
                             <div className="flex flex-col items-center">
                                 <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Unlock this feature</h3>

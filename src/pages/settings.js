@@ -251,7 +251,7 @@ export default function Settings() {
                                     }
                                 </button>
                         }
-                        <div className="flex mt-8 gap-x-8">
+                        <div className="flex mt-8 gap-x-8 flex-col sm:flex-row">
                             <div className="w-2/4 p-6 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 sm:p-8">
                                 <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                     Change Password

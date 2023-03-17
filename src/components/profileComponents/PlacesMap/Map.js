@@ -178,6 +178,5 @@ export default function PlacesMap({ coordinates, userPlacesToTry, setUserPlacesT
                 </div>
              </div>
         </Map>
-     
     )
 }
