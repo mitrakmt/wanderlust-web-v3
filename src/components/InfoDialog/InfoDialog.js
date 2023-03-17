@@ -1,5 +1,6 @@
 // Components
 import Dialog from "../Dialog";
+import { useRouter } from "next/router";
 
 function InfoDialog({ city, country, attribution, countryInfo, cityInfo }) {
     const continentKeys = {
@@ -11,13 +12,29 @@ function InfoDialog({ city, country, attribution, countryInfo, cityInfo }) {
         "AU": "Australia",
         "AN": "Antarctica",
     }
-  
+
+    // Hooks
+    const router = useRouter();
+
+    // Functions
+    const navigateToCity = () => {
+        if (cityInfo?.slug) {
+            router.push(`/city/${cityInfo.slug}`);
+        }
+    }
+
   return (
     <Dialog
         modalId="infodialog"
         title={`${city ? city : country}${city ? `, ${country}${countryInfo?.emoji ? ` ${countryInfo?.emoji}` : ''}` : null}`}
         body={
-            <div>
+            <div className="relative">
+                {/* Button to view city at /city/slug */}
+                {
+                    cityInfo?.slug && <div className="absolute top-0 right-0">
+                        <button className="btn btn-primary btn-sm px-4 py-1 rounded-lg bg-primary-800 dark:bg-primary-800 text-white dark:text-white hover:bg-primary-900 dark:hover:bg-primary-900 transition-colors" onClick={navigateToCity}>View City</button>
+                    </div>
+                }
                 {
                     countryInfo && <div>
                         <p className="text-lg mt-1 mb-0 text-gray-900 dark:text-gray-200">Capital: {countryInfo?.capital}</p>
@@ -39,7 +56,7 @@ function InfoDialog({ city, country, attribution, countryInfo, cityInfo }) {
                                     <div className="flex flex-wrap">
                                         {
                                             cityInfo?.top_sights.map((sight, index) => {
-                                                return <p className="px-5 py-2 mx-1 my-1 text-sm text-gray-900 dark:text-gray-200 bg-slate-800 rounded-xl" key={`sights-to-see-${index}`}>{sight}</p>
+                                                return <p className="px-5 py-2 mx-1 my-1 text-sm text-gray-900 dark:text-gray-200 bg-gray-400 dark:bg-gray-700 rounded-xl" key={`sights-to-see-${index}`}>{sight}</p>
                                             })
                                         }
                                     </div>

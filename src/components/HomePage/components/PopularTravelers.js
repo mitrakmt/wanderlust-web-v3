@@ -56,13 +56,13 @@ export default function PopularTravelers() {
                             <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">{traveler.description}</p>
                             <ul className="flex space-x-4 sm:mt-0">
                                 <li>
-                                    <a href={traveler.instagramUrl} target="_blank" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                                    <a href={traveler.instagramUrl} target="_blank" className="text-gray-500 hover:text-gray-900 dark:hover:text-white" aria-label={`View ${traveler?.name || traveler?.username}'s Instagram Profile`}>
                                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 30 30" aria-hidden="true">
                                         <path d="M 9.9980469 3 C 6.1390469 3 3 6.1419531 3 10.001953 L 3 20.001953 C 3 23.860953 6.1419531 27 10.001953 27 L 20.001953 27 C 23.860953 27 27 23.858047 27 19.998047 L 27 9.9980469 C 27 6.1390469 23.858047 3 19.998047 3 L 9.9980469 3 z M 22 7 C 22.552 7 23 7.448 23 8 C 23 8.552 22.552 9 22 9 C 21.448 9 21 8.552 21 8 C 21 7.448 21.448 7 22 7 z M 15 9 C 18.309 9 21 11.691 21 15 C 21 18.309 18.309 21 15 21 C 11.691 21 9 18.309 9 15 C 9 11.691 11.691 9 15 9 z M 15 11 A 4 4 0 0 0 11 15 A 4 4 0 0 0 15 19 A 4 4 0 0 0 19 15 A 4 4 0 0 0 15 11 z"/>                                        </svg>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={traveler.twitterUrl} target="_blank" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                                    <a href={traveler.twitterUrl} target="_blank" className="text-gray-500 hover:text-gray-900 dark:hover:text-white" aria-label={`View ${traveler?.name || traveler?.username}'s Twitter Profile`}>
                                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
                                     </a>
                                 </li>

@@ -25,6 +25,22 @@ export default function NomadTools() {
             image: "https://wanderlust-extension.s3.us-west-2.amazonaws.com/wise_logo.jpg",
             description: "Send & receive money internationally to any currency, at the real exchange rate. No hidden fees.",
             details: "Free $600 Transfer"
+        },
+        {
+            name: "Surfshark VPN",
+            type: "VPN",
+            link: "https://surfshark.club/friend/M8XZbMJZ",
+            image: "https://wanderlust-extension.s3.us-west-2.amazonaws.com/surfshark_logo.png",
+            description: "Surfshark is a VPN that keeps you safe online and lets you access any content you want.",
+            details: "83% Off"
+        },
+        {
+            name: "Airalo",
+            type: "Cell Phone",
+            link: "https://ref.airalo.com/3PwH",
+            image: "https://wanderlust-extension.s3.us-west-2.amazonaws.com/airalo_logo.png",
+            description: "Airalo is a virtual SIM card that allows you to use your phone number in any country.",
+            details: "$3 off your first SIM Card"
         }
     ]);
 
