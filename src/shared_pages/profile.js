@@ -75,7 +75,6 @@ export default function Profile({ publicUser, recommendedLocations }) {
     const [, setLoadingReviewCount] = useState(true);
     const [, setLoadingFollowCount] = useState(true);
 
-
     // UseEffects
     useEffect(() => {
         if (publicUser) {
