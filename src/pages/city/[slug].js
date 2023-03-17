@@ -38,13 +38,13 @@ import { useRouter } from 'next/router'
 import { favoritesContext } from '../../context/FavoritesProvider';
 
 export async function getStaticProps({ params: { slug } }) {
+    console.log('slug', slug);
     const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
     const citySelected = await response.json()
 
     return {
         props: {
-            citySelected: citySelected.data,
-            slug
+            citySelected: citySelected.data
         },
     };
 }
@@ -62,16 +62,15 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: false,
+        fallback: true,
     }
 }
 
-export default function CityPage({ citySelected, slug }) {
-    console.log('slug', slug);
+export default function CityPage({ citySelected }) {
     // Hooks
     const { user, userLoading } = useAuth();
     const router = useRouter()
-    const { breadcrumb = "" } = router.query
+    const { breadcrumb = "", slug } = router.query
 
     // Context
     const [favorites, setFavorites] = useContext(favoritesContext);
@@ -332,6 +331,8 @@ export default function CityPage({ citySelected, slug }) {
             return calculation
         }
     }
+
+    console.log('userLoading', userLoading);
 
     if (userLoading || !citySelected) return <p>Loading...</p>
 
