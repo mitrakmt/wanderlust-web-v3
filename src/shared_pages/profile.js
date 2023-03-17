@@ -34,6 +34,8 @@ export default function Profile({ publicUser, recommendedLocations }) {
     // Hooks
     const { user, setUser } = useAuth();
     const router = useRouter();
+
+    // Params
     const { username } = router.query;
     
     // Context
@@ -74,7 +76,6 @@ export default function Profile({ publicUser, recommendedLocations }) {
     const [, setSaveLoading] = useState(false);
     const [, setLoadingReviewCount] = useState(true);
     const [, setLoadingFollowCount] = useState(true);
-
 
     // UseEffects
     useEffect(() => {
