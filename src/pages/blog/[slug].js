@@ -50,12 +50,7 @@ export async function getStaticPaths() {
 
 export default function BlogPost({ blog }) {
     // Hooks
-    const router = useRouter();
-    const { user } = useAuth();
-
-    if (router.isFallback) {
-        return <div>Loading...</div>
-    }
+    const { user, userLoading } = useAuth();
 
     // State
     // const [post, setPost] = useState(null);
@@ -111,7 +106,7 @@ export default function BlogPost({ blog }) {
             })
     }
 
-    if (!blog) return null;
+    if (!blog || userLoading) return (<p>Loading...</p>)
 
     // Hooks
     return (
@@ -205,8 +200,8 @@ export default function BlogPost({ blog }) {
                                     </div>
                                 </div>
                             }
-                            {
-                                user && <div className="mb-6">
+                            {/* {
+                                user ? <div className="mb-6">
                                     <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                                         <label htmlFor="comment" className="sr-only">Your comment</label>
                                         <textarea id="comment" rows="6" value={comment} onChange={(e) => setComment(e.target.value)}
@@ -217,60 +212,60 @@ export default function BlogPost({ blog }) {
                                         className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                                         Post comment
                                     </button>
-                                </div>
-                            }
+                                </div> : null
+                            } */}
                             
                             {
-                                comments.map((comment) => (
-                                    <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
-                                        <div className="flex justify-between items-center mb-2">
-                                            <div className="flex items-center">
-                                                <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                                                    <Image
-                                                        className="mr-2 w-6 h-6 rounded-full relative" width={120} height={120}
-                                                        src={comment.user.profile_image} alt={comment.user.username} />
-                                                    {comment.user.username}
-                                                </p>
-                                                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate="true" dateTime="2022-02-08"
-                                                    title="February 8th, 2022">{comment.createdOn}</time></p>
-                                            </div>
-                                            <div className="flex items-center flex-col relative">
-                                                {
-                                                    comment.user.id === user.id && (
-                                                        <button
-                                                            onClick={showCommentDropdown ? () => setShowCommentDropdown(null) : () => setShowCommentDropdown(comment.id)}
-                                                            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                                            type="button"
-                                                        >
-                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
-                                                                </path>
-                                                            </svg>
-                                                            <span className="sr-only">Comment settings</span>
-                                                        </button>
-                                                    )
-                                                }
-                                                {/* <!-- Dropdown menu --> */}
-                                                {
-                                                    showCommentDropdown === comment.id && (
-                                                        <div className="absolute top-8 right-8 z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                                aria-labelledby="dropdownMenuIconHorizontalButton">
-                                                                <li>
-                                                                    <a onClick={() => removeComment(comment.id)}
-                                                                        className="cursor-pointer block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    )
-                                                }
-                                            </div>
-                                        </div>
-                                        <p>{comment.text}</p>
-                                    </article>
-                                ))
+                                // comments && comments.map((comment) => (
+                                //     <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                                //         <div className="flex justify-between items-center mb-2">
+                                //             <div className="flex items-center">
+                                //                 <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                                //                     <Image
+                                //                         className="mr-2 w-6 h-6 rounded-full relative" width={120} height={120}
+                                //                         src={comment.user.profile_image} alt={comment.user.username} />
+                                //                     {comment.user.username}
+                                //                 </p>
+                                //                 <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate="true" dateTime="2022-02-08"
+                                //                     title="February 8th, 2022">{comment.createdOn}</time></p>
+                                //             </div>
+                                //             <div className="flex items-center flex-col relative">
+                                //                 {
+                                //                     comment.user.id === user.id && (
+                                //                         <button
+                                //                             onClick={showCommentDropdown ? () => setShowCommentDropdown(null) : () => setShowCommentDropdown(comment.id)}
+                                //                             className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                //                             type="button"
+                                //                         >
+                                //                             <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                //                                 xmlns="http://www.w3.org/2000/svg">
+                                //                                 <path
+                                //                                     d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
+                                //                                 </path>
+                                //                             </svg>
+                                //                             <span className="sr-only">Comment settings</span>
+                                //                         </button>
+                                //                     )
+                                //                 }
+                                //                 {/* <!-- Dropdown menu --> */}
+                                //                 {
+                                //                     showCommentDropdown === comment.id && (
+                                //                         <div className="absolute top-8 right-8 z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                //                             <ul className="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                //                                 aria-labelledby="dropdownMenuIconHorizontalButton">
+                                //                                 <li>
+                                //                                     <a onClick={() => removeComment(comment.id)}
+                                //                                         className="cursor-pointer block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                                //                                 </li>
+                                //                             </ul>
+                                //                         </div>
+                                //                     )
+                                //                 }
+                                //             </div>
+                                //         </div>
+                                //         <p>{comment.text}</p>
+                                //     </article>
+                                // ))
                             }
                         </section>
                     </article>

@@ -9,20 +9,20 @@ const nextConfig = {
     styledComponents: true
   },
   basePath: '',
-  async redirects() {
-    return [
-      {
-        source: '/blog-post-dark-option/:slug',
-        destination: '/blog/:slug',
-        permanent: true,
-      },
-      {
-        source: '/categories-dark/wanderlust',
-        destination: '/blog',
-        permanent: true,
-      }
-    ]
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/blog-post-dark-option/:slug',
+  //       destination: '/blog/:slug',
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: '/categories-dark/wanderlust',
+  //       destination: '/blog',
+  //       permanent: true,
+  //     }
+  //   ]
+  // },
   rewrites: async () => [
     {
       source: '/dynamic-sitemap.xml',
