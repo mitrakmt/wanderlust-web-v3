@@ -38,7 +38,6 @@ import { useRouter } from 'next/router'
 import { favoritesContext } from '../../context/FavoritesProvider';
 
 export async function getStaticProps({ params: { slug } }) {
-    console.log('slug', slug);
     const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
     const citySelected = await response.json()
 
@@ -105,7 +104,7 @@ export default function CityPage({ citySelected }) {
     //     "@type": "Article",
     //     "mainEntityOfPage": {
     //         "@type": "WebPage",
-    //         "@id": `https://www.wanderlustapp.io/city/${citySelected?.id}`
+    //         "@id": `https://www.wanderlustapp.io/city/${citySelected?.slug}`
     //     },
     //     "headline": citySelected?.name,
     //     "image": [
@@ -127,6 +126,14 @@ export default function CityPage({ citySelected }) {
     //     "description": citySelected?.description
     // });
 
+    // useEffect(() => {
+    //     const script = document.createElement('script');
+    //     script.setAttribute('type', 'application/ld+json');
+    //     script.textContent = structuredDataText;
+    //     // Append to element of ID cityStructuredData
+    //     document.getElementById('cityStructuredData').appendChild(script);
+    // }, []);
+
     // UseEffects
     useEffect(() => {
         if (citySelected) {
@@ -147,12 +154,6 @@ export default function CityPage({ citySelected }) {
                     setWeatherCurrent(res.current)
                     setWeatherForecast(res.forecast)
                     setWeatherLocation(res.location)
-
-                    const script = document.createElement('script');
-                    script.setAttribute('type', 'application/ld+json');
-                    script.textContent = structuredDataText;
-                    // Append to element of ID cityStructuredData
-                    document.getElementById('cityStructuredData').appendChild(script);
                 })
                 .catch(err => {
                     // Show some error state or something
@@ -332,13 +333,17 @@ export default function CityPage({ citySelected }) {
         }
     }
 
-    console.log('userLoading', userLoading);
-
-    if (userLoading || !citySelected) return <p>Loading...</p>
+    // if no userLoading || !citySelected, render beautiful loading page 
+    if (userLoading || !citySelected) (
+        <div className="flex items-center justify-center w-full h-full">
+            {/* Code the full loading page  */}
+            <p className="text-2xl font-bold">Loading...</p>
+        </div>
+    )
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <div id="cityStructuredData" />
+            {/* <div id="cityStructuredData" /> */}
             <div>
                 {
                     breadcrumb && <BreadCrumb breadCrumbHome={breadcrumb} goToHome={() => router.push(`/${breadcrumb}`)} secondName={citySelected?.name} />
