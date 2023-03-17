@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import Image from 'next/image'
@@ -16,20 +16,15 @@ import { countriesContext } from '../context/CountriesProvider';
 import { toastsContext } from '../context/ToastsProvider';
 import { followsContext } from '../context/FollowsProvider';
 
-import Trending from './components/Trending';
 import LocationSuggestions from './components/LocationSuggestions';
 import FollowSuggestions from './components/FollowSuggestions';
 import Blogs from './components/Blogs';
 
 // Components
-import Button from '../components/Button/Button';
 import TextH2 from '../components/Text/TextH2';
-import TextH3 from '../components/Text/TextH3';
-import CustomInput from '../components/Input/Input';
 import InputWithAddon from '../components/InputWithAddon/InputWithAddon';
 import CustomSelect from '../components/Select/Select';
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
-import ToggleSwitch from '../components/ToggleSwitch/ToggleSwitch';
 import PlacesMap from '../components/profileComponents/PlacesMap/Map';
 import CountriesMap from '../components/profileComponents/CountriesMap/Map';
 import BannerModal from './components/BannerModal';
@@ -65,12 +60,11 @@ export default function Profile({ publicUser, recommendedLocations }) {
     const [previousHomeCountrySelect, setPreviousHomeCountrySelect] = useState(null);
     const [, setEditError] = useState(null);
     const [, setCountriesVisited] = useState({});
-    const [isFollowed, setIsFollowed] = useState(false);
-    const [, setFlagNameHovered] = useState("");
+    const [, setIsFollowed] = useState(false);
     const [imageError, setImageError] = useState(false);
     const [places, setPlaces] = useState([]);
-    const [selectedFilter, setSelectedFilter] = useState(null);
-    const [userPlaces, setUserPlaces] = useState([]);
+    const [selectedFilter] = useState(null);
+    const [, setUserPlaces] = useState([]);
     const [userPlacesToTry, setUserPlacesToTry] = useState([]);
     const [showProfileImageModal, setShowProfileImageModal] = useState(false);
     const [showBannerImageModal, setShowBannerImageModal] = useState(false);
