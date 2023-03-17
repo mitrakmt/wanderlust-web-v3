@@ -187,6 +187,11 @@ export default function BlogPost({ blog }) {
                                 }
                             })
                         }
+                        {/* DIVIDER */}
+                        <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                            <hr />
+                        </div>
+                        <p className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">Wanderlust App was created to make it easy to discover the most beautiful places across the world. From an AI travel assistant to planning the perfect trip and tracking all the places you want to visit around the world, <a href="https://wanderlustapp.io">Wanderlust App</a> will help you do it all.</p>
                         {/* COMMENTS */}
                         <section className="not-format">
                             <div className="flex justify-between items-center mb-6">

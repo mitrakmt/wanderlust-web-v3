@@ -114,8 +114,8 @@ export default function Home({ posts }) {
   return (
     <section className="relative min-h-screen overflow-scroll max-w-full">
       <Head>
-        <title>Wanderlust App</title>
-        <meta name="description" content="Explore the world one place at a time." />
+        <title>Wanderlust App - Explore the World</title>
+        <meta name="description" content="Wanderlust App helps you to find the most beautiful places around the world giving you local secrets and all the things you want to know." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
