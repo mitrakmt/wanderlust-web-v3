@@ -43,7 +43,8 @@ export async function getStaticProps({ params: { slug } }) {
 
     return {
         props: {
-            citySelected: citySelected.data
+            citySelected: citySelected.data,
+            slug
         },
     };
 }
@@ -61,15 +62,16 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: true,
+        fallback: false,
     }
 }
 
-export default function CityPage({ citySelected }) {
+export default function CityPage({ citySelected, slug }) {
+    console.log('slug', slug);
     // Hooks
-    const { user } = useAuth();
+    const { user, userLoading } = useAuth();
     const router = useRouter()
-    const { slug, breadcrumb } = router.query
+    const { breadcrumb = "" } = router.query
 
     // Context
     const [favorites, setFavorites] = useContext(favoritesContext);
@@ -125,10 +127,6 @@ export default function CityPage({ citySelected }) {
     //     },
     //     "description": citySelected?.description
     // });
-
-    if (router.isFallback) {
-        return <div>Loading...</div>
-    }
 
     // UseEffects
     useEffect(() => {
@@ -334,6 +332,8 @@ export default function CityPage({ citySelected }) {
             return calculation
         }
     }
+
+    if (userLoading || !citySelected) return <p>Loading...</p>
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
