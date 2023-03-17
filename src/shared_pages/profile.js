@@ -666,6 +666,14 @@ export default function Profile({ publicUser, recommendedLocations }) {
                                     className={`w-52 h-52 rounded-full border-4 border-white ${!publicUser ? "cursor-pointer" : ""}`}
                                 />
                             }
+                            {
+                                !profileUser?.profile_image && <div onMouseEnter={!publicUser ? () => showEditProfilePicture(true) : undefined} onClick={!publicUser ? showProfileModal : undefined} className={`w-52 h-52 rounded-full border-4 border-white ${!publicUser ? "cursor-pointer" : ""}`}>
+                                    <div className="flex items-center justify-center w-full h-full text-4xl text-white bg-gray-500 dark:bg-gray-400 dark:text-black rounded-full">
+                                        {profileUser?.username?.charAt(0).toUpperCase()}
+                                    </div>
+                                </div>
+                            }
+                                    
                         </div>
                             
                         <ProfileModal showProfileImageModal={showProfileImageModal} onDrop={onDrop} imageUploadLoading={imageUploadLoading} fileUploadError={fileUploadError} imageError={imageError} closeProfileModal={closeProfileModal} />
