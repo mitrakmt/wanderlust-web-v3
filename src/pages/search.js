@@ -83,13 +83,11 @@ export default function Search({ featuredCities }) {
         if (currentImageFavoriteStatus) {
             trackClick('unfavorite')
             trackStat('general', 'unfavorite');
-            const newFeaturedCities = featuredCities.slice();
             for (let i = 0; i < featuredCities?.length; i++) {
                 if (featuredCities[i]?.city.id === cityId) {
                     featuredCities[i].city.favorite_count -= 1
                 }
             }
-            setFeaturedCities(newFeaturedCities);
 
             removeFavorite(cityId, favorites, setFavorites);
         } else {
@@ -97,8 +95,6 @@ export default function Search({ featuredCities }) {
             trackClick('favorite')
             trackStat('general', 'favorite');
             addFavorite(cityId, favorites, setFavorites, city);
-            
-            const newFeaturedCities = featuredCities.slice();
 
             for (let i = 0; i < featuredCities?.length; i++) {
                 if (featuredCities[i]?.city.id === cityId) {
@@ -106,7 +102,6 @@ export default function Search({ featuredCities }) {
                 }
             }
 
-            setFeaturedCities(newFeaturedCities);
         }
     }
 

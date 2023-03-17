@@ -53,7 +53,7 @@ export default function PlacesTab({ places, setPlaces, geocodeByPlaceId, GoogleP
                 name: selectedPlace.label,
                 tags: selectedPlace.value.types,
                 note: newPlaceNotes,
-                city: selectedCity.id,
+                city: selectedCity?.id || null,
                 cityName,
                 countryName,
                 latitude: geo[0].geometry.location.lat(),

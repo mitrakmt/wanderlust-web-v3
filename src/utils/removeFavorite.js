@@ -1,7 +1,8 @@
 import request from './request';
 
 const removeFavorite = (id, favorites, setFavorites) => {
-    setFavorites(favorites.filter(favorite => favorite.city.id !== id));
+  console.log('favorites', favorites);
+    setFavorites(favorites.filter(favorite => favorite.city?.id !== id));
 
     request(`/favorites/city/${id}`, {
       method: 'DELETE'
