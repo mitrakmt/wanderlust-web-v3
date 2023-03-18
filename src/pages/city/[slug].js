@@ -334,6 +334,40 @@ export default function CityPage({ citySelected }) {
         }
     }
 
+    function addJsonLd() {
+        return {
+    //       __html: `{
+    //       "@context": "https://schema.org/",
+    //       "@type": "Place",
+    //       "name": ${citySelected.name},
+    //         "address": {
+    //             "@type": "PostalAddress",
+    //             "addressLocality": ${citySelected.name},
+    //             "addressRegion": ${citySelected.country_name},
+    //             "postalCode": ${citySelected.postal_code},
+    //             "streetAddress": ${citySelected.name}
+    //         },
+    //         "geo": {
+    //             "@type": "GeoCoordinates",
+    //             "latitude": ${citySelected.latitude},
+    //             "longitude": ${citySelected.longitude}  
+    //         },
+    //         "image": ${citySelected.image},
+    //         "description": ${citySelected.description},
+    //         "telephone": ${citySelected.phone},
+    //         "url": ${citySelected.url},
+    //         "openingHoursSpecification": {
+    //             "@type": "OpeningHoursSpecification",
+    //             "dayOfWeek": ${citySelected.opening_hours},
+    //             "opens": ${citySelected.opening_hours},
+    //             "closes": ${citySelected.opening_hours}
+                
+           
+    //     }
+    //   `,
+        };
+      }
+
     // if no userLoading || !citySelected, render beautiful loading page 
     if (userLoading || !citySelected) (
         <div className="flex items-center justify-center w-full h-full">
@@ -362,6 +396,13 @@ export default function CityPage({ citySelected }) {
                 <meta property="twitter:url" content={`https://www.wanderlustapp.io/city/${citySelected?.slug}`} />
                 <meta property="twitter:description" content={`Discover ${citySelected?.name} ${citySelected?.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${citySelected?.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${citySelected?.name}.`} />
                 <meta property="twitter:image" content={citySelected?.image_url_large} />
+
+                {/* Schema JSON ID  */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={addJsonLd()}
+                    key="city-jsonld"
+                />
             </Head>
             <div>
                 {
