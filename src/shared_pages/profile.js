@@ -99,8 +99,8 @@ export default function Profile({ publicUser, recommendedLocations }) {
     }, [follows, profileUser])
 
     useEffect(() => {
-        const currentCountryFound = countries?.find(country => country?.id === user?.currentCountry?.id);
-        const homeCountryFound = countries?.find(country => country?.id === user?.homeCountry?.id);
+        const currentCountryFound = countries?.find(country => country?.id === profileUser?.currentCountry?.id);
+        const homeCountryFound = countries?.find(country => country?.id === profileUser?.homeCountry?.id);
 
         if (currentCountryFound) {
           setCurrentCountrySelect(currentCountryFound);
@@ -544,7 +544,7 @@ export default function Profile({ publicUser, recommendedLocations }) {
     }
 
     if (!profileUser) return null;
-
+    
     return (
         // Profile page similar to twitter profile  
         <section className="relative ml-0 sm:ml-16 px-2 sm:px-6 py-8">
