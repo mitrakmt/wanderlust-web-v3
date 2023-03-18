@@ -74,28 +74,7 @@ export default function PublicProfile({ recommendedLocations }) {
                         />
                     )
                 } */}
-            
-            {/* Apples   */}
-
-            {/* <!-- Primary Meta Tags -->
-<title>MacBook Pro - Apple</title>
-<meta name="title" content="MacBook Pro - Apple">
-<meta name="description" content="Our most powerful laptops, supercharged by M1 and M2 chips. Featuring Magic Keyboard, Touch Bar, Touch ID, and brilliant Retina display.">
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.apple.com/macbook-pro/">
-<meta property="og:title" content="MacBook Pro - Apple">
-<meta property="og:description" content="Our most powerful laptops, supercharged by M1 and M2 chips. Featuring Magic Keyboard, Touch Bar, Touch ID, and brilliant Retina display.">
-<meta property="og:image" content="https://www.apple.com/v/macbook-pro/ah/images/meta/macbook-pro__fwqxvqrbd36u_og.png?202302020957">
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://www.apple.com/macbook-pro/">
-<meta property="twitter:title" content="MacBook Pro - Apple">
-<meta property="twitter:description" content="Our most powerful laptops, supercharged by M1 and M2 chips. Featuring Magic Keyboard, Touch Bar, Touch ID, and brilliant Retina display.">
- <meta property="twitter:image" content="https://www.apple.com/v/macbook-pro/ah/images/meta/macbook-pro__fwqxvqrbd36u_og.png?202302020957"></meta> */}
-            
+               
             <Profile publicUser={true} recommendedLocations={recommendedLocations} />
         </>
     )
