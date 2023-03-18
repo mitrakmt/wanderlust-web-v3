@@ -25,19 +25,19 @@ export default function Blog({ posts }) {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
-                <title>{blog.title} | Wanderlust App Blogs</title>
+                <title>Travel Inspiration and Tips | Wanderlust App Blogs</title>
                 <meta name="description" content="Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences. Read our expert advice and stay up-to-date on the latest travel trends. Let Wanderlust App Blogs inspire you to explore new destinations and make the most of your travels." />
 
                 {/* <!-- Open Graph / Facebook --> */}
                 <meta property="og:type" content="website" />
-                <meta property="og:title" content={`${blog.title} | Wanderlust App Blogs`} />
+                <meta property="og:title" content={`$Travel Inspiration and Tips | Wanderlust App Blogs`} />
                 <meta property="og:url" content="https://www.wanderlustapp.io/blog" />
                 <meta property="og:description" content="Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences. Read our expert advice and stay up-to-date on the latest travel trends. Let Wanderlust App Blogs inspire you to explore new destinations and make the most of your travels." />
                 {/* <meta property="og:image" content={blog?.image_url} /> */}
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content={`${blog.title} | Wanderlust App Blogs`} />
+                <meta property="twitter:title" content={`$Travel Inspiration and Tips | Wanderlust App Blogs`} />
                 <meta property="twitter:url" content="https://www.wanderlustapp.io/blog" />
                 <meta property="twitter:description" content="Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences. Read our expert advice and stay up-to-date on the latest travel trends. Let Wanderlust App Blogs inspire you to explore new destinations and make the most of your travels." />
                 {/* <meta property="twitter:image" content={blog?.image_url} /> */}
