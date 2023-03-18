@@ -111,23 +111,21 @@ export default function BlogPost({ blog }) {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>{blog.title} | Wanderlust App Blogs</title>
-                <meta
-                    name="description"
-                    content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
-                />
+                <meta name="description" content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+
+                {/* <!-- Open Graph / Facebook --> */}
                 <meta property="og:title" content={`${blog.title} | Wanderlust App Blogs`} />
-                <meta
-                    property="og:description"
-                    content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
-                />
-                {
-                    blog.image_url && (
-                        <meta
-                            property="og:image"
-                            content={blog?.image_url}
-                        />
-                    )
-                }
+                <meta property="og:type" content="website" />
+                <meta property="og:description" content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta property="og:image" content={blog?.image_url} />
+                <meta property="og:url" content={`https://www.wanderlustapp.io/blog/${blog.slug}`} />
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content={`https://www.wanderlustapp.io/blog/${blog.slug}`} />
+                <meta property="twitter:title" content={`${blog.title} | Wanderlust App Blogs`} />
+                <meta property="twitter:description" content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta property="twitter:image" content={blog?.image_url} />
             </Head>
             <BreadCrumb breadCrumbHome={"Blogs"} goToHome={() => router.push('/blog')} secondName={blog.title} />
             <main className="pt-8 mt-4 pb-16 lg:pt-16 lg:pb-24 dark:bg-gray-900">
