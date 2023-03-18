@@ -135,10 +135,21 @@ export default function Assistant() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Your Personal Travel Assistant | Wanderlust App AI Assistant</title>
-                <meta
-                    name="description"
-                    content="Say hello to your personal travel assistant - Wanderlust App AI Assistant. Our AI-powered assistant helps you plan your trips in detail, from finding the best flights and accommodations to creating custom itineraries based on your interests. Our assistant is always learning and improving, so you can trust that your travel plans will be optimized for the best experience. Let Wanderlust App AI Assistant take the stress out of travel planning and help you create unforgettable journeys."
-                />
+                <meta name="description" content="Say hello to your personal travel assistant - Wanderlust App AI Assistant. Our AI-powered assistant helps you plan your trips in detail, from finding the best flights and accommodations to creating custom itineraries based on your interests. Our assistant is always learning and improving, so you can trust that your travel plans will be optimized for the best experience. Let Wanderlust App AI Assistant take the stress out of travel planning and help you create unforgettable journeys." />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Your Personal Travel Assistant | Wanderlust App AI Assistant" />
+                <meta property="og:url" content="https://www.wanderlustapp.io/assistant" />
+                <meta property="og:description" content="Say hello to your personal travel assistant - Wanderlust App AI Assistant. Our AI-powered assistant helps you plan your trips in detail, from finding the best flights and accommodations to creating custom itineraries based on your interests. Our assistant is always learning and improving, so you can trust that your travel plans will be optimized for the best experience. Let Wanderlust App AI Assistant take the stress out of travel planning and help you create unforgettable journeys." />
+                {/* <meta property="og:image" content={blog?.image_url} /> */}
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content="Your Personal Travel Assistant | Wanderlust App AI Assistant" />
+                <meta property="twitter:url" content="https://www.wanderlustapp.io/assistant" />
+                <meta property="twitter:description" content="Say hello to your personal travel assistant - Wanderlust App AI Assistant. Our AI-powered assistant helps you plan your trips in detail, from finding the best flights and accommodations to creating custom itineraries based on your interests. Our assistant is always learning and improving, so you can trust that your travel plans will be optimized for the best experience. Let Wanderlust App AI Assistant take the stress out of travel planning and help you create unforgettable journeys." />
+                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <TextH2>AI Travel Assistant</TextH2>
             {/* chatbox  */}

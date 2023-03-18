@@ -5,10 +5,21 @@ export default function PrivacyPolicy() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Your Privacy Matters | Wanderlust App Privacy Policy</title>
-                <meta
-                    name="description"
-                    content="At Wanderlust App, we take your privacy seriously. Our privacy policy outlines our commitment to protecting your personal information and explains how we collect, use, and store your data. We value your trust and are dedicated to ensuring the safety and security of your information. Read our privacy policy to learn more about how we protect your privacy on Wanderlust App."
-                />
+                <meta name="description" content="At Wanderlust App, we take your privacy seriously. Our privacy policy outlines our commitment to protecting your personal information and explains how we collect, use, and store your data. We value your trust and are dedicated to ensuring the safety and security of your information. Read our privacy policy to learn more about how we protect your privacy on Wanderlust App." />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Your Privacy Matters | Wanderlust App Privacy Policy" />
+                <meta property="og:url" content="https://www.wanderlustapp.io/privacy" />
+                <meta property="og:description" content="At Wanderlust App, we take your privacy seriously. Our privacy policy outlines our commitment to protecting your personal information and explains how we collect, use, and store your data. We value your trust and are dedicated to ensuring the safety and security of your information. Read our privacy policy to learn more about how we protect your privacy on Wanderlust App." />
+                {/* <meta property="og:image" content={blog?.image_url} /> */}
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content="Your Privacy Matters | Wanderlust App Privacy Policy" />
+                <meta property="twitter:url" content="https://www.wanderlustapp.io/privacy" />
+                <meta property="twitter:description" content="At Wanderlust App, we take your privacy seriously. Our privacy policy outlines our commitment to protecting your personal information and explains how we collect, use, and store your data. We value your trust and are dedicated to ensuring the safety and security of your information. Read our privacy policy to learn more about how we protect your privacy on Wanderlust App." />
+                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <h1 className="text-3xl mb-4 font-bold text-gray-800 dark:text-gray-100">Privacy Policy</h1>
             <p className="text-gray-800 dark:text-gray-100" style={{ whiteSpace: 'pre-line'}}>{`

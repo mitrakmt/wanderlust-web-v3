@@ -9,10 +9,21 @@ export default function four0four() {
         <section className="min-h-screen flex justify-center items-center bg-white dark:bg-gray-900">
             <Head>
                 <title>Oops! Page Not Found | Wanderlust App 404 Error</title>
-                <meta
-                    name="description"
-                    content="Uh oh, looks like you've reached a dead end. Don't worry, our team is on it. The Wanderlust App 404 error page lets you know that the page you're looking for is not available. We apologize for the inconvenience and encourage you to check out our other pages for travel inspiration and planning. Let Wanderlust App help you plan your next adventure."
-                />
+                <meta name="description" content="Uh oh, looks like you've reached a dead end. Don't worry, our team is on it. The Wanderlust App 404 error page lets you know that the page you're looking for is not available. We apologize for the inconvenience and encourage you to check out our other pages for travel inspiration and planning. Let Wanderlust App help you plan your next adventure." />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Oops! Page Not Found | Wanderlust App 404 Error" />
+                <meta property="og:url" content="https://www.wanderlustapp.io/404" />
+                <meta property="og:description" content="Uh oh, looks like you've reached a dead end. Don't worry, our team is on it. The Wanderlust App 404 error page lets you know that the page you're looking for is not available. We apologize for the inconvenience and encourage you to check out our other pages for travel inspiration and planning. Let Wanderlust App help you plan your next adventure." />
+                {/* <meta property="og:image" content={blog?.image_url} /> */}
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content="Oops! Page Not Found | Wanderlust App 404 Error" />
+                <meta property="twitter:url" content="https://www.wanderlustapp.io/404" />
+                <meta property="twitter:description" content="Uh oh, looks like you've reached a dead end. Don't worry, our team is on it. The Wanderlust App 404 error page lets you know that the page you're looking for is not available. We apologize for the inconvenience and encourage you to check out our other pages for travel inspiration and planning. Let Wanderlust App help you plan your next adventure." />
+                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto max-w-screen-sm text-center">

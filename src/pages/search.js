@@ -148,10 +148,21 @@ export default function Search({ featuredCities }) {
         <section className="relative ml-0 sm:ml-16 px-6 py-8 overflow-scroll scroll-smooth">
             <Head>
                 <title>Find Your Next Destination | Search Cities Worldwide | Wanderlust App</title>
-                <meta
-                    name="description"
-                    content="Discover the world's hidden gems and popular hotspots with Wanderlust App's search page. Search cities worldwide and get in-depth and local information about each place, including travel tips, popular attractions, local cuisine, and much more. Explore with confidence and make the most of your journey with Wanderlust App."
-                />
+                <meta name="description" content="Discover the world's hidden gems and popular hotspots with Wanderlust App's search page. Search cities worldwide and get in-depth and local information about each place, including travel tips, popular attractions, local cuisine, and much more. Explore with confidence and make the most of your journey with Wanderlust App." />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Find Your Next Destination | Search Cities Worldwide | Wanderlust App" />
+                <meta property="og:url" content="https://www.wanderlustapp.io/search" />
+                <meta property="og:description" content="Discover the world's hidden gems and popular hotspots with Wanderlust App's search page. Search cities worldwide and get in-depth and local information about each place, including travel tips, popular attractions, local cuisine, and much more. Explore with confidence and make the most of your journey with Wanderlust App." />
+                {/* <meta property="og:image" content={blog?.image_url} /> */}
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content="Find Your Next Destination | Search Cities Worldwide | Wanderlust App" />
+                <meta property="twitter:url" content="https://www.wanderlustapp.io/search" />
+                <meta property="twitter:description" content="Discover the world's hidden gems and popular hotspots with Wanderlust App's search page. Search cities worldwide and get in-depth and local information about each place, including travel tips, popular attractions, local cuisine, and much more. Explore with confidence and make the most of your journey with Wanderlust App." />
+                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <TextH2>Popular Destinations</TextH2>
             <div className="flex items-end overflow-scroll">

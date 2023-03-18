@@ -25,10 +25,21 @@ export default function Pro() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Elevate Your Travel Experience | Join Wanderlust App Pro Today</title>
-                <meta
-                    name="description"
-                    content="Take your travel planning to the next level with Wanderlust App Pro. Join our premium membership program and unlock exclusive features and tools to help you explore the world like a pro. Enjoy benefits such as personalized travel recommendations, priority customer support, and discounts on select bookings. Upgrade to Wanderlust App Pro today and elevate your travel experience."
-                />
+                <meta name="description" content="Take your travel planning to the next level with Wanderlust App Pro. Join our premium membership program and unlock exclusive features and tools to help you explore the world like a pro. Enjoy benefits such as personalized travel recommendations, priority customer support, and discounts on select bookings. Upgrade to Wanderlust App Pro today and elevate your travel experience." />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Elevate Your Travel Experience | Join Wanderlust App Pro Today" />
+                <meta property="og:url" content="https://www.wanderlustapp.io/pro" />
+                <meta property="og:description" content="Take your travel planning to the next level with Wanderlust App Pro. Join our premium membership program and unlock exclusive features and tools to help you explore the world like a pro. Enjoy benefits such as personalized travel recommendations, priority customer support, and discounts on select bookings. Upgrade to Wanderlust App Pro today and elevate your travel experience." />
+                {/* <meta property="og:image" content={blog?.image_url} /> */}
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content="Elevate Your Travel Experience | Join Wanderlust App Pro Today" />
+                <meta property="twitter:url" content="https://www.wanderlustapp.io/pro" />
+                <meta property="twitter:description" content="Take your travel planning to the next level with Wanderlust App Pro. Join our premium membership program and unlock exclusive features and tools to help you explore the world like a pro. Enjoy benefits such as personalized travel recommendations, priority customer support, and discounts on select bookings. Upgrade to Wanderlust App Pro today and elevate your travel experience." />
+                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
                 <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">

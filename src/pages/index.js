@@ -126,6 +126,28 @@ export default function Home({ posts }) {
         
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Head>
+          <title>Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion</title>
+          <meta name="description" content="Wanderlust App is the ultimate travel companion, helping you plan and organize every aspect of your trip. Explore cities around the world, read expert travel tips and inspiration, and connect with fellow digital nomads. Our AI Assistant can help you create custom itineraries based on your preferences, while our Pro membership offers exclusive deals and resources for the ultimate travel experience. Start planning your next adventure today." />
+
+          {/* <!-- Open Graph / Facebook --> */}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion" />
+          <meta property="og:url" content="https://www.wanderlustapp.io" />
+          <meta property="og:description" content="Wanderlust App is the ultimate travel companion, helping you plan and organize every aspect of your trip. Explore cities around the world, read expert travel tips and inspiration, and connect with fellow digital nomads. Our AI Assistant can help you create custom itineraries based on your preferences, while our Pro membership offers exclusive deals and resources for the ultimate travel experience. Start planning your next adventure today." />
+          {/* <meta property="og:image" content={blog?.image_url} /> */}
+
+          {/* <!-- Twitter --> */}
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:title" content="Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion" />
+          <meta property="twitter:url" content="https://www.wanderlustapp.io" />
+          <meta property="twitter:description" content="Wanderlust App is the ultimate travel companion, helping you plan and organize every aspect of your trip. Explore cities around the world, read expert travel tips and inspiration, and connect with fellow digital nomads. Our AI Assistant can help you create custom itineraries based on your preferences, while our Pro membership offers exclusive deals and resources for the ultimate travel experience. Start planning your next adventure today." />
+          {/* <meta property="twitter:image" content={blog?.image_url} /> */}
+          
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/favicon.ico" />
+      </Head>
       {/* NEW USER HOMGEPAGE  */}
       <section className="w-full absolute overflow-hidden pr-0 top-0 left-0 right-0 ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/80 dark:bg-gray-900/80" style={{ zIndex: 49 }}>
         {

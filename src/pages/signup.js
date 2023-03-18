@@ -88,10 +88,21 @@ function Signup() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8 flex justify-center items-center min-h-screen">
             <Head>
                 <title>Join Wanderlust App | Sign up for Free Today</title>
-                <meta
-                    name="description"
-                    content="Join the Wanderlust App community today and start exploring the world like never before. Sign up for free and gain access to exclusive features and tools that will help you plan your next adventure with ease. Don't wait, sign up now and begin your journey with us."
-                />
+                <meta name="description" content="Join the Wanderlust App community today and start exploring the world like never before. Sign up for free and gain access to exclusive features and tools that will help you plan your next adventure with ease. Don't wait, sign up now and begin your journey with us." />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Join Wanderlust App | Sign up for Free Today" />
+                <meta property="og:url" content="https://www.wanderlustapp.io/signup" />
+                <meta property="og:description" content="Join the Wanderlust App community today and start exploring the world like never before. Sign up for free and gain access to exclusive features and tools that will help you plan your next adventure with ease. Don't wait, sign up now and begin your journey with us." />
+                {/* <meta property="og:image" content={blog?.image_url} /> */}
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content="Join Wanderlust App | Sign up for Free Today" />
+                <meta property="twitter:url" content="https://www.wanderlustapp.io/signup" />
+                <meta property="twitter:description" content="Join the Wanderlust App community today and start exploring the world like never before. Sign up for free and gain access to exclusive features and tools that will help you plan your next adventure with ease. Don't wait, sign up now and begin your journey with us." />
+                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <Image
                 src="https://images.unsplash.com/photo-1531804226530-70f8004aa44e?crop=entropy&cs=srgb&fm=webp&ixid=MnwxNzkyODZ8MHwxfGFsbHx8fHx8fHx8fDE2MTY3Mjc5OTE&ixlib=rb-1.2.1&q=85"

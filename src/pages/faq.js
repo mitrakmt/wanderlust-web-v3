@@ -6,10 +6,21 @@ export default function Faq() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Get Answers to Your Wanderlust App Questions | Frequently Asked Questions</title>
-                <meta
-                    name="description"
-                    content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence."
-                />
+                <meta name="description" content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence." />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Get Answers to Your Wanderlust App Questions | Frequently Asked Questions" />
+                <meta property="og:url" content="https://www.wanderlustapp.io/faq" />
+                <meta property="og:description" content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence." />
+                {/* <meta property="og:image" content={blog?.image_url} /> */}
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content="Get Answers to Your Wanderlust App Questions | Frequently Asked Questions" />
+                <meta property="twitter:url" content="https://www.wanderlustapp.io/faq" />
+                <meta property="twitter:description" content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence." />
+                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                 <h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Frequently Asked Questions</h2>

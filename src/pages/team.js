@@ -5,10 +5,21 @@ export default function Team() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts</title>
-                <meta
-                    name="description"
-                    content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App."
-                />
+                <meta name="description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts" />
+                <meta property="og:url" content="https://www.wanderlustapp.io/team" />
+                <meta property="og:description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
+                {/* <meta property="og:image" content={blog?.image_url} /> */}
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content="Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts" />
+                <meta property="twitter:url" content="https://www.wanderlustapp.io/team" />
+                <meta property="twitter:description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
+                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
                 <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
