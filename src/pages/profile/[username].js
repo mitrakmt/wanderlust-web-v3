@@ -61,6 +61,19 @@ export default function PublicProfile({ recommendedLocations }) {
                     content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
                 />
             </Head> */}
+                {/* <meta property="og:title" content={`${blog.title} | Wanderlust App Blogs`} />
+                <meta
+                    property="og:description"
+                    content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
+                />
+                {
+                    blog.image_url && (
+                        <meta
+                            property="og:image"
+                            content={blog?.image_url}
+                        />
+                    )
+                } */}
             <Profile publicUser={true} recommendedLocations={recommendedLocations} />
         </>
     )
