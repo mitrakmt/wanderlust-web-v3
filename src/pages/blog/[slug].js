@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Head from 'next/head'
 
 // Utils
 import request from '../../utils/request';
@@ -108,6 +109,13 @@ export default function BlogPost({ blog }) {
     // Hooks
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
+            <Head>
+                <title>{blog.title} | Wanderlust App Blogs</title>
+                <meta
+                    name="description"
+                    content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
+                />
+            </Head>
             <BreadCrumb breadCrumbHome={"Blogs"} goToHome={() => router.push('/blog')} secondName={blog.title} />
             <main className="pt-8 mt-4 pb-16 lg:pt-16 lg:pb-24 dark:bg-gray-900">
                 <div className="flex flex-col justify-between px-4 mx-auto max-w-screen-xl ">

@@ -1,4 +1,5 @@
 import Profile from '../../shared_pages/profile';
+import Head from 'next/head';
 
 // Update for reviews 
 // Revalidate? or something
@@ -52,6 +53,15 @@ export async function getStaticPaths() {
 
 export default function PublicProfile({ recommendedLocations }) {
     return (
-        <Profile publicUser={true} recommendedLocations={recommendedLocations} />
+        <>
+            {/* <Head>
+                <title>{blog.title} | Wanderlust App Blogs</title>
+                <meta
+                    name="description"
+                    content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
+                />
+            </Head> */}
+            <Profile publicUser={true} recommendedLocations={recommendedLocations} />
+        </>
     )
 }
