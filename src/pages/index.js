@@ -111,12 +111,19 @@ export default function Home({ posts }) {
 
   if (userLoading) return null;
 
+  // TODO: twitter meta tags  
+  // <meta name="twitter:card" content="summary_large_image" />
+  // <meta name="twitter:title" content="test title" />
+  // <meta name="twitter:description" content="test description" />
+  // <meta name="twitter:image" content="/images/test-image-1.png" />
+
   return (
     <section className="relative min-h-screen overflow-scroll max-w-full">
       <Head>
-        <title>Wanderlust App - Explore the World</title>
-        <meta name="description" content="Wanderlust App helps you to find the most beautiful places around the world giving you local secrets and all the things you want to know." />
+        <title>Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion</title>
+        <meta name="description" content="Wanderlust App is the ultimate travel companion, helping you plan and organize every aspect of your trip. Explore cities around the world, read expert travel tips and inspiration, and connect with fellow digital nomads. Our AI Assistant can help you create custom itineraries based on your preferences, while our Pro membership offers exclusive deals and resources for the ultimate travel experience. Start planning your next adventure today." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* NEW USER HOMGEPAGE  */}
