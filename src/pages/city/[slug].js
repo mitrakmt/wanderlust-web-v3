@@ -334,39 +334,39 @@ export default function CityPage({ citySelected }) {
         }
     }
 
-    function addJsonLd() {
-        return {
-    //       __html: `{
-    //       "@context": "https://schema.org/",
-    //       "@type": "Place",
-    //       "name": ${citySelected.name},
-    //         "address": {
-    //             "@type": "PostalAddress",
-    //             "addressLocality": ${citySelected.name},
-    //             "addressRegion": ${citySelected.country_name},
-    //             "postalCode": ${citySelected.postal_code},
-    //             "streetAddress": ${citySelected.name}
-    //         },
-    //         "geo": {
-    //             "@type": "GeoCoordinates",
-    //             "latitude": ${citySelected.latitude},
-    //             "longitude": ${citySelected.longitude}  
-    //         },
-    //         "image": ${citySelected.image},
-    //         "description": ${citySelected.description},
-    //         "telephone": ${citySelected.phone},
-    //         "url": ${citySelected.url},
-    //         "openingHoursSpecification": {
-    //             "@type": "OpeningHoursSpecification",
-    //             "dayOfWeek": ${citySelected.opening_hours},
-    //             "opens": ${citySelected.opening_hours},
-    //             "closes": ${citySelected.opening_hours}
+    // function addJsonLd() {
+    //     return {
+    //         __html: `{
+    //             "@context": "https://schema.org/",
+    //             "@type": "Place",
+    //             "name": ${citySelected.name},
+    //                 "address": {
+    //                     "@type": "PostalAddress",
+    //                     "addressLocality": ${citySelected.name},
+    //                     "addressRegion": ${citySelected.country_name},
+    //                     "postalCode": ${citySelected.postal_code},
+    //                     "streetAddress": ${citySelected.name}
+    //                 },
+    //                 "geo": {
+    //                     "@type": "GeoCoordinates",
+    //                     "latitude": ${citySelected.latitude},
+    //                     "longitude": ${citySelected.longitude}  
+    //                 },
+    //                 "image": ${citySelected.image},
+    //                 "description": ${citySelected.description},
+    //                 "telephone": ${citySelected.phone},
+    //                 "url": ${citySelected.url},
+    //                 "openingHoursSpecification": {
+    //                     "@type": "OpeningHoursSpecification",
+    //                     "dayOfWeek": ${citySelected.opening_hours},
+    //                     "opens": ${citySelected.opening_hours},
+    //                     "closes": ${citySelected.opening_hours}
+                        
                 
-           
-    //     }
-    //   `,
-        };
-      }
+    //             }
+    //         `,
+    //     };
+    // }
 
     // if no userLoading || !citySelected, render beautiful loading page 
     if (userLoading || !citySelected) (
@@ -398,11 +398,11 @@ export default function CityPage({ citySelected }) {
                 <meta property="twitter:image" content={citySelected?.image_url_large} />
 
                 {/* Schema JSON ID  */}
-                <script
+                {/* <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={addJsonLd()}
                     key="city-jsonld"
-                />
+                /> */}
             </Head>
             <div>
                 {
