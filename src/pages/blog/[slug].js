@@ -68,52 +68,52 @@ export default function BlogPost({ blog }) {
     const [showCommentDropdown, setShowCommentDropdown] = useState(null);
 
     // UseEffect
-    // useEffect(() => {
-    //     if (blog && user) {
-    //         request(`/blog-comment/${blog.id}`)
-    //             .then(res => {
-    //                 setBlogComments(res.data);
-    //             })
-    //     }
-    // }, [blog]);
+    useEffect(() => {
+        if (blog && user) {
+            request(`/blog-comment/${blog.id}`)
+                .then(res => {
+                    setBlogComments(res.data);
+                })
+        }
+    }, [blog]);
 
     useEffect(() => {
         trackClick('blog-view')
     }, [])
 
     // Functions
-    // const removeComment = (id) => {
-    //     if (!user) return;
+    const removeComment = (id) => {
+        if (!user) return;
 
-    //     setShowCommentDropdown(null);
-    //     request(`/blog-comment/comment/${id}`, {
-    //         method: 'DELETE'
-    //     })
-    //         .then(res => {
-    //             // Remove comment from state
-    //             const newComments = comments.filter(comment => comment.id !== id);
-    //             setBlogComments(newComments);
-    //         })
-    // }
+        setShowCommentDropdown(null);
+        request(`/blog-comment/comment/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => {
+                // Remove comment from state
+                const newComments = comments.filter(comment => comment.id !== id);
+                setBlogComments(newComments);
+            })
+    }
 
-    // const addComment = () => {
-    //     if (!user) return;
+    const addComment = () => {
+        if (!user) return;
 
-    //     if (comment.length === 0) {
-    //         return;
-    //     }
+        if (comment.length === 0) {
+            return;
+        }
 
-    //     request(`/blog-comment/${blog.id}`, {
-    //         body: {
-    //             text: comment,
-    //         },
-    //         method: 'POST'
-    //     })
-    //         .then(res => {
-    //             setBlogComments([...[res.data], ...comments]);
-    //             setComment("");
-    //         })
-    // }
+        request(`/blog-comment/${blog.id}`, {
+            body: {
+                text: comment,
+            },
+            method: 'POST'
+        })
+            .then(res => {
+                setBlogComments([...[res.data], ...comments]);
+                setComment("");
+            })
+    }
 
     if (!blog || userLoading) return (<p>Loading...</p>)
 
@@ -209,6 +209,92 @@ export default function BlogPost({ blog }) {
                                 }
                             })
                         }
+                        {/* DIVIDER */}
+                        <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                            <hr />
+                        </div>
+                        <p className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">Wanderlust App was created to make it easy to discover the most beautiful places across the world. From an AI travel assistant to planning the perfect trip and tracking all the places you want to visit around the world, <a href="https://wanderlustapp.io">Wanderlust App</a> will help you do it all.</p>
+                        {/* COMMENTS */}
+                        <section className="not-format">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion ({ comments.length })</h2>
+                            </div>
+                            {/* Show UI that adding comments is for logged in users only */}
+                            {
+                                !user && <div className="mb-6">
+                                    <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                        <p className="text-sm text-gray-900 dark:text-white">You must be logged in to comment.</p>
+                                    </div>
+                                </div>
+                            }
+                            {
+                                user ? <div className="mb-6">
+                                    <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                        <label htmlFor="comment" className="sr-only">Your comment</label>
+                                        <textarea id="comment" rows="6" value={comment} onChange={(e) => setComment(e.target.value)}
+                                            className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                            placeholder="Write a comment..."></textarea>
+                                    </div>
+                                    <button type="submit" onClick={addComment}
+                                        className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                        Post comment
+                                    </button>
+                                </div> : null
+                            }
+                            
+                            {
+                                comments && comments.map((comment) => (
+                                    <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <div className="flex items-center">
+                                                <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                                                    <Image
+                                                        className="mr-2 w-6 h-6 rounded-full relative" width={120} height={120}
+                                                        src={comment.user.profile_image} alt={comment.user.username} />
+                                                    {comment.user.username}
+                                                </p>
+                                                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate="true" dateTime="2022-02-08"
+                                                    title="February 8th, 2022">{comment.createdOn}</time></p>
+                                            </div>
+                                            <div className="flex items-center flex-col relative">
+                                                {
+                                                    comment.user.id === user.id && (
+                                                        <button
+                                                            onClick={showCommentDropdown ? () => setShowCommentDropdown(null) : () => setShowCommentDropdown(comment.id)}
+                                                            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                                            type="button"
+                                                        >
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
+                                                                </path>
+                                                            </svg>
+                                                            <span className="sr-only">Comment settings</span>
+                                                        </button>
+                                                    )
+                                                }
+                                                {/* <!-- Dropdown menu --> */}
+                                                {
+                                                    showCommentDropdown === comment.id && (
+                                                        <div className="absolute top-8 right-8 z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                                aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                                <li>
+                                                                    <a onClick={() => removeComment(comment.id)}
+                                                                        className="cursor-pointer block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                        <p>{comment.text}</p>
+                                    </article>
+                                ))
+                            }
+                        </section>
                     </article>
                 </div>
             </main>
