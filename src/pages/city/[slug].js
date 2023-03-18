@@ -346,10 +346,10 @@ export default function CityPage({ citySelected }) {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             {/* <div id="cityStructuredData" /> */}
             <Head>
-                <title>{`${selectedCity.name} ${selectedCity.country_name} | Wanderlust App City Guide`}</title>
+                <title>{`${citySelected.name} ${citySelected.country_name} | Wanderlust App City Guide`}</title>
                 <meta
                     name="description"
-                    content={`Discover ${selectedCity.name} ${selectedCity.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${selectedCity.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${selectedCity.name}.`}
+                    content={`Discover ${citySelected.name} ${citySelected.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${citySelected.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${citySelected.name}.`}
                 />
             </Head>
             <div>
