@@ -231,7 +231,7 @@ export default function Community() {
                                                 <LoadingProfileCard key={`community-loadingProfile-${index}`} />
                                             )) :
                                             community?.map((publicUser, index) => (
-                                                <ProfileCard user={publicUser} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${user.id}-${index}`} />
+                                                <ProfileCard user={publicUser} userId={publicUser._id} currentUserId={user._id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${user.id}-${index}`} />
                                             ))
                                     }
                                 </div>
@@ -243,7 +243,7 @@ export default function Community() {
                                 <div className="grid mt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 xl:gap-8">
                                     {
                                         followers.length > 0 && followers?.map((follow, index) => (
-                                            <ProfileCard user={follow.user} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />
+                                            <ProfileCard user={follow.user} userId={follow.user.id} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />
                                         ))
                                     }
                                 </div>
@@ -261,7 +261,7 @@ export default function Community() {
                                 <div className="grid mt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 xl:gap-8">
                                     {
                                         following?.map((follow, index) => (
-                                            <ProfileCard user={follow.following} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />
+                                            <ProfileCard user={follow.following} userId={follow.following.id} currentUserId={user.id} follows={follows} removeFollow={removeFollow} followUser={followUser} key={`profileCard-${follow.id}-${index}`} />
                                         ))
                                     }
                                 </div>                                

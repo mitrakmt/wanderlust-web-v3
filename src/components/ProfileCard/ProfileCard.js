@@ -2,11 +2,11 @@ import { useEffect, useState } from "react"
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ProfileCard({ user, currentUserId, followUser, removeFollow, follows, viewUserProfile }) {
+export default function ProfileCard({ user, userId, currentUserId, followUser, removeFollow, follows }) {
     const [isFollowed, setIsFollowed] = useState(false);
 
     useEffect(() => {
-        if (follows.includes(user._id)) {
+        if (follows.includes(userId)) {
             setIsFollowed(true);
         } else {
             setIsFollowed(false);
@@ -34,11 +34,11 @@ export default function ProfileCard({ user, currentUserId, followUser, removeFol
             <span className="text-sm text-center text-gray-500 dark:text-gray-400">{user.job || ""}</span>
             <div className="flex space-x-3 mt-auto">
                 {
-                    user._id === currentUserId ?
+                    userId === currentUserId ?
                         <></> :
                         isFollowed ? 
-                            <a onClick={() => removeFollow(user._id)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-primary-900 rounded-lg cursor-pointer hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-900 dark:hover:bg-red-700 dark:focus:ring-primary-800">Following</a> :
-                            <a onClick={() => followUser(user._id)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-primary-500 rounded-lg cursor-pointer hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-500 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Follow</a>
+                            <a onClick={() => removeFollow(userId)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-primary-900 rounded-lg cursor-pointer hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-900 dark:hover:bg-red-700 dark:focus:ring-primary-800">Following</a> :
+                            <a onClick={() => followUser(userId)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-primary-500 rounded-lg cursor-pointer hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-500 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Follow</a>
                 }
                 <Link
                     href={`/profile/${encodeURIComponent(user.username)}`}
