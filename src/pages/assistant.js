@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Head from 'next/head'
 
 // New Components
 import InputWithAddon from '../components/InputWithAddon/InputWithAddon';
@@ -132,6 +133,13 @@ export default function Assistant() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
+            <Head>
+                <title>Your Personal Travel Assistant | Wanderlust App AI Assistant</title>
+                <meta
+                    name="description"
+                    content="Say hello to your personal travel assistant - Wanderlust App AI Assistant. Our AI-powered assistant helps you plan your trips in detail, from finding the best flights and accommodations to creating custom itineraries based on your interests. Our assistant is always learning and improving, so you can trust that your travel plans will be optimized for the best experience. Let Wanderlust App AI Assistant take the stress out of travel planning and help you create unforgettable journeys."
+                />
+            </Head>
             <TextH2>AI Travel Assistant</TextH2>
             {/* chatbox  */}
             <div className="p-2 md:p-6 bg-gray-200 dark:bg-gray-800 dark:border-gray-700 w-full rounded-lg overflow-scroll scroll" style={{ height: '80vh' }}>

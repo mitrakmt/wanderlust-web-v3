@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import request from '../utils/request';
 import Footer from '../components/Footer';
+import Head from 'next/head'
 
 // Utils
 import removeFavorite from '../utils/removeFavorite';
@@ -79,6 +80,13 @@ export default function Favorites() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
+            <Head>
+                <title>Your Wanderlust App Favorites | Keep Your Favorite Places in One Place</title>
+                <meta
+                    name="description"
+                    content="Keep track of your favorite places around the world with Wanderlust App Favorites. Create a list of your favorite destinations, attractions, and experiences to help you plan your future travels. Our Favorites page allows you to easily access and organize your favorite places, so you never forget a moment of your journey. Keep your travel inspiration in one place with Wanderlust App Favorites."
+                />
+            </Head>
             <TextH2>Favorites</TextH2>
                 {/* TODO: favorites by cities, AND favorites by images */}
                 <div className="flex justify-between h-10">

@@ -1,6 +1,15 @@
+import Head from 'next/head'
+
 export default function Team() {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
+            <Head>
+                <title>Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts</title>
+                <meta
+                    name="description"
+                    content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App."
+                />
+            </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
                 <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Our Team</h2>

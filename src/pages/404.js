@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 export default function four0four() {
     // Hooks
@@ -6,6 +7,13 @@ export default function four0four() {
 
     return (
         <section className="min-h-screen flex justify-center items-center bg-white dark:bg-gray-900">
+            <Head>
+                <title>Oops! Page Not Found | Wanderlust App 404 Error</title>
+                <meta
+                    name="description"
+                    content="Uh oh, looks like you've reached a dead end. Don't worry, our team is on it. The Wanderlust App 404 error page lets you know that the page you're looking for is not available. We apologize for the inconvenience and encourage you to check out our other pages for travel inspiration and planning. Let Wanderlust App help you plan your next adventure."
+                />
+            </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto max-w-screen-sm text-center">
                     <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500">404</h1>

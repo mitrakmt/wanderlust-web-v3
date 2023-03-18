@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import Head from 'next/head';
 
 // Components
 import CityCard from '../components/CityCard/CityCard';
@@ -145,6 +146,13 @@ export default function Search({ featuredCities }) {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8 overflow-scroll scroll-smooth">
+            <Head>
+                <title>Find Your Next Destination | Search Cities Worldwide | Wanderlust App</title>
+                <meta
+                    name="description"
+                    content="Discover the world's hidden gems and popular hotspots with Wanderlust App's search page. Search cities worldwide and get in-depth and local information about each place, including travel tips, popular attractions, local cuisine, and much more. Explore with confidence and make the most of your journey with Wanderlust App."
+                />
+            </Head>
             <TextH2>Popular Destinations</TextH2>
             <div className="flex items-end overflow-scroll">
                 {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image'
+import Head from 'next/head'
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -62,6 +63,13 @@ export default function NomadTools() {
     
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
+            <Head>
+                <title>Maximize Your Nomad Lifestyle | Wanderlust App Nomad Tools</title>
+                <meta
+                    name="description"
+                    content="Make the most of your digital nomad lifestyle with Wanderlust App's Nomad Tools page. Gain access to exclusive deals and resources to help you save money and stay productive on the road. Discover the best coworking spaces, travel insurance, and other essential tools for digital nomads. Explore the world without limitations and enhance your nomad experience with Wanderlust App's Nomad Tools."
+                />
+            </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                 <div className="max-w-screen-md mb-8 lg:mb-16">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Deals & Tools for Nomads</h2>

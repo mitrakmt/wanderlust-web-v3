@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Head from 'next/head'
 
 // Components
 import StripeForm from '../components/StripeForm/StripeForm';
@@ -22,6 +23,13 @@ export default function Pro() {
     
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
+            <Head>
+                <title>Elevate Your Travel Experience | Join Wanderlust App Pro Today</title>
+                <meta
+                    name="description"
+                    content="Take your travel planning to the next level with Wanderlust App Pro. Join our premium membership program and unlock exclusive features and tools to help you explore the world like a pro. Enjoy benefits such as personalized travel recommendations, priority customer support, and discounts on select bookings. Upgrade to Wanderlust App Pro today and elevate your travel experience."
+                />
+            </Head>
                 <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Built for Digital Nomads by Digital Nomads</h2>

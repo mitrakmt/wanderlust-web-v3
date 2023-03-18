@@ -1,6 +1,15 @@
+import Head from 'next/head'
+
 export default function PrivacyPolicy() {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
+            <Head>
+                <title>Your Privacy Matters | Wanderlust App Privacy Policy</title>
+                <meta
+                    name="description"
+                    content="At Wanderlust App, we take your privacy seriously. Our privacy policy outlines our commitment to protecting your personal information and explains how we collect, use, and store your data. We value your trust and are dedicated to ensuring the safety and security of your information. Read our privacy policy to learn more about how we protect your privacy on Wanderlust App."
+                />
+            </Head>
             <h1 className="text-3xl mb-4 font-bold text-gray-800 dark:text-gray-100">Privacy Policy</h1>
             <p className="text-gray-800 dark:text-gray-100" style={{ whiteSpace: 'pre-line'}}>{`
                 We at Wanderlust are committed to protecting your privacy. This privacy policy applies to our browser extension (Wanderlust Extension), our website (https://wanderlustapp.io), and any subdomains of wanaderlustapp.io.

@@ -3,6 +3,7 @@ import request from '../utils/request';
 import trackStat from '../utils/trackStat';
 import { useRouter } from 'next/router';
 import Footer from '../components/Footer';
+import Head from 'next/head'
 
 // Components
 import ProfileCard from '../components/ProfileCard/ProfileCard';
@@ -162,6 +163,13 @@ export default function Community() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
+            <Head>
+                <title>Connect with Fellow Nomads | Join the Wanderlust App Community</title>
+                <meta
+                    name="description"
+                    content="Join the Wanderlust App Community and connect with fellow digital nomads around the world. Our Community page allows you to follow and connect with like-minded travelers, share travel tips, and discover new destinations. Whether you're looking for travel inspiration or want to network with other digital nomads, our community is the perfect place to connect. Join the Wanderlust App Community and enhance your travel experience."
+                />
+            </Head>
             <TextH2>Community</TextH2>
             <div className="mt-8">
                 <div className="mb-4 border-b border-gray-200 dark:border-gray-700">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import GooglePlacesAutocomplete, { geocodeByPlaceId } from 'react-google-places-autocomplete';
+import Head from 'next/head'
 
 // Utils
 import request from '../utils/request';
@@ -57,6 +58,13 @@ export default function Maps() {
 
     return (
         <section className="relative pt-4 h-full max-h-screen max-w-full min-h-screen w-full overflow-hidden">
+            <Head>
+                <title>Map Your Adventures | Save and Explore Your Favorite Places | Wanderlust App Maps</title>
+                <meta
+                    name="description"
+                    content="Keep track of your travel adventures with Wanderlust App Maps. Save your favorite places around the world, track the countries you've visited, and plan your future travels with ease. Our interactive maps allow you to explore the world and discover new places to add to your travel bucket list. Map your adventures with Wanderlust App and never forget a moment of your journey."
+                />
+            </Head>
             <div className="flex flex-col lg:flex-row">
                 <ul className="px-4 ml-0 sm:ml-16 flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
                     <li className="mr-2">

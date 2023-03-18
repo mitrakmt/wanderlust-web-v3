@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from 'react'
 import { useDebouncedCallback } from 'use-debounce';
+import Head from 'next/head'
 
 // Utils
 import request from '../utils/request'
@@ -224,6 +225,13 @@ export default function Settings() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
+            <Head>
+                <title>Customize Your Wanderlust App Experience | Settings</title>
+                <meta
+                    name="description"
+                    content="Personalize your Wanderlust App experience and make it truly your own. Our settings page allows you to customize your preferences, from language and currency to travel interests and notification settings. Set up your account the way you want it and enjoy a seamless travel planning experience. Explore the world your way with Wanderlust App."
+                />
+            </Head>
                 <div className="flex items-center w-full space-between">
                     <TextH2>Settings</TextH2>
                     <div className="ml-auto">
