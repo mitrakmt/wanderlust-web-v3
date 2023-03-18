@@ -51,7 +51,6 @@ export default function BlogPost({ blog }) {
     const { user, userLoading } = useAuth();
 
     // State
-    // const [post, setPost] = useState(null);
     const [comments, setBlogComments] = useState([]);
     const [comment, setComment] = useState("");
     const [showCommentDropdown, setShowCommentDropdown] = useState(null);
