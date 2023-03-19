@@ -185,7 +185,7 @@ export default function BlogPost({ blog }) {
                                     case 'image':
                                         return (
                                             <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
-                                                <img />
+                                                <Image src={content?.image} alt={blog?.title} height={600} width={800} className="rounded-lg w-full" />
                                             </div>
                                         )
                                     case 'h1':
