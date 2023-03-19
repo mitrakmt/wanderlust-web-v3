@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArticleJsonLd, NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 
 // Utils
 import request from '../../utils/request';
@@ -50,6 +51,7 @@ export async function getStaticPaths() {
 export default function BlogPost({ blog }) {
     // Hooks
     const { user, userLoading } = useAuth();
+    const router = useRouter();
 
     // State
     const [comments, setBlogComments] = useState([]);
@@ -172,7 +174,7 @@ export default function BlogPost({ blog }) {
                         </header>
                         {
                             blog.image_url && (
-                                <Image src={blog?.image_url} alt={blog?.title} height={600} width={800} className="rounded-lg w-full" />
+                                <Image priority src={blog?.image_url} alt={blog?.title} height={600} width={800} className="rounded-lg w-full" />
                             )
                         }
                         {
