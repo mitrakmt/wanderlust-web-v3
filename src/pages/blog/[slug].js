@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head'
+import { useRouter } from 'next/router';
 
 // Utils
 import request from '../../utils/request';
@@ -61,15 +62,22 @@ export async function getStaticPaths() {
 export default function BlogPost({ blog }) {
     // Hooks
     const { user, userLoading } = useAuth();
+    const router = useRouter();
 
     // State
     const [comments, setBlogComments] = useState([]);
     const [comment, setComment] = useState("");
     const [showCommentDropdown, setShowCommentDropdown] = useState(null);
 
+    const {
+        isReady // here it is
+    } = router;
+
+    console.log('isReady', isReady);
+
     // UseEffect
     useEffect(() => {
-        if (blog && user) {
+        if (blog) {
             request(`/blog-comment/${blog.id}`)
                 .then(res => {
                     setBlogComments(res.data);
@@ -115,7 +123,9 @@ export default function BlogPost({ blog }) {
             })
     }
 
-    if (!blog || userLoading) return (<p>Loading...</p>)
+    if (!isReady) return (<p>Loading 1...</p>)
+
+    if (!blog || userLoading) return (<p>Loading 2...</p>)
 
     // Hooks
     return (
@@ -147,7 +157,7 @@ export default function BlogPost({ blog }) {
                                 <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                     <Image className="relative mr-4 w-16 h-16 rounded-full" src={blog.author.profile_image} alt={`${blog.author.name} Avatar`} height={120} width={120} />
                                     <div>
-                                        <Link href={`/profile/${blog.author.username}`} className="text-xl font-bold text-gray-900 dark:text-white">{blog.author.username}</Link>
+                                        <Link href={{ pathname: "/profile/[username]", query: { username: blog.author.username } }} className="text-xl font-bold text-gray-900 dark:text-white">{blog.author.username}</Link>
                                         <p className="text-base font-light text-gray-500 dark:text-gray-400">{blog.author.job}</p>
                                         <p className="text-base font-light text-gray-500 dark:text-gray-400"><time pubdate="true" dateTime="2022-02-08" title="February 8th, 2022">{blog.publishedOn}</time></p>
                                     </div>

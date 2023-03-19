@@ -38,7 +38,7 @@ export default function FollowSuggestions({ follows, followUser, removeFollow })
                                         }
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <Link href={`/profile/${user?.username}`} passHref>
+                                        <Link href={{ pathname: "/profile/[username]", query: { username: user?.username } }} passHref>
                                             <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                                                 {user?.name || user?.username}
                                             </p>

@@ -1,5 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import Profile from '../../shared_pages/profile';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 // export async function getStaticProps({ params: { slug } }) {
 //     if (!slug) {
@@ -78,6 +80,25 @@ export async function getStaticPaths() {
 export default function PublicProfile({ recommendedLocations, profileUser, reviewsData }) {
     console.log('reviewsData', reviewsData)
     console.log('profileUser', profileUser)
+    // State
+    const [done, setDone] = useState(false);
+
+    // HOOKS
+    const router = useRouter();
+
+    const {
+        isReady // here it is
+    } = router;
+
+    useEffect(()=>{
+        if (!router.isReady) return;
+
+        console.log('done with username', router.query.username)
+    
+    }, [router.query.username, router.isReady]);
+
+    if (!isReady) return <h3>Loading...</h3>
+
 
     return (
         <>

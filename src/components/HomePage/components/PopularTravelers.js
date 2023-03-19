@@ -35,18 +35,18 @@ export default function PopularTravelers() {
             <div className="grid gap-6 mb-6 lg:mb-16 lg:grid-cols-2">
                 {travelers.map((traveler) => (
                     <div key={`popularTravelers-${traveler.username}`} className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
-                        <Link href={`/profile/${traveler.username}`}>
+                        <Link href={{ pathname: "/profile/[username]", query: { username: traveler.username } }}>
                             <Image className="w-48 sm:w-80 rounded-lg sm:rounded-none h-36 object-cover sm:rounded-l-lg" src={traveler.avatar} alt={`${traveler.name} Avatar`} width={80} height={80} />
                         </Link>
                         <div className="p-5">
                             <div className="flex justify-between">
-                            <Link href={`/profile/${traveler.username}`}>
+                            <Link href={{ pathname: "/profile/[username]", query: { username: traveler.username } }}>
                                 <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {traveler.name}
                                 </h3>
                                 </Link>
                                 {/* button to view profile  */}
-                                <Link href={`/profile/${traveler.username}`}>
+                                <Link href={{ pathname: "/profile/[username]", query: { username: traveler.username } }}>
                                     <p className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-gray-500 dark:bg-gray-900 hover:bg-gray-700 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors">
                                         View Profile
                                     </p>

@@ -19,8 +19,8 @@ export default function LocationSuggestions({ recommendedLocations }) {
                                     location?.image_url_small && (
                                         <Link
                                             href={{
-                                                pathname: `/city/${location?.city[0].slug}`,
-                                                query: { breadcrumb: router.pathname },
+                                                pathname: `/city/[slug]`,
+                                                query: { breadcrumb: router.pathname, slug: location?.city[0].slug },
                                             }}
                                             as={`/city/${location?.city[0].slug}`}
                                         >

@@ -53,10 +53,7 @@ export default function CityCard({ data, keyId, favorites, index, toggleFavorite
         }
       </div>
       <Link
-        href={{
-          pathname: `/city/${data.city?.slug}`,
-          query: { breadcrumb: 'search' },
-        }}
+        href={{ pathname: "/city/[slug]", query: { slug: data.city?.slug, breadcrumb: 'search' } }}
       >
         <div key={keyId} className="flex items-center w-full text-center cursor-pointer group space-between brightness-150 hover:brightness-125 dark:brightness-100 dark:hover:brightness-75" style={{ height: '200px', width: '100%', position: 'relative' }}>
             <div className="z-20 flex flex-col items-center justify-center w-full mt-4 text-center">
