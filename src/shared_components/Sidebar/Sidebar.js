@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Loading Components
 import LoadingSidebar from "../../loading_components/Sidebar";
@@ -312,10 +313,10 @@ function Sidebar({ user, router, userLoading, logout }) {
                                             
                                                     return (
                                                         <li key={`menuTabs-mobile-${title}`}>
-                                                            <a onClick={() => changePage(path)} className="flex cursor-pointer items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                            <Link href={path} className="flex cursor-pointer items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                                 {icon}
                                                                 <span className="ml-2">{title}</span>
-                                                            </a>
+                                                            </Link>
                                                         </li>
                                                     )
                                                 })
@@ -389,10 +390,10 @@ function Sidebar({ user, router, userLoading, logout }) {
 
                                 return (
                                     <li key={`profileTabs-desktop-${item.title}`}>
-                                        <a onClick={() => changePage(item.path)} className="flex items-center p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+                                        <Link href={item.path} className="flex items-center p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
                                             {item.icon}
                                             {expanded && <span className={`ml-5 ${item.authRequired && user ? "text-gray-400" : ""}`}>{item.title}</span>}
-                                        </a>
+                                        </Link>
                                     </li>
                                 )
                             })
