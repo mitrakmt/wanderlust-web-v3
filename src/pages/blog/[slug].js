@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Head from 'next/head'
+import { ArticleJsonLd, NextSeo } from 'next-seo';
 
 // Utils
 import request from '../../utils/request';
@@ -46,17 +46,6 @@ export async function getStaticPaths() {
         fallback: true,
     }
 }
-
-// export async function getServerSideProps({ query }) {
-//     const res = await fetch(`https://www.example.com/api/blog/${query.slug}`);
-//     const data = await res.json();
-  
-//     return {
-//       props: {
-//         blog: data,
-//       },
-//     };
-//   }
 
 export default function BlogPost({ blog }) {
     // Hooks
@@ -120,24 +109,50 @@ export default function BlogPost({ blog }) {
     // Hooks
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>{blog.title} | Wanderlust App Blogs</title>
-                <meta name="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:title" content={`${blog?.title} | Wanderlust App Blogs`} />
-                <meta property="og:type" content="website" />
-                <meta property="og:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta property="og:image" content={blog?.image_url} />
-                <meta property="og:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
-
-                {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
-                <meta property="twitter:title" content={`${blog?.title} | Wanderlust App Blogs`} />
-                <meta property="twitter:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta property="twitter:image" content={blog?.image_url} />
-            </Head>
+            <NextSeo
+                title={`${blog.title} | Wanderlust App Blogs`}
+                description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
+                canonical={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
+                openGraph={{
+                    url: `https://www.wanderlustapp.io/blog/${blog?.slug}`,
+                    title: `${blog.title} | Wanderlust App Blogs`,
+                    description: `${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`,
+                    images: [
+                        {
+                            url: blog?.image_url,
+                            width: 800,
+                            height: 600,
+                            alt: `${blog?.title} | Wanderlust App Blogs`,
+                            type: 'image/jpeg',
+                        },
+                    ],
+                    siteName: 'Wanderlust App Blogs',
+                }}
+                twitter={{
+                    handle: '@mike_mitrakos',
+                    site: '@wanderlustext',
+                    cardType: 'summary_large_image',
+                }}
+            />
+            <ArticleJsonLd
+                url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
+                title={`${blog?.title} | Wanderlust App Blogs`}
+                images={[
+                    blog?.image_url,
+                ]}
+                datePublished={blog?.publishedOn}
+                dateModified={blog?.updatedOn || undefined}
+                authorName={[
+                    {
+                        name: blog?.author?.name,
+                        url: `https://www.wanderlustapp.io/profile/${blog?.author?.username}`,
+                    }
+                ]}
+                publisherName="Wanderlust App"
+                publisherLogo="https://wanderlust-extension.s3.us-west-2.amazonaws.com/logo.jpg"
+                description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
+                isAccessibleForFree={true}
+            />
             <BreadCrumb breadCrumbHome={"Blogs"} goToHome={() => router.push('/blog')} secondName={blog.title} />
             <main className="pt-8 mt-4 pb-16 lg:pt-16 lg:pb-24 dark:bg-gray-900">
                 <div className="flex flex-col justify-between px-4 mx-auto max-w-screen-xl ">
@@ -160,41 +175,41 @@ export default function BlogPost({ blog }) {
                                 switch (content.type) {
                                     case 'p':
                                         return (
-                                            <p className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={index}>{content.text}</p>
+                                            <p className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</p>
                                         )
                                     case 'image':
                                         return (
-                                            <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={index}>
+                                            <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
                                                 <img />
                                             </div>
                                         )
                                     case 'h1':
                                         return (
-                                            <h1 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={index}>{content.text}</h1>
+                                            <h1 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h1>
                                         )
                                     case 'h2':
                                         return (
-                                            <h2 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={index}>{content.text}</h2>
+                                            <h2 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h2>
                                         )
                                     case 'h3':
                                         return (
-                                            <h3 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={index}>{content.text}</h3>
+                                            <h3 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h3>
                                         )
                                     case 'h4':
                                         return (
-                                            <h4 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={index}>{content.text}</h4>
+                                            <h4 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h4>
                                         )
                                     case 'h5':
                                         return (
-                                            <h5 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={index}>{content.text}</h5>
+                                            <h5 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h5>
                                         )
                                     case 'list':
                                         return (
-                                            <ul className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={index}>
+                                            <ul className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
                                                 {
                                                     content.content.map((item, index) => {
                                                         return (
-                                                            <li key={index}>{item}</li>
+                                                            <li key={`blog-list-${content.type}-${item}-${index}`}>{item}</li>
                                                         )
                                                     })
                                                 }
@@ -202,7 +217,7 @@ export default function BlogPost({ blog }) {
                                         )
                                     case 'quote':
                                         return (
-                                            <blockquote className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={index}>{content.content}</blockquote>
+                                            <blockquote className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.content}</blockquote>
                                         )
                                     default:
                                         return null;
