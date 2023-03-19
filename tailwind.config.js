@@ -8,7 +8,6 @@ module.exports = {
     "./public/**/*.html",
     "./node_modules/flowbite-react/**/*.js",
     './src/**/*.html',
-    './src/**/*.js',
  
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
