@@ -1,5 +1,5 @@
 import Profile from '../../shared_pages/profile';
-import Head from 'next/head';
+import { SocialProfileJsonLd, NextSeo } from 'next-seo';
 
 // Update for reviews 
 // Revalidate? or something
@@ -54,27 +54,36 @@ export async function getStaticPaths() {
 export default function PublicProfile({ recommendedLocations }) {
     return (
         <>
-            {/* <Head>
-                <title>{blog.title} | Wanderlust App Blogs</title>
-                <meta
-                    name="description"
-                    content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
-                />
-            </Head> */}
-                {/* <meta property="og:title" content={`${blog.title} | Wanderlust App Blogs`} />
-                <meta
-                    property="og:description"
-                    content={`${blog.summary}. Read ${blog.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
-                />
-                {
-                    blog.image_url && (
-                        <meta
-                            property="og:image"
-                            content={blog?.image_url}
-                        />
-                    )
-                } */}
-               
+            {/* <NextSeo
+                title={`${blog.title} | Wanderlust App Blogs`}
+                description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
+                canonical={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
+                openGraph={{
+                    url: `https://www.wanderlustapp.io/blog/${blog?.slug}`,
+                    title: `${blog.title} | Wanderlust App Blogs`,
+                    description: `${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`,
+                    images: [
+                        {
+                            url: blog?.image_url,
+                            width: 800,
+                            height: 600,
+                            alt: `${blog?.title} | Wanderlust App Blogs`,
+                            type: 'image/jpeg',
+                        },
+                    ],
+                    siteName: 'Wanderlust App Blogs',
+                }}
+                twitter={{
+                    handle: '@mike_mitrakos',
+                    site: '@wanderlustext',
+                    cardType: 'summary_large_image',
+                }}
+            /> */}
+            {/* <SocialProfileJsonLd
+                type="Person"
+                name={}
+            /> */}
+
             <Profile publicUser={true} recommendedLocations={recommendedLocations} />
         </>
     )
