@@ -171,6 +171,11 @@ export default function BlogPost({ blog }) {
                             <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{blog.title}</h1>
                         </header>
                         {
+                            blog.image_url && (
+                                <Image src={blog?.image_url} alt={blog?.title} height={600} width={800} className="rounded-lg w-full" />
+                            )
+                        }
+                        {
                             blog.content.map((content, index) => {
                                 switch (content.type) {
                                     case 'p':
