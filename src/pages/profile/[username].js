@@ -104,7 +104,7 @@ export default function PublicProfile({ recommendedLocations, profileUser, revie
                     type="application/ld+json"
                     dangerouslySetInnerHTML={addJsonLd()}
                     key="city-jsonld"
-                /> */}
+                /> */}  
             </Head>
 
             <h3>hi</h3>
