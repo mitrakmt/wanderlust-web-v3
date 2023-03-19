@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (data, forwardPath) => {
     setUser(data);
     setUserLoading(false);
-    router.push(forwardPath || "/", { replace: true });
+    router.replace(forwardPath || "/")
   };
 
   const logout = () => {
