@@ -358,6 +358,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                                 </svg>
                         }
                     </div>
+                    {/* MAIN ICONS  */}
                     <ul className="mt-10 space-y-2">
                         {
                             navbarTabs.map((item) => {
@@ -367,7 +368,7 @@ function Sidebar({ user, router, userLoading, logout }) {
 
                                 return (
                                     <li key={`navbarTabs-desktop-${item.title}`} className="flex items-center relative">
-                                        <a onClick={() => { changePage(item.path) }  } className={`${item.premiumRequired && !user?.premium ? "disabled pointer-events-none" : ""} flex items-center p-2 text-sm font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 w-full dark:hover:bg-gray-700 ${currentPath === item.path ? 'bg-gray-100 dark:bg-gray-700' : ''}`}>
+                                        <a onClick={() => { changePage(item.path) } } className={`${item.premiumRequired && !user?.premium ? "disabled pointer-events-none" : ""} flex items-center p-2 text-sm font-normal w-full rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white ${currentPath === item.path ? 'bg-gray-100 dark:bg-gray-700' : ''}`}>
                                             {item.icon}
                                             {expanded && <span className="ml-5">{item.title}</span>}
                                         </a>
@@ -379,6 +380,7 @@ function Sidebar({ user, router, userLoading, logout }) {
                             })
                         }
                     </ul>
+                    {/* PROFILE ICONS  */}
                     <ul className="pt-4 mt-auto space-y-2">
                         {
                             profileTabs.map((item) => {

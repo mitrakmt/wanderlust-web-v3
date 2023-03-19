@@ -100,6 +100,15 @@ export default function CityPage({ citySelected }) {
     const [, setReviewsLoading] = useState(true);
     const [, setPlacesLoading] = useState(true);
 
+    // if no userLoading || !citySelected, render beautiful loading page 
+    if (userLoading || !citySelected) (
+        <div className="flex items-center justify-center w-full h-full">
+            {/* Code the full loading page  */}
+            <p className="text-2xl font-bold">Loading...</p>
+        </div>
+    )
+    
+
     const structuredDataText = JSON.stringify({
         "@context": "https://schema.org",
         "@type": "City",
@@ -136,14 +145,6 @@ export default function CityPage({ citySelected }) {
             "target": `https://wanderlustapp.io/city/${citySelected?.slug}`
         }
     });
-
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.setAttribute('type', 'application/ld+json');
-        script.textContent = structuredDataText;
-        // Append to element of ID cityStructuredData
-        document.getElementById('cityStructuredData').appendChild(script);
-    }, []);
 
     // UseEffects
     useEffect(() => {
@@ -344,48 +345,6 @@ export default function CityPage({ citySelected }) {
         }
     }
 
-    // function addJsonLd() {
-    //     return {
-    //         __html: `{
-    //             "@context": "https://schema.org/",
-    //             "@type": "Place",
-    //             "name": ${citySelected.name},
-    //                 "address": {
-    //                     "@type": "PostalAddress",
-    //                     "addressLocality": ${citySelected.name},
-    //                     "addressRegion": ${citySelected.country_name},
-    //                     "postalCode": ${citySelected.postal_code},
-    //                     "streetAddress": ${citySelected.name}
-    //                 },
-    //                 "geo": {
-    //                     "@type": "GeoCoordinates",
-    //                     "latitude": ${citySelected.latitude},
-    //                     "longitude": ${citySelected.longitude}  
-    //                 },
-    //                 "image": ${citySelected.image},
-    //                 "description": ${citySelected.description},
-    //                 "telephone": ${citySelected.phone},
-    //                 "url": ${citySelected.url},
-    //                 "openingHoursSpecification": {
-    //                     "@type": "OpeningHoursSpecification",
-    //                     "dayOfWeek": ${citySelected.opening_hours},
-    //                     "opens": ${citySelected.opening_hours},
-    //                     "closes": ${citySelected.opening_hours}
-                        
-                
-    //             }
-    //         `,
-    //     };
-    // }
-
-    // if no userLoading || !citySelected, render beautiful loading page 
-    if (userLoading || !citySelected) (
-        <div className="flex items-center justify-center w-full h-full">
-            {/* Code the full loading page  */}
-            <p className="text-2xl font-bold">Loading...</p>
-        </div>
-    )
-
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
@@ -407,16 +366,15 @@ export default function CityPage({ citySelected }) {
                 <meta property="twitter:image" content={citySelected?.image_url_large} />
 
                 {/* Schema JSON ID  */}
-                {/* <script
+                <script
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={addJsonLd()}
+                    dangerouslySetInnerHTML={{ __html: structuredDataText }}
                     key="city-jsonld"
-                /> */}
+                />
             </Head>
-            <div id="cityStructuredData" />
             <div>
                 {
-                    breadcrumb && <BreadCrumb breadCrumbHome={breadcrumb} goToHome={() => router.push(`/${breadcrumb}`)} secondName={citySelected?.name} />
+                    // breadcrumb && <BreadCrumb breadCrumbHome={breadcrumb} goToHome={() => router.push(`/${breadcrumb}`)} secondName={citySelected?.name} />
                 }
                 <div className={`relative flex items-center w-full mt-12 sm:mt-4 mb-8 h-28`}>
                     <div className={`sm:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full`}> 
@@ -661,20 +619,20 @@ export default function CityPage({ citySelected }) {
                     </div>
                 )
             }
-            {/* <div className="w-full my-8">
+            <div className="w-full my-8">
                 <TextH3 classes="mb-4">Country Information</TextH3>
                 <div className="flex flex-col w-full h-auto px-10 pl-0 bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
                     <div className="flex flex-col w-full p-8 ml-8 leading-normal">
                         <TextH2>{citySelected?.country_name}</TextH2>
                         <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Region: {citySelected?.region}</p>
-                    <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
+                        <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
                         <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Currency: {citySelected?.country?.currency}</p>
                     </div>
                     {
-                       citySelected?.country?.image_url_medium || citySelected?.image_url_medium && <Image height={30} width={30} className="static object-cover w-full my-8 rounded-md h-96 md:h-auto md:w-96" src={citySelected?.country?.image_url_medium || citySelected?.image_url_medium} alt={`${citySelected?.country_name}`} />
+                       citySelected?.country?.image_url_small || citySelected?.image_url_small && <Image height={30} width={30} className="static object-cover w-full my-8 rounded-md h-96 md:h-auto md:w-96" src={citySelected?.country?.image_url_medium || citySelected?.image_url_medium} alt={`${citySelected?.country_name}`} />
                     }
                 </div>
-            </div> */}
+            </div>
         </section>
     )
 }
