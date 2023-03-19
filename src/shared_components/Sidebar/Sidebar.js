@@ -270,10 +270,10 @@ function Sidebar({ user, router, userLoading, logout }) {
                                         </div>
                                         <div className="grid grid-cols-3 gap-4 p-4">
                                             {
-                                                navbarTabs.map(({ title, icon, path, authRequired, premiumRequired, adminOnly }) => {
-                                                    if (authRequired && !user) return null;
-                                                    if (premiumRequired && !user?.is_premium) return null;
-                                                    if (adminOnly && !user?.role === 'superadmin') return null;
+                                                navbarTabs.map(({ title, icon, path, authRequired, hideIfPremium, premiumRequired, adminOnly }) => {
+                                                    if (adminOnly && user?.role !== 'superadmin') return null
+                                                    if (authRequired && !user) return null
+                                                    if (hideIfPremium && user?.premium) return null
                                             
                                                     return (
                                                         <a key={`navbarTabs-mobile-${title}`} onClick={() => changePage(path)} className={`${premiumRequired && !user?.premium ? "disabled cursor-not-allowed" : ""} flex flex-col items-center justify-center cursor-pointer p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group`}>
