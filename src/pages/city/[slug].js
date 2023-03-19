@@ -100,40 +100,50 @@ export default function CityPage({ citySelected }) {
     const [, setReviewsLoading] = useState(true);
     const [, setPlacesLoading] = useState(true);
 
-    // const structuredDataText = JSON.stringify({
-    //     "@context": "https://schema.org",
-    //     "@type": "Article",
-    //     "mainEntityOfPage": {
-    //         "@type": "WebPage",
-    //         "@id": `https://www.wanderlustapp.io/city/${citySelected?.slug}`
-    //     },
-    //     "headline": citySelected?.name,
-    //     "image": [
-    //         citySelected?.image_url_large
-    //     ],
-    //     "datePublished": moment(citySelected?.created_at, ['MMMM Do YYYY']),
-    //     "author": {
-    //         "@type": "Person",
-    //         "name": "Wanderlust"
-    //     },
-    //     "publisher": {
-    //         "@type": "Organization",
-    //         "name": "Wanderlust",
-    //         "logo": {
-    //             "@type": "ImageObject",
-    //             "url": "https://wanderlust-extension.s3.us-west-2.amazonaws.com/logo.jpg"
-    //         }
-    //     },
-    //     "description": citySelected?.description
-    // });
+    const structuredDataText = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "City",
+        "name": citySelected?.name,
+        "image": citySelected?.image_url_large,
+        "description": `${citySelected?.name} is located in ${citySelected?.country_name} (${citySelected?.region}) with a population of around ${citySelected?.population}. Discover ${citySelected?.name} with Wanderlust App. Find out what to do, the best places to stay, and the top places to eat in ${citySelected?.name} all curated by real people and no ads.`,
+        "url": `https://wanderlustapp.io/city/${citySelected?.slug}`,
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": citySelected?.latitude,
+            "longitude": citySelected?.longitude
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": citySelected?.name,
+            "addressRegion": citySelected?.region,
+            "addressCountry": citySelected?.country_name
+        },
+        "containedInPlace": {
+            "@type": "Country",
+            "name": citySelected?.country_name
+        },
+        "population": citySelected?.population,
+        "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": citySelected?.region
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://wanderlustapp.io/city/${citySelected?.slug}`
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": `https://wanderlustapp.io/city/${citySelected?.slug}`
+        }
+    });
 
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.setAttribute('type', 'application/ld+json');
-    //     script.textContent = structuredDataText;
-    //     // Append to element of ID cityStructuredData
-    //     document.getElementById('cityStructuredData').appendChild(script);
-    // }, []);
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.setAttribute('type', 'application/ld+json');
+        script.textContent = structuredDataText;
+        // Append to element of ID cityStructuredData
+        document.getElementById('cityStructuredData').appendChild(script);
+    }, []);
 
     // UseEffects
     useEffect(() => {
@@ -378,7 +388,6 @@ export default function CityPage({ citySelected }) {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            {/* <div id="cityStructuredData" /> */}
             <Head>
                 <title>{`${citySelected?.name} ${citySelected?.country_name} | Wanderlust App City Guide`}</title>
                 <meta name="description" content={`Discover ${citySelected?.name} ${citySelected?.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${citySelected?.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${citySelected?.name}.`} />
@@ -404,6 +413,7 @@ export default function CityPage({ citySelected }) {
                     key="city-jsonld"
                 /> */}
             </Head>
+            <div id="cityStructuredData" />
             <div>
                 {
                     breadcrumb && <BreadCrumb breadCrumbHome={breadcrumb} goToHome={() => router.push(`/${breadcrumb}`)} secondName={citySelected?.name} />
