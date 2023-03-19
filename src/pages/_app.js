@@ -63,7 +63,7 @@ export default function MyApp({ Component, pageProps }) {
                                                             <Layout>
                                                                 <ErrorBoundary>
                                                                     <Component {...pageProps} />
-                                                                    <Analytics />
+                                                                    {/* <Analytics /> */}
                                                                 </ErrorBoundary>
                                                             </Layout>
                                                         </CommunityProvider>

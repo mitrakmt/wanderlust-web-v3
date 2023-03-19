@@ -2,16 +2,9 @@ const { fontFamily } = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./public/**/*.html",
     "./node_modules/flowbite-react/**/*.js",
-    './src/**/*.html',
-    './src/**/*.js',
- 
-    // Or if using `src` directory:
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{ts,tsx}",
+    "./public/**/*.html",
   ],
   mode: 'jit',
   darkMode: 'class',
@@ -55,7 +48,6 @@ module.exports = {
   },
   plugins: [
       require('@tailwindcss/aspect-ratio'),
-      require('flowbite/plugin'),
       require('@tailwindcss/forms'),
       require('@tailwindcss/line-clamp'),
       require('@tailwindcss/typography'),

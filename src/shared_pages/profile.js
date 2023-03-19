@@ -30,7 +30,7 @@ import CountriesMap from '../components/profileComponents/CountriesMap/Map';
 import BannerModal from './components/BannerModal';
 import ProfileModal from './components/ProfileModal';
 
-export default function Profile({ publicUser, recommendedLocations }) {
+export default function Profile({ publicUser, recommendedLocations, profileUser, reviewsData }) {
     // Hooks
     const { user, setUser } = useAuth();
     const router = useRouter();
@@ -43,7 +43,7 @@ export default function Profile({ publicUser, recommendedLocations }) {
 
     // State
     const [selectedMap, setSelectedMap] = useState('favorites');
-    const [profileUser, setProfileUser] = useState(null);
+    // const [profileUser, setProfileUser] = useState(null);
     const [followCount, setFollowCount] = useState(0);
     const [reviewCount, setReviewCount] = useState(0);
     const [fileUploadError, setFileUploadError] = useState(false);
@@ -111,137 +111,137 @@ export default function Profile({ publicUser, recommendedLocations }) {
         }
     }, [countries]);
   
-    useEffect(() => {
-        async function fetchData() {
-            if (publicUser) {
-                if (username) {
-                    const newUserData = await request(`/users/public/username/${username}`, {
-                        method: 'GET'
-                    })
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         if (publicUser) {
+    //             if (username) {
+    //                 const newUserData = await request(`/users/public/username/${username}`, {
+    //                     method: 'GET'
+    //                 })
 
-                    // If not data, it's a bad URL so push back to home 
-                    if (!newUserData?.data) {
-                        router.push('/');
-                        return;
-                    }
+    //                 // If not data, it's a bad URL so push back to home 
+    //                 if (!newUserData?.data) {
+    //                     router.push('/');
+    //                     return;
+    //                 }
 
-                    setProfileUser(newUserData?.data)
+    //                 setProfileUser(newUserData?.data)
         
-                    const newCountriesVisited = {};
-                    profileUser?.countries_visited?.forEach(country => {
-                        newCountriesVisited[country] = true;
-                    })
-                    setCountriesVisited(newCountriesVisited)
+    //                 const newCountriesVisited = {};
+    //                 profileUser?.countries_visited?.forEach(country => {
+    //                     newCountriesVisited[country] = true;
+    //                 })
+    //                 setCountriesVisited(newCountriesVisited)
                     
-                    // Fetch reviews for user
-                    const reviews = await request(`/reviews/user/${newUserData.data.id}`)
-                    setReviews(reviews?.data || {});
-                }
-            } else {
-                setProfileUser(user);
+    //                 // Fetch reviews for user
+    //                 const reviews = await request(`/reviews/user/${newUserData.data.id}`)
+    //                 setReviews(reviews?.data || {});
+    //             }
+    //         } else {
+    //             setProfileUser(user);
     
-                const newCountriesVisited = {};
-                user?.countries_visited?.forEach(country => {
-                    newCountriesVisited[country] = true;
-                })
-                setCountriesVisited(newCountriesVisited)
+    //             const newCountriesVisited = {};
+    //             user?.countries_visited?.forEach(country => {
+    //                 newCountriesVisited[country] = true;
+    //             })
+    //             setCountriesVisited(newCountriesVisited)
     
-                // Fetch reviews for user
-                const reviews = await request(`/reviews/user/${user?.id}`)
-                setReviews(reviews?.data || {});
-            }
-        }
-        fetchData();
-      }, [username]);
+    //             // Fetch reviews for user
+    //             const reviews = await request(`/reviews/user/${user?.id}`)
+    //             setReviews(reviews?.data || {});
+    //         }
+    //     }
+    //     fetchData();
+    //   }, [username]);
 
-    useEffect(() => {
-        async function fetchData(userId) {
-            const response = await request(`/reviews/count/${userId}`, {
-                method: 'GET'
-            })
-            setReviewCount(response.data)
-            setLoadingReviewCount(false)
-        }
+    // useEffect(() => {
+    //     async function fetchData(userId) {
+    //         const response = await request(`/reviews/count/${userId}`, {
+    //             method: 'GET'
+    //         })
+    //         setReviewCount(response.data)
+    //         setLoadingReviewCount(false)
+    //     }
 
-        if (publicUser && profileUser) {
-            fetchData(profileUser.id);
-        }
-    }, [profileUser]);
+    //     if (publicUser && profileUser) {
+    //         fetchData(profileUser.id);
+    //     }
+    // }, [profileUser]);
     
-    useEffect(() => {
-        async function fetchData(userId) {
-            const response = await request(`/reviews/count/${userId}`, {
-                method: 'GET'
-            })
-            setReviewCount(response.data)
-            setLoadingReviewCount(false)
-        }
+    // useEffect(() => {
+    //     async function fetchData(userId) {
+    //         const response = await request(`/reviews/count/${userId}`, {
+    //             method: 'GET'
+    //         })
+    //         setReviewCount(response.data)
+    //         setLoadingReviewCount(false)
+    //     }
 
-        if (!publicUser) {
-            fetchData(user.id);
-        }
-    }, []);
+    //     if (!publicUser) {
+    //         fetchData(user.id);
+    //     }
+    // }, []);
 
-    useEffect(() => {
-        async function fetchData(userId) {
-            const response = await request(`/follows/count/${userId}`, {
-                method: 'GET'
-            })
+    // useEffect(() => {
+    //     async function fetchData(userId) {
+    //         const response = await request(`/follows/count/${userId}`, {
+    //             method: 'GET'
+    //         })
     
-            setFollowCount(response.data)
-            setLoadingFollowCount(false)
-        }
+    //         setFollowCount(response.data)
+    //         setLoadingFollowCount(false)
+    //     }
 
-        if (publicUser && profileUser) {
-            fetchData(profileUser.id);
-        } else if (!publicUser) {
-            fetchData(user?.id);
-        }
-      }, [profileUser]);
+    //     if (publicUser && profileUser) {
+    //         fetchData(profileUser.id);
+    //     } else if (!publicUser) {
+    //         fetchData(user?.id);
+    //     }
+    // }, [profileUser]);
 
-    useEffect(() => {
-        async function fetchData(userId) {
-            const response = await request(`/place/user/${userId}`, {
-                method: 'GET'
-            })
+    // useEffect(() => {
+    //     async function fetchData(userId) {
+    //         const response = await request(`/place/user/${userId}`, {
+    //             method: 'GET'
+    //         })
     
-            setPlaces(response.data)
-        }
+    //         setPlaces(response.data)
+    //     }
 
-        if (publicUser && profileUser) {
-            fetchData(profileUser.id);
-        } else if (!publicUser) {
-            fetchData(user?.id);
-        }
-    }, [profileUser]); 
+    //     if (publicUser && profileUser) {
+    //         fetchData(profileUser.id);
+    //     } else if (!publicUser) {
+    //         fetchData(user?.id);
+    //     }
+    // }, [profileUser]); 
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await request(`/place`, {
-                method: 'GET'
-            })
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         const response = await request(`/place`, {
+    //             method: 'GET'
+    //         })
     
-            setUserPlaces(response.data)
-        }
+    //         setUserPlaces(response.data)
+    //     }
 
-        if (user) {
-            fetchData();
-        }
-    }, []); 
+    //     if (user) {
+    //         fetchData();
+    //     }
+    // }, []); 
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await request(`/placesToTry`, {
-                method: 'GET'
-            })
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         const response = await request(`/placesToTry`, {
+    //             method: 'GET'
+    //         })
     
-            setUserPlacesToTry(response.data)
-        }
+    //         setUserPlacesToTry(response.data)
+    //     }
 
-        if (user) {
-            fetchData();
-        }
-    }, []); 
+    //     if (user) {
+    //         fetchData();
+    //     }
+    // }, []); 
 
     // Functions
     const showProfileModal = () => {
@@ -269,186 +269,186 @@ export default function Profile({ publicUser, recommendedLocations }) {
         setUsernameTaken(response.data.usernameTaken)
     }
 
-    const onDrop = async (files) => {
-        setImageUploadLoading(true);
-        if (files.length === 0) {
-            setFileUploadError(true);
-            setImageUploadLoading(false);
-            return;
-        }
-        var file = files[0];
+    // const onDrop = async (files) => {
+    //     setImageUploadLoading(true);
+    //     if (files.length === 0) {
+    //         setFileUploadError(true);
+    //         setImageUploadLoading(false);
+    //         return;
+    //     }
+    //     var file = files[0];
 
-        if (file.type === 'image/heic') {
-            setImageError(".heic images are not allowed. Please use either .jpg or .png")
-            setImageUploadLoading(false);
-            return;
-        }
+    //     if (file.type === 'image/heic') {
+    //         setImageError(".heic images are not allowed. Please use either .jpg or .png")
+    //         setImageUploadLoading(false);
+    //         return;
+    //     }
 
-        setImageError(null);
+    //     setImageError(null);
     
-        request('/file/sign', {
-            method: "POST",
-            body: {
-                filename: file.name,
-                filetype: file.type
-            }
-        })
-            .then(function (result) {
-                var signedUrl = result.data;
+    //     request('/file/sign', {
+    //         method: "POST",
+    //         body: {
+    //             filename: file.name,
+    //             filetype: file.type
+    //         }
+    //     })
+    //         .then(function (result) {
+    //             var signedUrl = result.data;
             
-                var options = {
-                    headers: {
-                        'Content-Type': file.type
-                    }
-                };
+    //             var options = {
+    //                 headers: {
+    //                     'Content-Type': file.type
+    //                 }
+    //             };
         
-                return axios.put(signedUrl, file, options);
-            })
-            .then(async () => {
-                setImageUploadLoading(false);
+    //             return axios.put(signedUrl, file, options);
+    //         })
+    //         .then(async () => {
+    //             setImageUploadLoading(false);
 
-                setProfileUser({
-                    ...profileUser,
-                    ...{ profile_image: undefined }
-                })
-                setUser({
-                    ...user,
-                    ...{ profile_image: undefined }
-                });
+    //             setProfileUser({
+    //                 ...profileUser,
+    //                 ...{ profile_image: undefined }
+    //             })
+    //             setUser({
+    //                 ...user,
+    //                 ...{ profile_image: undefined }
+    //             });
 
-                setTimeout(async () => {
-                    const newUserData = await request(`/users`, {
-                        method: 'GET'
-                    })
+    //             setTimeout(async () => {
+    //                 const newUserData = await request(`/users`, {
+    //                     method: 'GET'
+    //                 })
     
-                    setProfileUser(newUserData?.data)
-                    setUser(newUserData?.data);
-                }, 4000)
+    //                 setProfileUser(newUserData?.data)
+    //                 setUser(newUserData?.data);
+    //             }, 4000)
 
-                closeProfileModal();
-            })
-            .catch(function (err) {
-                // TODO: add error logging in some service
-                console.log(err);
-            });
-    };
+    //             closeProfileModal();
+    //         })
+    //         .catch(function (err) {
+    //             // TODO: add error logging in some service
+    //             console.log(err);
+    //         });
+    // };
 
-    const onBannerDrop = async (files) => {
-        setImageUploadLoading(true);
-        if (files.length === 0) {
-            setFileUploadError(true);
-            setImageUploadLoading(false);
-            return;
-        }
-        var file = files[0];
+    // const onBannerDrop = async (files) => {
+    //     setImageUploadLoading(true);
+    //     if (files.length === 0) {
+    //         setFileUploadError(true);
+    //         setImageUploadLoading(false);
+    //         return;
+    //     }
+    //     var file = files[0];
 
-        if (file.type === 'image/heic') {
-            setImageError(".heic images are not allowed. Please use either .jpg or .png")
-            setImageUploadLoading(false);
-            return;
-        }
+    //     if (file.type === 'image/heic') {
+    //         setImageError(".heic images are not allowed. Please use either .jpg or .png")
+    //         setImageUploadLoading(false);
+    //         return;
+    //     }
 
-        setImageError(null);
+    //     setImageError(null);
     
-        request('/file/sign/banner', {
-            method: "POST",
-            body: {
-                filename: `${file.name}_banner`,
-                filetype: file.type
-            }
-        })
-            .then(function (result) {
-                var signedUrl = result.data;
+    //     request('/file/sign/banner', {
+    //         method: "POST",
+    //         body: {
+    //             filename: `${file.name}_banner`,
+    //             filetype: file.type
+    //         }
+    //     })
+    //         .then(function (result) {
+    //             var signedUrl = result.data;
             
-                var options = {
-                    headers: {
-                        'Content-Type': file.type
-                    }
-                };
+    //             var options = {
+    //                 headers: {
+    //                     'Content-Type': file.type
+    //                 }
+    //             };
         
-                return axios.put(signedUrl, file, options);
-            })
-            .then(async () => {
-                setImageUploadLoading(false);
+    //             return axios.put(signedUrl, file, options);
+    //         })
+    //         .then(async () => {
+    //             setImageUploadLoading(false);
 
-                setProfileUser({
-                    ...profileUser,
-                    ...{ bannerImage: undefined }
-                })
-                setUser({
-                    ...user,
-                    ...{ bannerImage: undefined }
-                });
+    //             setProfileUser({
+    //                 ...profileUser,
+    //                 ...{ bannerImage: undefined }
+    //             })
+    //             setUser({
+    //                 ...user,
+    //                 ...{ bannerImage: undefined }
+    //             });
 
-                setTimeout(async () => {
-                    const newUserData = await request(`/users`, {
-                        method: 'GET'
-                    })
+    //             setTimeout(async () => {
+    //                 const newUserData = await request(`/users`, {
+    //                     method: 'GET'
+    //                 })
     
-                    setProfileUser(newUserData?.data)
-                    setUser(newUserData?.data);
-                }, 4000)
+    //                 setProfileUser(newUserData?.data)
+    //                 setUser(newUserData?.data);
+    //             }, 4000)
 
-                closeBannerModal();
-            })
-            .catch(function (err) {
-                // TODO: add error logging in some service
-                console.log(err);
-            });
-    };
+    //             closeBannerModal();
+    //         })
+    //         .catch(function (err) {
+    //             // TODO: add error logging in some service
+    //             console.log(err);
+    //         });
+    // };
 
-    const saveProfileEdit = async () => {
-        setSaveLoading(true);
+    // const saveProfileEdit = async () => {
+    //     setSaveLoading(true);
         
-        // Error check
-        if (usernameTaken) {
-            setSaveLoading(false);
-            return;
-        }
+    //     // Error check
+    //     if (usernameTaken) {
+    //         setSaveLoading(false);
+    //         return;
+    //     }
 
-        // Add country selects to editedValues
-        editedValues.currentCountry = currentCountrySelect?.id
-        editedValues.homeCountry = homeCountrySelect?.id
+    //     // Add country selects to editedValues
+    //     editedValues.currentCountry = currentCountrySelect?.id
+    //     editedValues.homeCountry = homeCountrySelect?.id
 
-        // Save
-        const response = await request(`/users/${user?.id}`, {
-            method: 'PUT',
-            body: editedValues
-        })
+    //     // Save
+    //     const response = await request(`/users/${user?.id}`, {
+    //         method: 'PUT',
+    //         body: editedValues
+    //     })
 
-        // Check errors 
-        if (!response.data) {
-            // TODO: set show error
-            setEditError(response.message)
-            setToasts([
-                ...toasts,
-                ...[{
-                  message: 'Profile failed to save',
-                  type: 'error'
-                }]
-            ])
-            setTimeout(() => {
-                let newToasts = [...toasts];
-                newToasts.pop();
-                setToasts(newToasts);
-            }, 2000)
-            setSaveLoading(false);
-            return;
-        }
+    //     // Check errors 
+    //     if (!response.data) {
+    //         // TODO: set show error
+    //         setEditError(response.message)
+    //         setToasts([
+    //             ...toasts,
+    //             ...[{
+    //               message: 'Profile failed to save',
+    //               type: 'error'
+    //             }]
+    //         ])
+    //         setTimeout(() => {
+    //             let newToasts = [...toasts];
+    //             newToasts.pop();
+    //             setToasts(newToasts);
+    //         }, 2000)
+    //         setSaveLoading(false);
+    //         return;
+    //     }
 
-        // Reset values for editing
-        const requestedUser = await request(`/users`, {
-            method: 'GET'
-        })
-        setProfileUser(requestedUser?.data)
-        setUser(requestedUser?.data);
+    //     // Reset values for editing
+    //     const requestedUser = await request(`/users`, {
+    //         method: 'GET'
+    //     })
+    //     setProfileUser(requestedUser?.data)
+    //     setUser(requestedUser?.data);
 
-        setEditing(false);
-        setEditedValues({});
-        setPreviousCurrentCountrySelect(null);
-        setPreviousHomeCountrySelect(null);
-        setSaveLoading(false);
-    }
+    //     setEditing(false);
+    //     setEditedValues({});
+    //     setPreviousCurrentCountrySelect(null);
+    //     setPreviousHomeCountrySelect(null);
+    //     setSaveLoading(false);
+    // }
 
     const cancelProfileEdit = () => {
         // Revert selects if changed
@@ -543,8 +543,10 @@ export default function Profile({ publicUser, recommendedLocations }) {
         })
     }
 
-    if (!profileUser) return null;
-    
+    if (!profileUser) return <h3>no user</h3>;
+
+    return <h3>hi</h3>
+
     return (
         // Profile page similar to twitter profile  
         <section className="relative ml-0 sm:ml-16 px-2 sm:px-6 py-8">
@@ -982,7 +984,6 @@ export default function Profile({ publicUser, recommendedLocations }) {
                     <LocationSuggestions recommendedLocations={recommendedLocations} />
                     <FollowSuggestions follows={follows} followUser={followUser} removeFollow={removeFollow} />
                     <Blogs />
-                    {/* <Trending /> */}
                 </div>
             </div>
         </section>

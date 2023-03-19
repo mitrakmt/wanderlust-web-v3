@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 function LoadingSidebar() {
     return (
         <header>
@@ -12,7 +10,6 @@ function LoadingSidebar() {
                         </a>
                     </div>
                     <div className="flex items-center lg:order-2">
-                        
                         {/* {
                             !user && (
                                 <div className="flex items-center">
