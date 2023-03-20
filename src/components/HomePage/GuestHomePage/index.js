@@ -1,5 +1,9 @@
+import { useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+
+// Context
+import { themeContext } from '../../../context/ThemeProvider';
 
 // Components
 import Features from './components/Features';
@@ -7,9 +11,11 @@ import PopularTravelers from '../components/PopularTravelers';
 import BlogCard from '../../BlogCard';
 
 export default function GuestHomePage({ router, posts }) {
+    const [theme] = useContext(themeContext);
+
     return (
-        <div className="px-0 sm:pl-16 pr-0 flex flex-col items-center">
-            <div className="w-4/5 py-8 max-w-screen-xl text-center my-36">
+        <div className=" px-2 sm:pl-16 pr-0 flex flex-col items-center w-10/12">
+            <div className="mx-auto mt-56 mb-44 sm:text-center sm:flex sm:flex-col sm:items-center sm:justify-center">
                 <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Helping you to explore the world</h1>
                 <p className="mb-8 text-lg font-bold text-gray-800 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300">Wanderlust App let's you to find, explore and share the best places around the world, and gives you the tools to plan everything you'd need.</p>
                 <div className="flex flex-col mt-4 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
@@ -21,7 +27,7 @@ export default function GuestHomePage({ router, posts }) {
                         Search for a place
                     </Link> 
                 </div>
-                <div className="px-4 mx-auto flex mt-4 flex-col items-center justify-center text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
+                <div className="px-4 mx-auto flex mt-4 flex-col items-center justify-center text-center lg:px-36">
                     <span className="font-semibold text-gray-700 uppercase dark:text-gray-300">FEATURED IN</span>
                     <div className="flex flex-wrap justify-center items-center mt-8 px-4 py-2 rounded-full text-gray-700 dark:text-gray-300 sm:justify-between bg-gray-100 dark:bg-gray-700">
                         <svg className="h-11" viewBox="0 0 208 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +40,7 @@ export default function GuestHomePage({ router, posts }) {
             </div>
             <Features />
             {/* CONTENT */}
-            <div className="w-4/5 gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 bg-white/90 dark:bg-gray-800/90 rounded-lg">
+            <div className="w-full gap-16 items-center py-8 px-4 mx-auto lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 bg-white/90 dark:bg-gray-800/90 rounded-lg">
                 <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Your Personal Travel Assistant</h2>
                     <p className="mb-4 text-gray-700 dark:text-white">Welcome to Wanderlust App - your digital travel companion! As a digital nomad, I created this web application to help travelers find the best places around the world and track their travels. I wanted to make the travel experience easier, more enjoyable, and more fulfilling. With Wanderlust App, I created a platform that connects travelers and fosters positivity and support in the travel community. </p>
@@ -50,8 +56,46 @@ export default function GuestHomePage({ router, posts }) {
                     </div>
                 </div>
             </div>
+
+            {/* EXTENSION  */}
+            <section className="bg-white dark:bg-gray-900 rounded-lg my-12">
+                <div className="grid px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                    <div className="mr-auto place-self-center lg:col-span-7">
+                        <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Beautiful places on your new tab page</h1>
+                        <p className="mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Transform your new tab page into a beautiful location from around the world with our travel extension. Our extension is perfect for digital nomads who want to explore the world from their browser. Our extension is SEO optimized to help you find the best travel destinations. Install our extension today and start exploring the world from your browser!</p>
+                        <div className="flex gap-x-4">
+                            <p className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700">
+                                Get the extension free
+                                <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+                            </p>
+                            {/* Chrome icon */}
+                            <a href="https://chrome.google.com/webstore/detail/flowbite-new-tab-page/ndjgjgjgjgjgjgjgjgjgjgjgjgjgjgjg" target="_blank" rel="noopener noreferrer">
+                                <Image src="/chrome_logo.png" alt="chrome logo" width={150} height={50} className="h-12 w-12" />
+                            </a>
+                            {/* Firefox icon */}
+                            <a href="https://addons.mozilla.org/en-US/firefox/addon/flowbite-new-tab-page/" target="_blank" rel="noopener noreferrer">
+                                <Image src="/edge_logo.webp" alt="Edge logo" width={150} height={50} className="h-12 w-12" />
+                            </a>
+                            {/* Edge icon */}
+                            <a href="https://microsoftedge.microsoft.com/addons/detail/flowbite-new-tab-page/ndjgjgjgjgjgjgjgjgjgjgjgjgjgjgjg" target="_blank" rel="noopener noreferrer">
+                                <Image src="/firefox_logo.webp" alt="Firefox logo" width={150} height={50} className="h-12 w-12" />
+                            </a>
+                        </div>
+                    </div>
+                    <div className="relative flex mt-4 sm:mt-auto sm:mb-auto h-60 flex-col lg:col-span-5 lg:flex-row">
+                        {
+                            theme === 'dark' ? (
+                                <Image src="/extension_dark.png" className="rounded-lg object-contain" fill alt="Wanderlust Extension" />
+                            ): (
+                                <Image src="/extension_light.png" className="rounded-lg object-contain" fill alt="Wanderlust Extension" />
+                            )
+                        }
+                    </div>                
+                </div>
+            </section>
+
             {/* CTA  */}
-            <div className="px-4 w-4/5 py-8 mx-auto max-w-screen-xl text-center my-32 bg-white/90 dark:bg-gray-800/90 rounded-lg">
+            <div className="px-4 py-8 mx-auto text-center my-32 bg-white/90 dark:bg-gray-800/90 rounded-lg">
                 <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Start Exploring</h1>
                 <p className="mb-8 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300 my-8">Wanderlust App let's you to find, explore and share the best places around the world, and gives you the tools to plan everything you'd need.</p>
                 <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
@@ -67,8 +111,8 @@ export default function GuestHomePage({ router, posts }) {
             {/* POPULAR TRAVELERS  */}
             <PopularTravelers />
             {/* QUOTE  */}
-            <div className="w-4/5 max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6 my-20">
-                <figure className="max-w-screen-md mx-auto">
+            <div className="px-4 py-8 mx-auto text-center lg:py-16 lg:px-6 my-20">
+                <figure className="mx-auto">
                     <svg className="h-12 mx-auto mb-3 text-gray-600 dark:text-gray-600" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
                     </svg> 
@@ -84,8 +128,8 @@ export default function GuestHomePage({ router, posts }) {
                 </figure>
             </div>
             {/* BLOG  */}
-            <div className="w-4/5 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-                <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
+            <div className="py-8 px-4 mx-auto lg:py-16 lg:px-6">
+                <div className="mx-auto text-center lg:mb-16 mb-8">
                     <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Digital Nomad Blog</h2>
                     <p className="font-normal text-gray-900 sm:text-xl dark:text-gray-100">We help you to learn about the best places around the world, the most beautiful places to see, and everything you'd need as a nomad.</p>
                 </div> 
@@ -103,12 +147,12 @@ export default function GuestHomePage({ router, posts }) {
                 </div>
             </div>
             {/* NEWSLETTER  */}
-            {/* <div className="w-4/5 py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 my-20">
-                <div className="mx-auto max-w-screen-md sm:text-center">
+            {/* <div className="py-8 px-4 mx-auto lg:py-16 lg:px-6 my-20">
+                <div className="mx-auto sm:text-center">
                     <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">Sign up for our newsletter</h2>
-                    <p className="mx-auto mb-8 max-w-2xl font-light text-gray-600 md:mb-12 sm:text-xl dark:text-gray-300">Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email.</p>
+                    <p className="mx-auto mb-8 font-light text-gray-600 md:mb-12 sm:text-xl dark:text-gray-300">Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email.</p>
                     <form action="#">
-                        <div className="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
+                        <div className="items-center mx-auto mb-3 space-y-4 sm:flex sm:space-y-0">
                             <div className="relative w-full">
                                 <label htmlFor="email" className="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
                                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -120,7 +164,7 @@ export default function GuestHomePage({ router, posts }) {
                                 <button type="submit" className="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Subscribe</button>
                             </div>
                         </div>
-                        <div className="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer dark:text-gray-300">We care about the protection of your data. <a href="#" className="font-medium text-primary-600 dark:text-primary-500 hover:underline">Read our Privacy Policy</a>.</div>
+                        <div className="mx-auto text-sm text-left text-gray-500 newsletter-form-footer dark:text-gray-300">We care about the protection of your data. <a href="#" className="font-medium text-primary-600 dark:text-primary-500 hover:underline">Read our Privacy Policy</a>.</div>
                     </form>
                 </div>
             </div> */}

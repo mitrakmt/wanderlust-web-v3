@@ -24,7 +24,7 @@ import StripeForm from '../components/StripeForm/StripeForm';
 
 export default function Settings() {
     // Hooks
-    const { logout, user, setUser } = useAuth();
+    const { logout, user, setUser, userLoading } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
@@ -220,6 +220,8 @@ export default function Settings() {
 
         setShowCancelMembershipModal(false);
     }
+
+    if (userLoading) return <h3>Loading...</h3>
 
     // Fetch stripe membership info to show dashboard here
 

@@ -55,10 +55,10 @@ module.exports = {
   },
   plugins: [
       require('@tailwindcss/aspect-ratio'),
-      require('flowbite/plugin'),
       require('@tailwindcss/forms'),
       require('@tailwindcss/line-clamp'),
       require('@tailwindcss/typography'),
+      require('flowbite/plugin'),
       require('flowbite-typography')
   ],
 }

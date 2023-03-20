@@ -1,6 +1,6 @@
 export default function Features() {
     return (
-        <div className="w-4/5 text-center py-8 grow px-4 flex items-center justify-center flex-col max-w-screen-xl ml-0 sm:py-16 lg:px-6 my-20 bg-white/90 dark:bg-gray-800/90 rounded-lg">
+        <div className="text-center py-8 grow px-4 flex items-center justify-center flex-col max-w-screen-xl ml-0 sm:py-16 lg:px-6 my-20 bg-white/90 dark:bg-gray-800/90 rounded-lg">
             <div className="max-w-screen-md mb-8 lg:mb-16">
                 <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Built for Digital Nomads by Digital Nomads</h2>
             </div>

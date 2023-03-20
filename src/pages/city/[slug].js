@@ -634,7 +634,7 @@ export default function CityPage({ citySelected }) {
                         <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Currency: {citySelected?.country?.currency}</p>
                     </div>
                     {
-                       citySelected?.country?.image_url_small || citySelected?.image_url_small && <Image height={30} width={30} className="static object-cover w-full my-8 rounded-md h-96 md:h-auto md:w-96" src={citySelected?.country?.image_url_medium || citySelected?.image_url_medium} alt={`${citySelected?.country_name}`} />
+                       citySelected?.country?.image_url_small || citySelected?.image_url_small && <Image height={400} width={600} className="static object-cover w-full my-8 rounded-md h-96 md:h-auto md:w-96" src={citySelected?.country?.image_url_medium || citySelected?.image_url_medium} alt={`${citySelected?.country_name}`} />
                     }
                 </div>
             </div>
