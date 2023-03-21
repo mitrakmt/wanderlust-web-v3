@@ -15,7 +15,7 @@ import { useAuth } from '../../hooks/useAuth';
 import Footer from '../../components/Footer';
 import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
 
-export async function getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { slug, city, country } }) {
     if (!slug) {
         return;
     }
@@ -23,9 +23,29 @@ export async function getStaticProps({ params: { slug } }) {
     const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/${slug}`)
     const blog = await response.json()
 
+    // Get related articles
+    let relatedArticles;
+
+    if (city) {
+        // Get related articles by city
+        const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${city}?limit=4`)
+        relatedArticles = await relatedResponse.json()
+
+    } else if (country) {
+        // Get related articles by country
+        const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/country/${country}?limit=4`)
+        relatedArticles = await relatedResponse.json()
+
+    } else {
+        // Get related articles by category
+        const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/search?category=${blog.data.category.replace(/\ /g, '+')}&limit=4`)
+        relatedArticles = await relatedResponse.json()
+    }
+
     return {
         props: {
             blog: blog.data,
+            relatedArticles: relatedArticles.data
         },
         revalidate: 320,
     };
@@ -50,7 +70,8 @@ export async function getStaticPaths() {
     }
 }
 
-export default function BlogPost({ blog }) {
+export default function BlogPost({ blog, relatedArticles }) {
+    console.log('relatedArticles', relatedArticles)
     // Hooks
     const { user, userLoading } = useAuth();
     const router = useRouter();
@@ -323,7 +344,7 @@ export default function BlogPost({ blog }) {
                 </div>
             </main>
 
-                {/* <aside aria-label="Related articles" className="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+                <aside aria-label="Related articles" className="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
                     <div className="px-4 mx-auto max-w-screen-xl">
                         <h2 className="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Related articles</h2>
                         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
@@ -377,9 +398,9 @@ export default function BlogPost({ blog }) {
                             </article>
                         </div>
                     </div>
-                </aside> */}
+                </aside>
 
-            {/* <section className="bg-white dark:bg-gray-900">
+            <section className="bg-white dark:bg-gray-900">
                 <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     <div className="mx-auto max-w-screen-md sm:text-center">
                         <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white">Sign up for our newsletter</h2>
@@ -401,7 +422,7 @@ export default function BlogPost({ blog }) {
                         </form>
                     </div>
                 </div>
-            </section> */}
+            </section>
 
             <Footer />
         </section>
