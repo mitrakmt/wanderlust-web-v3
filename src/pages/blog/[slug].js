@@ -25,7 +25,7 @@ export async function getStaticProps({ params: { slug } }) {
 
     return {
         props: {
-            blog: blog.data
+            blog: blog.data,
         },
         revalidate: 320,
     };
@@ -38,6 +38,8 @@ export async function getStaticPaths() {
         {
             params: {
                 slug: blog.slug,
+                city: blog.city,
+                country: blog.country,
             },
         }
     ))

@@ -28,6 +28,7 @@ import FavoriteControl from '../../icons/likeIcon';
 import WeatherCard from '../../components/WeatherCard/WeatherCard';
 import ProBanner from '../../components/ProBanner/ProBanner';
 import PlacesMap from '../../components/cityComponents/Map';
+import BlogCard from '../../components/BlogCard';
 
 // Utils
 import trackClick from '../../utils/trackClick';
@@ -43,9 +44,14 @@ export async function getStaticProps({ params: { slug } }) {
     const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
     const citySelected = await response.json()
 
+    // Get blogs for city
+    const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${citySelected.data.id}`)
+    const blogs = await blogsResponse.json()
+
     return {
         props: {
-            citySelected: citySelected.data
+            citySelected: citySelected.data,
+            blogs: blogs.data
         },
     };
 }
@@ -67,7 +73,7 @@ export async function getStaticPaths() {
     }
 }
 
-export default function CityPage({ citySelected }) {
+export default function CityPage({ citySelected, blogs }) {
     // Hooks
     const { user, userLoading } = useAuth();
     const router = useRouter()
@@ -109,7 +115,6 @@ export default function CityPage({ citySelected }) {
         </div>
     )
     
-
     const structuredDataText = JSON.stringify({
         "@context": "https://schema.org",
         "@type": "City",
@@ -379,7 +384,7 @@ export default function CityPage({ citySelected }) {
             />
             <div>
                 {
-                    // breadcrumb && <BreadCrumb breadCrumbHome={breadcrumb} goToHome={() => router.push(`/${breadcrumb}`)} secondName={citySelected?.name} />
+                    breadcrumb && <BreadCrumb breadCrumbHome={breadcrumb} goToHome={() => router.push(`/${breadcrumb}`)} secondName={citySelected?.name} />
                 }
                 <div className={`relative flex items-center w-full mt-12 sm:mt-4 mb-8 h-28`}>
                     <div className={`sm:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full`}> 
@@ -508,6 +513,18 @@ export default function CityPage({ citySelected }) {
                         }
                     </div> : <Carousel images={locations} propertyName="image_url_medium" />
                 }
+            </div>
+
+            <div className="w-full my-12">
+                <TextH3>Blogs & Guides</TextH3>
+                <div className={blogs.length > 0 ? "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" : ""}>
+                    {
+                        blogs && blogs.length > 0 ? blogs.map((blog) => <BlogCard key={`city-blogCard-${blog.title}`} post={blog} />) 
+                            : <div className="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                <h5>Guides coming soon!</h5>
+                            </div>
+                    }
+                </div>
             </div>
 
             <div className="w-full my-12">
