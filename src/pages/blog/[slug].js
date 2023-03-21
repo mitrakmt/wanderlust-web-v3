@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArticleJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 // Utils
 import request from '../../utils/request';
