@@ -303,7 +303,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                         {/* COMMENTS */}
                         <section className="not-format">
                             <div className="flex justify-between items-center mb-6">
-                                <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion ({ comments.length })</h2>
+                                <p className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion ({ comments.length })</p>
                             </div>
                             {/* Show UI that adding comments is for logged in users only */}
                             {
