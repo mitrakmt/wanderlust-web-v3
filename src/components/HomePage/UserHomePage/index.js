@@ -98,7 +98,7 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
                                 <div className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded-b-lg shadow-lg dark:bg-gray-700 dark:border-gray-600">
                                     {
                                         locations.map((location) => (
-                                            <div key={`userhomepage-searchlocations-${location.id}`} className="flex items-center justify-between px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-500" onClick={() => navigateTo(location.id)}>
+                                            <div key={`userhomepage-searchlocations-${location.id}`} className="flex items-center justify-between px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-500" onClick={() => navigateTo(location.slug)}>
                                                 <div className="flex items-center">
                                                     <div className="flex-shrink-0">
                                                         <img className="h-10 w-10 rounded-full" src={location.image_url_thumb} alt="" />
