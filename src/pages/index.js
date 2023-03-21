@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
-import { NextSeo } from 'next-seo';
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -123,32 +122,24 @@ export default function Home({ posts }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <title>Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion</title>
+        <meta name="description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
+
+        {/* <!-- Open Graph / Facebook --> */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion" />
+        <meta property="og:url" content={`https://www.wanderlustapp.io`} />
+        <meta property="og:description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
+        <meta property="og:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
+
+        {/* <!-- Twitter --> */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion" />
+        <meta property="twitter:url" content={`https://www.wanderlustapp.io`} />
+        <meta property="twitter:description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
+        <meta property="twitter:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
       </Head>
 
-      <NextSeo
-        title="Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion"
-        description="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today."
-        openGraph={{
-            type: 'website',
-            locale: 'en_IE',
-            url: 'https://www.wanderlustapp.io/',
-            siteName: 'Wanderlust App',
-            images: [
-              {
-                url: `https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg`,
-                width: 800,
-                height: 800,
-                alt: "Wanderlust App",
-              },
-            ],
-        }}
-        canonical='https://www.wanderlustapp.io'
-        twitter={{
-            handle: '@wanderlustext',
-            site: '@wanderlustext',
-            cardType: 'summary_large_image',
-        }}
-    />
       {/* NEW USER HOMGEPAGE  */}
       <section className="w-full absolute overflow-hidden pr-0 top-0 left-0 right-0 ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/80 dark:bg-gray-900/80" style={{ zIndex: 49 }}>
         {

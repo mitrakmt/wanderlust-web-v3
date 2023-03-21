@@ -1,5 +1,5 @@
 import Profile from '../../shared_pages/profile';
-import { SocialProfileJsonLd, NextSeo } from 'next-seo';
+import { SocialProfileJsonLd } from 'next-seo';
 
 // Update for reviews 
 // Revalidate? or something
