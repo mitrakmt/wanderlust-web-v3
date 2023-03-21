@@ -59,6 +59,19 @@ export default function MyApp({ Component, pageProps }) {
                                                                         <title>Plan Your Dream Trip | Wanderlust App - Your Travel Companion</title>
                                                                         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                                                                         <meta name="description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
+                                                                        <meta property="og:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
+                                                                        <meta property="og:image:width" content="800" />
+                                                                        <meta property="og:image:height" content="600" />
+                                                                        <meta property="og:image:alt" content="Wanderlust App" />
+                                                                        <meta property="og:type" content="website" />
+                                                                        <meta property="og:locale" content="en_IE" />
+                                                                        <meta property="og:url" content="https://www.wanderlustapp.io/" />
+                                                                        <meta property="og:site_name" content="Wanderlust App" />
+                                                                        <meta name="twitter:card" content="summary_large_image" />
+                                                                        <meta name="twitter:site" content="@wanderlustext" />
+                                                                        <meta name="twitter:creator" content="@wanderlustext" />
+                                                                        <meta property="twitter:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
+                                                                        <meta property="twitter:image:alt" content="Wanderlust App" />
                                                                     </Head>
                                                                     <Component {...pageProps} />
                                                                     <Analytics />
