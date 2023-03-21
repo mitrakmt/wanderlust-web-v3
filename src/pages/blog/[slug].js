@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArticleJsonLd, NextSeo } from 'next-seo';
+import { ArticleJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
 
 // Utils
@@ -142,7 +142,7 @@ export default function BlogPost({ blog, relatedArticles }) {
     // Hooks
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <NextSeo
+            {/* <NextSeo
                 title={`${blog.title} | Wanderlust App Blogs`}
                 description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
                 canonical={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
@@ -166,7 +166,25 @@ export default function BlogPost({ blog, relatedArticles }) {
                     site: '@wanderlustext',
                     cardType: 'summary_large_image',
                 }}
-            />
+            /> */}
+            <Head>
+                <title>{`${blog.title} | Wanderlust App Blogs`}</title>
+                <meta name="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={`${blog.title} | Wanderlust App Blogs`} />
+                <meta property="og:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
+                <meta property="og:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta property="og:image" content={blog?.image_url} />
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content={`${blog.title} | Wanderlust App Blogs`} />
+                <meta property="twitter:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
+                <meta property="twitter:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta property="twitter:image" content={blog?.image_url} />
+            </Head>
             <ArticleJsonLd
                 url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
                 title={`${blog?.title} | Wanderlust App Blogs`}
