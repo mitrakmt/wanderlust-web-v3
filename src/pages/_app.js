@@ -1,8 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
-import { DefaultSeo } from 'next-seo';
-import SEO from '../../next-seo.config';
-
-const { metas } = SEO;
+import Head from 'next/head';
 
 // Hooks
 import { AuthProvider } from "../hooks/useAuth";
@@ -58,7 +55,11 @@ export default function MyApp({ Component, pageProps }) {
                                                         <CommunityProvider>
                                                             <Layout>
                                                                 <ErrorBoundary>
-                                                                    <DefaultSeo {...metas} />
+                                                                    <Head>
+                                                                        <title>Plan Your Dream Trip | Wanderlust App - Your Travel Companion</title>
+                                                                        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                                                                        <meta name="description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
+                                                                    </Head>
                                                                     <Component {...pageProps} />
                                                                     <Analytics />
                                                                 </ErrorBoundary>
