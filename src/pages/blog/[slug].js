@@ -15,6 +15,7 @@ import { useAuth } from '../../hooks/useAuth';
 import Footer from '../../components/Footer';
 import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
 import BlogCard from '../../components/BlogCard';
+import CityRow from '../../components/CityRow';
 
 export async function getStaticProps({ params: { slug, city, country } }) {
     if (!slug) {
@@ -72,7 +73,6 @@ export async function getStaticPaths() {
 }
 
 export default function BlogPost({ blog, relatedArticles }) {
-    console.log('relatedArticles', relatedArticles)
     // Hooks
     const { user, userLoading } = useAuth();
     const router = useRouter();
@@ -180,7 +180,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                 isAccessibleForFree={true}
             />
             <BreadCrumb breadCrumbHome={"Blogs"} goToHome={() => router.push('/blog')} secondName={blog.title} />
-            <main className="pt-8 mt-4 pb-16 lg:pt-16 lg:pb-24 dark:bg-gray-900">
+            <main className="pt-8 mt-4 pb-16 lg:pt-16 lg:pb-8 dark:bg-gray-900">
                 <div className="flex flex-col justify-between px-4 mx-auto max-w-screen-xl ">
                     <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                         <header className="mb-4 lg:mb-6 not-format">
@@ -195,6 +195,9 @@ export default function BlogPost({ blog, relatedArticles }) {
                                 </div>
                             </address>
                             <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{blog.title}</h1>
+                            {/* City info */}
+                            <CityRow cities={[blog.city]} pageIndex="2" />
+
                         </header>
                         {
                             blog.image_url && (
@@ -260,6 +263,8 @@ export default function BlogPost({ blog, relatedArticles }) {
                             <hr />
                         </div>
                         <p className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">Wanderlust App was created to make it easy to discover the most beautiful places across the world. From an AI travel assistant to planning the perfect trip and tracking all the places you want to visit around the world, <a href="https://wanderlustapp.io">Wanderlust App</a> will help you do it all.</p>
+                    
+                        
                         {/* COMMENTS */}
                         <section className="not-format">
                             <div className="flex justify-between items-center mb-6">
@@ -343,6 +348,8 @@ export default function BlogPost({ blog, relatedArticles }) {
                         </section>
                     </article>
                 </div>
+                {/* City info */}
+                <CityRow cities={[blog.city]} pageIndex="2" />
             </main>
 
                 <aside aria-label="Related articles" className="py-8 lg:py-24">
