@@ -12,6 +12,7 @@ export default function PlacesToTryTab({ places, setPlaces, geocodeByPlaceId, Go
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [showSidebar, setShowSidebar] = useState(false);
 
+    // Functions
     const removePlace = (placeId) => {
         setPlaces(places?.filter((place) => place.id !== placeId))
 

@@ -95,29 +95,29 @@ export default function Maps() {
                 <div className="ml-auto">
                     {
                         currentTab === 'favorites' && (
-                            <div className="flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
-                                <span className="mr-2">Favorites - Add your favorite places from around the world!</span>
+                            <div className="flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
+                                <span className="mr-1 sm:mr-2">Favorites - Add your favorite places from around the world!</span>
                             </div>
                         )
                     }
                     {
                         currentTab === 'placesToTry' && (
-                            <div className="flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
-                                <span className="mr-2">Places to Try - Add places you want to try in the future.</span>
+                            <div className="flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
+                                <span className="mr-1 sm:mr-2">Places to Try - Add places you want to try in the future.</span>
                             </div>
                         )
                     }
                     {
                         currentTab === 'bucketList' && (
-                            <div className="flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
-                                <span className="mr-2">Travel Bucket List - Add cities you want to visit around the world!</span>
+                            <div className="flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
+                                <span className="mr-1 sm:mr-2">Travel Bucket List - Add cities you want to visit around the world!</span>
                             </div>
                         )
                     }
                     {
                         currentTab === 'passport' && (
-                            <div className="flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
-                                <span className="mr-2">Digital Passport - Keep track of the countries you have been to.</span>
+                            <div className="flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
+                                <span className="mr-1 sm:mr-2">Digital Passport - Keep track of the countries you have been to.</span>
                             </div>
                         )
                     }

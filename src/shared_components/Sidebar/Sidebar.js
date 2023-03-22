@@ -292,8 +292,8 @@ function Sidebar({ user, router, userLoading, logout }) {
                         
                         {
                             user && (
-                                <button type="button" onClick={toggleProfileDropdown} className="flex items-center justify-center mr-3 text-sm bg-gray-800 rounded-full">
-                                    <Image className="w-8 h-8 rounded-full ml-2" width={30} height={30} src={user?.profile_image || "https://wanderlust-extension.s3.us-west-2.amazonaws.com/no-user.webp"} alt={`${user?.name} Profile Picture`} />
+                                <button type="button" onClick={toggleProfileDropdown} className="border-0 flex items-center justify-center mr-3 text-sm rounded-full">
+                                    <Image className="w-10 h-10 rounded-full" width={120} height={120} src={user?.profile_image || "https://wanderlust-extension.s3.us-west-2.amazonaws.com/no-user.webp"} alt={`${user?.name} Profile Picture`} />
                                 </button>
                             )
                         }

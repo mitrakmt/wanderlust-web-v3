@@ -189,6 +189,7 @@ export default function CityGoogleSidebar({ showSidebar, setShowSidebar, geocode
                         <div className="mt-2 relative text-red-500">{errorMessage}</div>
                     )
                 }
+                
                 <div className="flex justify-center w-full pb-4 space-x-4 md:px-4 mt-4">
                     <button type="submit" onClick={addPlace} className="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                         Add place

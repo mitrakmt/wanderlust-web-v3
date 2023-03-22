@@ -20,6 +20,14 @@ export default function NomadTools() {
             details: "42 / month"
         },
         {
+            name: "SkipLagged",
+            type: "Flights",
+            link: "https://skiplagged.com/?rfsn=4608264.1c5b8",
+            image: "https://skiplagged.com/r/wanderlustapp",
+            description: "Find cheap flights with Skiplagged. We search hundreds of airlines to find the cheapest flights.",
+            details: "Free"
+        },
+        {
             name: "Wise",
             type: "Money",
             link: "https://wise.prf.hn/l/eYNoY28",

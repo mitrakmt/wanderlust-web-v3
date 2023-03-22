@@ -69,7 +69,7 @@ export default function CitySidebar({ showSidebar, toggleSidebar, toVisit, setTo
                 <div className="rounded-lg bg-gray-50 dark:bg-gray-800 w-full" id="search" role="tabpanel" aria-labelledby="search">
                         <div className="flex w-full">
                         
-                            <div className="w-full">   
+                            <div className="w-full">
                                 <div className="relative">
                                     <Input
                                         onChange={(e) => updateSearchTerm(e.target.value)}
@@ -121,9 +121,9 @@ export default function CitySidebar({ showSidebar, toggleSidebar, toVisit, setTo
                                     Close
                                 </button>
                             </div>
-                            </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     )
