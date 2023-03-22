@@ -22,8 +22,8 @@ export default function NomadTools() {
         {
             name: "SkipLagged",
             type: "Flights",
-            link: "https://skiplagged.com/?rfsn=4608264.1c5b8",
-            image: "https://skiplagged.com/r/wanderlustapp",
+            link: "https://skiplagged.com/r/wanderlustapp",
+            image: "https://play-lh.googleusercontent.com/j5MAf3_xrajtn8p337-hRlLpSguTT37NYG2eHVrUejTt7txBu3PhrccMwsC7jfgehAU",
             description: "Find cheap flights with Skiplagged. We search hundreds of airlines to find the cheapest flights.",
             details: "Free"
         },
@@ -39,7 +39,7 @@ export default function NomadTools() {
             name: "Surfshark VPN",
             type: "VPN",
             link: "https://surfshark.club/friend/M8XZbMJZ",
-            image: "https://wanderlust-extension.s3.us-west-2.amazonaws.com/surfshark_logo.png",
+            image: "https://asset.brandfetch.io/id_oq1LNMK/idXWkiBaFy.jpeg",
             description: "Surfshark is a VPN that keeps you safe online and lets you access any content you want.",
             details: "83% Off"
         },
