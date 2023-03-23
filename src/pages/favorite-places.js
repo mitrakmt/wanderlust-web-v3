@@ -59,13 +59,13 @@ export default function FavoritePlacesFeaturePage() {
                         </Link>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                        <Image width={800} height={600} className="object-contain dark:hidden" src="/favoritePlacesLight1.png" alt="dashboard image" />
-                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/favoritePlacesDark1.png" alt="dashboard image" />
+                        <Image width={800} height={600} className="object-contain dark:hidden" src="/favoritePlacesLight.png" alt="Wanderlust Favorite Places" />
+                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/favoritePlacesDark.png" alt="Wanderlust Favorite Places" />
                     </div>                
                 </div>
                 <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                    <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/favoritePlacesLight2.png" alt="dashboard image" />
-                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/favoritePlacesDark2.png" alt="dashboard image" />
+                    {/* <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/favoritePlacesLight2.png" alt="Wanderlust Favorite Places" />
+                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/favoritePlacesDark2.png" alt="Wanderlust Favorite Places" /> */}
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Share your Favorites Easily</h2>
                         <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Favorite Places feature is designed to help you keep track of your most cherished destinations and share them with others. With just a few clicks, you can save your favorite places to your profile and share them with friends, family, or other travelers. Plus, with the ability to see other traveler's favorite places for any city you're interested in, you'll have insider information on the best places to go and things to see.</p>

@@ -59,13 +59,13 @@ export default function WanderlustCommunityFeaturePage() {
                         </Link>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                        <Image width={800} height={600} className="object-contain dark:hidden" src="/communityLight1.png" alt="dashboard image" />
-                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/communityDark1.png" alt="dashboard image" />
+                        <Image width={800} height={600} className="object-contain dark:hidden" src="/communityLight1.png" alt="Wanderlust Community" />
+                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/communityDark1.png" alt="Wanderlust Community" />
                     </div>                
                 </div>
                 <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                    <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/communityLight2.png" alt="dashboard image" />
-                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/communityDark2.png" alt="dashboard image" />
+                    <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/communityLight2.png" alt="Wanderlust Community" />
+                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/communityDark2.png" alt="Wanderlust Community" />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">A Global Network of Travelers</h2>
                         <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Wanderlust Community feature is designed to help you connect with other travelers and discover new destinations, insider tips, and advice from those who have been there before. With a community of digital nomads and travelers from around the world, you'll have access to a wealth of knowledge and experience that will make your travel adventures even more memorable.</p>

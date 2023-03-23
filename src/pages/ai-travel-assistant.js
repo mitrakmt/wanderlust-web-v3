@@ -59,13 +59,13 @@ export default function TravelAssistantFeaturePage() {
                         </Link>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                        <Image width={800} height={600} className="object-contain dark:hidden" src="/assistantLight1.png" alt="dashboard image" />
-                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/assistantDark1.png" alt="dashboard image" />
+                        <Image width={800} height={600} className="object-contain dark:hidden" src="/assistantLight1.png" alt="Wanderlust AI Travel Assistant" />
+                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/assistantDark1.png" alt="Wanderlust AI Travel Assistant" />
                     </div>                
                 </div>
                 <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                    <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/assistantLight2.png" alt="dashboard image" />
-                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/assistantDark2.png" alt="dashboard image" />
+                    <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/assistantLight2.png" alt="Wanderlust AI Travel Assistant" />
+                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/assistantDark2.png" alt="Wanderlust AI Travel Assistant" />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Personalized</h2>
                         <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our AI Travel Assistant is the perfect tool for digital nomads and travelers who are constantly on the go. With our custom trained travel AI, you can easily get personalized recommendations for your next trip. Whether you're looking for the best place to stay, eat, or explore, our travel AI can help you find the perfect match for your travel preferences.</p>

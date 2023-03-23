@@ -59,13 +59,13 @@ export default function HaveTraveledToFeaturePage() {
                         </Link>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                        <Image width={800} height={600} className="object-contain dark:hidden" src="/haveTraveledToLight1.png" alt="dashboard image" />
-                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/haveTraveledToDark1.png" alt="dashboard image" />
+                        <Image width={800} height={600} className="object-contain dark:hidden" src="/haveTraveledToLight1.png" alt="Wanderlust Have Traveled To" />
+                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/haveTraveledToDark1.png" alt="Wanderlust Have Traveled To" />
                     </div>                
                 </div>
                 <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                    <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/haveTraveledToLight2.png" alt="dashboard image" />
-                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/haveTraveledToDark2.png" alt="dashboard image" />
+                    <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/haveTraveledToLight2.png" alt="Wanderlust Have Traveled To" />
+                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/haveTraveledToDark2.png" alt="Wanderlust Have Traveled To" />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Travel achievements</h2>
                         <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Have Traveled To feature is designed to help you keep track of the countries you've visited and celebrate your travel achievements. With just a few clicks, you can add countries to your profile and see your progress towards visiting every corner of the world. Plus, with fun statistics like "% of the world you've traveled", you can get a sense of your travel journey in a whole new way.</p>

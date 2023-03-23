@@ -54,13 +54,13 @@ export default function CityDetailsFeaturePage() {
                         </Link>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                        <Image width={800} height={600} className="object-contain dark:hidden" src="/cityDetailsLight3.png" alt="dashboard image" />
-                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/cityDetailsDark3.png" alt="dashboard image" />
+                        <Image width={800} height={600} className="object-contain dark:hidden" src="/cityDetailsLight3.png" alt="Wanderlust City Details" />
+                        <Image width={800} height={600} className="object-contain hidden dark:block" src="/cityDetailsDark3.png" alt="Wanderlust City Details" />
                     </div>                
                 </div>
                 <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                    <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/cityDetailsLight2.png" alt="dashboard image" />
-                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/cityDetailsDark2.png" alt="dashboard image" />
+                    <Image width={800} height={600} className="object-contain w-full dark:hidden" src="/cityDetailsLight2.png" alt="Wanderlust City Details" />
+                    <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/cityDetailsDark2.png" alt="Wanderlust City Details" />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Everything You Need to Know</h2>
                         <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our City Details feature is designed to give you an in-depth view of each city, so you can make informed decisions on where to go and what to do. From popular tourist attractions to hidden gems, our comprehensive guide covers it all. Plus, with insider information and local favorites, you'll get a unique perspective on each city that you won't find anywhere else.</p>
