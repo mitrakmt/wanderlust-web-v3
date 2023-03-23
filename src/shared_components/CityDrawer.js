@@ -88,7 +88,7 @@ export default function PlacesMap({ closePlaceOverlay, isPublicMap, removePlace,
             </div>
 
             {/* MODAL */}
-            <div tabindex="-1" aria-hidden="true" className={`fixed flex flex-col items-center justify-center top-0 left-0 bg-gray-100/80 dark:bg-gray-800/80 z-50 ${!showMobileTerms && "hidden"} w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full`}>
+            <div tabIndex="-1" aria-hidden="true" className={`fixed flex flex-col items-center justify-center top-0 left-0 bg-gray-100/80 dark:bg-gray-800/80 z-50 ${!showMobileTerms && "hidden"} w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full`}>
                 <div className="relative w-full h-full max-w-2xl md:h-auto">
                     {/* <!-- Modal content --> */}
                     <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">

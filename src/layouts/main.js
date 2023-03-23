@@ -185,7 +185,7 @@ export default function Main({ children, countries }) {
     
     
   return (
-    <div className="overflow-scroll scroll-smooth bg-gray-100 dark:bg-gray-900 min-h-screen max-h-screen w-full">
+    <div className="overflow-hidden scroll-smooth bg-gray-100 dark:bg-gray-900 min-h-screen max-h-screen w-full">
         {
             showOfflineSnackbar && <OfflineSnackbar closeSnackbar={() => setShowOfflineSnackbar(false)} />
         }

@@ -77,46 +77,46 @@ export default function Maps() {
                 {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <div className="flex flex-col lg:flex-row">
-                <ul className="px-4 ml-0 sm:ml-16 flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
-                    <li className="mr-2">
-                        <a onClick={() => changeTab('favorites')} className={`cursor-pointer inline-block p-4 ${currentTab === 'favorites' ? "text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"}`}>Favorites</a>
+                <ul className="px-2 sm:px-4 ml-0 sm:ml-16 flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+                    <li className="mr-1 sm:mr-2">
+                        <a onClick={() => changeTab('favorites')} className={`text-xs sm:text-sm cursor-pointer inline-block p-4 ${currentTab === 'favorites' ? "text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"}`}>Favorites</a>
                     </li>
-                    <li className="mr-2">
-                        <a onClick={() => changeTab('placesToTry')} className={`cursor-pointer inline-block p-4 ${currentTab === 'placesToTry' ? "text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"}`}>Places to Try</a>
+                    <li className="mr-1 sm:mr-2">
+                        <a onClick={() => changeTab('placesToTry')} className={`text-xs sm:text-sm cursor-pointer inline-block p-4 ${currentTab === 'placesToTry' ? "text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"}`}>Places to Try</a>
                     </li>
-                    <li className="mr-2">
-                        <a onClick={() => changeTab('bucketList')} className={`cursor-pointer inline-block p-4 ${currentTab === 'bucketList' ? "text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"}`}>Bucket List</a>
+                    <li className="mr-1 sm:mr-2">
+                        <a onClick={() => changeTab('bucketList')} className={`text-xs sm:text-sm cursor-pointer inline-block p-4 ${currentTab === 'bucketList' ? "text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"}`}>Bucket List</a>
                     </li>
-                    <li className="mr-2">
-                        <a onClick={() => changeTab('passport')} className={`cursor-pointer inline-block p-4 ${currentTab === 'passport' ? "text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"}`}>Passport</a>
+                    <li className="mr-1 sm:mr-2">
+                        <a onClick={() => changeTab('passport')} className={`text-xs sm:text-sm cursor-pointer inline-block p-4 ${currentTab === 'passport' ? "text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"}`}>Passport</a>
                     </li>
                 </ul>
 
                 <div className="ml-auto">
                     {
                         currentTab === 'favorites' && (
-                            <div className="flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
+                            <div className="hidden sm:flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
                                 <span className="mr-1 sm:mr-2">Favorites - Add your favorite places from around the world!</span>
                             </div>
                         )
                     }
                     {
                         currentTab === 'placesToTry' && (
-                            <div className="flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
+                            <div className="hidden sm:flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
                                 <span className="mr-1 sm:mr-2">Places to Try - Add places you want to try in the future.</span>
                             </div>
                         )
                     }
                     {
                         currentTab === 'bucketList' && (
-                            <div className="flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
+                            <div className="hidden sm:flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
                                 <span className="mr-1 sm:mr-2">Travel Bucket List - Add cities you want to visit around the world!</span>
                             </div>
                         )
                     }
                     {
                         currentTab === 'passport' && (
-                            <div className="flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
+                            <div className="hidden sm:flex items-center justify-center px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-400">
                                 <span className="mr-1 sm:mr-2">Digital Passport - Keep track of the countries you have been to.</span>
                             </div>
                         )

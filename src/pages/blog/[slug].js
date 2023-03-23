@@ -94,8 +94,10 @@ export default function BlogPost({ blog, relatedArticles }) {
     }, [blog]);
 
     useEffect(()=>{
-      const handleRouteChange = () => {
-          document.getElementById('top').scrollIntoView();
+        const handleRouteChange = () => {
+            if (document.getElementById('top')) {
+                document.getElementById('top').scrollIntoView();
+            }
         }
         router.events.on('routeChangeComplete', handleRouteChange)
     }, []);

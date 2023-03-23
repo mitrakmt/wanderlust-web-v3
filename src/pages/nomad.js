@@ -67,6 +67,11 @@ export default function NomadTools() {
         }
     }, [user])
 
+    // Functions
+    const navigateToOffer = (link) => {
+        window.open(link, '_blank')
+    }
+
     // Offers to check - flights? airbnb? hotels? vrbo? digital nomad services?
     
     return (
@@ -104,7 +109,7 @@ export default function NomadTools() {
                                 <h3 className="mb text-xl font-bold dark:text-white">{offer.name}</h3>
                                 <p className="text-gray-500 text-xs dark:text-gray-400 mb-2">{offer.type}</p>
                                 <p className="text-gray-500 dark:text-gray-400">{offer.description}</p>
-                                <button onClick={offer.link} target="_blank" className="mt-4 px-4 py-2 bg-primary-500 rounded-lg text-sm font-semibold text-gray-200 dark:text-gray-200">{offer.details}</button>
+                                <button onClick={() => navigateToOffer(offer.link)} target="_blank" className="mt-4 px-4 py-2 bg-primary-500 rounded-lg text-sm font-semibold text-gray-200 dark:text-gray-200">{offer.details}</button>
                             </div>
                         ))
                     }
