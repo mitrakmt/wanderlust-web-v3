@@ -93,13 +93,17 @@ export default function BlogPost({ blog, relatedArticles }) {
         }
     }, [blog]);
 
-    useEffect(()=>{
+    useEffect(() => {
         const handleRouteChange = () => {
             if (document.getElementById('top')) {
                 document.getElementById('top').scrollIntoView();
             }
         }
         router.events.on('routeChangeComplete', handleRouteChange)
+
+        return () => {
+            window.removeEventListener("routeChangeComplete", handleRouteChange) // this event listener is removed after the new route loads
+        }
     }, []);
 
     useEffect(() => {

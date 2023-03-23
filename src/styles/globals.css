@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+html { height: 100%; }
+
 /* Define some variables to allow switching for light and dark modes */
 :root {
   --body-color: rgb(52, 52, 52);

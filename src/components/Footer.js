@@ -46,6 +46,32 @@ export default function Footer() {
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <p className="mb-6 text-sm font-bold text-gray-500 uppercase dark:text-gray-400">Features</p>
+                    <ul className="text-gray-500 dark:text-gray-400">
+                        <Link href="/ai-travel-assistant"><li className="mb-4">
+                            <p className="hover:underline">AI Travel Assistant</p>
+                        </li></Link>
+                        <Link href="/travel-bucket-list"><li className="mb-4">
+                            <p className="hover:underline">Travel Bucket List</p>
+                        </li></Link>
+                        <Link href="/want-to-travel-list"><li className="mb-4">
+                            <p className="hover:underline">Want to Travel List</p>
+                        </li></Link>
+                        <Link href="/favorite-places"><li className="mb-4">
+                            <p className="hover:underline">Favorite Places</p>
+                        </li></Link>
+                        <Link href="/have-traveled-to"><li className="mb-4">
+                            <p className="hover:underline">Traveled To List</p>
+                        </li></Link>
+                        <Link href="/wanderlust-community"><li className="mb-4">
+                            <p className="hover:underline">Wanderlust Community</p>
+                        </li></Link>
+                        <Link href="/city-details"><li className="mb-4">
+                            <p className="hover:underline">City Details</p>
+                        </li></Link>
+                    </ul>
+                </div>
             </div>
             <div className="px-4 py-6 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between">
                 <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2023 <a href="https://wanderlustapp.io" aria-label="Wanderlust App">WanderlustApp™</a>. All Rights Reserved.</span>
