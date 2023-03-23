@@ -26,35 +26,38 @@ export default function WantToTravelListFeaturePage() {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
-                <title>Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts</title>
-                <meta name="description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
+                <title>Keep Track of Your Future Travel Plans with Wanderlust App</title>
+                <meta name="description" content="Wanderlust App's Want to Travel To List feature lets you keep track of all the places you want to visit in the future, whether it's a restaurant in a city, a sight on an upcoming vacation, or a secret beach. Stay organized and plan your next adventure with ease." />
 
                 {/* <!-- Open Graph / Facebook --> */}
                 <meta property="og:type" content="website" />
-                <meta property="og:title" content="Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts" />
+                <meta property="og:title" content="Keep Track of Your Future Travel Plans with Wanderlust App" />
                 <meta property="og:url" content="https://www.wanderlustapp.io/team" />
-                <meta property="og:description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
+                <meta property="og:description" content="Wanderlust App's Want to Travel To List feature lets you keep track of all the places you want to visit in the future, whether it's a restaurant in a city, a sight on an upcoming vacation, or a secret beach. Stay organized and plan your next adventure with ease." />
+                <meta property="og:image" content={"/travelListDark.png"} />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content="Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts" />
+                <meta property="twitter:title" content="Keep Track of Your Future Travel Plans with Wanderlust App" />
                 <meta property="twitter:url" content="https://www.wanderlustapp.io/team" />
-                <meta property="twitter:description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
+                <meta property="twitter:description" content="Wanderlust App's Want to Travel To List feature lets you keep track of all the places you want to visit in the future, whether it's a restaurant in a city, a sight on an upcoming vacation, or a secret beach. Stay organized and plan your next adventure with ease." />
+                <meta property="twitter:image" content={"/travelListDark.png"} />
             </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6" id="top">
                 <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div className="mr-auto place-self-center lg:col-span-7">
+                        {/* PRO TAG */}
+                        <div className="flex items-center justify-center w-12 px-2 py-1 mr-2 text-xs font-medium leading-4 text-white uppercase bg-red-500 rounded-full hover:bg-primary-800 transition-colors cursor-pointer">
+                            <Link href="/pro" className="w-full flex items-center justify-center">
+                                <span className="text-white">PRO</span>
+                            </Link>
+                        </div>
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Track the Places You Want To Travel To</h1>
                         <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Have you ever heard about a must-see restaurant in a city or a secret beach that you just have to visit, only to forget about it later? With Wanderlust App's Want to Travel To List feature, you'll never miss out on your dream destinations again. Keep track of all the amazing places you want to visit in the future, from hidden gems to iconic landmarks, and never forget a travel goal again.</p>
-                        <a href="#" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                        <Link href="/pro" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Get started
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                        </a>
-                        <a href="#" className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                            Speak to Sales
-                        </a> 
+                        </Link>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
                         <Image width={800} height={600} className="object-contain dark:hidden" src="/travelListLight.png" alt="dashboard image" />
@@ -67,93 +70,48 @@ export default function WantToTravelListFeaturePage() {
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Making the Most of Your Travel Experiences</h2>
                         <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Want to Travel To List feature is the perfect tool for digital nomads and travelers who want to make the most of their travel experiences. Whether you're planning an upcoming vacation or simply looking for inspiration for your next adventure, this feature lets you keep track of all the places you want to visit in one convenient location. From restaurants and bars to museums and attractions, you can add any travel goal to your list and easily check them off as you go.</p>
-                        <a href="#" className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                        <Link href="/pro" className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                             Get started
                             <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
                     <div className="max-w-2xl mx-auto text-center">
                         <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl dark:text-white">
-                            Our work
+                            Want to Travel List Benefits
                         </h2>
                         <p className="mt-4 text-base font-normal text-gray-500 sm:text-xl dark:text-gray-400">
-                            Crafted with skill and care to help our clients grow their business!
+                            As seasoned digital nomads and travelers, we know what it takes to plan the perfect trip. That's why we created Wanderlust App with all the essential tools for digital nomads and travelers. With our app, you can stay organized, plan your trips, discover new places, connect with other travelers, and so much more. Here are just a few of the many benefits that come with using our app.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 mt-12 text-center sm:mt-16 gap-x-20 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                         <div className="space-y-4">
-                            <span
-                                className="bg-gray-100 text-gray-900 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                                Alphabet Inc.
-                            </span>
                             <h3 className="text-2xl font-bold leading-tight text-gray-900 dark:text-white">
                                 Stay Organized
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
                                 Keep all of your travel goals and bucket list items in one place, so you never forget a must-see destination again.
                             </p>
-                            <a href="#" title=""
-                                className="text-white bg-primary-700 justify-center hover:bg-primary-800 inline-flex items-center  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                role="button">
-                                View case study
-                                <svg aria-hidden="true" className="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fillRule="evenodd"
-                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                    clipRule="evenodd" />
-                                </svg>
-                            </a>
                         </div>
 
                         <div className="space-y-4">
-                            <span
-                                className="bg-gray-100 text-gray-900 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                                Microsoft Corp.
-                            </span>
                             <h3 className="text-2xl font-bold leading-tight text-gray-900 dark:text-white">
                                 Easily Share
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
                             Share your Want to Travel To List with friends and fellow travelers to inspire their next adventure or plan your next trip together.
                             </p>
-                            <a href="#" title=""
-                                className="text-white bg-primary-700 justify-center hover:bg-primary-800 inline-flex items-center  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                role="button">
-                                View case study
-                                <svg aria-hidden="true" className="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fillRule="evenodd"
-                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                    clipRule="evenodd" />
-                                </svg>
-                            </a>
                         </div>
 
                         <div className="space-y-4">
-                            <span
-                            className="bg-gray-100 text-gray-900 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                            Adobe Inc.
-                            </span>
                             <h3 className="text-2xl font-bold leading-tight text-gray-900 dark:text-white">
                                 Discover New Destinations
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
                                 Get inspired by new and exciting destinations from other traveler's lists, and add them to your own list for future travel goals.
                             </p>
-                            <a href="#" title=""
-                            className="text-white bg-primary-700 justify-center hover:bg-primary-800 inline-flex items-center  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                            role="button">
-                            View case study
-                            <svg aria-hidden="true" className="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    fillRule="evenodd"
-                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"
-                                />
-                            </svg>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -166,7 +124,6 @@ export default function WantToTravelListFeaturePage() {
                             <p className="text-2xl font-medium text-gray-900 dark:text-white">"I love Wanderlust App's Want to Travel To List feature. I'm always hearing about amazing places to visit from friends or online, and this feature lets me keep track of them all in one place. Plus, it's so easy to share my list with friends and plan our next adventure together. I highly recommend this feature to anyone who loves to travel and wants to make the most of their experiences"</p>
                         </blockquote>
                         <figcaption className="flex items-center justify-center mt-6 space-x-3">
-                            <img className="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png" alt="profile picture" />
                             <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                                 <div className="pr-3 font-medium text-gray-900 dark:text-white">Jason R.</div>
                             </div>

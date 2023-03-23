@@ -26,35 +26,32 @@ export default function CityDetailsFeaturePage() {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
-                <title>Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts</title>
-                <meta name="description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
+                <title>Explore Cities Like a Local with Wanderlust App's City Details</title>
+                <meta name="description" content="Wanderlust App's City Details feature gives you an in-depth look into each city with insider information, reviews, and more. Discover the best places to visit and local favorites like a true local." />
 
                 {/* <!-- Open Graph / Facebook --> */}
                 <meta property="og:type" content="website" />
-                <meta property="og:title" content="Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts" />
+                <meta property="og:title" content="Explore Cities Like a Local with Wanderlust App's City Details" />
                 <meta property="og:url" content="https://www.wanderlustapp.io/team" />
-                <meta property="og:description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
+                <meta property="og:description" content="Wanderlust App's City Details feature gives you an in-depth look into each city with insider information, reviews, and more. Discover the best places to visit and local favorites like a true local." />
+                <meta property="og:image" content={'/cityDetailsDark2.png'} />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content="Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts" />
+                <meta property="twitter:title" content="Explore Cities Like a Local with Wanderlust App's City Details" />
                 <meta property="twitter:url" content="https://www.wanderlustapp.io/team" />
-                <meta property="twitter:description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
+                <meta property="twitter:description" content="Wanderlust App's City Details feature gives you an in-depth look into each city with insider information, reviews, and more. Discover the best places to visit and local favorites like a true local." />
+                <meta property="twitter:image" content={'/cityDetailsDark2.png'} />
             </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6" id="top">
                 <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div className="mr-auto place-self-center lg:col-span-7">
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">City Information from the Best Places Around the World</h1>
                         <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Discover the world like never before with Wanderlust App's City Details feature. With detailed information on the best places to visit, local favorites, insider information, and reviews, you'll have everything you need to make the most of your trip. Whether you're a digital nomad, traveler, or simply looking for your next adventure, our City Details feature has got you covered.</p>
-                        <a href="#" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                        <Link href="/search" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Get started
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                        </a>
-                        <a href="#" className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                            Speak to Sales
-                        </a> 
+                        </Link>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
                         <Image width={800} height={600} className="object-contain dark:hidden" src="/cityDetailsLight3.png" alt="dashboard image" />
@@ -67,10 +64,10 @@ export default function CityDetailsFeaturePage() {
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Everything You Need to Know</h2>
                         <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our City Details feature is designed to give you an in-depth view of each city, so you can make informed decisions on where to go and what to do. From popular tourist attractions to hidden gems, our comprehensive guide covers it all. Plus, with insider information and local favorites, you'll get a unique perspective on each city that you won't find anywhere else.</p>
-                        <a href="#" className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
+                        <Link href="/search" className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                             Get started
                             <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
@@ -88,84 +85,39 @@ export default function CityDetailsFeaturePage() {
                 <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
                     <div className="max-w-2xl mx-auto text-center">
                         <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl dark:text-white">
-                            Our work
+                            City Details for Nomads Benefits
                         </h2>
                         <p className="mt-4 text-base font-normal text-gray-500 sm:text-xl dark:text-gray-400">
-                            Crafted with skill and care to help our clients grow their business!
+                            At Wanderlust App, we know that every traveler wants to experience the true essence of a city. That's why we created City Details, which gives you an in-depth view into each city, with insider information, reviews, and more. Here are just a few of the many benefits of using our City Details feature:
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 mt-12 text-center sm:mt-16 gap-x-20 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                         <div className="space-y-4">
-                            <span
-                                className="bg-gray-100 text-gray-900 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                                Alphabet Inc.
-                            </span>
                             <h3 className="text-2xl font-bold leading-tight text-gray-900 dark:text-white">
                                 Insider Information
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
                                 Get a local's perspective on each city with our insider information, giving you an authentic travel experience.
                             </p>
-                            <a href="#" title=""
-                                className="text-white bg-primary-700 justify-center hover:bg-primary-800 inline-flex items-center  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                role="button">
-                                View case study
-                                <svg aria-hidden="true" className="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fillRule="evenodd"
-                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                    clipRule="evenodd" />
-                                </svg>
-                            </a>
                         </div>
 
                         <div className="space-y-4">
-                            <span
-                                className="bg-gray-100 text-gray-900 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                                Microsoft Corp.
-                            </span>
                             <h3 className="text-2xl font-bold leading-tight text-gray-900 dark:text-white">
                                 Comprehensive Guide
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
                                 Our City Details feature covers everything you need to know about each city, from the best places to visit to the local cuisine and culture
                             </p>
-                            <a href="#" title=""
-                                className="text-white bg-primary-700 justify-center hover:bg-primary-800 inline-flex items-center  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                role="button">
-                                View case study
-                                <svg aria-hidden="true" className="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fillRule="evenodd"
-                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                    clipRule="evenodd" />
-                                </svg>
-                            </a>
                         </div>
 
                         <div className="space-y-4">
-                            <span
-                            className="bg-gray-100 text-gray-900 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                                Adobe Inc.
-                            </span>
                             <h3 className="text-2xl font-bold leading-tight text-gray-900 dark:text-white">
                                 Personalized Recommendations
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
                                 Whether you're looking for the best restaurants, museums, or outdoor activities, our City Details feature provides personalized recommendations based on your preferences and interests.
                             </p>
-                            <a href="#" title=""
-                            className="text-white bg-primary-700 justify-center hover:bg-primary-800 inline-flex items-center  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                            role="button">
-                            View case study
-                            <svg aria-hidden="true" className="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    fillRule="evenodd"
-                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"
-                                />
-                            </svg>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -178,7 +130,6 @@ export default function CityDetailsFeaturePage() {
                             <p className="text-2xl font-medium text-gray-900 dark:text-white">"Wanderlust App's City Details feature is a must-have for any traveler. I loved how it provided a comprehensive guide to each city, with insider information and local favorites that you won't find anywhere else. It was like having a local guide with me every step of the way. Highly recommended!"</p>
                         </blockquote>
                         <figcaption className="flex items-center justify-center mt-6 space-x-3">
-                            <img className="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png" alt="profile picture" />
                             <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                                 <div className="pr-3 font-medium text-gray-900 dark:text-white">Micheal T.</div>
                             </div>

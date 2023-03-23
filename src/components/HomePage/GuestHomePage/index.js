@@ -49,10 +49,10 @@ export default function GuestHomePage({ router, posts }) {
                 </div>
                 <div className="hidden sm:grid grid-cols-2 gap-4 mt-8 ">
                     <div className="rounded-lg border h-80 overflow-hidden -mt-10 border-gray-300 dark:border-gray-700">
-                        <Image className="relative w-full h-full object-cover" height={340} quality={80} width={230} src={'/guestHomeImage1.png'} alt="Wanderlust App" />
+                        <Image className="relative w-full h-full object-cover rounded-lg" height={340} quality={80} width={230} src={'/guestHomeImage1.png'} alt="Wanderlust App" />
                     </div>
                     <div className="rounded-lg border mt-10 h-80 overflow-hidden border-gray-300 dark:border-gray-700">
-                        <Image className="relative w-full h-full object-cover" height={340} quality={80} width={230} src={'/guestHomeImage2.png'} alt="Wanderlust App" />
+                        <Image className="relative w-full h-full object-cover rounded-lg" height={340} quality={80} width={230} src={'/guestHomeImage2.png'} alt="Wanderlust App" />
                     </div>
                 </div>
             </div>
@@ -71,15 +71,15 @@ export default function GuestHomePage({ router, posts }) {
                             <div className="flex gap-x-4 justify-center sm:justify-start">
                                 {/* Chrome icon */}
                                 <a href="https://chrome.google.com/webstore/detail/flowbite-new-tab-page/ndjgjgjgjgjgjgjgjgjgjgjgjgjgjgjg" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/chrome_logo.png" alt="chrome logo" width={150} height={50} className="h-12 w-12" />
+                                    <Image src="/chrome_logo.png" alt="chrome logo" width={150} height={50} className="h-12 w-12 rounded-lg" />
                                 </a>
                                 {/* Firefox icon */}
                                 <a href="https://addons.mozilla.org/en-US/firefox/addon/flowbite-new-tab-page/" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/edge_logo.webp" alt="Edge logo" width={150} height={50} className="h-12 w-12" />
+                                    <Image src="/edge_logo.webp" alt="Edge logo" width={150} height={50} className="h-12 w-12 rounded-lg" />
                                 </a>
                                 {/* Edge icon */}
                                 <a href="https://microsoftedge.microsoft.com/addons/detail/flowbite-new-tab-page/ndjgjgjgjgjgjgjgjgjgjgjgjgjgjgjg" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/firefox_logo.webp" alt="Firefox logo" width={150} height={50} className="h-12 w-12" />
+                                    <Image src="/firefox_logo.webp" alt="Firefox logo" width={150} height={50} className="h-12 w-12 rounded-lg" />
                                 </a>
                             </div>
                         </div>
@@ -87,9 +87,9 @@ export default function GuestHomePage({ router, posts }) {
                     <div className="relative flex mt-4 sm:mt-auto sm:mb-auto h-60 flex-col lg:col-span-5 lg:flex-row">
                         {
                             theme === 'dark' ? (
-                                <Image src="/extension_dark.png" className="rounded-lg object-contain" fill alt="Wanderlust Extension" />
+                                <Image src="/extension_dark.png" className="rounded-lg object-contain xl:object-cover" fill alt="Wanderlust Extension" />
                             ): (
-                                <Image src="/extension_light.png" className="rounded-lg object-contain" fill alt="Wanderlust Extension" />
+                                <Image src="/extension_light.png" className="rounded-lg object-contain xl:object-cover" fill alt="Wanderlust Extension" />
                             )
                         }
                     </div>                

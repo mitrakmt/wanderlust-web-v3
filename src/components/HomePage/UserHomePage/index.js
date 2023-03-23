@@ -197,15 +197,15 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
                             <div className="flex gap-x-4 justify-center sm:justify-start">
                                 {/* Chrome icon */}
                                 <a href="https://chrome.google.com/webstore/detail/wanderlust-new-tab/eengninahgaajcfgddamfpbjhcoghdbj" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/chrome_logo.png" alt="Chrome logo" width={150} height={50} className="h-12 w-12" />
+                                    <Image src="/chrome_logo.png" alt="Chrome logo" width={150} height={50} className="h-12 w-12 rounded-lg" />
                                 </a>
                                 {/* Firefox icon */}
                                 <a href="https://addons.mozilla.org/en-US/firefox/addon/wanderlust-new-tab/" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/firefox_logo.webp" alt="Firefox logo" width={150} height={50} className="h-12 w-12" />
+                                    <Image src="/firefox_logo.webp" alt="Firefox logo" width={150} height={50} className="h-12 w-12 rounded-lg" />
                                 </a>
                                 {/* Edge icon */}
                                 <a href="https://microsoftedge.microsoft.com/addons/detail/wanderlust-new-tab/phoiidojckakdofhhddiodioomhopdil" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/edge_logo.webp" alt="Microsoft Edge logo" width={150} height={50} className="h-12 w-12" />
+                                    <Image src="/edge_logo.webp" alt="Microsoft Edge logo" width={150} height={50} className="h-12 w-12 rounded-lg" />
                                 </a>
                             </div>
                         </div>
@@ -213,9 +213,9 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
                     <div className="relative flex mt-4 sm:mt-auto sm:mb-auto h-60 flex-col lg:col-span-5 lg:flex-row">
                         {
                             theme === 'dark' ? (
-                                <Image src="/extension_dark.png" className="rounded-lg object-contain" fill alt="Wanderlust Extension" />
+                                <Image src="/extension_dark.png" className="rounded-lg object-contain xl:object-cover" fill alt="Wanderlust Extension" />
                             ): (
-                                <Image src="/extension_light.png" className="rounded-lg object-contain" fill alt="Wanderlust Extension" />
+                                <Image src="/extension_light.png" className="rounded-lg object-contain xl:object-cover" fill alt="Wanderlust Extension" />
                             )
                         }
                     </div>                
