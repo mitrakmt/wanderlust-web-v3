@@ -63,62 +63,62 @@ const nextConfig = {
       },
       {
         source: '/version-2-of-wanderlust-our-web-app-cc7cd0a21136',
-        destination: '/version-2-of-wanderlust-our-web-app',
+        destination: '/blog/version-2-of-wanderlust-our-web-app',
         permanent: true,
       },
       {
         source: '/version-2-of-wanderlust-our-web-app',
-        destination: '/version-2-of-wanderlust-our-web-app',
+        destination: '/blog/version-2-of-wanderlust-our-web-app',
         permanent: true,
       },
       {
         source: '/the-best-places-to-live-in-bali-5fe6706c80da',
-        destination: '/the-best-places-to-live-in-bali',
+        destination: '/blog/the-best-places-to-live-in-bali',
         permanent: true,
       },
       {
         source: '/the-best-places-to-live-in-bali',
-        destination: '/the-best-places-to-live-in-bali',
+        destination: '/blog/the-best-places-to-live-in-bali',
         permanent: true,
       },
       {
         source: '/the-top-5-most-beautiful-beaches-in-the-world-d1d441508cd',
-        destination: '/the-top-5-most-beautiful-beaches-in-the-world',
+        destination: '/blog/the-top-5-most-beautiful-beaches-in-the-world',
         permanent: true,
       },
       {
         source: '/the-top-5-most-beautiful-beaches-in-the-world',
-        destination: '/the-top-5-most-beautiful-beaches-in-the-world',
+        destination: '/blog/the-top-5-most-beautiful-beaches-in-the-world',
         permanent: true,
       },
       {
         source: '/the-5-best-restaurants-in-bali-5ef9576f248a',
-        destination: '/the-5-best-restaurants-in-bali',
+        destination: '/blog/the-5-best-restaurants-in-bali',
         permanent: true,
       },
       {
         source: '/the-5-best-restaurants-in-bali',
-        destination: '/the-5-best-restaurants-in-bali',
+        destination: '/blog/the-5-best-restaurants-in-bali',
         permanent: true,
       },
       {
         source: '/top-5-most-interesting-places-to-visit-in-the-world-990819413af1',
-        destination: '/top-5-most-interesting-places-to-visit-in-the-world',
+        destination: '/blog/top-5-most-interesting-places-to-visit-in-the-world',
         permanent: true,
       },
       {
         source: '/top-5-most-interesting-places-to-visit-in-the-world',
-        destination: '/top-5-most-interesting-places-to-visit-in-the-world',
+        destination: '/blog/top-5-most-interesting-places-to-visit-in-the-world',
         permanent: true,
       },
       {
         source: '/bucharest-cost-of-living-719d139d539e',
-        destination: '/bucharest-cost-of-living',
+        destination: '/blog/bucharest-cost-of-living',
         permanent: true,
       },
       {
         source: '/bucharest-cost-of-living',
-        destination: '/bucharest-cost-of-living',
+        destination: '/blog/bucharest-cost-of-living',
         permanent: true,
       }
     ]
