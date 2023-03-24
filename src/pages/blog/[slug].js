@@ -144,6 +144,14 @@ export default function BlogPost({ blog, relatedArticles }) {
             })
     }
 
+    const shareToFacebook = (req, res) => {
+        window.open(`https://www.facebook.com/dialog/share?app_id=5439766236043603&display=popup&href=https://www.wanderlustapp.io/blog/${blog.slug}&redirect_uri=https://wanderlustapp.io/blog/${blog.slug}`, '_blank');
+    }
+
+    const shareToMastadon = (req, res) => {
+        window.open(`https://mastodon.social/share`, '_blank');
+    }
+
     if (!blog || userLoading) return (<p>Loading...</p>)
 
     // Hooks
@@ -314,6 +322,23 @@ export default function BlogPost({ blog, relatedArticles }) {
                                     <title>Twitter</title>
                                     <path d="m459 152 1 13c0 139-106 299-299 299-59 0-115-17-161-47a217 217 0 0 0 156-44c-47-1-85-31-98-72l19 1c10 0 19-1 28-3-48-10-84-52-84-103v-2c14 8 30 13 47 14A105 105 0 0 1 36 67c51 64 129 106 216 110-2-8-2-16-2-24a105 105 0 0 1 181-72c24-4 47-13 67-25-8 24-25 45-46 58 21-3 41-8 60-17-14 21-32 40-53 55z">
                                     </path>
+                                </svg>
+                            </a>
+
+                            {/* FACEBOOK  */}
+                            <a onClick={shareToFacebook} className="cursor-pointer border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-3 rounded-lg text-white border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700" rel="noopener" aria-label="Share on Facebook">
+                                <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-6 h-6">
+                                    <title>Facebook</title>
+                                    <path d="M379 22v75h-44c-36 0-42 17-42 41v54h84l-12 85h-72v217h-88V277h-72v-85h72v-62c0-72 45-112 109-112 31 0 58 3 65 4z">
+                                    </path>
+                                </svg>
+                            </a>
+
+                            {/* Mastadon */}
+                            <a onClick={shareToMastadon} className="w-14 h-14 cursor-pointer border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-3 rounded-lg text-white border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700" rel="noopener" aria-label="Share on Instagram">
+                                <svg height="2500" width="2331" xmlns="http://www.w3.org/2000/svg" viewBox="-0.41 0.22 747.62 801.4499999999999">
+                                    <path d="M729.94 479.5c-10.96 56.4-98.17 118.12-198.34 130.08-52.23 6.23-103.66 11.96-158.49 9.44-89.68-4.1-160.45-21.4-160.45-21.4 0 8.73.54 17.04 1.62 24.81 11.66 88.52 87.76 93.82 159.84 96.29 72.76 2.49 137.55-17.94 137.55-17.94l2.99 65.79s-50.89 27.32-141.55 32.35c-50 2.75-112.07-1.26-184.37-20.39C31.94 737.02 4.97 569.86.85 400.26-.41 349.9.37 302.42.37 262.7.37 89.27 113.99 38.44 113.99 38.44 171.28 12.12 269.59 1.06 371.79.22h2.52c102.19.84 200.57 11.9 257.86 38.22 0 0 113.62 50.83 113.62 224.26 0 0 1.42 127.96-15.85 216.8" fill="#3088d4" />
+                                    <path d="M611.77 276.16v209.99h-83.2V282.33c0-42.97-18.07-64.77-54.23-64.77-39.98 0-60.01 25.86-60.01 77.02v111.57h-82.71V294.58c0-51.16-20.04-77.02-60.01-77.02-36.16 0-54.24 21.8-54.24 64.77v203.82h-83.19V276.16c0-42.92 10.93-77.03 32.88-102.26 22.63-25.23 52.27-38.17 89.07-38.17 42.57 0 74.81 16.37 96.12 49.1l20.72 34.74 20.73-34.74c21.31-32.73 53.55-49.1 96.12-49.1 36.79 0 66.44 12.94 89.07 38.17 21.95 25.23 32.88 59.34 32.88 102.26z" fill="#fff" />
                                 </svg>
                             </a>
                         </div>

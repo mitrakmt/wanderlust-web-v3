@@ -20,7 +20,17 @@ const nextConfig = {
         source: '/categories-dark/wanderlust',
         destination: '/blog',
         permanent: true,
-      }
+      },
+      {
+        source: '/best-places-to-live-as-a-digital-nomad-139431ca7569',
+        destination: '/blog/best-places-to-live-as-a-digital-nomad',
+        permanent: true,
+      },
+      {
+        source: '/best-places-to-live-as-a-digital-nomad',
+        destination: '/blog/best-places-to-live-as-a-digital-nomad',
+        permanent: true,
+      },
     ]
   },
   rewrites: async () => [
