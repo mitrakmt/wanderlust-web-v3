@@ -83,22 +83,22 @@ const nextConfig = {
       },
       {
         source: '/the-top-5-most-beautiful-beaches-in-the-world-d1d441508cd',
-        destination: '/blog/the-top-5-most-beautiful-beaches-in-the-world',
+        destination: '/blog/top-5-beautiful-beaches',
         permanent: true,
       },
       {
         source: '/the-top-5-most-beautiful-beaches-in-the-world',
-        destination: '/blog/the-top-5-most-beautiful-beaches-in-the-world',
+        destination: '/blog/top-5-beautiful-beaches',
         permanent: true,
       },
       {
         source: '/the-5-best-restaurants-in-bali-5ef9576f248a',
-        destination: '/blog/the-5-best-restaurants-in-bali',
+        destination: '/blog/5-best-restaurants-bali',
         permanent: true,
       },
       {
         source: '/the-5-best-restaurants-in-bali',
-        destination: '/blog/the-5-best-restaurants-in-bali',
+        destination: '/blog/5-best-restaurants-bali',
         permanent: true,
       },
       {
