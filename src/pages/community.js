@@ -165,20 +165,20 @@ export default function Community() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Connect with Fellow Nomads | Join the Wanderlust App Community</title>
-                <meta name="description" content="Join the Wanderlust App Community and connect with fellow digital nomads around the world. Our Community page allows you to follow and connect with like-minded travelers, share travel tips, and discover new destinations. Whether you're looking for travel inspiration or want to network with other digital nomads, our community is the perfect place to connect. Join the Wanderlust App Community and enhance your travel experience." />
+                <meta key="description" name="description" content="Join the Wanderlust App Community and connect with fellow digital nomads around the world. Our Community page allows you to follow and connect with like-minded travelers, share travel tips, and discover new destinations. Whether you're looking for travel inspiration or want to network with other digital nomads, our community is the perfect place to connect. Join the Wanderlust App Community and enhance your travel experience." />
 
                 {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="Connect with Fellow Nomads | Join the Wanderlust App Community" />
-                <meta property="og:url" content="https://www.wanderlustapp.io/community" />
-                <meta property="og:description" content="Join the Wanderlust App Community and connect with fellow digital nomads around the world. Our Community page allows you to follow and connect with like-minded travelers, share travel tips, and discover new destinations. Whether you're looking for travel inspiration or want to network with other digital nomads, our community is the perfect place to connect. Join the Wanderlust App Community and enhance your travel experience." />
+                <meta key="type" property="og:type" content="website" />
+                <meta key="title" property="og:title" content="Connect with Fellow Nomads | Join the Wanderlust App Community" />
+                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/community" />
+                <meta key="description" property="og:description" content="Join the Wanderlust App Community and connect with fellow digital nomads around the world. Our Community page allows you to follow and connect with like-minded travelers, share travel tips, and discover new destinations. Whether you're looking for travel inspiration or want to network with other digital nomads, our community is the perfect place to connect. Join the Wanderlust App Community and enhance your travel experience." />
                 {/* <meta property="og:image" content={blog?.image_url} /> */}
 
                 {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content="Connect with Fellow Nomads | Join the Wanderlust App Community" />
-                <meta property="twitter:url" content="https://www.wanderlustapp.io/community" />
-                <meta property="twitter:description" content="Join the Wanderlust App Community and connect with fellow digital nomads around the world. Our Community page allows you to follow and connect with like-minded travelers, share travel tips, and discover new destinations. Whether you're looking for travel inspiration or want to network with other digital nomads, our community is the perfect place to connect. Join the Wanderlust App Community and enhance your travel experience." />
+                <meta key="card" property="twitter:card" content="summary_large_image" />
+                <meta key="title" property="twitter:title" content="Connect with Fellow Nomads | Join the Wanderlust App Community" />
+                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/community" />
+                <meta key="description" property="twitter:description" content="Join the Wanderlust App Community and connect with fellow digital nomads around the world. Our Community page allows you to follow and connect with like-minded travelers, share travel tips, and discover new destinations. Whether you're looking for travel inspiration or want to network with other digital nomads, our community is the perfect place to connect. Join the Wanderlust App Community and enhance your travel experience." />
                 {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <TextH2>Community</TextH2>

@@ -27,21 +27,21 @@ export default function TravelBucketListFeaturePage() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Keep Your Travel Dreams in Check with Wanderlust App</title>
-                <meta name="description" content="Wanderlust App's Travel Bucket List feature lets you keep track of all the places you want to visit in the future. Say goodbye to notepads and keep track of all your travel aspirations in one place." />
+                <meta key="description" name="description" content="Wanderlust App's Travel Bucket List feature lets you keep track of all the places you want to visit in the future. Say goodbye to notepads and keep track of all your travel aspirations in one place." />
 
                 {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="Keep Your Travel Dreams in Check with Wanderlust App" />
-                <meta property="og:url" content="https://www.wanderlustapp.io/team" />
-                <meta property="og:description" content="Wanderlust App's Travel Bucket List feature lets you keep track of all the places you want to visit in the future. Say goodbye to notepads and keep track of all your travel aspirations in one place." />
-                <meta property="og:image" content={'/travelBucketListDark1.png'} />
+                <meta key="type" property="og:type" content="website" />
+                <meta key="title" property="og:title" content="Keep Your Travel Dreams in Check with Wanderlust App" />
+                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/team" />
+                <meta key="description" property="og:description" content="Wanderlust App's Travel Bucket List feature lets you keep track of all the places you want to visit in the future. Say goodbye to notepads and keep track of all your travel aspirations in one place." />
+                <meta key="image" property="og:image" content={'/travelBucketListDark1.png'} />
 
                 {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content="Keep Your Travel Dreams in Check with Wanderlust App" />
-                <meta property="twitter:url" content="https://www.wanderlustapp.io/team" />
-                <meta property="twitter:description" content="Wanderlust App's Travel Bucket List feature lets you keep track of all the places you want to visit in the future. Say goodbye to notepads and keep track of all your travel aspirations in one place." />
-                <meta property="twitter:image" content={'/travelBucketListDark1.png'} />
+                <meta key="card" property="twitter:card" content="summary_large_image" />
+                <meta key="title" property="twitter:title" content="Keep Your Travel Dreams in Check with Wanderlust App" />
+                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/team" />
+                <meta key="description" property="twitter:description" content="Wanderlust App's Travel Bucket List feature lets you keep track of all the places you want to visit in the future. Say goodbye to notepads and keep track of all your travel aspirations in one place." />
+                <meta key="image" property="twitter:image" content={'/travelBucketListDark1.png'} />
             </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6" id="top">
                 <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">

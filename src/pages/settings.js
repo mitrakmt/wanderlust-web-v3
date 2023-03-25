@@ -229,20 +229,20 @@ export default function Settings() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Customize Your Wanderlust App Experience | Settings</title>
-                <meta name="description" content="Personalize your Wanderlust App experience and make it truly your own. Our settings page allows you to customize your preferences, from language and currency to travel interests and notification settings. Set up your account the way you want it and enjoy a seamless travel planning experience. Explore the world your way with Wanderlust App." />
+                <meta key="description" name="description" content="Personalize your Wanderlust App experience and make it truly your own. Our settings page allows you to customize your preferences, from language and currency to travel interests and notification settings. Set up your account the way you want it and enjoy a seamless travel planning experience. Explore the world your way with Wanderlust App." />
 
                 {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="Customize Your Wanderlust App Experience | Settings" />
-                <meta property="og:url" content="https://www.wanderlustapp.io/settings" />
-                <meta property="og:description" content="Personalize your Wanderlust App experience and make it truly your own. Our settings page allows you to customize your preferences, from language and currency to travel interests and notification settings. Set up your account the way you want it and enjoy a seamless travel planning experience. Explore the world your way with Wanderlust App." />
+                <meta key="type" property="og:type" content="website" />
+                <meta key="title" property="og:title" content="Customize Your Wanderlust App Experience | Settings" />
+                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/settings" />
+                <meta key="description" property="og:description" content="Personalize your Wanderlust App experience and make it truly your own. Our settings page allows you to customize your preferences, from language and currency to travel interests and notification settings. Set up your account the way you want it and enjoy a seamless travel planning experience. Explore the world your way with Wanderlust App." />
                 {/* <meta property="og:image" content={blog?.image_url} /> */}
 
                 {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content="Customize Your Wanderlust App Experience | Settings" />
-                <meta property="twitter:url" content="https://www.wanderlustapp.io/settings" />
-                <meta property="twitter:description" content="Personalize your Wanderlust App experience and make it truly your own. Our settings page allows you to customize your preferences, from language and currency to travel interests and notification settings. Set up your account the way you want it and enjoy a seamless travel planning experience. Explore the world your way with Wanderlust App." />
+                <meta key="card" property="twitter:card" content="summary_large_image" />
+                <meta key="title" property="twitter:title" content="Customize Your Wanderlust App Experience | Settings" />
+                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/settings" />
+                <meta key="description" property="twitter:description" content="Personalize your Wanderlust App experience and make it truly your own. Our settings page allows you to customize your preferences, from language and currency to travel interests and notification settings. Set up your account the way you want it and enjoy a seamless travel planning experience. Explore the world your way with Wanderlust App." />
                 {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
                 <div className="flex items-center w-full space-between">

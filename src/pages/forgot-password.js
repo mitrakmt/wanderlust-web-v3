@@ -32,20 +32,20 @@ function ForgotPassword() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8 flex justify-center items-center min-h-screen">
             <Head>
                 <title>Forgot Your Wanderlust App Password? | Account Recovery</title>
-                <meta name="description" content="Don't worry if you've forgotten your Wanderlust App password. Our account recovery page makes it easy to reset your password and regain access to your account. Enter your email address and follow the instructions to reset your password and get back to planning your travels. Don't let a forgotten password stop you from exploring the world. Reset your Wanderlust App password now." />
+                <meta key="description" name="description" content="Don't worry if you've forgotten your Wanderlust App password. Our account recovery page makes it easy to reset your password and regain access to your account. Enter your email address and follow the instructions to reset your password and get back to planning your travels. Don't let a forgotten password stop you from exploring the world. Reset your Wanderlust App password now." />
 
                 {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="Forgot Your Wanderlust App Password? | Account Recovery" />
-                <meta property="og:url" content="https://www.wanderlustapp.io/forgot-password" />
-                <meta property="og:description" content="Don't worry if you've forgotten your Wanderlust App password. Our account recovery page makes it easy to reset your password and regain access to your account. Enter your email address and follow the instructions to reset your password and get back to planning your travels. Don't let a forgotten password stop you from exploring the world. Reset your Wanderlust App password now." />
+                <meta key="type" property="og:type" content="website" />
+                <meta key="title" property="og:title" content="Forgot Your Wanderlust App Password? | Account Recovery" />
+                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/forgot-password" />
+                <meta key="description" property="og:description" content="Don't worry if you've forgotten your Wanderlust App password. Our account recovery page makes it easy to reset your password and regain access to your account. Enter your email address and follow the instructions to reset your password and get back to planning your travels. Don't let a forgotten password stop you from exploring the world. Reset your Wanderlust App password now." />
                 {/* <meta property="og:image" content={blog?.image_url} /> */}
 
                 {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content="Forgot Your Wanderlust App Password? | Account Recovery" />
-                <meta property="twitter:url" content="https://www.wanderlustapp.io/forgot-password" />
-                <meta property="twitter:description" content="Don't worry if you've forgotten your Wanderlust App password. Our account recovery page makes it easy to reset your password and regain access to your account. Enter your email address and follow the instructions to reset your password and get back to planning your travels. Don't let a forgotten password stop you from exploring the world. Reset your Wanderlust App password now." />
+                <meta key="card" property="twitter:card" content="summary_large_image" />
+                <meta key="title" property="twitter:title" content="Forgot Your Wanderlust App Password? | Account Recovery" />
+                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/forgot-password" />
+                <meta key="description" property="twitter:description" content="Don't worry if you've forgotten your Wanderlust App password. Our account recovery page makes it easy to reset your password and regain access to your account. Enter your email address and follow the instructions to reset your password and get back to planning your travels. Don't let a forgotten password stop you from exploring the world. Reset your Wanderlust App password now." />
                 {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <Image

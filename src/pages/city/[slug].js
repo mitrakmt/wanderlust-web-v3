@@ -357,31 +357,25 @@ export default function CityPage({ citySelected, blogs }) {
                 />
             </Head>
 
-            <NextSeo
-                title={`${citySelected?.name} ${citySelected?.country_name} | Wanderlust App City Guide`}
-                description={`Discover ${citySelected?.name} ${citySelected?.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${citySelected?.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${citySelected?.name}.`}
-                canonical={`https://www.wanderlustapp.io/city/${citySelected?.slug}`}
-                openGraph={{
-                    url: `https://www.wanderlustapp.io/city/${citySelected?.slug}`,
-                    title: `${citySelected?.name} ${citySelected?.country_name} | Wanderlust App City Guide`,
-                    description: `Discover ${citySelected?.name} ${citySelected?.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${citySelected?.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${citySelected?.name}.`,
-                    images: [
-                        {
-                            url: citySelected?.image_url_large,
-                            width: 800,
-                            height: 600,
-                            alt: `${citySelected?.name} ${citySelected?.country_name} | Wanderlust App City Guide`,
-                            type: 'image/jpeg',
-                        },
-                    ],
-                    siteName: 'Wanderlust App',
-                }}
-                twitter={{
-                    handle: '@mike_mitrakos',
-                    site: '@wanderlustext',
-                    cardType: 'summary_large_image',
-                }}
-            />
+            <Head>
+                <title>{`${citySelected?.name} ${citySelected?.country_name} | Wanderlust App City Guide`}</title>
+                <meta name="description" content={`Discover ${citySelected?.name} ${citySelected?.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${citySelected?.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${citySelected?.name}.`} />
+
+                {/* <!-- Open Graph / Facebook --> */}
+                <meta property="og:type" content="website" key="type" />
+                <meta property="og:title" content={`${citySelected?.name} ${citySelected?.country_name} | Wanderlust App City Guide`} key="title" />
+                <meta property="og:url" content={`https://www.wanderlustapp.io/city/${citySelected?.slug}`} key="url" />
+                <meta property="og:description" key="description" content={`Discover ${citySelected?.name} ${citySelected?.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${citySelected?.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${citySelected?.name}.`} />
+                <meta property="og:image" content={citySelected?.image_url_large} key="image" />
+
+                {/* <!-- Twitter --> */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content={`${citySelected?.name} ${citySelected?.country_name} | Wanderlust App City Guide`} key="title" />
+                <meta property="twitter:url" content={`https://www.wanderlustapp.io/city/${citySelected?.slug}`} />
+                <meta property="twitter:description" key="description" content={`Discover ${citySelected?.name} ${citySelected?.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${citySelected?.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${citySelected?.name}.`} />
+                <meta property="twitter:image" content={citySelected?.image_url_large} key="image" />
+            </Head>
+
             <div>
                 {
                     breadcrumb && <BreadCrumb breadCrumbHome={breadcrumb} goToHome={() => router.push(`/${breadcrumb}`)} secondName={citySelected?.name} />

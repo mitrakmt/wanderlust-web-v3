@@ -187,18 +187,18 @@ export default function BlogPost({ blog, relatedArticles }) {
                 <meta name="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
 
                 {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content={`${blog.title} | Wanderlust App Blogs`} />
-                <meta property="og:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
-                <meta property="og:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta property="og:image" content={blog?.image_url} />
+                <meta property="og:type" content="website" key="type" />
+                <meta property="og:title" content={`${blog.title} | Wanderlust App Blogs`} key="title" />
+                <meta property="og:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} key="url" />
+                <meta property="og:description" key="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta property="og:image" content={blog?.image_url} key="image" />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content={`${blog.title} | Wanderlust App Blogs`} />
+                <meta property="twitter:title" content={`${blog.title} | Wanderlust App Blogs`} key="title" />
                 <meta property="twitter:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
-                <meta property="twitter:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta property="twitter:image" content={blog?.image_url} />
+                <meta property="twitter:description" key="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta property="twitter:image" content={blog?.image_url} key="image" />
             </Head>
             <ArticleJsonLd
                 url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}

@@ -46,20 +46,20 @@ export default function Contact() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Contact Wanderlust App | Get in Touch with Us</title>
-                <meta name="description" content="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure." />
+                <meta key="description" name="description" content="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure." />
 
                 {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="Contact Wanderlust App | Get in Touch with Us" />
-                <meta property="og:url" content="https://www.wanderlustapp.io/contact" />
-                <meta property="og:description" content="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure." />
+                <meta key="type" property="og:type" content="website" />
+                <meta key="title" property="og:title" content="Contact Wanderlust App | Get in Touch with Us" />
+                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/contact" />
+                <meta key="description" property="og:description" content="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure." />
                 {/* <meta property="og:image" content={blog?.image_url} /> */}
 
                 {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content="Contact Wanderlust App | Get in Touch with Us" />
-                <meta property="twitter:url" content="https://www.wanderlustapp.io/contact" />
-                <meta property="twitter:description" content="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure." />
+                <meta key="card" property="twitter:card" content="summary_large_image" />
+                <meta key="title" property="twitter:title" content="Contact Wanderlust App | Get in Touch with Us" />
+                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/contact" />
+                <meta key="description" property="twitter:description" content="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure." />
                 {/* <meta property="twitter:image" content={blog?.image_url} /> */}
             </Head>
             <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">

@@ -27,21 +27,21 @@ export default function WantToTravelListFeaturePage() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>Keep Track of Your Future Travel Plans with Wanderlust App</title>
-                <meta name="description" content="Wanderlust App's Want to Travel To List feature lets you keep track of all the places you want to visit in the future, whether it's a restaurant in a city, a sight on an upcoming vacation, or a secret beach. Stay organized and plan your next adventure with ease." />
+                <meta key="description" name="description" content="Wanderlust App's Want to Travel To List feature lets you keep track of all the places you want to visit in the future, whether it's a restaurant in a city, a sight on an upcoming vacation, or a secret beach. Stay organized and plan your next adventure with ease." />
 
                 {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="Keep Track of Your Future Travel Plans with Wanderlust App" />
-                <meta property="og:url" content="https://www.wanderlustapp.io/team" />
-                <meta property="og:description" content="Wanderlust App's Want to Travel To List feature lets you keep track of all the places you want to visit in the future, whether it's a restaurant in a city, a sight on an upcoming vacation, or a secret beach. Stay organized and plan your next adventure with ease." />
-                <meta property="og:image" content={"/travelListDark.png"} />
+                <meta key="type" property="og:type" content="website" />
+                <meta key="title" property="og:title" content="Keep Track of Your Future Travel Plans with Wanderlust App" />
+                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/team" />
+                <meta key="description" property="og:description" content="Wanderlust App's Want to Travel To List feature lets you keep track of all the places you want to visit in the future, whether it's a restaurant in a city, a sight on an upcoming vacation, or a secret beach. Stay organized and plan your next adventure with ease." />
+                <meta key="image" property="og:image" content={"/travelListDark.png"} />
 
                 {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content="Keep Track of Your Future Travel Plans with Wanderlust App" />
-                <meta property="twitter:url" content="https://www.wanderlustapp.io/team" />
-                <meta property="twitter:description" content="Wanderlust App's Want to Travel To List feature lets you keep track of all the places you want to visit in the future, whether it's a restaurant in a city, a sight on an upcoming vacation, or a secret beach. Stay organized and plan your next adventure with ease." />
-                <meta property="twitter:image" content={"/travelListDark.png"} />
+                <meta key="card" property="twitter:card" content="summary_large_image" />
+                <meta key="title" property="twitter:title" content="Keep Track of Your Future Travel Plans with Wanderlust App" />
+                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/team" />
+                <meta key="description" property="twitter:description" content="Wanderlust App's Want to Travel To List feature lets you keep track of all the places you want to visit in the future, whether it's a restaurant in a city, a sight on an upcoming vacation, or a secret beach. Stay organized and plan your next adventure with ease." />
+                <meta key="image" property="twitter:image" content={"/travelListDark.png"} />
             </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6" id="top">
                 <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
