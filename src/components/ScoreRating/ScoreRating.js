@@ -18,7 +18,7 @@ export default function ScoreRating({ citySelected }) {
                     <dl className="mb-8">
                         <div className="flex justify-between">
                             <dt className="text-sm font-medium text-gray-700 dark:text-gray-400">Internet</dt>
-                            <TextP classes="mt-0">{citySelected?.internet_speed} mbps avg</TextP>
+                            <TextP classes="mt-0">{citySelected?.internet_speed.toFixed(1)} mbps avg</TextP>
                         </div>
                         <dd className="flex items-center mb-3">
                             <div className="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
