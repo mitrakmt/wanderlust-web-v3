@@ -67,6 +67,7 @@ export default function CreateBlogPage() {
                 slug,
                 publishedOn: new Date().toLocaleDateString('en-US', options),
                 region,
+                content,
                 country,
                 city,
                 image_url: mainImage,
