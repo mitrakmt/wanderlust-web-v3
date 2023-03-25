@@ -56,6 +56,9 @@ export default function CreateBlogPage() {
             return;
         }
 
+        // TODO: make sure slug has no spaces 
+        // TODO: trim any spaces at end of images
+
         setErrorMessage(null)
 
         // Send to API

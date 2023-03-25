@@ -59,7 +59,6 @@ export default function Blog({ posts }) {
             method: 'GET',
         })
             .then((res) => {
-                console.log('res', res)
                 if (res.data) {
                     setNewBlogPosts(res.data);
                 }
