@@ -157,8 +157,8 @@ export default function BlogPost({ blog, relatedArticles }) {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <Head>
                 <title>{`${blog?.title} | Wanderlust App Blogs`}</title>
-                <meta charSet="utf-8" />
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta key="charSet" charSet="utf-8" />
+                <meta key="viewport" name="viewport" content="initial-scale=1.0, width=device-width" />
                 <meta key="description" name="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
                 <meta key="image" property="image" content={blog?.image_url} />
                 <meta key="width" property="image:width" content="800" />
@@ -167,24 +167,24 @@ export default function BlogPost({ blog, relatedArticles }) {
             </Head>
             <Head>
                 {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:type" content="website" key="type" />
-                <meta property="og:title" content={`${blog?.title} | Wanderlust App Blogs`} key="title" />
-                <meta property="og:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} key="url" />
-                <meta property="og:description" key="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta property="og:image" content={blog?.image_url} key="image" />
+                <meta key="type" property="og:type" content="website" />
+                <meta key="title" property="og:title" content={`${blog?.title} | Wanderlust App Blogs`} />
+                <meta key="url" property="og:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
+                <meta key="description" property="og:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta key="image" property="og:image" content={blog?.image_url} />
                 <meta key="width" property="og:image:width" content="800" />
                 <meta key="height" property="og:image:height" content="600" />
                 <meta key="alt" property="og:image:alt" content={`${blog?.title} - Wanderlust App`} />
             </Head>
             <Head>
                 {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content={`${blog?.title} | Wanderlust App Blogs`} key="title" />
-                <meta property="twitter:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
-                <meta property="twitter:description" key="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta property="twitter:image" content={blog?.image_url} key="image" />
+                <meta key="card"property="twitter:card" content="summary_large_image" />
+                <meta key="title"property="twitter:title" content={`${blog?.title} | Wanderlust App Blogs`} />
+                <meta key="url"property="twitter:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
+                <meta key="description" property="twitter:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta key="image"property="twitter:image" content={blog?.image_url} />
             </Head>
-            <ArticleJsonLd
+            {/* <ArticleJsonLd
                 url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
                 title={`${blog?.title} | Wanderlust App Blogs`}
                 images={[
@@ -202,7 +202,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                 publisherLogo="https://wanderlust-extension.s3.us-west-2.amazonaws.com/logo.jpg"
                 description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
                 isAccessibleForFree={true}
-            />
+            /> */}
             <BreadCrumb breadCrumbHome={"Blogs"} goToHome={() => router.push('/blog')} secondName={blog?.title} />
             <main className="pt-8 mt-4 pb-16 lg:pt-16 lg:pb-8 dark:bg-gray-900" id="top">
                 <div className="flex flex-col justify-between px-4 mx-auto max-w-screen-xl ">
@@ -287,20 +287,14 @@ export default function BlogPost({ blog, relatedArticles }) {
 
                         {/* SOCIAL */}
                         <div className="sharing-buttons flex flex-wrap mb-4">
-                            {/* <a className="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-3 rounded-lg text-white border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700" target="_blank" rel="noopener" href="https://facebook.com/sharer/sharer.php?u=" aria-label="Share on Facebook">
-                                <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-6 h-6">
-                                    <title>Facebook</title>
-                                    <path d="M379 22v75h-44c-36 0-42 17-42 41v54h84l-12 85h-72v217h-88V277h-72v-85h72v-62c0-72 45-112 109-112 31 0 58 3 65 4z">
-                                    </path>
-                                </svg>
-                            </a>
-                            <a className="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-3 rounded-lg text-white border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700" target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=&amp;title=&amp;summary=&amp;source=" aria-label="Share on Linkedin">
+                            <a className="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-3 rounded-lg text-white border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700" target="_blank" rel="noopener" href={`https://www.linkedin.com/sharing/share-offsite/?url=https://wanderlustapp.io/blog/${blog?.slug}`} aria-label="Share on Linkedin">
                                 <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-6 h-6">
                                     <title>Linkedin</title>
                                     <path d="M136 183v283H42V183h94zm6-88c1 27-20 49-53 49-32 0-52-22-52-49 0-28 21-49 53-49s52 21 52 49zm333 208v163h-94V314c0-38-13-64-47-64-26 0-42 18-49 35-2 6-3 14-3 23v158h-94V183h94v41c12-20 34-48 85-48 62 0 108 41 108 127z">
                                     </path>
                                 </svg>
-                            </a> */}
+                            </a>
+                            
                             <a href={`https://twitter.com/share?text=${blog?.title} by @${blog?.author.twitter}&url=https://wanderlustapp.io/blog/${blog?.slug}&hashtags=${blog?.city ? blog?.city : "wanderlust"}&via=wanderlustext`} className="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-3 rounded-lg text-white border-blue-600 bg-blue-600 hover:bg-blue-700 hover:border-blue-700" target="_blank" rel="noopener">
                                 <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-6 h-6">
                                     <title>Twitter</title>
@@ -339,7 +333,6 @@ export default function BlogPost({ blog, relatedArticles }) {
                             <div className="flex justify-between items-center mb-6">
                                 <p className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion ({ comments.length })</p>
                             </div>
-                            {/* Show UI that adding comments is for logged in users only */}
                             {
                                 !user && <div className="mb-6">
                                     <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
