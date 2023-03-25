@@ -24,32 +24,82 @@ export default function WriteBlog() {
     // State
     const [showAddSectionDropdown, setShowAddSectionDropdown] = useState(false);
     const [title, setTitle] = useState("");
+    const[slug, setSlug] = useState("");
     const [category, setCategory] = useState("");
+    const [summary, setSummary] = useState("");
     const [region, setRegion] = useState(null);
     const [country, setCountry] = useState(null);
     const [city, setCity] = useState(null);
     const [mainImage, setMainImage] = useState(null);
     const [content, setContent] = useState([]);
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
     
     // Functions
+    const handleInputChange = (selectedIndex, value, name) => {
+        setContent(prevContent => {
+          const updatedContent = [...prevContent];
+          updatedContent[selectedIndex] = {
+            ...updatedContent[selectedIndex],
+            [name]: value
+          };
+          return updatedContent;
+        });
+    };
+
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    
     const publishBlogPost = () => {
-        // CHECK FOR ALL VALID VALUES
+        if (!title || !slug || !category || !summary || !mainImage || content.length === 0) {
+            console.log('title', title);
+            console.log('category', category);
+            console.log('summary', summary);
+            console.log('mainImage', mainImage);
+            console.log('content', content);
+            setErrorMessage("Please fill out all fields: title, slug, category, summary, mainImage, content");
+            return;
+        }
+
+        setErrorMessage(null)
 
         // Send to API
-        // request({
-        //     url: '/blog/create',
-        //     method: 'POST',
-        //     body: {
-        //         title: 'test',
-        //         content: 'test',
-        //         category: 'test',
-        //         tags: 'test',
-        //         image: 'test',
-                    
-        //     }
-        // })
+        request(`/blog`, {
+            method: 'POST',
+            body: {
+                title,
+                category,
+                summary,
+                slug,
+                publishedOn: new Date().toLocaleDateString('en-US', options),
+                region,
+                country,
+                city,
+                image_url: mainImage,
+            }
+          })
+            .then((res) => {
+                if (res.data) {
+                    // Clear states
+                    setTitle("");
+                    setSlug("");
+                    setCategory("");
+                    setSummary("");
+                    setRegion(null);
+                    setCountry(null);
+                    setCity(null);
+                    setMainImage(null);
+                    setContent([]);
 
-        console.log('publishBlogPost');
+                    setSuccessMessage("Successfully created blog post!");
+
+                    setTimeout(() => {
+                        setSuccessMessage(null);
+                    }, 5000)
+                } else {
+                    setErrorMessage("Something went wrong. Please try again.");
+                }
+            })
+
     };
 
     const addSectionParagraph = () => {
@@ -61,7 +111,15 @@ export default function WriteBlog() {
     };
 
     const addImage = () => {
-        setContent([...content, { type: 'image', src: '' }]);
+        setContent([...content, { type: 'image', src: '', alt: '' }]);
+    };
+
+    const handleDeleteSection = (index) => {
+        setContent(prevContent => {
+            const updatedContent = [...prevContent];
+            updatedContent.splice(index, 1);
+            return updatedContent;
+        });
     };
 
     return (
@@ -84,14 +142,13 @@ export default function WriteBlog() {
                     <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div className="sm:col-span-2">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blog Title</label>
-                            <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Blog name" />
+                            <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Blog name" />
                         </div>
                         <div className="sm:col-span-2">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blog Slug</label>
-                            <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Blog slug" />
-                            {/* Note that this is very important for SEO */}
+                            <input type="text" value={slug} onChange={(e) => setSlug(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Blog slug" />
                             <p className="text-xs text-gray-600 italic mt-1">
-                                This slug has an impact on SEO. It should use words relevant to the guide, use keywords, use "-" for spaces, and should not be greater than 140 characters in length.
+                                This slug has an impact on SEO. It should use words relevant to the guide, use keywords, use "-" for spaces, and should not be greater than 140 characters in length. One example of a GOOD slug is: "2023-digital-nomads-guide-to-bali"
                             </p>
                             
                         </div>
@@ -122,11 +179,11 @@ export default function WriteBlog() {
                         </div>
                         <div>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
-                            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <select onChange={(e) => setCountry(e.target.value)} value={country || "Select a country"} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option defaultValue="">Select a Country</option>
                                 {
                                     countries?.map(country => (
-                                        <option value={country.name}>{country.name}</option>
+                                        <option key={`countriesSelect-${country.name}`} value={country.id}>{country.name}</option>
                                     ))
                                 }
                             </select>
@@ -137,9 +194,15 @@ export default function WriteBlog() {
                         </div> 
                         <div className="sm:col-span-2">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">summary</label>
-                            <textarea rows="8" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Summary for the guide"></textarea>
+                            <textarea rows="8" value={summary} onChange={(e) => setSummary(e.target.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Summary for the guide"></textarea>
                         </div>
                     </div>
+                    <div className="sm:col-span-2 my-4">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Main Guide Image</label>
+                        <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/image_default.jpeg" alt="image default" />
+                        <input type="text" value={mainImage || ""} onChange={(e) => setMainImage(e.target.value)} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Or paste an image URL" />
+                    </div>
+
                     <div className="my-8 p-4 gap-y-2 block w-full text-gray-900 border border-gray-200 shadow-sm sm:text-sm dark:bg-gray-900 dark:border-gray-600 dark:text-white block-canvas rounded-lg">
                         <div className="flex justify-between items-center">
                             <p className="text-xl font-bold text-gray-900 dark:text-white">Body of Post</p>
@@ -160,44 +223,65 @@ export default function WriteBlog() {
                                     case 'p':
                                         return (
                                             <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Paragraph</label>
-                                                <textarea rows="8" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Paragraph"></textarea>
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Paragraph</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                </div>                                                <textarea rows="8" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Paragraph" />
                                             </div>
                                         )
                                     case "h2":
                                         return (
                                             <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Heading 2</label>
-                                                <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 2</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                </div>
+                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
                                         )
                                     case "h3":
                                         return (
                                             <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Heading 3</label>
-                                                <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 3</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                </div>
+                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
                                         )
                                     case "h4":
                                         return (
                                             <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Heading 4</label>
-                                                <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 4</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                </div>
+                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
                                         )
                                     case 'h5':
                                         return (
                                             <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Heading 5</label>
-                                                <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 5</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                </div>
+                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
                                         )
                                     case 'image':
                                         return (
                                             <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Image</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                </div>
                                                 <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/image_default.jpeg" alt="image default" />
-                                                <input type="text" className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Image Alt Text" />
+                                                <input type="text" value={section.src} onChange={(e) => handleInputChange(index, e.target.value, 'src')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Or paste an image URL here" />
+                                                <input type="text" value={section.alt} onChange={(e) => handleInputChange(index, e.target.value, 'alt')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Image Alt Text" />
+                                                <p className="text-xs text-gray-600 italic mt-1">
+                                                    Visually, horizontle images are better
+                                                </p>
                                             </div>
                                         )
                                 }
@@ -252,6 +336,16 @@ export default function WriteBlog() {
                         <button type="submit" onClick={publishBlogPost} className="inline-flex items-center px-5 py-2.5 mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                             Publish Post
                         </button>
+                        {
+                            successMessage && (
+                                <p className="text-sm text-green-500 mt-2">{successMessage}</p>
+                            )
+                        }
+                        {
+                            errorMessage && (
+                                <p className="text-sm text-red-500 mt-2">{errorMessage}</p>
+                            )
+                        }
                     </div>
 
                     
