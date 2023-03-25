@@ -1,5 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
+// Hooks
+import { useAuth } from '../../hooks/useAuth';
+
+// Context
+import { countriesContext } from '../../context/CountriesProvider';
 
 // Utils
 import request from '../../utils/request';
@@ -8,6 +15,12 @@ import request from '../../utils/request';
 import CustomHead from '@/shared_components/CustomHead';
 
 export default function WriteBlog() {
+    // Context
+    const [countries, ] = useContext(countriesContext);
+
+    // Hooks
+    const { user, userLoading } = useAuth();
+
     // State
     const [showAddSectionDropdown, setShowAddSectionDropdown] = useState(false);
     const [title, setTitle] = useState("");
@@ -23,18 +36,18 @@ export default function WriteBlog() {
         // CHECK FOR ALL VALID VALUES
 
         // Send to API
-        request({
-            url: '/blog/create',
-            method: 'POST',
-            body: {
-                title: 'test',
-                content: 'test',
-                category: 'test',
-                tags: 'test',
-                image: 'test',
+        // request({
+        //     url: '/blog/create',
+        //     method: 'POST',
+        //     body: {
+        //         title: 'test',
+        //         content: 'test',
+        //         category: 'test',
+        //         tags: 'test',
+        //         image: 'test',
                     
-            }
-        })
+        //     }
+        // })
 
         console.log('publishBlogPost');
     };
@@ -84,7 +97,7 @@ export default function WriteBlog() {
                         </div>
                         <div>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <select onChange={(e) => setCategory(e.target.value)} value={category || "Select a Category"} className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option defaultValue="">Select category</option>
                                 <option value="Travel Guide">Travel Guide</option>
                                 <option value="Digital Nomad">Digital Nomad</option>
@@ -96,22 +109,26 @@ export default function WriteBlog() {
                         </div>
                         <div>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Region</label>
-                            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <select onChange={(e) => setRegion(e.target.value)} value={region || "Select a Region"}  className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option defaultValue="">Select region</option>
-                                <option value="TV">TV/Monitors</option>
-                                <option value="PC">PC</option>
-                                <option value="GA">Gaming/Console</option>
-                                <option value="PH">Phones</option>
+                                <option value="Africa">Africa</option>
+                                <option value="Antarctica">Antarctica</option>
+                                <option value="Asia">Asia</option>
+                                <option value="Europe">Europe</option>
+                                <option value="North America">North America</option>
+                                <option value="Oceania">Oceania</option>
+                                <option value="South America">South America</option>
                             </select>
                         </div>
                         <div>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
                             <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option defaultValue="">Select country</option>
-                                <option value="TV">TV/Monitors</option>
-                                <option value="PC">PC</option>
-                                <option value="GA">Gaming/Console</option>
-                                <option value="PH">Phones</option>
+                                <option defaultValue="">Select a Country</option>
+                                {
+                                    countries?.map(country => (
+                                        <option value={country.name}>{country.name}</option>
+                                    ))
+                                }
                             </select>
                         </div>
                         <div>
@@ -220,9 +237,24 @@ export default function WriteBlog() {
                             }
                         </div>
                     </div>
-                    <button type="submit" onClick={publishBlogPost} className="inline-flex items-center px-5 py-2.5 mt-6 sm:mt-20 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                        Publish Post
-                    </button>
+                    {/* Ready to post blog? ask if they've thought about SEO, keywords */}
+                    <div className="flex flex-col w-full mt-8 sm:mt-12">
+                        <p className="text-xl text-gray-800 dark:text-gray-200">Ready to post your blog?</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Have you thought about SEO? Here are some things to keep in mind for SEO w/ blog posts:</p>
+                        <ul className="list-decimal text-sm text-gray-500 dark:text-gray-400 px-4 py-2">
+                            <li>Make sure every paragraph is readable, as Google algorithms use natural language processing to rank content.</li>
+                            <li>Use relevant keywords: Incorporate relevant keywords that people would use when searching for information related to your blog topic. However, avoid keyword stuffing, which can negatively affect your rankings.</li>
+                            <li>Use descriptive and meaningful headlines: Headlines are the first thing people see when browsing search results. Ensure that your headlines accurately describe what your article is about and incorporate keywords when possible.</li>
+                            <li>Create high-quality content: Search engines prioritize high-quality, informative content that provides value to readers. Ensure that your blog article is well-researched, well-written, and provides helpful insights on your topic.</li>
+                            <li>Use multimedia: Incorporating images, videos, and other multimedia into your blog post can increase engagement and improve your SEO. Be sure to include alt tags with your images and videos to provide additional context for search engines.</li>
+                            <li>Share your content on social media: Sharing your blog post on social media platforms can increase visibility and drive traffic to your website. Additionally, social signals (likes, shares, comments, etc.) can indirectly impact your SEO.</li>
+                        </ul>
+                        <button type="submit" onClick={publishBlogPost} className="inline-flex items-center px-5 py-2.5 mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                            Publish Post
+                        </button>
+                    </div>
+
+                    
                 </div>
             </div>
         </section>
