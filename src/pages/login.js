@@ -86,24 +86,6 @@ function Login() {
                 alt="Login - Wanderlust App"
             />
 
-            <Head>
-                <title>Welcome Back | Wanderlust App Login</title>
-                <meta key="description" name="description" content="Log in to your Wanderlust App account and pick up where you left off. Access your saved places, travel plans, and personalized recommendations with ease. Our login page is secure and easy to use, allowing you to quickly get back to planning your next adventure. Welcome back to Wanderlust App." />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Welcome Back | Wanderlust App Login" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/login" />
-                <meta key="description" property="og:description" content="Log in to your Wanderlust App account and pick up where you left off. Access your saved places, travel plans, and personalized recommendations with ease. Our login page is secure and easy to use, allowing you to quickly get back to planning your next adventure. Welcome back to Wanderlust App." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Welcome Back | Wanderlust App Login" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/login" />
-                <meta key="description" property="twitter:description" content="Log in to your Wanderlust App account and pick up where you left off. Access your saved places, travel plans, and personalized recommendations with ease. Our login page is secure and easy to use, allowing you to quickly get back to planning your next adventure. Welcome back to Wanderlust App." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
             <Image
                 src="https://images.unsplash.com/photo-1531804226530-70f8004aa44e?crop=entropy&cs=srgb&fm=webp&ixid=MnwxNzkyODZ8MHwxfGFsbHx8fHx8fHx8fDE2MTY3Mjc5OTE&ixlib=rb-1.2.1&q=85"
                 fill
