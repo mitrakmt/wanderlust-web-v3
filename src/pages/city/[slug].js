@@ -602,7 +602,7 @@ export default function CityPage({ citySelected, blogs }) {
             <div className="w-full my-12">
                 <TextH3>Airbnbs</TextH3>
                 <div className="flex flex-col items-center w-full h-auto bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
-                    <Image height={150} width={150} quality={80} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://images.unsplash.com/photo-1591825729269-caeb344f6df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3540&q=80" alt={`Airbnbs in ${citySelected?.name}`} />
+                    <Image height={150} width={150} quality={80} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/photo-1591825729269-caeb344f6df2.jpeg" alt={`Airbnbs in ${citySelected?.name}`} />
                     <div className="flex flex-col justify-between w-full p-4 leading-normal">
                         <div className="flex">
                             <h5 className="mb-2 mr-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">COMING SOON</h5>
