@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import Head from 'next/head'
 import request from '../../utils/request';
 
 // Components
 import BlogCard from '../../components/BlogCard';
 import trackClick from '../../utils/trackClick';
+import CustomHead from '@/shared_components/CustomHead';
 
 export async function getStaticProps() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
@@ -62,24 +62,14 @@ export default function Blog({ posts }) {
     
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Travel Inspiration and Tips | Wanderlust App Blogs</title>
-                <meta name="description" content="Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences. Read our expert advice and stay up-to-date on the latest travel trends. Let Wanderlust App Blogs inspire you to explore new destinations and make the most of your travels." />
+            <CustomHead
+                title="Travel Inspiration and Tips | Wanderlust App Blogs"
+                description="Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences. Read our expert advice and stay up-to-date on the latest travel trends. Let Wanderlust App Blogs inspire you to explore new destinations and make the most of your travels."
+                url="https://www.wanderlustapp.io/blog"
+                image="/cityDetailsDark1.png"
+                alt="Cities - Wanderlust App"
+            />
 
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content={`Travel Inspiration and Tips | Wanderlust App Blogs`} />
-                <meta property="og:url" content="https://www.wanderlustapp.io/blog" />
-                <meta property="og:description" content="Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences. Read our expert advice and stay up-to-date on the latest travel trends. Let Wanderlust App Blogs inspire you to explore new destinations and make the most of your travels." />
-                <meta property="og:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
-
-                {/* <!-- Twitter --> */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content={`Travel Inspiration and Tips | Wanderlust App Blogs`} />
-                <meta property="twitter:url" content="https://www.wanderlustapp.io/blog" />
-                <meta property="twitter:description" content="Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences. Read our expert advice and stay up-to-date on the latest travel trends. Let Wanderlust App Blogs inspire you to explore new destinations and make the most of your travels." />
-                <meta property="twitter:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
-            </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
                     <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Digital Nomad Blog</h2>
