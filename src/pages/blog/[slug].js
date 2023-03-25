@@ -182,7 +182,11 @@ export default function BlogPost({ blog, relatedArticles }) {
             /> */}
             <Head>
                 <title>{`${blog?.title} | Wanderlust App Blogs`}</title>
-                <meta name="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta key="description" name="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
+                <meta key="image" property="image" content={blog?.image_url} />
+                <meta key="width" property="image:width" content="800" />
+                <meta key="height" property="image:height" content="600" />
+                <meta key="alt" property="image:alt" content={`${blog?.title} - Wanderlust App`} />
 
                 {/* <!-- Open Graph / Facebook --> */}
                 <meta property="og:type" content="website" key="type" />
@@ -190,6 +194,9 @@ export default function BlogPost({ blog, relatedArticles }) {
                 <meta property="og:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} key="url" />
                 <meta property="og:description" key="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
                 <meta property="og:image" content={blog?.image_url} key="image" />
+                <meta key="width" property="og:image:width" content="800" />
+                <meta key="height" property="og:image:height" content="600" />
+                <meta key="alt" property="og:image:alt" content={`${blog?.title} - Wanderlust App`} />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
