@@ -1,5 +1,4 @@
 import Profile from '../../shared_pages/profile';
-import Head from 'next/head';
 import CustomHead from '@/shared_components/CustomHead';
 
 export async function getStaticProps() {

@@ -1,5 +1,7 @@
 import Profile from '../../shared_pages/profile';
 
+import CustomHead from '@/shared_components/CustomHead';
+
 // Update for reviews 
 // Revalidate? or something
 // Maybe, i'm not sure. think about it
