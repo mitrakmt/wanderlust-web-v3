@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+// Utils
 import request from '../../utils/request';
+
+// Hooks
+import { useAuth } from '../../hooks/useAuth';
 
 // Components
 import BlogCard from '../../components/BlogCard';
@@ -18,6 +25,11 @@ export async function getStaticProps() {
 }
 
 export default function Blog({ posts }) {
+    // Hooks
+    const { user, userLoading } = useAuth();
+    const router = useRouter();
+
+
     // State
     const [searchTerm, setSearchTerm] = useState("");
     const [category, setCategory] = useState("");
@@ -73,6 +85,17 @@ export default function Blog({ posts }) {
                     <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Digital Nomad Blog</h2>
                     <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">Learn about the best places around the world, the most beautiful places to see, and everything you'd need as a nomad.</p>
                 </div> 
+                {
+                    (user?.role === 'publisher' || user?.role === 'superadmin') && (
+                        <div className="flex mb-4 justify-center">
+                            <Link href="/blog/create">
+                                <button className="bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded">
+                                    Write a new guide or blog post
+                                </button>
+                            </Link>
+                        </div>
+                    )
+                }
                 <div className="mx-auto lg:px-12 w-full mb-4">
                     <div className="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg ">
                         <div className="flex flex-col items-center justify-between p-4 space-y-3 md:space-y-0 md:space-x-4">

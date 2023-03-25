@@ -20,6 +20,7 @@ export default function CreateBlogPage() {
 
     // Hooks
     const { user, userLoading } = useAuth();
+    const router = useRouter();
 
     // State
     const [showAddSectionDropdown, setShowAddSectionDropdown] = useState(false);
@@ -117,6 +118,11 @@ export default function CreateBlogPage() {
             return updatedContent;
         });
     };
+
+    if (!userLoading && user.role === 'user') {
+        // Send them back to home
+        router.push('/');
+    }
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
