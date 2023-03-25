@@ -261,7 +261,7 @@ export default function CityPage({ citySelected, blogs }) {
     // Functions
     function getNotUnique(a) {
         var seen = {};
-        return a.filter(function(item) {
+        return a?.filter(function(item) {
             return seen.hasOwnProperty(item.urlid) ? false : (seen[item.urlid] = true);
         });
     }
