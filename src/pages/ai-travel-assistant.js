@@ -28,11 +28,18 @@ export default function TravelAssistantFeaturePage() {
             <Head>
                 <title>Plan Your Next Adventure with Wanderlust App's AI Travel Assistant</title>
                 <meta key="description" name="description" content="Wanderlust App's AI Travel Assistant makes trip planning a breeze. Talk to our custom trained travel AI to get personalized recommendations for your next adventure." />
+                <meta key="image" property="image" content={'/assistantDark1.png'} />
+                <meta key="width" property="image:width" content="800" />
+                <meta key="height" property="image:height" content="600" />
+                <meta key="alt" property="image:alt" content="AI Travel Assistant - Wanderlust App" />
 
                 {/* <!-- Open Graph / Facebook --> */}
                 <meta key="type" property="og:type" content="website" />
                 <meta key="title" property="og:title" content="Plan Your Next Adventure with Wanderlust App's AI Travel Assistant" />
                 <meta key="url" property="og:url" content="https://www.wanderlustapp.io/team" />
+                <meta key="width" property="og:image:width" content="800" />
+                <meta key="height" property="og:image:height" content="600" />
+                <meta key="alt" property="og:image:alt" content="AI Travel Assistant - Wanderlust App" />
                 <meta key="description" property="og:description" content="Wanderlust App's AI Travel Assistant makes trip planning a breeze. Talk to our custom trained travel AI to get personalized recommendations for your next adventure." />
                 <meta key="image" property="og:image" content={'/assistantDark1.png'} />
 

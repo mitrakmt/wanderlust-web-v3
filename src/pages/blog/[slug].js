@@ -152,8 +152,6 @@ export default function BlogPost({ blog, relatedArticles }) {
         window.open(`https://mastodon.social/share`, '_blank');
     }
 
-    if (!blog || userLoading) return (<p>Loading...</p>)
-
     // Hooks
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
