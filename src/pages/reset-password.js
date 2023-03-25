@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import { useSearchParams } from 'next/navigation';
 import Image from "next/image";
 import Link from "next/link";
-import Head from "next/head";
+
+// Components
+import CustomHead from '../shared_components/CustomHead';
 
 // Utils
 import request from "../utils/request";
@@ -48,24 +50,14 @@ function PasswordReset() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8 flex justify-center items-center min-h-screen">
-            <Head>
-                <title>Reset Your Wanderlust App Account Password | Account Recovery</title>
-                <meta key="description" name="description" content="Forgot your password? No problem. Reset your Wanderlust App account password quickly and easily with our account recovery page. Enter your email address and follow the instructions to reset your password and regain access to your account. Don't let a forgotten password stop your travel planning journey. Reset your password now with Wanderlust App." />
+            <CustomHead
+                title="Reset Your Wanderlust App Account Password | Account Recovery"
+                description="Forgot your password? No problem. Reset your Wanderlust App account password quickly and easily with our account recovery page. Enter your email address and follow the instructions to reset your password and regain access to your account. Don't let a forgotten password stop your travel planning journey. Reset your password now with Wanderlust App."
+                url="https://www.wanderlustapp.io/reset-password"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Nomad Tools - Wanderlust App"
+            />
 
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Reset Your Wanderlust App Account Password | Account Recovery" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/reset-password" />
-                <meta key="description" property="og:description" content="Forgot your password? No problem. Reset your Wanderlust App account password quickly and easily with our account recovery page. Enter your email address and follow the instructions to reset your password and regain access to your account. Don't let a forgotten password stop your travel planning journey. Reset your password now with Wanderlust App." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Reset Your Wanderlust App Account Password | Account Recovery" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/reset-password" />
-                <meta key="description" property="twitter:description" content="Forgot your password? No problem. Reset your Wanderlust App account password quickly and easily with our account recovery page. Enter your email address and follow the instructions to reset your password and regain access to your account. Don't let a forgotten password stop your travel planning journey. Reset your password now with Wanderlust App." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
             <Image
                 src="https://images.unsplash.com/photo-1531804226530-70f8004aa44e?crop=entropy&cs=srgb&fm=webp&ixid=MnwxNzkyODZ8MHwxfGFsbHx8fHx8fHx8fDE2MTY3Mjc5OTE&ixlib=rb-1.2.1&q=85"
                 fill

@@ -161,6 +161,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                 image={blog?.image_url}
                 url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
                 alt={`${blog?.title} - Wanderlust App`}
+                contentCreator={blog?.author?.twitter}
             />
             <ArticleJsonLd
                 url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}

@@ -1,26 +1,16 @@
-import Head from 'next/head'
+import CustomHead from '../shared_components/CustomHead';
 
 export default function PrivacyPolicy() {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Your Privacy Matters | Wanderlust App Privacy Policy</title>
-                <meta key="description" name="description" content="At Wanderlust App, we take your privacy seriously. Our privacy policy outlines our commitment to protecting your personal information and explains how we collect, use, and store your data. We value your trust and are dedicated to ensuring the safety and security of your information. Read our privacy policy to learn more about how we protect your privacy on Wanderlust App." />
+            <CustomHead
+                title="Your Privacy Matters | Wanderlust App Privacy Policy"
+                description="At Wanderlust App, we take your privacy seriously. Our privacy policy outlines our commitment to protecting your personal information and explains how we collect, use, and store your data. We value your trust and are dedicated to ensuring the safety and security of your information. Read our privacy policy to learn more about how we protect your privacy on Wanderlust App."
+                url="https://www.wanderlustapp.io/privacy"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Nomad Tools - Wanderlust App"
+            />
 
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Your Privacy Matters | Wanderlust App Privacy Policy" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/privacy" />
-                <meta key="description" property="og:description" content="At Wanderlust App, we take your privacy seriously. Our privacy policy outlines our commitment to protecting your personal information and explains how we collect, use, and store your data. We value your trust and are dedicated to ensuring the safety and security of your information. Read our privacy policy to learn more about how we protect your privacy on Wanderlust App." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Your Privacy Matters | Wanderlust App Privacy Policy" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/privacy" />
-                <meta key="description" property="twitter:description" content="At Wanderlust App, we take your privacy seriously. Our privacy policy outlines our commitment to protecting your personal information and explains how we collect, use, and store your data. We value your trust and are dedicated to ensuring the safety and security of your information. Read our privacy policy to learn more about how we protect your privacy on Wanderlust App." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
             <h1 className="text-3xl mb-4 font-bold text-gray-800 dark:text-gray-100">Privacy Policy</h1>
             <p className="text-gray-800 dark:text-gray-100" style={{ whiteSpace: 'pre-line'}}>{`
                 We at Wanderlust are committed to protecting your privacy. This privacy policy applies to our browser extension (Wanderlust Extension), our website (https://wanderlustapp.io), and any subdomains of wanaderlustapp.io.

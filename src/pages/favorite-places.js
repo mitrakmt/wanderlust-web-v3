@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 // Components
+import CustomHead from '../shared_components/CustomHead';
 import Footer from '../components/Footer';
 
 export default function FavoritePlacesFeaturePage() {
@@ -25,24 +25,14 @@ export default function FavoritePlacesFeaturePage() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Keep Track of Your Favorite Places with Wanderlust App</title>
-                <meta key="description" name="description" content="Wanderlust App's Favorite Places feature lets you save your most beloved places and share them with friends or other travelers. Discover new places and see other traveler's favorite spots for any city." />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Keep Track of Your Favorite Places with Wanderlust App" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/team" />
-                <meta key="description" property="og:description" content="Wanderlust App's Favorite Places feature lets you save your most beloved places and share them with friends or other travelers. Discover new places and see other traveler's favorite spots for any city." />
-                <meta key="image" property="og:image" content={'/favoritePlacesDark1.png'} />
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Keep Track of Your Favorite Places with Wanderlust App" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/team" />
-                <meta key="description" property="twitter:description" content="Wanderlust App's Favorite Places feature lets you save your most beloved places and share them with friends or other travelers. Discover new places and see other traveler's favorite spots for any city." />
-                <meta key="image" property="twitter:image" content={'/favoritePlacesDark1.png'} />
-            </Head>
+            <CustomHead 
+                title="Keep Track of Your Favorite Places with Wanderlust App"
+                description="Wanderlust App's Favorite Places feature lets you save your most beloved places and share them with friends or other travelers. Discover new places and see other traveler's favorite spots for any city."
+                image="/favoritePlacesDark1.png"
+                url="https://www.wanderlustapp.io/favorite-places"
+                alt="Favorite Places - Wanderlust App"
+            />
+            
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6" id="top">
                 <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div className="mr-auto place-self-center lg:col-span-7">

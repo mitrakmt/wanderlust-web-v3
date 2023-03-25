@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 // Components
 import Footer from '../components/Footer';
+import CustomHead from '../shared_components/CustomHead';
 
 export default function TravelAssistantFeaturePage() {
     const router = useRouter();
@@ -25,31 +25,13 @@ export default function TravelAssistantFeaturePage() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Plan Your Next Adventure with Wanderlust App's AI Travel Assistant</title>
-                <meta key="description" name="description" content="Wanderlust App's AI Travel Assistant makes trip planning a breeze. Talk to our custom trained travel AI to get personalized recommendations for your next adventure." />
-                <meta key="image" property="image" content={'/assistantDark1.png'} />
-                <meta key="width" property="image:width" content="800" />
-                <meta key="height" property="image:height" content="600" />
-                <meta key="alt" property="image:alt" content="AI Travel Assistant - Wanderlust App" />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Plan Your Next Adventure with Wanderlust App's AI Travel Assistant" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/team" />
-                <meta key="width" property="og:image:width" content="800" />
-                <meta key="height" property="og:image:height" content="600" />
-                <meta key="alt" property="og:image:alt" content="AI Travel Assistant - Wanderlust App" />
-                <meta key="description" property="og:description" content="Wanderlust App's AI Travel Assistant makes trip planning a breeze. Talk to our custom trained travel AI to get personalized recommendations for your next adventure." />
-                <meta key="image" property="og:image" content={'/assistantDark1.png'} />
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Plan Your Next Adventure with Wanderlust App's AI Travel Assistant" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/team" />
-                <meta key="description" property="twitter:description" content="Wanderlust App's AI Travel Assistant makes trip planning a breeze. Talk to our custom trained travel AI to get personalized recommendations for your next adventure." />
-                <meta key="image" property="twitter:image" content={'/assistantDark1.png'} />
-            </Head>
+            <CustomHead
+                title="Plan Your Next Adventure with Wanderlust App's AI Travel Assistant"
+                description="Wanderlust App's AI Travel Assistant makes trip planning a breeze. Talk to our custom trained travel AI to get personalized recommendations for your next adventure."
+                image={'/assistantDark1.png'}
+                url="https://www.wanderlustapp.io/ai-travel-assistant"
+                alt={"AI Travel Assistant - Wanderlust App"}
+            />
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6" id="top">
                 <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div className="mr-auto place-self-center lg:col-span-7">

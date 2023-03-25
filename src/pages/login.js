@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Head from 'next/head'
+
+// Components
+import CustomHead from '../shared_components/CustomHead';
 
 // Utils
 import request from "../utils/request";
@@ -76,6 +78,14 @@ function Login() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8 flex justify-center items-center min-h-screen">
+            <CustomHead 
+                title="Welcome Back | Wanderlust App Login"
+                description="Log in to your Wanderlust App account and pick up where you left off. Access your saved places, travel plans, and personalized recommendations with ease. Our login page is secure and easy to use, allowing you to quickly get back to planning your next adventure. Welcome back to Wanderlust App."
+                url="https://www.wanderlustapp.io/login"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Login - Wanderlust App"
+            />
+
             <Head>
                 <title>Welcome Back | Wanderlust App Login</title>
                 <meta key="description" name="description" content="Log in to your Wanderlust App account and pick up where you left off. Access your saved places, travel plans, and personalized recommendations with ease. Our login page is secure and easy to use, allowing you to quickly get back to planning your next adventure. Welcome back to Wanderlust App." />

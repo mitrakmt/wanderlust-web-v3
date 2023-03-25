@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import Head from 'next/head';
 
 // Components
+import CustomHead from '../shared_components/CustomHead';
 import CityCard from '../components/CityCard/CityCard';
 import LoadingCityCard from '../components/LoadingCityCard/LoadingCityCard';
 
@@ -146,24 +146,13 @@ export default function Search({ featuredCities }) {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8 overflow-scroll scroll-smooth">
-            <Head>
-                <title>Find Your Next Destination | Search Cities Worldwide | Wanderlust App</title>
-                <meta key="description" name="description" content="Discover the world's hidden gems and popular hotspots with Wanderlust App's search page. Search cities worldwide and get in-depth and local information about each place, including travel tips, popular attractions, local cuisine, and much more. Explore with confidence and make the most of your journey with Wanderlust App." />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Find Your Next Destination | Search Cities Worldwide | Wanderlust App" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/search" />
-                <meta key="description" property="og:description" content="Discover the world's hidden gems and popular hotspots with Wanderlust App's search page. Search cities worldwide and get in-depth and local information about each place, including travel tips, popular attractions, local cuisine, and much more. Explore with confidence and make the most of your journey with Wanderlust App." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Find Your Next Destination | Search Cities Worldwide | Wanderlust App" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/search" />
-                <meta key="description" property="twitter:description" content="Discover the world's hidden gems and popular hotspots with Wanderlust App's search page. Search cities worldwide and get in-depth and local information about each place, including travel tips, popular attractions, local cuisine, and much more. Explore with confidence and make the most of your journey with Wanderlust App." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
+            <CustomHead 
+                title="Find Your Next Destination | Search Cities Worldwide | Wanderlust App"
+                description="Discover the world's hidden gems and popular hotspots with Wanderlust App's search page. Search cities worldwide and get in-depth and local information about each place, including travel tips, popular attractions, local cuisine, and much more. Explore with confidence and make the most of your journey with Wanderlust App."
+                url="https://www.wanderlustapp.io/search"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Nomad Tools - Wanderlust App"
+            />
             <TextH2>Popular Destinations</TextH2>
             <div className="flex items-end overflow-scroll">
                 {

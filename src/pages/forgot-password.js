@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Head from 'next/head'
+
+// Components
+import CustomHead from '../shared_components/CustomHead';
 
 // Utils
 import request from "../utils/request";
@@ -30,6 +32,14 @@ function ForgotPassword() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8 flex justify-center items-center min-h-screen">
+            <CustomHead 
+                title="Forgot Your Wanderlust App Password? | Account Recovery"
+                description="Don't worry if you've forgotten your Wanderlust App password. Our account recovery page makes it easy to reset your password and regain access to your account. Enter your email address and follow the instructions to reset your password and get back to planning your travels. Don't let a forgotten password stop you from exploring the world. Reset your Wanderlust App password now."
+                url="https://www.wanderlustapp.io/forgot-password"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Forgot Password - Wanderlust App"
+            />
+
             <Head>
                 <title>Forgot Your Wanderlust App Password? | Account Recovery</title>
                 <meta key="description" name="description" content="Don't worry if you've forgotten your Wanderlust App password. Our account recovery page makes it easy to reset your password and regain access to your account. Enter your email address and follow the instructions to reset your password and get back to planning your travels. Don't let a forgotten password stop you from exploring the world. Reset your Wanderlust App password now." />

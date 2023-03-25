@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image'
-import Head from 'next/head'
+
+// Components
+import CustomHead from '../shared_components/CustomHead';
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -75,25 +77,15 @@ export default function NomadTools() {
     // Offers to check - flights? airbnb? hotels? vrbo? digital nomad services?
     
     return (
-        <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Maximize Your Nomad Lifestyle | Wanderlust App Nomad Tools</title>
-                <meta key="description" name="description" content="Make the most of your digital nomad lifestyle with Wanderlust App's Nomad Tools page. Gain access to exclusive deals and resources to help you save money and stay productive on the road. Discover the best coworking spaces, travel insurance, and other essential tools for digital nomads. Explore the world without limitations and enhance your nomad experience with Wanderlust App's Nomad Tools." />
+        <section className="relative ml-0 sm:ml-16 px-6 py-8">\
+            <CustomHead
+                title="Maximize Your Nomad Lifestyle | Wanderlust App Nomad Tools"
+                description="Make the most of your digital nomad lifestyle with Wanderlust App's Nomad Tools page. Gain access to exclusive deals and resources to help you save money and stay productive on the road. Discover the best coworking spaces, travel insurance, and other essential tools for digital nomads. Explore the world without limitations and enhance your nomad experience with Wanderlust App's Nomad Tools."
+                url="https://www.wanderlustapp.io/nomad"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Nomad Tools - Wanderlust App"
+            />
 
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Maximize Your Nomad Lifestyle | Wanderlust App Nomad Tools" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/nomad" />
-                <meta key="description" property="og:description" content="Make the most of your digital nomad lifestyle with Wanderlust App's Nomad Tools page. Gain access to exclusive deals and resources to help you save money and stay productive on the road. Discover the best coworking spaces, travel insurance, and other essential tools for digital nomads. Explore the world without limitations and enhance your nomad experience with Wanderlust App's Nomad Tools." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Maximize Your Nomad Lifestyle | Wanderlust App Nomad Tools" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/nomad" />
-                <meta key="description" property="twitter:description" content="Make the most of your digital nomad lifestyle with Wanderlust App's Nomad Tools page. Gain access to exclusive deals and resources to help you save money and stay productive on the road. Discover the best coworking spaces, travel insurance, and other essential tools for digital nomads. Explore the world without limitations and enhance your nomad experience with Wanderlust App's Nomad Tools." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                 <div className="max-w-screen-md mb-8 lg:mb-16">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Deals & Tools for Nomads</h2>

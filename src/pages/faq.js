@@ -1,27 +1,18 @@
 import Footer from '../components/Footer';
-import Head from 'next/head'
+
+// Components
+import CustomHead from '../shared_components/CustomHead';
 
 export default function Faq() {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Get Answers to Your Wanderlust App Questions | Frequently Asked Questions</title>
-                <meta key="description" name="description" content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence." />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Get Answers to Your Wanderlust App Questions | Frequently Asked Questions" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/faq" />
-                <meta key="description" property="og:description" content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Get Answers to Your Wanderlust App Questions | Frequently Asked Questions" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/faq" />
-                <meta key="description" property="twitter:description" content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
+            <CustomHead 
+                title="Get Answers to Your Wanderlust App Questions | Frequently Asked Questions"
+                description="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence."
+                url="https://www.wanderlustapp.io/faq"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Frequently Asked Questions - Wanderlust App"
+            />
             <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                 <h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Frequently Asked Questions</h2>
                 <div className="grid pt-8 text-left border-t border-gray-200 md:gap-16 dark:border-gray-700 md:grid-cols-2">

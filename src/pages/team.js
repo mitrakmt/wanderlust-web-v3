@@ -1,26 +1,15 @@
-import Head from 'next/head'
+import CustomHead from '../shared_components/CustomHead';
 
 export default function Team() {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts</title>
-                <meta key="description" name="description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/team" />
-                <meta key="description" property="og:description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/team" />
-                <meta key="description" property="twitter:description" content="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
+            <CustomHead
+                title="Meet the Wanderlust App Team | Our Digital Nomads and Travel Experts"
+                description="Get to know the Wanderlust App team behind the scenes - a group of passionate digital nomads and travel experts who are dedicated to helping you find and explore the best places around the world. Learn about their backgrounds, expertise, and unique perspectives that shape the vision and mission of Wanderlust App."
+                url="https://www.wanderlustapp.io/team"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Wanderlust App Team"
+            />
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
                 <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Our Team</h2>

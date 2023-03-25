@@ -1,7 +1,6 @@
 import { useEffect, useContext, useState } from 'react';
 import request from '../utils/request';
 import Footer from '../components/Footer';
-import Head from 'next/head'
 
 // Utils
 import removeFavorite from '../utils/removeFavorite';
@@ -15,6 +14,7 @@ import { useRouter } from 'next/router';
 import { favoritesContext } from '../context/FavoritesProvider';
 
 // Components
+import CustomHead from '../shared_components/CustomHead';
 import CityCard from '../components/CityCard/CityCard';
 import CountryCard from '../components/CountryCard/CountryCard';
 import TextH2 from '../components/Text/TextH2';
@@ -80,24 +80,13 @@ export default function Favorites() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Your Wanderlust App Favorites | Keep Your Favorite Places in One Place</title>
-                <meta key="description" name="description" content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence." />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Your Wanderlust App Favorites | Keep Your Favorite Places in One Place" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/favorites" />
-                <meta key="description" property="og:description" content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Your Wanderlust App Favorites | Keep Your Favorite Places in One Place" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/favorites" />
-                <meta key="description" property="twitter:description" content="Have questions about Wanderlust App? Our FAQ page has the answers you need. Find information on account setup, travel planning, app features, and more. Our comprehensive FAQ section covers everything you need to know to make the most of your Wanderlust App experience. Get answers to your questions and start exploring the world with confidence." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
+            <CustomHead 
+                title="Your Wanderlust App Favorites | Keep Your Favorite Places in One Place"
+                description="Keep your favorite places in one place. Save your favorite cities and countries to your Wanderlust App account and access them from any device."
+                url="https://www.wanderlustapp.io/favorites"
+                image="/favoritePlacesDark1.png"
+                alt="Favorites - Wanderlust App"
+            />
             <TextH2>Favorites</TextH2>
                 {/* TODO: favorites by cities, AND favorites by images */}
                 <div className="flex justify-between h-10">

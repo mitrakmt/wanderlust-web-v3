@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 // Components
 import Footer from '../components/Footer';
+import CustomHead from '../shared_components/CustomHead';
 
 export default function CityDetailsFeaturePage() {
     const router = useRouter();
@@ -25,24 +25,14 @@ export default function CityDetailsFeaturePage() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Explore Cities Like a Local with Wanderlust App's City Details</title>
-                <meta key="description" name="description" content="Wanderlust App's City Details feature gives you an in-depth look into each city with insider information, reviews, and more. Discover the best places to visit and local favorites like a true local." />
+            <CustomHead 
+                title="Explore Cities Like a Local with Wanderlust App's City Details"
+                description="Wanderlust App's City Details feature gives you an in-depth look into each city with insider information, reviews, and more. Discover the best places to visit and local favorites like a true local."
+                image="/cityDetailsDark2.png"
+                url={"https://www.wanderlustapp.io/city-details"}
+                alt="City Details - Wanderlust App"
+            />
 
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Explore Cities Like a Local with Wanderlust App's City Details" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/team" />
-                <meta key="description" property="og:description" content="Wanderlust App's City Details feature gives you an in-depth look into each city with insider information, reviews, and more. Discover the best places to visit and local favorites like a true local." />
-                <meta key="image" property="og:image" content={'/cityDetailsDark2.png'} />
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Explore Cities Like a Local with Wanderlust App's City Details" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/team" />
-                <meta key="description" property="twitter:description" content="Wanderlust App's City Details feature gives you an in-depth look into each city with insider information, reviews, and more. Discover the best places to visit and local favorites like a true local." />
-                <meta key="image" property="twitter:image" content={'/cityDetailsDark2.png'} />
-            </Head>
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6" id="top">
                 <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div className="mr-auto place-self-center lg:col-span-7">

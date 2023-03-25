@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Head from 'next/head'
 
 // Components
+import CustomHead from '../shared_components/CustomHead';
 import Footer from '../components/Footer';
 
 // Utils
@@ -44,24 +44,14 @@ export default function Contact() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>Contact Wanderlust App | Get in Touch with Us</title>
-                <meta key="description" name="description" content="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure." />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Contact Wanderlust App | Get in Touch with Us" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/contact" />
-                <meta key="description" property="og:description" content="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Contact Wanderlust App | Get in Touch with Us" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/contact" />
-                <meta key="description" property="twitter:description" content="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
+            <CustomHead 
+                title="Contact Wanderlust App | Get in Touch with Us"
+                description="Have a question or feedback for Wanderlust App? Our contact page makes it easy to get in touch with us. Whether you need help with travel planning or have a suggestion for app improvements, we're here to help. Simply fill out our contact form and we'll get back to you as soon as possible. Connect with Wanderlust App and let us help you plan your next adventure."
+                url="https://www.wanderlustapp.io/contact"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Contact - Wanderlust App"
+            />
+            
             <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
                 <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
                 <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Pro plan? Let us know.</p>

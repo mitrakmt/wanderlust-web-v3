@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Head from "next/head";
+
+// Components
+import CustomHead from '../shared_components/CustomHead';
 
 // Utils
 import request from "../utils/request";
@@ -86,24 +88,14 @@ function Signup() {
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8 flex justify-center items-center min-h-screen">
-            <Head>
-                <title>Join Wanderlust App | Sign up for Free Today</title>
-                <meta key="description" name="description" content="Join the Wanderlust App community today and start exploring the world like never before. Sign up for free and gain access to exclusive features and tools that will help you plan your next adventure with ease. Don't wait, sign up now and begin your journey with us." />
-
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="type" property="og:type" content="website" />
-                <meta key="title" property="og:title" content="Join Wanderlust App | Sign up for Free Today" />
-                <meta key="url" property="og:url" content="https://www.wanderlustapp.io/signup" />
-                <meta key="description" property="og:description" content="Join the Wanderlust App community today and start exploring the world like never before. Sign up for free and gain access to exclusive features and tools that will help you plan your next adventure with ease. Don't wait, sign up now and begin your journey with us." />
-                {/* <meta property="og:image" content={blog?.image_url} /> */}
-
-                {/* <!-- Twitter --> */}
-                <meta key="card" property="twitter:card" content="summary_large_image" />
-                <meta key="title" property="twitter:title" content="Join Wanderlust App | Sign up for Free Today" />
-                <meta key="url" property="twitter:url" content="https://www.wanderlustapp.io/signup" />
-                <meta key="description" property="twitter:description" content="Join the Wanderlust App community today and start exploring the world like never before. Sign up for free and gain access to exclusive features and tools that will help you plan your next adventure with ease. Don't wait, sign up now and begin your journey with us." />
-                {/* <meta property="twitter:image" content={blog?.image_url} /> */}
-            </Head>
+            <CustomHead
+                title="Join Wanderlust App | Sign up for Free Today"
+                description="Join the Wanderlust App community today and start exploring the world like never before. Sign up for free and gain access to exclusive features and tools that will help you plan your next adventure with ease. Don't wait, sign up now and begin your journey with us."
+                url="https://www.wanderlustapp.io/signup"
+                image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+                alt="Nomad Tools - Wanderlust App"
+            />
+            
             <Image
                 src="https://images.unsplash.com/photo-1531804226530-70f8004aa44e?crop=entropy&cs=srgb&fm=webp&ixid=MnwxNzkyODZ8MHwxfGFsbHx8fHx8fHx8fDE2MTY3Mjc5OTE&ixlib=rb-1.2.1&q=85"
                 fill

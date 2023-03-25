@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function CustomHead({ title, description, image, alt, url }) {
+export default function CustomHead({ title, description, image, alt, url, contentCreator }) {
     return (
         <>
             <Head>
@@ -30,6 +30,11 @@ export default function CustomHead({ title, description, image, alt, url }) {
                 <meta key="twitter:card" property="twitter:card" content="summary_large_image" />
                 <meta key="twitter:title" property="twitter:title" content={title} />
                 <meta key="twitter:url" property="twitter:url" content={url} />
+                <meta key="twitter:site" property="twitter:site" content="@wanderlustapp" />
+                {
+                    contentCreator && <meta key="twitter:creator" property="twitter:creator" content={contentCreator} />
+                }
+                <meta key="twitter:domain" property="twitter:domain" content="wanderlustapp.io" />
                 <meta key="twitter:description" property="twitter:description" content={description} />
                 <meta key="twitter:image" property="twitter:image" content={image} />
                 <meta key="twitter:width" property="twitter:image:width" content="800" />
