@@ -123,21 +123,25 @@ export default function Home({ posts }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <title>Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion</title>
-        <meta nkey="description" ame="description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
-
-        {/* <!-- Open Graph / Facebook --> */}
-        <meta key="type" property="og:type" content="website" />
-        <meta key="title" property="og:title" content="Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion" />
-        <meta key="url" property="og:url" content={`https://www.wanderlustapp.io`} />
         <meta key="description" property="og:description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
         <meta key="image" property="og:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
+        <meta key="width" property="image:width" content="800" />
+        <meta key="height" property="image:height" content="600" />
+        <meta key="alt" property="image:alt" content={`Wanderlust App`} />
+        
+        {/* <!-- Open Graph / Facebook --> */}
+        <meta key="og:type" property="og:type" content="website" />
+        <meta key="og:title" property="og:title" content="Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion" />
+        <meta key="og:url" property="og:url" content={`https://www.wanderlustapp.io`} />
+        <meta key="og:description" property="og:description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
+        <meta key="og:image" property="og:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
 
         {/* <!-- Twitter --> */}
-        <meta key="card" property="twitter:card" content="summary_large_image" />
-        <meta key="title" property="twitter:title" content="Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion" />
-        <meta key="url" property="twitter:url" content={`https://www.wanderlustapp.io`} />
-        <meta key="description" property="twitter:description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
-        <meta key="image" property="twitter:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
+        <meta key="twitter:card" property="twitter:card" content="summary_large_image" />
+        <meta key="twitter:title" property="twitter:title" content="Plan Your Next Adventure | Wanderlust App - Your Ultimate Travel Companion" />
+        <meta key="twitter:url" property="twitter:url" content={`https://www.wanderlustapp.io`} />
+        <meta key="twitter:description" property="twitter:description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
+        <meta key="twitter:image" property="twitter:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
       </Head>
 
       {/* NEW USER HOMGEPAGE  */}
