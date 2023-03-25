@@ -77,7 +77,7 @@ export default function NomadTools() {
     // Offers to check - flights? airbnb? hotels? vrbo? digital nomad services?
     
     return (
-        <section className="relative ml-0 sm:ml-16 px-6 py-8">\
+        <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <CustomHead
                 title="Maximize Your Nomad Lifestyle | Wanderlust App Nomad Tools"
                 description="Make the most of your digital nomad lifestyle with Wanderlust App's Nomad Tools page. Gain access to exclusive deals and resources to help you save money and stay productive on the road. Discover the best coworking spaces, travel insurance, and other essential tools for digital nomads. Explore the world without limitations and enhance your nomad experience with Wanderlust App's Nomad Tools."
