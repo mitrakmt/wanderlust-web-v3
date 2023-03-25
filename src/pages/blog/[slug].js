@@ -158,6 +158,7 @@ export default function BlogPost({ blog, relatedArticles }) {
             <Head>
                 <title>{`${blog?.title} | Wanderlust App Blogs`}</title>
                 <link rel="icon" href="/favicon.ico" />
+                <meta property="fb:app_id" content="1333829727111489" />
                 <meta key="charSet" charSet="utf-8" />
                 <meta key="viewport" name="viewport" content="initial-scale=1.0, width=device-width" />
                 <meta key="description" name="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
@@ -183,7 +184,10 @@ export default function BlogPost({ blog, relatedArticles }) {
                 <meta key="twitter:title"property="twitter:title" content={`${blog?.title} | Wanderlust App Blogs`} />
                 <meta key="twitter:url"property="twitter:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
                 <meta key="twitter:description" property="twitter:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta key="twitter:image"property="twitter:image" content={blog?.image_url} />
+                <meta key="twitter:image" property="twitter:image" content={blog?.image_url} />
+                <meta key="twitter:width" property="twitter:image:width" content="800" />
+                <meta key="twitter:height" property="twitter:image:height" content="600" />
+                <meta key="twitter:alt" property="twitter:image:alt" content={`${blog?.title} - Wanderlust App`} />
             </Head>
             {/* <ArticleJsonLd
                 url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
