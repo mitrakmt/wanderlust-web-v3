@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArticleJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 
 // Utils
 import request from '../../utils/request';
@@ -13,6 +12,7 @@ import trackClick from "../../utils/trackClick";
 import { useAuth } from '../../hooks/useAuth';
 
 // Components
+import CustomHead from '../../shared_components/CustomHead';
 import Footer from '../../components/Footer';
 import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
 import BlogCard from '../../components/BlogCard';
@@ -155,41 +155,14 @@ export default function BlogPost({ blog, relatedArticles }) {
     // Hooks
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            <Head>
-                <title>{`${blog?.title} | Wanderlust App Blogs`}</title>
-                <link rel="icon" href="/favicon.ico" />
-                <meta property="fb:app_id" content="1333829727111489" />
-                <meta key="charSet" charSet="utf-8" />
-                <meta key="viewport" name="viewport" content="initial-scale=1.0, width=device-width" />
-                <meta key="description" name="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta key="image" property="image" content={blog?.image_url} />
-                <meta key="width" property="image:width" content="800" />
-                <meta key="height" property="image:height" content="600" />
-                <meta key="alt" property="image:alt" content={`${blog?.title} - Wanderlust App`} />
-            </Head>
-            <Head>
-                {/* <!-- Open Graph / Facebook --> */}
-                <meta key="og:type" property="og:type" content="website" />
-                <meta key="og:title" property="og:title" content={`${blog?.title} | Wanderlust App Blogs`} />
-                <meta key="og:url" property="og:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
-                <meta key="og:description" property="og:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta key="og:image" property="og:image" content={blog?.image_url} />
-                <meta key="og:width" property="og:image:width" content="800" />
-                <meta key="og:height" property="og:image:height" content="600" />
-                <meta key="og:alt" property="og:image:alt" content={`${blog?.title} - Wanderlust App`} />
-            </Head>
-            <Head>
-                {/* <!-- Twitter --> */}
-                <meta key="twitter:card"property="twitter:card" content="summary_large_image" />
-                <meta key="twitter:title"property="twitter:title" content={`${blog?.title} | Wanderlust App Blogs`} />
-                <meta key="twitter:url"property="twitter:url" content={`https://www.wanderlustapp.io/blog/${blog?.slug}`} />
-                <meta key="twitter:description" property="twitter:description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
-                <meta key="twitter:image" property="twitter:image" content={blog?.image_url} />
-                <meta key="twitter:width" property="twitter:image:width" content="800" />
-                <meta key="twitter:height" property="twitter:image:height" content="600" />
-                <meta key="twitter:alt" property="twitter:image:alt" content={`${blog?.title} - Wanderlust App`} />
-            </Head>
-            {/* <ArticleJsonLd
+            <CustomHead
+                title={`${blog?.title} | Wanderlust App Blogs`}
+                description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
+                image={blog?.image_url}
+                url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
+                alt={`${blog?.title} - Wanderlust App`}
+            />
+            <ArticleJsonLd
                 url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
                 title={`${blog?.title} | Wanderlust App Blogs`}
                 images={[
@@ -207,7 +180,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                 publisherLogo="https://wanderlust-extension.s3.us-west-2.amazonaws.com/logo.jpg"
                 description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
                 isAccessibleForFree={true}
-            /> */}
+            />
             <BreadCrumb breadCrumbHome={"Blogs"} goToHome={() => router.push('/blog')} secondName={blog?.title} />
             <main className="pt-8 mt-4 pb-16 lg:pt-16 lg:pb-8 dark:bg-gray-900" id="top">
                 <div className="flex flex-col justify-between px-4 mx-auto max-w-screen-xl ">

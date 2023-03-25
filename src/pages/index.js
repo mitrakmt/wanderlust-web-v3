@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 
 // Hooks
@@ -6,6 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useRouter } from 'next/router';
 
 // Main components
+import CustomHead from '../shared_components/CustomHead';
 import ControlBar from "../components/ControlBar";
 import InfoDialog from "../components/InfoDialog/InfoDialog";
 import LoadImage from "../components/LoadImage";
@@ -111,47 +111,15 @@ export default function Home({ posts }) {
 
   if (userLoading) return null;
 
-  // TODO: twitter meta tags  
-  // <meta name="twitter:card" content="summary_large_image" />
-  // <meta name="twitter:title" content="test title" />
-  // <meta name="twitter:description" content="test description" />
-  // <meta name="twitter:image" content="/images/test-image-1.png" />
-
   return (
     <section className="relative min-h-screen overflow-scroll max-w-full">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-        <title>A Digital Nomad's Ultimate Travel Companion - Wanderlust App</title>
-        <meta property="fb:app_id" content="1333829727111489" />
-        <meta key="description" property="og:description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
-        <meta key="image" property="og:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
-        <meta key="width" property="image:width" content="800" />
-        <meta key="height" property="image:height" content="600" />
-        <meta key="alt" property="image:alt" content={`The Ultimate Digital Nomad Tool - Wanderlust App`} />
-      </Head>
-      <Head> 
-        {/* <!-- Open Graph / Facebook --> */}
-        <meta key="og:type" property="og:type" content="website" />
-        <meta key="og:title" property="og:title" content="A Digital Nomad's Ultimate Travel Companion - Wanderlust App" />
-        <meta key="og:url" property="og:url" content={`https://www.wanderlustapp.io`} />
-        <meta key="og:description" property="og:description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
-        <meta key="og:image" property="og:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
-        <meta key="og:width" property="og:image:width" content="800" />
-        <meta key="og:height" property="og:image:height" content="600" />
-        <meta key="og:alt" property="og:image:alt" content={`The Ultimate Digital Nomad Tool - Wanderlust App`} />
-      </Head>
-      <Head>
-        {/* <!-- Twitter --> */}
-        <meta key="twitter:card" property="twitter:card" content="summary_large_image" />
-        <meta key="twitter:title" property="twitter:title" content="A Digital Nomad's Ultimate Travel Companion - Wanderlust App" />
-        <meta key="twitter:url" property="twitter:url" content={`https://www.wanderlustapp.io`} />
-        <meta key="twitter:description" property="twitter:description" content="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today." />
-        <meta key="twitter:image" property="twitter:image" content="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg" />
-        <meta key="twitter:width" property="twitter:image:width" content="800" />
-        <meta key="twitter:height" property="twitter:image:height" content="600" />
-        <meta key="twitter:alt" property="twitter:image:alt" content={`The Ultimate Digital Nomad Tool - Wanderlust App`} />
-      </Head>
+      <CustomHead 
+        title="A Digital Nomad's Ultimate Travel Companion - Wanderlust App"
+        description="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today."
+        image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
+        alt="Wanderlust App"
+        url="https://www.wanderlustapp.io/"
+      />
 
       {/* NEW USER HOMGEPAGE  */}
       <section className="w-full absolute overflow-hidden pr-0 top-0 left-0 right-0 ml-0 flex flex-col justify-center items-center min-h-screen bg-gray-200/80 dark:bg-gray-900/80" style={{ zIndex: 49 }}>
