@@ -33,52 +33,52 @@ const nextConfig = {
       },
       {
         source: '/best-places-to-live-in-portugal-8deaf55ddb6b',
-        destination: '/blog/best-places-to-live-in-portugal',
+        destination: '/blog/best-places-to-live-portugal',
         permanent: true,
       },
       {
         source: '/best-places-to-live-in-portugal',
-        destination: '/blog/best-places-to-live-in-portugal',
+        destination: '/blog/best-places-to-live-portugal',
         permanent: true,
       },
       {
         source: '/best-places-to-live-in-france-821d33071cbe',
-        destination: '/blog/best-places-to-live-in-france',
+        destination: '/blog/best-places-to-live-france',
         permanent: true,
       },
       {
         source: '/best-places-to-live-in-france',
-        destination: '/blog/best-places-to-live-in-france',
+        destination: '/blog/best-places-to-live-france',
         permanent: true,
       },
       {
         source: '/the-best-places-to-live-in-spain-c54b259def4e',
-        destination: '/blog/the-best-places-to-live-in-spain',
+        destination: '/blog/the-best-places-to-live-spain',
         permanent: true,
       },
       {
         source: '/the-best-places-to-live-in-spain',
-        destination: '/blog/the-best-places-to-live-in-spain',
+        destination: '/blog/the-best-places-to-live-spain',
         permanent: true,
       },
       {
         source: '/version-2-of-wanderlust-our-web-app-cc7cd0a21136',
-        destination: '/blog/version-2-of-wanderlust-our-web-app',
+        destination: '/blog/version-2',
         permanent: true,
       },
       {
         source: '/version-2-of-wanderlust-our-web-app',
-        destination: '/blog/version-2-of-wanderlust-our-web-app',
+        destination: '/blog/version-2',
         permanent: true,
       },
       {
         source: '/the-best-places-to-live-in-bali-5fe6706c80da',
-        destination: '/blog/the-best-places-to-live-in-bali',
+        destination: '/blog/the-best-places-to-live-bali',
         permanent: true,
       },
       {
         source: '/the-best-places-to-live-in-bali',
-        destination: '/blog/the-best-places-to-live-in-bali',
+        destination: '/blog/the-best-places-to-live-bali',
         permanent: true,
       },
       {
@@ -103,12 +103,12 @@ const nextConfig = {
       },
       {
         source: '/top-5-most-interesting-places-to-visit-in-the-world-990819413af1',
-        destination: '/blog/top-5-most-interesting-places-to-visit-in-the-world',
+        destination: '/blog/top-5-interesting-places-to-visit',
         permanent: true,
       },
       {
         source: '/top-5-most-interesting-places-to-visit-in-the-world',
-        destination: '/blog/top-5-most-interesting-places-to-visit-in-the-world',
+        destination: '/blog/top-5-interesting-places-to-visit',
         permanent: true,
       },
       {
