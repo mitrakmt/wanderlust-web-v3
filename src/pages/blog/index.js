@@ -43,8 +43,6 @@ export default function Blog({ posts }) {
         let convertedSearchTerm = searchTerm?.replace(/\ /g, '+')
         let convertedCategory = category?.replace(/\ /g, '+')
 
-        console.log('convertedCategory', convertedCategory);
-
         request(`/blog/search?${searchTerm ? `searchText=${convertedSearchTerm}` : ""}${searchTerm && category ? "&" : ""}${category ? `category=${convertedCategory}` : ""}`, {
             method: 'GET',
         })

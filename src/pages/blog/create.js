@@ -14,7 +14,7 @@ import request from '../../utils/request';
 // Components
 import CustomHead from '@/shared_components/CustomHead';
 
-export default function WriteBlog() {
+export default function CreateBlogPage() {
     // Context
     const [countries, ] = useContext(countriesContext);
 
@@ -24,7 +24,7 @@ export default function WriteBlog() {
     // State
     const [showAddSectionDropdown, setShowAddSectionDropdown] = useState(false);
     const [title, setTitle] = useState("");
-    const[slug, setSlug] = useState("");
+    const [slug, setSlug] = useState("");
     const [category, setCategory] = useState("");
     const [summary, setSummary] = useState("");
     const [region, setRegion] = useState(null);
@@ -51,11 +51,6 @@ export default function WriteBlog() {
     
     const publishBlogPost = () => {
         if (!title || !slug || !category || !summary || !mainImage || content.length === 0) {
-            console.log('title', title);
-            console.log('category', category);
-            console.log('summary', summary);
-            console.log('mainImage', mainImage);
-            console.log('content', content);
             setErrorMessage("Please fill out all fields: title, slug, category, summary, mainImage, content");
             return;
         }
@@ -284,6 +279,8 @@ export default function WriteBlog() {
                                                 </p>
                                             </div>
                                         )
+                                    default:
+                                        return null
                                 }
                             })
                         }
