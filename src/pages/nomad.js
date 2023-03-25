@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 // Components
 import CustomHead from '../shared_components/CustomHead';
+import Footer from '../components/Footer';
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -107,6 +108,7 @@ export default function NomadTools() {
                     }
                 </div>
             </div>
+            <Footer />
         </section>
     )
 }

@@ -77,7 +77,9 @@ export default function Footer() {
                 <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2023 <a href="https://wanderlustapp.io" aria-label="Wanderlust App">WanderlustApp™</a>. All Rights Reserved.</span>
                 <div className="flex mt-4 space-x-6 sm:justify-center md:mt-0">
                     <a href="https://www.facebook.com/wanderlustappio" target="_blank" className="text-gray-400 hover:text-gray-900 dark:hover:text-white" aria-label="Read more from Wanderlust on Facebook">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12p.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12p.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg>
+                        <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5">
+                            <path d="M379 22v75h-44c-36 0-42 17-42 41v54h84l-12 85h-72v217h-88V277h-72v-85h72v-62c0-72 45-112 109-112 31 0 58 3 65 4z"></path>
+                        </svg>
                         <span className="sr-only">Facebook page</span>
                     </a>
                     <a href="https://www.instagram.com/wanderlustapp/" target="_blank" className="text-gray-400 hover:text-gray-900 dark:hover:text-white" aria-label="Read more from Wanderlust on Instagram">
