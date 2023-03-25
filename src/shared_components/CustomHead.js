@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 export default function CustomHead({ title, description, image, alt, url }) {
     return (
         <>
