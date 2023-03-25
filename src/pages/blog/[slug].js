@@ -155,39 +155,17 @@ export default function BlogPost({ blog, relatedArticles }) {
     // Hooks
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
-            {/* <NextSeo
-                title={`${blog?.title} | Wanderlust App Blogs`}
-                description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
-                canonical={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
-                openGraph={{
-                    url: `https://www.wanderlustapp.io/blog/${blog?.slug}`,
-                    title: `${blog?.title} | Wanderlust App Blogs`,
-                    description: `${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`,
-                    images: [
-                        {
-                            url: blog?.image_url,
-                            width: 800,
-                            height: 600,
-                            alt: `${blog?.title} | Wanderlust App Blogs`,
-                            type: 'image/jpeg',
-                        },
-                    ],
-                    siteName: 'Wanderlust App Blogs',
-                }}
-                twitter={{
-                    handle: '@mike_mitrakos',
-                    site: '@wanderlustext',
-                    cardType: 'summary_large_image',
-                }}
-            /> */}
             <Head>
                 <title>{`${blog?.title} | Wanderlust App Blogs`}</title>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <meta key="description" name="description" content={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`} />
                 <meta key="image" property="image" content={blog?.image_url} />
                 <meta key="width" property="image:width" content="800" />
                 <meta key="height" property="image:height" content="600" />
                 <meta key="alt" property="image:alt" content={`${blog?.title} - Wanderlust App`} />
-
+            </Head>
+            <Head>
                 {/* <!-- Open Graph / Facebook --> */}
                 <meta property="og:type" content="website" key="type" />
                 <meta property="og:title" content={`${blog?.title} | Wanderlust App Blogs`} key="title" />
@@ -197,7 +175,8 @@ export default function BlogPost({ blog, relatedArticles }) {
                 <meta key="width" property="og:image:width" content="800" />
                 <meta key="height" property="og:image:height" content="600" />
                 <meta key="alt" property="og:image:alt" content={`${blog?.title} - Wanderlust App`} />
-
+            </Head>
+            <Head>
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:title" content={`${blog?.title} | Wanderlust App Blogs`} key="title" />
