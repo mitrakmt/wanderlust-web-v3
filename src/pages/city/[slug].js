@@ -12,6 +12,7 @@ import removeFavorite from '../../utils/removeFavorite';
 import addFavorite from '../../utils/addFavorite';
 
 // Components
+import InstagramPost from './instaEmbed';
 import CustomHead from '../../shared_components/CustomHead';
 import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
 import ScoreRating from '../../components/ScoreRating/ScoreRating';
@@ -106,14 +107,6 @@ export default function CityPage({ citySelected, blogs }) {
     const [, setFavoritesLoading] = useState(true);
     const [, setReviewsLoading] = useState(true);
     const [, setPlacesLoading] = useState(true);
-
-    // if no userLoading || !citySelected, render beautiful loading page 
-    // if (userLoading || !citySelected) (
-    //     <div className="flex items-center justify-center w-full h-full">
-    //         {/* Code the full loading page  */}
-    //         <p className="text-2xl font-bold">Loading...</p>
-    //     </div>
-    // )
     
     const structuredDataText = JSON.stringify({
         "@context": "https://schema.org",
@@ -393,6 +386,7 @@ export default function CityPage({ citySelected, blogs }) {
                     }
                 </div>
             </div>
+            
             <div className="w-full my-12">
                 <TextH3>Cost of Living</TextH3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -495,6 +489,10 @@ export default function CityPage({ citySelected, blogs }) {
                             </svg> : <p className="text-md font-medium text-gray-500 dark:text-gray-400">None to see here, yet!</p>
                         }
                     </div> : <Carousel images={locations} propertyName="image_url_medium" />
+                }
+
+                {
+                    citySelected?.instagramPosts && citySelected?.instagramPosts.length > 0 && <InstagramPost links={citySelected?.instagramPosts} />
                 }
             </div>
 
