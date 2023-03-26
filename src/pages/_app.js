@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script'
 
 // Hooks
 import { AuthProvider } from "../hooks/useAuth";
+import { useRouter } from 'next/router';
 
 // Context
 import FeaturedCitiesProvider from '../context/FeaturedCitiesProvider';
@@ -41,14 +43,13 @@ const roboto = Roboto({
 
 export default function MyApp({ Component, pageProps }) {
 
-    // const { pathname } = useRouter();
+    const { pathname } = useRouter();
 
-    // useEffect(() => {
-    //     // some browsers (like safari) may require a timeout to delay calling this
-    //     // function after a page has loaded; otherwise, it may not update the position
-    //     console.log('changing')
-    //      window.scrollTo(0, 0);
-    // }, [pathname]);
+    useEffect(() => {
+        // some browsers (like safari) may require a timeout to delay calling this
+        // function after a page has loaded; otherwise, it may not update the position
+         window.scrollTo(0, 0);
+    }, [pathname]);
     
     return (
         <div className={`overflow-scroll h-full max-h-screen scroll-smooth ${roboto.variable} font-sans`}>

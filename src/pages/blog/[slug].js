@@ -222,6 +222,30 @@ export default function BlogPost({ blog, relatedArticles }) {
                                                 <Image src={content?.src} alt={blog?.alt} height={600} width={800} className="rounded-lg w-full" />
                                             </div>
                                         )
+                                    case 'youtube':
+                                        return (
+                                            <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
+                                                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${content?.src}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                            </div>
+                                        )
+                                    case 'instagram':
+                                        return (
+                                            <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
+                                                <iframe src={`https://www.instagram.com/p/${content?.src}/embed`} width="560" height="315" frameBorder="0" scrolling="no" allowFullScreen={true}></iframe>
+                                            </div>
+                                        )
+                                    case 'twitter':
+                                        return (
+                                            <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
+                                                <blockquote className="twitter-tweet">
+                                                    <a href={`https://twitter.com/${content?.src}`}></a>
+                                                </blockquote>
+                                            </div>
+                                        )
+                                    case 'blockquote':
+                                        return (
+                                            <blockquote className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</blockquote>
+                                        )
                                     case 'h1':
                                         return (
                                             <h1 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h1>
