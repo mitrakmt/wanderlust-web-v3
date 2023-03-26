@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArticleJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
+import moment from 'moment';
 
 // Utils
 import request from '../../utils/request';
@@ -151,6 +152,8 @@ export default function BlogPost({ blog, relatedArticles }) {
     const shareToMastadon = (req, res) => {
         window.open(`https://mastodon.social/share`, '_blank');
     }
+
+    const options = { month: 'short', day: 'numeric', year: 'numeric' };
 
     // Hooks
     return (
@@ -363,14 +366,14 @@ export default function BlogPost({ blog, relatedArticles }) {
                                     <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
                                         <div className="flex justify-between items-center mb-2">
                                             <div className="flex items-center">
-                                                <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                                                <Link href={`/profile/${comment?.user.username}`} className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                                     <Image
-                                                        className="mr-2 w-6 h-6 rounded-full relative" width={120} height={120}
-                                                        src={comment.user.profile_image} alt={comment.user.username} />
-                                                    {comment.user.username}
-                                                </p>
-                                                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate="true" dateTime="2022-02-08"
-                                                    title="February 8th, 2022">{comment.createdOn}</time></p>
+                                                        className="mr-2 w-10 h-10 rounded-full relative" width={160} height={160}
+                                                        src={comment?.user.profile_image} alt={comment?.user.username} />
+                                                    <p className="text-lg font-bold hover:text-primary-600 transition-colors">{comment?.user.username}</p>
+                                                </Link>
+                                                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate="true" dateTime={new Date(comment.createdAt).toLocaleDateString('en-US', options)}
+                                                    title={new Date(comment.createdAt).toLocaleDateString('en-US', options)}>{new Date(comment.createdAt).toLocaleDateString('en-US', options)}</time></p>
                                             </div>
                                             <div className="flex items-center flex-col relative">
                                                 {
