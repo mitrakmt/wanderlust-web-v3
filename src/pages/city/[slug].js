@@ -492,7 +492,7 @@ export default function CityPage({ citySelected, blogs }) {
                 }
 
                 {
-                    citySelected?.instagramPosts && citySelected?.instagramPosts.length > 0 && <InstagramPost links={citySelected?.instagramPosts} />
+                    citySelected?.instagram_posts && citySelected?.instagram_posts.length > 0 && <InstagramPost links={citySelected?.instagram_posts} />
                 }
             </div>
 
