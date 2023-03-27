@@ -40,7 +40,7 @@ export default function PrivacyPolicy() {
                 What vendors/sub-processors do you use?
                 We use several vendors/sub-processors to conduct various aspects of our business.
 
-                Mongo, Mandrill, Unsplash, Google Analytics, Mixpanel, Slack, Notion, Gmail, Mailchimp, Stripe, Railway, and Zapier.
+                Mongo, Mandrill, Unsplash, Google Analytics, Mapbox, Google Maps, Vercel, Slack, Notion, Gmail, Mailchimp, Stripe, and Railway.
 
                 What are my rights in relation to my personal data?
                 By using Wanderlust Extension, you may exercise the following rights:
@@ -71,6 +71,20 @@ export default function PrivacyPolicy() {
                 Is my data secure?
                 Data security is a priority at all times. We use a Tier 1 cloud provider to run our operations (Railway).
 
+                TikTok Integration
+                Our website integrates with TikTok's platform to provide a better user experience. This integration allows us to access certain information from TikTok and share user information with TikTok in accordance with their Developer's Terms of Service.
+
+                We collect the following information from TikTok:
+
+                User content (such as videos and images)
+                This information is used to provide a personalized experience on our website and to improve the services we offer. We will not share this information with any third-party companies or service providers, except as required by law.
+
+                We also share certain information with TikTok, such as device information and usage data, to improve their services and to better understand how our website is being used. This information is collected and processed in accordance with TikTok's privacy policy.
+
+                We take data security seriously and implement appropriate measures to protect user information. This includes regularly monitoring our systems and implementing measures such as encryption and secure storage to ensure that user data is protected.
+
+                If you have any questions or concerns about our privacy policy or the information we collect, please do not hesitate to contact us.
+
                 In Transit
                 All data communication in transit to and from our servers is secured using HTTPS/TLS. All Wanderlust domains have HTTP Strict Transport Security (HSTS) enabled and are in the HSTS Preload list on the major browsers supporting this feature.
 
@@ -82,7 +96,7 @@ export default function PrivacyPolicy() {
 
                 If you have any questions about Wanderlust's Privacy policy, please contact us.
 
-                ‍Last updated May 18, 2022.
+                ‍Last updated March 28, 2023.
             `}</p>
         </section>
     )

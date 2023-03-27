@@ -86,7 +86,7 @@ export default function BlogPost({ blog, relatedArticles }) {
 
     // UseEffect
     useEffect(() => {
-        if (blog && user) {
+        if (blog) {
             request(`/blog-comment/${blog?.id}`)
                 .then(res => {
                     setBlogComments(res.data);
@@ -192,7 +192,13 @@ export default function BlogPost({ blog, relatedArticles }) {
                         <header className="mb-4 lg:mb-6 not-format">
                             <address className="flex items-center mb-6 not-italic">
                                 <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                                    <Image className="relative mr-4 w-16 h-16 rounded-full" src={blog?.author.profile_image} alt={`${blog?.author.name} Avatar`} height={120} width={120} />
+                                    <Image
+                                        className="relative mr-4 w-16 h-16 rounded-full"
+                                        src={blog?.author.profile_image}
+                                        alt={`${blog?.author.name} Avatar`}
+                                        height={120}
+                                        width={120}
+                                    />
                                     <div>
                                         <Link href={`/profile/${blog?.author.username}`} className="text-xl font-bold text-gray-900 dark:text-white">{blog?.author.username}</Link>
                                         <p className="text-base font-light text-gray-500 dark:text-gray-400">{blog?.author.job}</p>
@@ -209,7 +215,14 @@ export default function BlogPost({ blog, relatedArticles }) {
                         </header>
                         {
                             blog?.image_url && (
-                                <Image priority src={blog?.image_url} alt={blog?.title} height={600} width={800} className="rounded-lg w-full" />
+                                <Image
+                                    priority
+                                    src={blog?.image_url}
+                                    alt={blog?.title}
+                                    height={600}
+                                    width={800}
+                                    className="rounded-lg w-full"
+                                />
                             )
                         }
                         {
@@ -222,7 +235,13 @@ export default function BlogPost({ blog, relatedArticles }) {
                                     case 'image':
                                         return (
                                             <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
-                                                <Image src={content?.src} alt={blog?.alt} height={600} width={800} className="rounded-lg w-full" />
+                                                <Image
+                                                    src={content?.src}
+                                                    alt={content?.alt}
+                                                    height={600}
+                                                    width={800}
+                                                    className="rounded-lg w-full"
+                                                />
                                             </div>
                                         )
                                     case 'youtube':
@@ -363,13 +382,17 @@ export default function BlogPost({ blog, relatedArticles }) {
                             
                             {
                                 comments && comments.map((comment) => (
-                                    <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                                    <article key={`blog-comments-${comment.id}`} className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
                                         <div className="flex justify-between items-center mb-2">
                                             <div className="flex items-center">
                                                 <Link href={`/profile/${comment?.user.username}`} className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                                     <Image
-                                                        className="mr-2 w-10 h-10 rounded-full relative" width={160} height={160}
-                                                        src={comment?.user.profile_image} alt={comment?.user.username} />
+                                                        className="mr-2 w-10 h-10 rounded-full relative"
+                                                        width={160}
+                                                        height={160}
+                                                        src={comment?.user.profile_image}
+                                                        alt={comment?.user.username}
+                                                    />
                                                     <p className="text-lg font-bold hover:text-primary-600 transition-colors">{comment?.user.username}</p>
                                                 </Link>
                                                 <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate="true" dateTime={new Date(comment.createdAt).toLocaleDateString('en-US', options)}
@@ -377,7 +400,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                                             </div>
                                             <div className="flex items-center flex-col relative">
                                                 {
-                                                    comment.user.id === user.id && (
+                                                    comment?.user.id === user?.id && (
                                                         <button
                                                             onClick={showCommentDropdown ? () => setShowCommentDropdown(null) : () => setShowCommentDropdown(comment.id)}
                                                             className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
