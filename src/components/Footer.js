@@ -30,6 +30,9 @@ export default function Footer() {
                         <Link href="/privacy"><li className="mb-4">
                             <p className="hover:underline">Privacy Policy</p>
                         </li></Link>
+                        <Link href="/terms-of-service"><li className="mb-4">
+                            <p className="hover:underline">Terms of Service</p>
+                        </li></Link>
                     </ul>
                 </div>
                 <div>
