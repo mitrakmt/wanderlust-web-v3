@@ -348,7 +348,7 @@ export default function CityPage({ citySelected, blogs }) {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'c5a7cd5a76msh6c1a923c75df3d3p11ef07jsn9b9ab712ca44',
+                'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
 		        'X-RapidAPI-Host': 'airbnb-listings.p.rapidapi.com'
             }
         };
