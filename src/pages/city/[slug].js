@@ -29,6 +29,7 @@ import WeatherCard from '../../components/WeatherCard/WeatherCard';
 import ProBanner from '../../components/ProBanner/ProBanner';
 import PlacesMap from '../../components/cityComponents/Map';
 import BlogCard from '../../components/BlogCard';
+import RelatedCities from '../../components/RelatedCities';
 
 // Utils
 import trackClick from '../../utils/trackClick';
@@ -359,7 +360,6 @@ export default function CityPage({ citySelected, blogs }) {
             .catch(err => console.error('error:' + err));
     }
         
-
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <CustomHead 
@@ -643,6 +643,7 @@ export default function CityPage({ citySelected, blogs }) {
                     </div>
                 </div>
             </div>
+            <RelatedCities citySelected={citySelected} />
             {
                 !user?.premium && <ProBanner />
             }
