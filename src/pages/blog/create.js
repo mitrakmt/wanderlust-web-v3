@@ -217,10 +217,10 @@ export default function CreateBlogPage() {
     const updateCitySearchText = (e) => {
         setCitySearchText(e.target.value);
 
-        if (e.target.value.length === 0) {
+        if (e.target.value?.length === 0) {
             setShowCities(false);
             return;
-        } else if (e.target.value.length < 3) {
+        } else if (e.target.value?.length < 3) {
             return;
         }
 
@@ -235,7 +235,7 @@ export default function CreateBlogPage() {
     const updateCountrySearchText = (e) => {
         setCountrySearchText(e.target.value);
 
-        if (e.target.value.length <= 1) {
+        if (e.target.value?.length <= 1) {
             setShowCountries(false);
             return;
         }
@@ -249,10 +249,10 @@ export default function CreateBlogPage() {
     const updateUserSearchText = (e) => {
         setUserSearchText(e.target.value);
 
-        if (e.target.value.length === 0) {
+        if (e.target.value?.length === 0) {
             setShowUsers(false);
             return;
-        } else if (e.target.value.length < 3) {
+        } else if (e.target.value?.length < 3) {
             return;
         }
 
@@ -273,10 +273,10 @@ export default function CreateBlogPage() {
     const updateBlogSearchText = (e) => {
         setBlogSearchText(e.target.value);
 
-        if (e.target.value.length === 0) {
+        if (e.target.value?.length === 0) {
             setShowBlogs(false);
             return;
-        } else if (e.target.value.length < 3) {
+        } else if (e.target.value?.length < 3) {
             return;
         }
 
@@ -297,10 +297,10 @@ export default function CreateBlogPage() {
     const updatePlaceSearchText = (e) => {
         setPlaceSearchText(e.target.value);
 
-        if (e.target.value.length === 0) {
+        if (e.target.value?.length === 0) {
             setShowPlaces(false);
             return;
-        } else if (e.target.value.length < 3) {
+        } else if (e.target.value?.length < 3) {
             return;
         }
 
