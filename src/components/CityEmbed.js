@@ -28,7 +28,7 @@ export default function CityEmbed({ id }) {
     }
     
     return (
-        <div className="overflow-x-auto px-4 sm:px-6 pt-2 pb-6 rounded-lg bg-gray-300 dark:bg-gray-800">
+        <div className="overflow-x-auto px-4 sm:px-6 pt-2 pb-6 rounded-lg bg-gray-200 dark:bg-gray-800">
             <div className="py-0 my-0 h-20 flex items-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {
                     city?.image_url_thumb && <Image src={city.image_url_thumb} alt={city.name} height={150} width={150} className="object-cover h-12 w-12 rounded-full" />
@@ -49,7 +49,7 @@ export default function CityEmbed({ id }) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr key={`cityEmbed-${city.id}`} className="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <tr key={`cityEmbed-${city.id}`} className="border-b bg-gray-100 dark:bg-gray-700 dark:border-gray-600">
                         <td style={{ paddingLeft: '14px' }} className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div className="flex items-center h-full relative min-h-full">
                                 <div className={`inline-block w-4 h-4 mr-2 ${city.air_quality_score <= 3 ? "bg-red-700" : city.air_quality_score < 4 ? "bg-yellow-700" : "bg-green-700"} rounded-full`} />
