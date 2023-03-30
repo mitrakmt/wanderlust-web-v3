@@ -69,7 +69,7 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
     return (
         <div className=" px-2 sm:pl-16 pr-0 flex flex-col items-center w-11/12">
             <div className="mx-auto mt-56 mb-44 sm:text-center sm:flex sm:flex-col sm:items-center sm:justify-center">
-                <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">Let's Get Traveling!</h2>
+                <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">Let&#39;s Get Traveling!</h2>
                 <div className="items-center mx-auto mb-3 space-y-4 sm:flex sm:space-y-0 w-full">
                     <div className="relative w-full">
                         <label htmlFor="email" className="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">City</label>

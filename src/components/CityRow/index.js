@@ -56,7 +56,7 @@ export default function CityRow({ cities, pageIndex }) {
                                         
                                         <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             <div className="flex items-center">
-                                                <div className={`inline-block w-4 h-4 mr-2 ${city.leisure_quality <= 3 ? "bg-red-700" : city.leisure_quality < 4 ? "bg-yellow-700" : "bg-green-700"} rounded-full`} />
+                                                <div className={`inline-block w-4 h-4 mr-2 ${city.leisure_quality <= 3 ? "bg-red-600" : city.leisure_quality < 4 ? "bg-yellow-200" : "bg-green-700"} rounded-full`} />
                                                 {convertToPercentage(city.leisure_quality.toFixed(0))}
                                             </div>
                                         </td>

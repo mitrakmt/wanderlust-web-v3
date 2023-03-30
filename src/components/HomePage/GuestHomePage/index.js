@@ -17,7 +17,7 @@ export default function GuestHomePage({ router, posts }) {
         <div className=" px-2 sm:pl-16 pr-0 flex flex-col items-center w-10/12">
             <div className="mx-auto mt-56 mb-44 sm:text-center sm:flex sm:flex-col sm:items-center sm:justify-center">
                 <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Helping you to explore the world</h1>
-                <p className="mb-8 text-lg font-bold text-gray-800 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300">Wanderlust App let's you to find, explore and share the best places around the world, and gives you the tools to plan everything you'd need.</p>
+                <p className="mb-8 text-lg font-bold text-gray-800 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300">Wanderlust App let&#39;s you to find, explore and share the best places around the world, and gives you the tools to plan everything you&#39;d need.</p>
                 <div className="flex flex-col mt-4 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                     <Link href={'/signup'} className="cursor-pointer inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                         Signup for free
@@ -44,8 +44,8 @@ export default function GuestHomePage({ router, posts }) {
                 <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Your Personal Travel Assistant</h2>
                     <p className="mb-4 text-gray-700 dark:text-white">Welcome to Wanderlust App - your digital travel companion! As a digital nomad, I created this web application to help travelers find the best places around the world and track their travels. I wanted to make the travel experience easier, more enjoyable, and more fulfilling. With Wanderlust App, I created a platform that connects travelers and fosters positivity and support in the travel community. </p>
-                    <p className="mb-4 text-gray-700 dark:text-white">I've always been fascinated by the idea of travel and exploring new places. As a digital nomad myself, I know firsthand the joys and challenges that come with constantly being on the move. While travel can be incredibly rewarding, it can also be overwhelming and stressful at times - especially when you're in a new and unfamiliar place.</p>
-                    <p className="mb-4 text-gray-700 dark:text-white">If you're ready to embark on your next adventure, join the Wanderlust App community today and let's start exploring the world together!</p>
+                    <p className="mb-4 text-gray-700 dark:text-white">I&#39;ve always been fascinated by the idea of travel and exploring new places. As a digital nomad myself, I know firsthand the joys and challenges that come with constantly being on the move. While travel can be incredibly rewarding, it can also be overwhelming and stressful at times - especially when you&#39;re in a new and unfamiliar place.</p>
+                    <p className="mb-4 text-gray-700 dark:text-white">If you&#39;re ready to embark on your next adventure, join the Wanderlust App community today and let&#39;s start exploring the world together!</p>
                 </div>
                 <div className="hidden sm:grid grid-cols-2 gap-4 mt-8 ">
                     <div className="rounded-lg border h-80 overflow-hidden -mt-10 border-gray-300 dark:border-gray-700">
@@ -99,7 +99,7 @@ export default function GuestHomePage({ router, posts }) {
             {/* CTA  */}
             <div className="px-4 py-8 mx-auto text-center my-32 bg-white/90 dark:bg-gray-800/90 rounded-lg">
                 <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Start Exploring</h1>
-                <p className="mb-8 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300 my-8">Wanderlust App let's you to find, explore and share the best places around the world, and gives you the tools to plan everything you'd need.</p>
+                <p className="mb-8 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300 my-8">Wanderlust App let&#39;s you to find, explore and share the best places around the world, and gives you the tools to plan everything you&apos;d need.</p>
                 <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                     <Link href="/signup" className="cursor-pointer inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                         Signup for free
@@ -119,7 +119,7 @@ export default function GuestHomePage({ router, posts }) {
                         <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
                     </svg> 
                     <blockquote>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">"Wanderlust App is the ultimate travel companion you've been waiting for! This app is a game changer for anyone who loves to travel and explore new places. With Wanderlust App, you'll have access to a wealth of information at your fingertips, including travel guides, recommendations for top attractions, and local insider tips."</p>
+                        <p className="text-2xl font-bold text-gray-900 dark:text-white">&quot;Wanderlust App is the ultimate travel companion you&#39;ve been waiting for! This app is a game changer for anyone who loves to travel and explore new places. With Wanderlust App, you&apos;ll have access to a wealth of information at your fingertips, including travel guides, recommendations for top attractions, and local insider tips.&quot;</p>
                     </blockquote>
                     <figcaption className="flex items-center justify-center mt-6 space-x-3">
                         <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
@@ -133,7 +133,7 @@ export default function GuestHomePage({ router, posts }) {
             <div className="py-8 px-4 mx-auto lg:py-16 lg:px-6">
                 <div className="mx-auto text-center lg:mb-16 mb-8">
                     <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Digital Nomad Blog</h2>
-                    <p className="font-normal text-gray-900 sm:text-xl dark:text-gray-100">We help you to learn about the best places around the world, the most beautiful places to see, and everything you'd need as a nomad.</p>
+                    <p className="font-normal text-gray-900 sm:text-xl dark:text-gray-100">We help you to learn about the best places around the world, the most beautiful places to see, and everything you&apos;d need as a nomad.</p>
                 </div> 
                 <div className="grid gap-8 lg:grid-cols-2">
                     {

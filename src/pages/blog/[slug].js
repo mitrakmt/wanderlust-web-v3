@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArticleJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
-import moment from 'moment';
 
 // Utils
 import request from '../../utils/request';
@@ -18,6 +17,10 @@ import Footer from '../../components/Footer';
 import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
 import BlogCard from '../../components/BlogCard';
 import CityRow from '../../components/CityRow';
+import CityEmbed from '../../components/CityEmbed';
+import CountryEmbed from '../../components/CountryEmbed';
+import UserEmbed from '../../components/UserEmbed';
+import BlogEmbed from '../../components/BlogEmbed';
 
 export async function getStaticProps({ params: { slug, city, country } }) {
     if (!slug) {
@@ -187,8 +190,8 @@ export default function BlogPost({ blog, relatedArticles }) {
             />
             <BreadCrumb breadCrumbHome={"Blogs"} goToHome={() => router.push('/blog')} secondName={blog?.title} />
             <main className="pt-8 mt-4 pb-16 lg:pt-16 lg:pb-8 dark:bg-gray-900" id="top">
-                <div className="flex flex-col justify-between px-4 mx-auto max-w-screen-xl ">
-                    <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                <div className="flex flex-col justify-between px-4 mx-auto ">
+                    <article className="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                         <header className="mb-4 lg:mb-6 not-format">
                             <address className="flex items-center mb-6 not-italic">
                                 <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
@@ -318,6 +321,27 @@ export default function BlogPost({ blog, relatedArticles }) {
                                     case 'quote':
                                         return (
                                             <blockquote className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.content}</blockquote>
+                                        )
+                                    case 'city':
+                                        return (
+                                            <CityEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                        )
+                                    case 'country':
+                                        return (
+                                            <CountryEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                        )
+                                    case 'blog':
+                                        return (
+                                            <BlogEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                        )
+                                    case 'user':
+                                        return (
+                                            <UserEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                        )
+                                    case 'place':
+                                        return (
+                                            // <PlaceEmbed key={`blog-${content.type}-${content.id}`} />
+                                            null
                                         )
                                     default:
                                         return null;
