@@ -264,7 +264,7 @@ export default function Settings() {
                             </button>
                     }
                     <div className="flex mt-8 gap-x-8 flex-col sm:flex-row">
-                        <div className="w-2/4 p-6 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 sm:p-8">
+                        <div className="w-full sm:w-2/4 p-6 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 sm:p-8">
                             <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Change Password
                             </h2>
@@ -287,7 +287,7 @@ export default function Settings() {
                                 <Button text="Change Password" onClick={changePassword} />
                             </div>
                         </div>
-                        <div className="flex w-2/4 flex-col items-center justify-center p-2 md:p-6 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 sm:p-8">
+                        <div className="flex w-full sm:w-2/4 mt-4 sm:mt-0 flex-col items-center justify-center p-2 md:p-6 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 sm:p-8">
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Membership: {user?.premium ? "Premium" : "Basic"}</h5>
                             {
                                 user?.premium ?
@@ -321,7 +321,7 @@ export default function Settings() {
                             </div>
                     }
                     {/* Danger zone */}
-                    <div className="z-50 flex w-full mt-20 h-25 opacity-60 flex-center align-center">
+                    <div className="z-50 flex w-full mt-10 sm:mt-20 h-25 opacity-60 flex-center align-center">
                         <div className="flex px-4 py-5 sm:px-6 w-60 flex-center align-center" style={{ marginLeft: 'auto' }} >
                             <DangerButton text="Delete Account" style={{ margin: 0, marginTop: 'auto' }} onClick={deleteAccount} />
                         </div>

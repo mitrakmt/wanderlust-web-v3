@@ -28,7 +28,7 @@ export default function CityEmbed({ id }) {
     }
     
     return (
-        <div className="overflow-x-auto px-6 pt-2 pb-6 rounded-lg bg-gray-300 dark:bg-gray-800">
+        <div className="overflow-x-auto px-4 sm:px-6 pt-2 pb-6 rounded-lg bg-gray-300 dark:bg-gray-800">
             <div className="py-0 my-0 h-20 flex items-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {
                     city?.image_url_thumb && <Image src={city.image_url_thumb} alt={city.name} height={150} width={150} className="object-cover h-12 w-12 rounded-full" />

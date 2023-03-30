@@ -160,7 +160,7 @@ export default function BlogPost({ blog, relatedArticles }) {
 
     // Hooks
     return (
-        <section className="relative ml-0 sm:ml-16 px-6 py-8">
+        <section className="relative ml-0 sm:ml-16 px-2 sm:px-6 py-8">
             <CustomHead
                 title={`${blog?.title} | Wanderlust App Blogs`}
                 description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
