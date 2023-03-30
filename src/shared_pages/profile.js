@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
@@ -21,6 +22,7 @@ import FollowSuggestions from './components/FollowSuggestions';
 import Blogs from './components/Blogs';
 
 // Components
+import BlogCard from '../components/BlogCard';
 import TextH2 from '../components/Text/TextH2';
 import InputWithAddon from '../components/InputWithAddon/InputWithAddon';
 import CustomSelect from '../components/Select/Select';
@@ -49,6 +51,7 @@ export default function Profile({ publicUser, recommendedLocations }) {
     const [fileUploadError, setFileUploadError] = useState(false);
     const [reviews, setReviews] = useState([]);
     const [feed] = useState([]);
+    const [content, setContent] = useState([]);
     const [editing, setEditing] = useState(false);
     const [showEditProfilePhotoIcon, setShowEditProfilePhotoIcon] = useState(false);
     const [showEditBannerIcon, setShowEditBannerIcon] = useState(false);
@@ -97,6 +100,8 @@ export default function Profile({ publicUser, recommendedLocations }) {
             }
         }
     }, [follows, profileUser])
+
+    
 
     useEffect(() => {
         const currentCountryFound = countries?.find(country => country?.id === profileUser?.currentCountry?.id);
@@ -242,6 +247,23 @@ export default function Profile({ publicUser, recommendedLocations }) {
             fetchData();
         }
     }, []); 
+
+    // Fetch user's content
+    useEffect(() => {
+        async function fetchData(username) {
+            const response = await request(`/blog/user/${username}`, {
+                method: 'GET'
+            })
+    
+            setContent(response.data.slice(0, 3))
+        }
+
+        if (publicUser && profileUser) {
+            fetchData(profileUser.username);
+        } else if (!publicUser) {
+            fetchData(user?.username);
+        }
+    }, [profileUser]); 
 
     // Functions
     const showProfileModal = () => {
@@ -883,33 +905,32 @@ export default function Profile({ publicUser, recommendedLocations }) {
                             </div>
                     }
                     {/* Maps  */}
-                    {/* HIDE MAPS UNLESS USER IS PREMIUM */}
                     {
                         profileUser && profileUser.premium &&
-                        <div className="flex flex-col mt-8 w-full">
-                            <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
-                                <li className="mr-2">
-                                    <a onClick={() => setSelectedMap('favorites')} className={`${selectedMap === 'favorites' ? "active bg-gray-100 text-primary-600 dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"} transition-colors cursor-pointer inline-block p-4 rounded-t-lg`}>Favorites</a>
-                                </li>
-                                <li className="mr-2">
-                                    <a onClick={() => setSelectedMap('passport')} className={`${selectedMap === 'passport' ? "active bg-gray-100 text-primary-600 dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"} transition-colors cursor-pointer inline-block p-4 rounded-t-lg`}>Passport</a>
-                                </li>
-                            </ul>
-                            {
-                                selectedMap === 'favorites' && (
-                                    <PlacesMap userPlacesToTry={userPlacesToTry} setUserPlacesToTry={setUserPlacesToTry} user={user} zoom={2.5} coordinates={[17.1317479, 41.6531344]}  places={selectedFilter ? places.filter(place => { return place?.tags?.find(element => element === selectedFilter) }) : places} />
-                                )
-                            }
-                            {
-                                selectedMap === 'passport' && (
-                                    <CountriesMap
-                                        user={profileUser}
-                                        defaultZoom={2.5}
-                                        coordinates={[17.1317479, 41.6531344]} 
-                                    />
-                                )
-                            }
-                        </div>
+                            <div className="flex flex-col mt-8 w-full">
+                                <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+                                    <li className="mr-2">
+                                        <a onClick={() => setSelectedMap('favorites')} className={`${selectedMap === 'favorites' ? "active bg-gray-100 text-primary-600 dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"} transition-colors cursor-pointer inline-block p-4 rounded-t-lg`}>Favorites</a>
+                                    </li>
+                                    <li className="mr-2">
+                                        <a onClick={() => setSelectedMap('passport')} className={`${selectedMap === 'passport' ? "active bg-gray-100 text-primary-600 dark:bg-gray-800 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"} transition-colors cursor-pointer inline-block p-4 rounded-t-lg`}>Passport</a>
+                                    </li>
+                                </ul>
+                                {
+                                    selectedMap === 'favorites' && (
+                                        <PlacesMap userPlacesToTry={userPlacesToTry} setUserPlacesToTry={setUserPlacesToTry} user={user} zoom={2.5} coordinates={[17.1317479, 41.6531344]}  places={selectedFilter ? places.filter(place => { return place?.tags?.find(element => element === selectedFilter) }) : places} />
+                                    )
+                                }
+                                {
+                                    selectedMap === 'passport' && (
+                                        <CountriesMap
+                                            user={profileUser}
+                                            defaultZoom={2.5}
+                                            coordinates={[17.1317479, 41.6531344]} 
+                                        />
+                                    )
+                                }
+                            </div>
                     }
                     {
                         feed.length > 0 && 
@@ -933,6 +954,21 @@ export default function Profile({ publicUser, recommendedLocations }) {
                                                         <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{post.body}</p>
                                                     </article>
                                                 </li>
+                                            ))
+                                        }
+                                    </ol>
+                                </div>
+                            </div>
+                    }
+                    {
+                        content.length > 0 && 
+                            <div className="p-2 md:p-10 mt-10">
+                                <TextH2>Content</TextH2>
+                                <div className="flex flex-wrap justify-center px-2 mt-4">
+                                    <ol className="gap-y-4 relative border-l border-gray-200 dark:border-gray-700">                  
+                                        {
+                                            content.map(article => (
+                                                <BlogCard post={article} key={`publicProfile-content-${article?.id}`} />
                                             ))
                                         }
                                     </ol>
