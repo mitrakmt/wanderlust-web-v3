@@ -12,10 +12,14 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
   const [userLoading, setUserLoading] = useState(true);
 
-  const login = async (data) => {
+  const login = async (data, forwardPath) => {
     setUser(data);
     setUserLoading(false);
-    router.replace(router.asPath || "/")
+    if (forwardPath) {
+      router.push(forwardPath);
+      return;
+    }
+    router.replace(router.asPath)
   };
 
   const logout = () => {

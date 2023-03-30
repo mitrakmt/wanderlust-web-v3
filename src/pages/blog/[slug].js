@@ -230,7 +230,22 @@ export default function BlogPost({ blog, relatedArticles }) {
                                 switch (content.type) {
                                     case 'p':
                                         return (
-                                            <p className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</p>
+                                            <>
+                                                <p className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</p>
+                                                {
+                                                    // TODO: break this into one component so it's cleaner
+                                                    content.rich === 'city' ?
+                                                        <></> :
+                                                        content.rich === 'user' ?
+                                                            <></> :
+                                                            content.rich === 'blog' ?
+                                                                <></> :
+                                                                content.rich === 'country' ? 
+                                                                    <></> :
+                                                                    content.rich === 'place' &&
+                                                                        <></>
+                                                }
+                                            </>
                                         )
                                     case 'image':
                                         return (

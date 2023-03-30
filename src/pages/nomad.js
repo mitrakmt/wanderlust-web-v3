@@ -53,6 +53,14 @@ export default function NomadTools() {
             image: "https://wanderlust-extension.s3.us-west-2.amazonaws.com/airalo_logo.png",
             description: "Airalo is a virtual SIM card that allows you to use your phone number in any country.",
             details: "$3 off your first SIM Card"
+        },
+        {
+            link: "https://hichee.com/",
+            name: "HiChee",
+            type: "Housing",
+            description: "HiChee helps YOU SAVE MONEY by showing the best prices for an airbnb or booking.com property and where best to book it.",
+            details: "Free",
+            image: "https://wanderlust-extension.s3.us-west-2.amazonaws.com/TVxVQOsu_400x400.png"
         }
     ]);
 

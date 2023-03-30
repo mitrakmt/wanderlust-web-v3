@@ -98,6 +98,8 @@ export default function Main({ children, countries }) {
         let accessToken;
         let forwardPath;
         const urlParams = new URLSearchParams(window.location.search);
+
+        forwardPath = urlParams.get("forwardPath");
         
         if (urlParams.has("accessToken")) {
             // Check path for accessToken param
@@ -111,7 +113,6 @@ export default function Main({ children, countries }) {
 
             const theme = urlParams.get("colorTheme");
             const refreshToken = urlParams.get("refreshToken");
-            forwardPath = urlParams.get("forwardPath");
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("refreshToken", refreshToken);
             localStorage.setItem("color-theme", theme);
@@ -162,22 +163,22 @@ export default function Main({ children, countries }) {
     const checkAuth = (forwardPath) => {
         if (localStorage.getItem('accessToken')) {
             request(`/users`)
-            .then(response => {
-                if (!response?.data) {
-                    localStorage.removeItem('accessToken');
-                    localStorage.removeItem('refreshToken');
-                    setUserLoading(false);
-                    return;
-                }
-
-                login({
-                    ...response.data,
-                    ...{
-                        isLoggedIn: true,
-                        role: response?.data?.role
+                .then(response => {
+                    if (!response?.data) {
+                        localStorage.removeItem('accessToken');
+                        localStorage.removeItem('refreshToken');
+                        setUserLoading(false);
+                        return;
                     }
-                }, forwardPath || window.location.pathname);
-            })
+
+                    login({
+                        ...response.data,
+                        ...{
+                            isLoggedIn: true,
+                            role: response?.data?.role
+                        }
+                    }, forwardPath || window.location.pathname);
+                })
         } else {
             setUserLoading(false);
         }

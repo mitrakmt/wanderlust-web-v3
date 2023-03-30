@@ -13,6 +13,7 @@ import request from '../../utils/request';
 
 // Components
 import CustomHead from '@/shared_components/CustomHead';
+import MoveContentButtonsSection from './components/moveContentButtonsSection';
 
 export default function CreateBlogPage() {
     // Context
@@ -35,6 +36,24 @@ export default function CreateBlogPage() {
     const [content, setContent] = useState([]);
     const [successMessage, setSuccessMessage] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
+
+    const [citySearchText, setCitySearchText] = useState("");
+    const [countrySearchText, setCountrySearchText] = useState("");
+    const [userSearchText, setUserSearchText] = useState("");
+    const [placeSearchText, setPlaceSearchText] = useState("");
+    const [blogSearchText, setBlogSearchText] = useState("");
+
+    const [cities, setCities] = useState([]);
+    const [blogs, setBlogs] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [places, setPlaces] = useState([]);
+    const [filteredCountries, setFilteredCountries] = useState([]);
+
+    const [showCities, setShowCities] = useState(false);
+    const [showBlogs, setShowBlogs] = useState(false);
+    const [showUsers, setShowUsers] = useState(false);
+    const [showPlaces, setShowPlaces] = useState(false);
+    const [showCountries, setShowCountries] = useState(false);
     
     // Functions
     const handleInputChange = (selectedIndex, value, name) => {
@@ -57,18 +76,17 @@ export default function CreateBlogPage() {
         }
 
         // TODO: make sure slug has no spaces 
-        // TODO: trim any spaces at end of images
+        // TODO: make sure city,blog,user, etc have no empty IDs
 
         setErrorMessage(null)
-
         // Send to API
         request(`/blog`, {
             method: 'POST',
             body: {
-                title,
+                title: title.trim(),
                 category,
-                summary,
-                slug,
+                summary: summary.trim(),
+                slug: slug.trim(),
                 publishedOn: new Date().toLocaleDateString('en-US', options),
                 region,
                 content,
@@ -122,6 +140,179 @@ export default function CreateBlogPage() {
         });
     };
 
+    const handleMoveSection = (currentIndex, newIndex) => {
+        // Using setContent
+        setContent(prevContent => {
+            const updatedContent = [...prevContent];
+            const [removed] = updatedContent.splice(currentIndex, 1);
+            updatedContent.splice(newIndex, 0, removed);
+            return updatedContent;
+        })
+    };
+
+    const addCityEmbed = () => {
+        setContent([...content, { type: 'city', id: '' }]);
+    };
+
+    const addCountryEmbed = () => {
+        setContent([...content, { type: 'country', id: '' }]);
+    };
+
+    const addBlogEmbed = () => {
+        setContent([...content, { type: 'blog', id: '' }]);
+    };
+
+    const addUserEmbed = () => {
+        setContent([...content, { type: 'user', id: '' }]);
+    };
+
+    const addPlaceEmbed = () => {
+        setContent([...content, { type: 'place', id: '' }]);
+    };
+
+    // Embed select functions
+    const selectIdForEmbed = (newId, selectedIndex) => {
+        setContent(prevContent => {
+            const updatedContent = [...prevContent];
+            updatedContent[selectedIndex] = {
+              ...updatedContent[selectedIndex],
+              id: newId
+            };
+            return updatedContent;
+        });
+
+        // Clear search related values
+        setShowCities(false);
+        setCitySearchText("");
+        setCities([]);
+
+        setShowBlogs(false);
+        setBlogSearchText("");
+        setBlogSearchText([])
+        
+        setShowCountries(false);
+        setCountrySearchText("");
+        setFilteredCountries([]);
+
+        setShowUsers(false);
+        setUserSearchText("");
+        setUsers([]);
+
+        setShowPlaces(false);
+        setPlaceSearchText("");
+        setPlaces([]);
+    }
+
+    const filterCountries = (searchTerm) => {
+        const filtered = countries
+          .filter((country) =>
+            country.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+          .slice(0, 5);
+      
+        setFilteredCountries(filtered);
+    };
+
+    // Update search text for embeds
+    const updateCitySearchText = (e) => {
+        setCitySearchText(e.target.value);
+
+        if (e.target.value.length === 0) {
+            setShowCities(false);
+            return;
+        } else if (e.target.value.length < 3) {
+            return;
+        }
+
+        // request cities from search text
+        request(`/cities/search?name=${e.target.value}`)
+            .then(res => {
+                setShowCities(true);
+                setCities(res.data);
+            })
+    }
+
+    const updateCountrySearchText = (e) => {
+        setCountrySearchText(e.target.value);
+
+        if (e.target.value.length <= 1) {
+            setShowCountries(false);
+            return;
+        }
+
+        // Filter countries list
+        filterCountries(e.target.value);
+
+        setShowCountries(true);
+    }
+
+    const updateUserSearchText = (e) => {
+        setUserSearchText(e.target.value);
+
+        if (e.target.value.length === 0) {
+            setShowUsers(false);
+            return;
+        } else if (e.target.value.length < 3) {
+            return;
+        }
+
+        request(`/users/public/username/${e.target.value}`)
+            .then(res => {
+                if (res.data) {
+                    setShowUsers(true);
+                    setUsers([res.data]);
+                } else {
+                    setUsers([])
+                    setShowUsers(false);
+                }
+            })
+
+        setShowUsers(true);
+    }
+
+    const updateBlogSearchText = (e) => {
+        setBlogSearchText(e.target.value);
+
+        if (e.target.value.length === 0) {
+            setShowBlogs(false);
+            return;
+        } else if (e.target.value.length < 3) {
+            return;
+        }
+
+        request(`/blog/search?searchText=${e.target.value}`)
+            .then(res => {
+                if (res.data) {
+                    setShowBlogs(true);
+                    setBlogs(res.data);
+                } else {
+                    setShowBlogs(false);
+                    setBlogs([]);
+                }
+            })
+
+        setShowBlogs(true);
+    }
+
+    const updatePlaceSearchText = (e) => {
+        setPlaceSearchText(e.target.value);
+
+        if (e.target.value.length === 0) {
+            setShowPlaces(false);
+            return;
+        } else if (e.target.value.length < 3) {
+            return;
+        }
+
+        // request(`/cities/search?name=${e.target.value}`)
+        //     .then(res => {
+        //         setShowPlaces(true);
+        //         setPlaces(res.data);
+        //     })
+
+        setShowPlaces(true);
+    }
+
     if (!userLoading && user.role === 'user') {
         // Send them back to home
         router.push('/');
@@ -140,7 +331,7 @@ export default function CreateBlogPage() {
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
                     <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Write a Guide</h2>
-                    <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">Teach about the best places around the world, the most beautiful places to see, and everything you'd want to see as a nomad.</p>
+                    <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">Teach about the best places around the world, the most beautiful places to see, and everything you&apos;d want to see as a nomad.</p>
                 </div> 
                 <div className="mx-auto lg:px-12 w-full mb-4">
                     <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new Guide</h2>
@@ -153,7 +344,7 @@ export default function CreateBlogPage() {
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blog Slug</label>
                             <input type="text" value={slug} onChange={(e) => setSlug(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Blog slug" />
                             <p className="text-xs text-gray-600 italic mt-1">
-                                This slug has an impact on SEO. It should use words relevant to the guide, use keywords, use "-" for spaces, and should not be greater than 140 characters in length. One example of a GOOD slug is: "2023-digital-nomads-guide-to-bali"
+                                This slug has an impact on SEO. It should use words relevant to the guide, use keywords, use &quot;-&quot; for spaces, and should not be greater than 140 characters in length. One example of a GOOD slug is: &quot;2023-digital-nomads-guide-to-bali&quot;
                             </p>
                             
                         </div>
@@ -230,8 +421,11 @@ export default function CreateBlogPage() {
                                             <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
                                                 <div className="flex mb-2 items-center">
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Paragraph</label>
+
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
-                                                </div>                                                <textarea rows="8" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Paragraph" />
+                                                </div>
+                                                <textarea rows="8" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Paragraph" />
                                             </div>
                                         )
                                     case "h2":
@@ -240,6 +434,7 @@ export default function CreateBlogPage() {
                                                 <div className="flex mb-2 items-center">
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 2</label>
                                                     <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                 </div>
                                                 <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
@@ -250,6 +445,7 @@ export default function CreateBlogPage() {
                                                 <div className="flex mb-2 items-center">
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 3</label>
                                                     <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                 </div>
                                                 <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
@@ -260,6 +456,7 @@ export default function CreateBlogPage() {
                                                 <div className="flex mb-2 items-center">
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 4</label>
                                                     <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                 </div>
                                                 <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
@@ -270,6 +467,7 @@ export default function CreateBlogPage() {
                                                 <div className="flex mb-2 items-center">
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 5</label>
                                                     <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                 </div>
                                                 <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
@@ -280,6 +478,7 @@ export default function CreateBlogPage() {
                                                 <div className="flex mb-2 items-center">
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Image</label>
                                                     <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                 </div>
                                                 <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/image_default.jpeg" alt="image default" />
                                                 <input type="text" value={section.src} onChange={(e) => handleInputChange(index, e.target.value, 'src')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Or paste an image URL here" />
@@ -287,6 +486,151 @@ export default function CreateBlogPage() {
                                                 <p className="text-xs text-gray-600 italic mt-1">
                                                     Visually, horizontle images are better
                                                 </p>
+                                            </div>
+                                        )
+                                    case 'city':
+                                        return (
+                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">City Embed</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
+                                                </div>
+                                                <input type="text" value={citySearchText} onChange={updateCitySearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a city" />
+                                                {/* Dropdown that shows selectable cities */}
+                                                {
+                                                    showCities && <div className="p-2 border-solid border-gray-300">
+                                                        {
+                                                            cities?.map((city) => (
+                                                                <div onClick={() => selectIdForEmbed(city.id, index)} key={`citiesSearch-${city.name}-${city.countryName}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
+                                                                    <p>{city.name}, {city.country_name}</p>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                }
+                                                {
+                                                    // Show name of the city and country
+                                                    section.id && 
+                                                        <p className="mt-2">{section.id}</p>       
+                                                }
+                                            </div>
+                                        )
+                                    case 'country':
+                                        return (
+                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Country Embed</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
+                                                </div>
+                                                <input type="text" value={countrySearchText} onChange={updateCountrySearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a country" />
+                                                {/* Dropdown that shows selectable cities */}
+                                                {
+                                                    showCountries && <div className="p-2 border-solid border-gray-300">
+                                                        {
+                                                            filteredCountries?.map((country) => (
+                                                                <div onClick={() => selectIdForEmbed(country.id, index)} key={`citiesSearch-${country.name}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
+                                                                    <p>{country.name}</p>
+                                                                </div>
+        
+                                                            ))
+                                                        }
+                                                    </div>
+                                                }
+
+                                                {
+                                                    // Show name of the city and country
+                                                    section.id && 
+                                                        <p className="mt-2">{section.id}</p>       
+                                                }
+                                            </div>
+                                        )
+                                    case 'blog':
+                                        return (
+                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Blog Embed</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
+                                                </div>
+                                                <input type="text" value={blogSearchText} onChange={updateBlogSearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a blog" />
+                                                {/* Dropdown that shows selectable cities */}
+                                                {
+                                                    showBlogs && <div className="p-2 border-solid border-gray-300">
+                                                        {
+                                                            blogs?.map((blog) => (
+                                                                <div onClick={() => selectIdForEmbed(blog.id, index)} key={`citiesSearch-${blog.slug}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
+                                                                    <p>{blog.slug}</p>
+                                                                </div>
+        
+                                                            ))
+                                                        }
+                                                    </div>
+                                                }
+                                                {
+                                                    // Show blog selected
+                                                    section.id && 
+                                                        <p className="mt-2">{section.id}</p>       
+                                                }
+                                            </div>
+                                        )
+                                    case 'user':
+                                        return (
+                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">User Embed</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
+                                                </div>
+                                                <input type="text" value={userSearchText} onChange={updateUserSearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a user" />
+                                                {/* Dropdown that shows selectable cities */}
+                                                {
+                                                    showUsers && <div className="p-2 border-solid border-gray-300">
+                                                        {
+                                                            users?.map((user) => (
+                                                                <div onClick={() => selectIdForEmbed(user.id, index)} key={`citiesSearch-${user.username}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
+                                                                    <p>{user.username}</p>
+                                                                </div>
+        
+                                                            ))
+                                                        }
+                                                    </div>
+                                                }
+                                                {
+                                                    // Show user selected
+                                                    section.id && 
+                                                        <p className="mt-2">{section.id}</p>       
+                                                }
+                                            </div>
+                                        )
+                                    case 'place':
+                                        return (
+                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Place Embed</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
+                                                </div>
+                                                <input type="text" value={placeSearchText} onChange={updatePlaceSearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a place" />
+                                                {/* Dropdown that shows selectable cities */}
+                                                {
+                                                    showPlaces && <div className="p-2 border-solid border-gray-300">
+                                                        {
+                                                            places?.map((place) => (
+                                                                <div onClick={() => selectIdForEmbed(place.id, index)} key={`citiesSearch-${place.name}-${place.placeName}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
+                                                                    <p>{place.name}</p>
+                                                                </div>
+        
+                                                            ))
+                                                        }
+                                                    </div>
+                                                }
+                                                {
+                                                    // Show blog selected
+                                                    section.id && 
+                                                        <p className="mt-2">{section.id}</p>       
+                                                }
                                             </div>
                                         )
                                     default:
@@ -320,8 +664,20 @@ export default function CreateBlogPage() {
                                                 <a onClick={addImage} className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Image</a>
                                             </li>
                                             <li>
-                                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">City Bar</a>
+                                                <a onClick={addCityEmbed} className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">City</a>
                                             </li>
+                                            <li>
+                                                <a onClick={addCountryEmbed} className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Country</a>
+                                            </li>
+                                            <li>
+                                                <a onClick={addBlogEmbed} className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blog</a>
+                                            </li>
+                                            <li>
+                                                <a onClick={addUserEmbed} className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">User</a>
+                                            </li>
+                                            {/* <li>
+                                                <a onClick={addPlaceEmbed} className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Place</a>
+                                            </li> */}
                                         </ul>
                                     </div>
                                 )

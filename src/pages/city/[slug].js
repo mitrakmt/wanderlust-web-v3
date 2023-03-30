@@ -359,6 +359,14 @@ export default function CityPage({ citySelected, blogs }) {
             .then(json => console.log(json))
             .catch(err => console.error('error:' + err));
     }
+
+    const fetchHikingData = (req, res) => {
+
+    }
+
+    const fetchSafetyData = (req, res) => {
+
+    }
         
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
@@ -513,7 +521,7 @@ export default function CityPage({ citySelected, blogs }) {
                             }
                             </div> : locations?.map((location, index) => (
                                     <div key={`cityPage-locations-${location.name}-${index}`}>
-                                        <Image src={location.image_url_small} className="h-full object-cover max-w-full rounded-lg" alt={`${location.city_name} ${location.country_name}}`} width={500} height={500} />
+                                        <Image src={location.image_url_medium} className="h-full object-cover max-w-full rounded-lg" alt={`${location.city_name} ${location.country_name}}`} width={500} height={500} />
                                     </div>
                                 ))
                             }
