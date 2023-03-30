@@ -129,7 +129,7 @@ export default function BlogPost({ blog, relatedArticles }) {
     const addComment = () => {
         if (!user) return;
 
-        if (comment.length === 0) {
+        if (comment?.length === 0) {
             return;
         }
 

@@ -70,7 +70,7 @@ export default function CreateBlogPage() {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     
     const publishBlogPost = () => {
-        if (!title || !slug || !category || !summary || !mainImage || content.length === 0) {
+        if (!title || !slug || !category || !summary || !mainImage || content?.length === 0) {
             setErrorMessage("Please fill out all fields: title, slug, category, summary, mainImage, content");
             return;
         }
@@ -406,7 +406,7 @@ export default function CreateBlogPage() {
                         </div>
                         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
                         {
-                            content.length === 0 && (
+                            content?.length === 0 && (
                                 <div className="flex flex-col items-center justify-center">
                                     <p className="text-xl font-bold text-gray-900 dark:text-white">No content added yet</p>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Add content to your blog post by clicking the button below</p>
