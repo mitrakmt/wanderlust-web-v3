@@ -7,13 +7,13 @@ import request from '../utils/request';
 
 export default function CountryEmbed({ id }) {
     // State
-    const [city, setCity] = useState(null)
+    const [country, setCountry] = useState(null)
 
     // UseEffects
     useEffect(() => {
-        // request(`/cities/${id}`)
+        // request(`/countries/${id}`)
         //     .then(response => {
-        //         setCity(response.data);
+        //         setCountry(response.data);
         //     })
     }, []);
     
