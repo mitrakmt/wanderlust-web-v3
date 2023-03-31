@@ -32,3 +32,13 @@
         "name": "Washington Times"
       }
     } */}
+
+export default function ReviewPage() {
+
+
+    return (
+        <section className="relative ml-0 sm:ml-16 px-6 py-8">
+
+        </section>
+    )
+}
