@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
@@ -26,7 +27,7 @@ export default function TravelBucketListFeaturePage() {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <CustomHead
-                title="Keep Your Travel Dreams in Check with Wanderlust App"
+                title="Track Your Travel Bucket List in Wanderlust App"
                 description="Wanderlust App's Travel Bucket List feature lets you keep track of all the places you want to visit in the future. Say goodbye to notepads and keep track of all your travel aspirations in one place."
                 image="/travelBucketListDark1.png"
                 alt="Travel Bucket List - Wanderlust App"
@@ -42,7 +43,7 @@ export default function TravelBucketListFeaturePage() {
                             </Link>
                         </div>
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">The Ultimate Travel Bucket List for Digital Nomads</h1>
-                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">At Wanderlust App, we know that every traveler has a bucket list of destinations they dream of visiting. That's why we've created the Travel Bucket List feature, where you can track all the places you want to visit in the future. Say goodbye to lost notepads and hello to a personalized digital bucket list of all the amazing places you want to travel to.</p>
+                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">At Wanderlust App, we know that every traveler has a bucket list of destinations they dream of visiting. That&apos;s why we&apos;ve created the Travel Bucket List feature, where you can track all the places you want to visit in the future. Say goodbye to lost notepads and hello to a personalized digital bucket list of all the amazing places you want to travel to.</p>
                         <Link href="/pro" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Get started
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -58,7 +59,7 @@ export default function TravelBucketListFeaturePage() {
                     <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/travelBucketListDark2.png" alt="Wanderlust Travel Bucket List" />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">The Improved Travel Bucket List</h2>
-                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Travel Bucket List feature is designed to help you keep track of all the destinations you dream of visiting. With just a few clicks, you can add new destinations to your bucket list and start planning your next adventure. Plus, with the ability to see other traveler's bucket lists for inspiration, you'll never run out of new ideas for your own travel goals.</p>
+                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Travel Bucket List feature is designed to help you keep track of all the destinations you dream of visiting. With just a few clicks, you can add new destinations to your bucket list and start planning your next adventure. Plus, with the ability to see other traveler&apos;s bucket lists for inspiration, you&apos;ll never run out of new ideas for your own travel goals.</p>
                         <Link href="/pro" className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                             Get started
                             <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -71,7 +72,7 @@ export default function TravelBucketListFeaturePage() {
                             Travel Bucket List Benefits
                         </h2>
                         <p className="mt-4 text-base font-normal text-gray-500 sm:text-xl dark:text-gray-400">
-                            At Wanderlust App, we know that every traveler has a list of dream destinations they want to visit. That's why we created the Travel Bucket List feature, which lets you keep track of all the amazing places you want to travel to in the future. Here are just a few of the many benefits of using our Travel Bucket List feature:
+                            At Wanderlust App, we know that every traveler has a list of dream destinations they want to visit. That&apos;s why we created the Travel Bucket List feature, which lets you keep track of all the amazing places you want to travel to in the future. Here are just a few of the many benefits of using our Travel Bucket List feature:
                         </p>
                     </div>
 
@@ -90,7 +91,7 @@ export default function TravelBucketListFeaturePage() {
                                 Inspiration
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
-                            Get inspiration from other traveler's bucket lists, and discover new destinations and experiences that you may not have considered before.
+                            Get inspiration from other traveler&apos;s bucket lists, and discover new destinations and experiences that you may not have considered before.
                             </p>
                         </div>
 
@@ -110,7 +111,7 @@ export default function TravelBucketListFeaturePage() {
                             <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
                         </svg> 
                         <blockquote>
-                            <p className="text-2xl font-medium text-gray-900 dark:text-white">"I love Wanderlust App's Travel Bucket List feature. It's the perfect way to keep track of all the destinations I dream of visiting, and to stay motivated towards achieving my travel goals. Plus, being able to see other traveler's bucket lists has given me so much inspiration for new adventures. It's like having a personalized travel advisor right in my pocket!""</p>
+                            <p className="text-2xl font-medium text-gray-900 dark:text-white">&quot;I love Wanderlust App&apos;s Travel Bucket List feature. It&apos;s the perfect way to keep track of all the destinations I dream of visiting, and to stay motivated towards achieving my travel goals. Plus, being able to see other traveler&apos;s bucket lists has given me so much inspiration for new adventures. It&apos;s like having a personalized travel advisor right in my pocket!&quot;</p>
                         </blockquote>
                         <figcaption className="flex items-center justify-center mt-6 space-x-3">
                             <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">

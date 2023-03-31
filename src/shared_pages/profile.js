@@ -6,7 +6,6 @@ import Image from 'next/image'
 
 // Utils
 import request from '../utils/request';
-import trackClick from '../utils/trackClick';
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -81,16 +80,6 @@ export default function Profile({ publicUser, recommendedLocations }) {
     // UseEffects
     useEffect(() => {
         if (publicUser) {
-            if (username) {
-                trackClick('publicProfile-view')
-            }
-        } else {
-            trackClick('profile-view')
-        }
-    }, [username])
-
-    useEffect(() => {
-        if (publicUser) {
             if (profileUser) {
                 if (follows?.find(followUserId => followUserId === profileUser.id)) {
                     setIsFollowed(true);
@@ -100,8 +89,6 @@ export default function Profile({ publicUser, recommendedLocations }) {
             }
         }
     }, [follows, profileUser])
-
-    
 
     useEffect(() => {
         const currentCountryFound = countries?.find(country => country?.id === profileUser?.currentCountry?.id);

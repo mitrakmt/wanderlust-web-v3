@@ -31,9 +31,6 @@ import PlacesMap from '../../components/cityComponents/Map';
 import BlogCard from '../../components/BlogCard';
 import RelatedCities from '../../components/RelatedCities';
 
-// Utils
-import trackClick from '../../utils/trackClick';
-
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
 import { useRouter } from 'next/router'
@@ -183,10 +180,6 @@ export default function CityPage({ citySelected, blogs }) {
 
     useEffect(() => {
         trackStat({ type: 'tabViews', property: 'cityView' })
-    }, [])
-
-    useEffect(() => {
-        trackClick('city-view')
     }, [])
 
     useEffect(() => {
@@ -536,7 +529,7 @@ export default function CityPage({ citySelected, blogs }) {
                 <TextH3>Blogs & Guides</TextH3>
                 <div className={blogs?.length > 0 ? "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" : ""}>
                     {
-                        blogs && blogs?.length > 0 ? blogs.map((blog) => <BlogCard key={`city-blogCard-${blog.title}`} post={blog} />) 
+                        blogs && blogs?.length > 0 ? blogs.map((blog) => <BlogCard key={`city-blogCard-${blog.title}`} post={blog} fullHeight={true} />) 
                             : <div className="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                                 {/* Guides coming soon text  */}
                                 <p className="text-md font-medium text-gray-500 dark:text-gray-400">Guides coming soon!</p>

@@ -3,7 +3,6 @@ import GooglePlacesAutocomplete, { geocodeByPlaceId } from 'react-google-places-
 
 // Utils
 import request from '../utils/request';
-import trackClick from "../utils/trackClick";
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -30,10 +29,6 @@ export default function Maps() {
             router.push('/pro')
         }
     }, [user])
-
-    useEffect(() => {
-        trackClick('map-view')
-    }, [])
 
     useEffect(() => {
         request(`/place`)

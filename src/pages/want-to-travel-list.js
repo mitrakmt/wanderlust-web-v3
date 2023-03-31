@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
@@ -43,7 +44,7 @@ export default function WantToTravelListFeaturePage() {
                             </Link>
                         </div>
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Track the Places You Want To Travel To</h1>
-                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Have you ever heard about a must-see restaurant in a city or a secret beach that you just have to visit, only to forget about it later? With Wanderlust App's Want to Travel To List feature, you'll never miss out on your dream destinations again. Keep track of all the amazing places you want to visit in the future, from hidden gems to iconic landmarks, and never forget a travel goal again.</p>
+                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Have you ever heard about a must-see restaurant in a city or a secret beach that you just have to visit, only to forget about it later? With Wanderlust App&apos;s Want to Travel To List feature, you&apos;ll never miss out on your dream destinations again. Keep track of all the amazing places you want to visit in the future, from hidden gems to iconic landmarks, and never forget a travel goal again.</p>
                         <Link href="/pro" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Get started
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -59,7 +60,7 @@ export default function WantToTravelListFeaturePage() {
                     <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/travelListDark2.png" alt="Wanderlust Want To Travel List" />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Making the Most of Your Travel Experiences</h2>
-                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Want to Travel To List feature is the perfect tool for digital nomads and travelers who want to make the most of their travel experiences. Whether you're planning an upcoming vacation or simply looking for inspiration for your next adventure, this feature lets you keep track of all the places you want to visit in one convenient location. From restaurants and bars to museums and attractions, you can add any travel goal to your list and easily check them off as you go.</p>
+                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Want to Travel To List feature is the perfect tool for digital nomads and travelers who want to make the most of their travel experiences. Whether you&apos;re planning an upcoming vacation or simply looking for inspiration for your next adventure, this feature lets you keep track of all the places you want to visit in one convenient location. From restaurants and bars to museums and attractions, you can add any travel goal to your list and easily check them off as you go.</p>
                         <Link href="/pro" className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                             Get started
                             <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -72,7 +73,7 @@ export default function WantToTravelListFeaturePage() {
                             Want to Travel List Benefits
                         </h2>
                         <p className="mt-4 text-base font-normal text-gray-500 sm:text-xl dark:text-gray-400">
-                            As seasoned digital nomads and travelers, we know what it takes to plan the perfect trip. That's why we created Wanderlust App with all the essential tools for digital nomads and travelers. With our app, you can stay organized, plan your trips, discover new places, connect with other travelers, and so much more. Here are just a few of the many benefits that come with using our app.
+                            As seasoned digital nomads and travelers, we know what it takes to plan the perfect trip. That&apos;s why we created Wanderlust App with all the essential tools for digital nomads and travelers. With our app, you can stay organized, plan your trips, discover new places, connect with other travelers, and so much more. Here are just a few of the many benefits that come with using our app.
                         </p>
                     </div>
 
@@ -100,7 +101,7 @@ export default function WantToTravelListFeaturePage() {
                                 Discover New Destinations
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
-                                Get inspired by new and exciting destinations from other traveler's lists, and add them to your own list for future travel goals.
+                                Get inspired by new and exciting destinations from other traveler&apos;s lists, and add them to your own list for future travel goals.
                             </p>
                         </div>
                     </div>
@@ -111,7 +112,7 @@ export default function WantToTravelListFeaturePage() {
                             <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
                         </svg> 
                         <blockquote>
-                            <p className="text-2xl font-medium text-gray-900 dark:text-white">"I love Wanderlust App's Want to Travel To List feature. I'm always hearing about amazing places to visit from friends or online, and this feature lets me keep track of them all in one place. Plus, it's so easy to share my list with friends and plan our next adventure together. I highly recommend this feature to anyone who loves to travel and wants to make the most of their experiences"</p>
+                            <p className="text-2xl font-medium text-gray-900 dark:text-white">&quot;I love Wanderlust App&apos;s Want to Travel To List feature. I&apos;m always hearing about amazing places to visit from friends or online, and this feature lets me keep track of them all in one place. Plus, it&apos;s so easy to share my list with friends and plan our next adventure together. I highly recommend this feature to anyone who loves to travel and wants to make the most of their experiences&quot;</p>
                         </blockquote>
                         <figcaption className="flex items-center justify-center mt-6 space-x-3">
                             <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">

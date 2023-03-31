@@ -75,7 +75,7 @@ export default function MyApp({ Component, pageProps }) {
                                                             <Layout>
                                                                 <ErrorBoundary>
                                                                     <CustomHead
-                                                                        title="A Digital Nomad's Ultimate Travel Companion - Wanderlust App"
+                                                                        title="A Digital Nomad's Ultimate Travel Companion - Check Out Wanderlust App"
                                                                         description="Wanderlust App is your ultimate travel companion, helping you plan and organize every aspect of your trip. From finding the best flights and accommodations to creating custom itineraries based on your interests, our app makes travel planning easy and stress-free. Browse our city guides and blog for travel inspiration, connect with fellow digital nomads, and let our AI Assistant optimize your travel plans. Download Wanderlust App and start planning your dream trip today."
                                                                         image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
                                                                         alt="Wanderlust App"

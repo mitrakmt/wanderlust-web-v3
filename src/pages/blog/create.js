@@ -170,6 +170,10 @@ export default function CreateBlogPage() {
         setContent([...content, { type: 'place', id: '' }]);
     };
 
+    const addLinkEmbed = () => {
+        setContent([...content, { type: 'link', url: '', text: '' }]);
+    };
+
     // Embed select functions
     const selectIdForEmbed = (newId, selectedIndex) => {
         setContent(prevContent => {
@@ -633,6 +637,18 @@ export default function CreateBlogPage() {
                                                 }
                                             </div>
                                         )
+                                    case 'link':
+                                        return (
+                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Link Embed</label>
+                                                    <button onClick={() => handleDeleteSection(index)} className="ml-2 px-2 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Delete</button>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
+                                                </div>
+                                                <input type="text" value={section.url} onChange={(e) => handleInputChange(index, e.target.value, 'url')} className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Url" />
+                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Text" />
+                                            </div>
+                                        )
                                     default:
                                         return null
                                 }
@@ -674,6 +690,9 @@ export default function CreateBlogPage() {
                                             </li>
                                             <li>
                                                 <a onClick={addUserEmbed} className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">User</a>
+                                            </li>
+                                            <li>
+                                                <a onClick={addLinkEmbed} className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Link</a>
                                             </li>
                                             {/* <li>
                                                 <a onClick={addPlaceEmbed} className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Place</a>

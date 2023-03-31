@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from "react";
 
 // Components
 import Sidebar from '../shared_components/Sidebar/Sidebar';
 import OfflineSnackbar from '../components/OfflineSnackbar/OfflineSnackbar';
-// import CookiesBar from '../src/components/CookiesBar/CookiesBar';
 import Toasts from '../components/Toasts/Toasts';
 import request from '../utils/request';
 

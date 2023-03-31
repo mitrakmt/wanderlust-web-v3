@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import CustomHead from '../shared_components/CustomHead';
 
 export default function Team() {

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,7 +7,6 @@ import { useRouter } from 'next/router';
 
 // Utils
 import request from '../../utils/request';
-import trackClick from "../../utils/trackClick";
 
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
@@ -109,10 +109,6 @@ export default function BlogPost({ blog, relatedArticles }) {
             window.removeEventListener("routeChangeComplete", handleRouteChange) // this event listener is removed after the new route loads
         }
     }, []);
-
-    useEffect(() => {
-        trackClick('blog-view')
-    }, [])
 
     // Functions
     const removeComment = (id) => {
@@ -310,9 +306,9 @@ export default function BlogPost({ blog, relatedArticles }) {
                                         return (
                                             <ul className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
                                                 {
-                                                    content.content.map((item, index) => {
+                                                    content.content.map((item, contentIndex) => {
                                                         return (
-                                                            <li key={`blog-list-${content.type}-${item}-${index}`}>{item}</li>
+                                                            <li key={`blog-list-usercontent-${content.type}-${item}-${contentIndex}`}>{item}</li>
                                                         )
                                                     })
                                                 }
@@ -337,6 +333,10 @@ export default function BlogPost({ blog, relatedArticles }) {
                                     case 'user':
                                         return (
                                             <UserEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                        )
+                                    case 'link':
+                                        return (
+                                            <a href={content.url} target="_blank" title={content.text} className="px-6 py-4 rounded-full bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-200 no-underline hover:text-primary-600 dark:hover:text-primary-600 transition-colors">{content.text}</a>
                                         )
                                     case 'place':
                                         return (

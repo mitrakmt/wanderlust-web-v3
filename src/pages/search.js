@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react';
 
 // Components
@@ -54,10 +55,6 @@ export default function Search({ featuredCities }) {
     const [searchRandomCityByRegionLoading, setSearchRandomCityByRegionLoading] = useState(false);
     
     // UseEffects
-    useEffect(() => {
-        trackClick('search-view')
-    }, [])
-    
     useEffect(() => {
         if (user) {
             request('/favorites')

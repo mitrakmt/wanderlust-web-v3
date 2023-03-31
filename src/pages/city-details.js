@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
@@ -37,7 +38,7 @@ export default function CityDetailsFeaturePage() {
                 <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div className="mr-auto place-self-center lg:col-span-7">
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">City Information from the Best Places Around the World</h1>
-                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Discover the world like never before with Wanderlust App's City Details feature. With detailed information on the best places to visit, local favorites, insider information, and reviews, you'll have everything you need to make the most of your trip. Whether you're a digital nomad, traveler, or simply looking for your next adventure, our City Details feature has got you covered.</p>
+                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Discover the world like never before with Wanderlust App&apos;s City Details feature. With detailed information on the best places to visit, local favorites, insider information, and reviews, you&apos;ll have everything you need to make the most of your trip. Whether you&apos;re a digital nomad, traveler, or simply looking for your next adventure, our City Details feature has got you covered.</p>
                         <Link href="/search" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Get started
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -53,7 +54,7 @@ export default function CityDetailsFeaturePage() {
                     <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/cityDetailsDark2.png" alt="Wanderlust City Details" />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Everything You Need to Know</h2>
-                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our City Details feature is designed to give you an in-depth view of each city, so you can make informed decisions on where to go and what to do. From popular tourist attractions to hidden gems, our comprehensive guide covers it all. Plus, with insider information and local favorites, you'll get a unique perspective on each city that you won't find anywhere else.</p>
+                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our City Details feature is designed to give you an in-depth view of each city, so you can make informed decisions on where to go and what to do. From popular tourist attractions to hidden gems, our comprehensive guide covers it all. Plus, with insider information and local favorites, you&apos;ll get a unique perspective on each city that you won&apos;t find anywhere else.</p>
                         <Link href="/search" className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                             Get started
                             <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -63,9 +64,9 @@ export default function CityDetailsFeaturePage() {
                 <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
                     <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Curated Content & User Reviews</h2>
-                        <p className="mb-4">At Wanderlust App, we value our community of digital nomads and travelers, and we understand that their experiences and recommendations are invaluable. That's why we've created a space for user-generated content and reviews, where you can share your travel stories, tips, and advice with fellow users.</p>
+                        <p className="mb-4">At Wanderlust App, we value our community of digital nomads and travelers, and we understand that their experiences and recommendations are invaluable. That&apos;s why we&apos;ve created a space for user-generated content and reviews, where you can share your travel stories, tips, and advice with fellow users.</p>
                         <p className="mb-4">Our User Content & User Reviews section is designed to be a platform for users to share their experiences and insights. Whether you want to write a review of a restaurant, hotel, or tourist attraction, or share your travel itinerary and tips, our community is eager to hear from you.</p>
-                        <p className="mb-4">Not only is our User Content & User Reviews section a great way to connect with fellow travelers and share your experiences, but it's also a valuable resource for planning your own trips. Get insider information from other travelers, find hidden gems, and get recommendations for the best places to visit and things to do. Together, we can create a network of informed and empowered travelers, making the most out of every adventure.</p>
+                        <p className="mb-4">Not only is our User Content & User Reviews section a great way to connect with fellow travelers and share your experiences, but it&apos;s also a valuable resource for planning your own trips. Get insider information from other travelers, find hidden gems, and get recommendations for the best places to visit and things to do. Together, we can create a network of informed and empowered travelers, making the most out of every adventure.</p>
                     </div>
                     <div className="mt-8">
                         <Image width={800} height={600} className="object-contain w-full rounded-lg dark:hidden" src="/cityDetailsLight1.png" alt="office content 1" />
@@ -78,7 +79,7 @@ export default function CityDetailsFeaturePage() {
                             City Details for Nomads Benefits
                         </h2>
                         <p className="mt-4 text-base font-normal text-gray-500 sm:text-xl dark:text-gray-400">
-                            At Wanderlust App, we know that every traveler wants to experience the true essence of a city. That's why we created City Details, which gives you an in-depth view into each city, with insider information, reviews, and more. Here are just a few of the many benefits of using our City Details feature:
+                            At Wanderlust App, we know that every traveler wants to experience the true essence of a city. That&apos;s why we created City Details, which gives you an in-depth view into each city, with insider information, reviews, and more. Here are just a few of the many benefits of using our City Details feature:
                         </p>
                     </div>
 
@@ -88,7 +89,7 @@ export default function CityDetailsFeaturePage() {
                                 Insider Information
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
-                                Get a local's perspective on each city with our insider information, giving you an authentic travel experience.
+                                Get a local&apos;s perspective on each city with our insider information, giving you an authentic travel experience.
                             </p>
                         </div>
 
@@ -106,7 +107,7 @@ export default function CityDetailsFeaturePage() {
                                 Personalized Recommendations
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
-                                Whether you're looking for the best restaurants, museums, or outdoor activities, our City Details feature provides personalized recommendations based on your preferences and interests.
+                                Whether you&apos;re looking for the best restaurants, museums, or outdoor activities, our City Details feature provides personalized recommendations based on your preferences and interests.
                             </p>
                         </div>
                     </div>
@@ -117,7 +118,7 @@ export default function CityDetailsFeaturePage() {
                             <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
                         </svg> 
                         <blockquote>
-                            <p className="text-2xl font-medium text-gray-900 dark:text-white">"Wanderlust App's City Details feature is a must-have for any traveler. I loved how it provided a comprehensive guide to each city, with insider information and local favorites that you won't find anywhere else. It was like having a local guide with me every step of the way. Highly recommended!"</p>
+                            <p className="text-2xl font-medium text-gray-900 dark:text-white">&quot;Wanderlust App&apos;s City Details feature is a must-have for any traveler. I loved how it provided a comprehensive guide to each city, with insider information and local favorites that you won&apos;t find anywhere else. It was like having a local guide with me every step of the way. Highly recommended!&quot;</p>
                         </blockquote>
                         <figcaption className="flex items-center justify-center mt-6 space-x-3">
                             <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">

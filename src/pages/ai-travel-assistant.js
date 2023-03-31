@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
@@ -57,7 +58,7 @@ export default function TravelAssistantFeaturePage() {
                     <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/assistantDark2.png" alt="Wanderlust AI Travel Assistant" />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Personalized</h2>
-                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our AI Travel Assistant is the perfect tool for digital nomads and travelers who are constantly on the go. With our custom trained travel AI, you can easily get personalized recommendations for your next trip. Whether you're looking for the best place to stay, eat, or explore, our travel AI can help you find the perfect match for your travel preferences.</p>
+                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our AI Travel Assistant is the perfect tool for digital nomads and travelers who are constantly on the go. With our custom trained travel AI, you can easily get personalized recommendations for your next trip. Whether you&apos;re looking for the best place to stay, eat, or explore, our travel AI can help you find the perfect match for your travel preferences.</p>
                         <Link href="/pro" className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                             Get started
                             <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -70,7 +71,7 @@ export default function TravelAssistantFeaturePage() {
                             AI Travel Assistant Benefits
                         </h2>
                         <p className="mt-4 text-base font-normal text-gray-500 sm:text-xl dark:text-gray-400">
-                            As long-time digital nomads and travelers, we know that planning a trip can be a daunting task. That's why we created Wanderlust App with the AI Travel Assistant feature. With our custom trained travel AI, you can easily plan any trip around the world with ease. Here are just a few of the many benefits of using our AI Travel Assistant:
+                            As long-time digital nomads and travelers, we know that planning a trip can be a daunting task. That&apos;s why we created Wanderlust App with the AI Travel Assistant feature. With our custom trained travel AI, you can easily plan any trip around the world with ease. Here are just a few of the many benefits of using our AI Travel Assistant:
                         </p>
                     </div>
 
@@ -98,7 +99,7 @@ export default function TravelAssistantFeaturePage() {
                                 Never Miss a Beat
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
-                                Wanderlust App's AI Travel Assistant ensures you never miss out on the best experiences, hidden gems, and must-see attractions.
+                                Wanderlust App&apos;s AI Travel Assistant ensures you never miss out on the best experiences, hidden gems, and must-see attractions.
                             </p>
                         </div>
                     </div>
@@ -109,7 +110,7 @@ export default function TravelAssistantFeaturePage() {
                             <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
                         </svg> 
                         <blockquote>
-                            <p className="text-2xl font-medium text-gray-900 dark:text-white">"Using Wanderlust App's AI Travel Assistant was a game-changer for my trip planning. I loved how it took my preferences and budget into consideration, making personalized recommendations that were spot on. It saved me so much time and effort, and I never felt like I was missing out on the best experiences. I highly recommend it to any digital nomad or traveler out there!"</p>
+                            <p className="text-2xl font-medium text-gray-900 dark:text-white">&quot;Using Wanderlust App&apos;s AI Travel Assistant was a game-changer for my trip planning. I loved how it took my preferences and budget into consideration, making personalized recommendations that were spot on. It saved me so much time and effort, and I never felt like I was missing out on the best experiences. I highly recommend it to any digital nomad or traveler out there!&quot;</p>
                         </blockquote>
                         <figcaption className="flex items-center justify-center mt-6 space-x-3">
                             <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default {
     metas: {
         title: "Plan Your Dream Trip | Wanderlust App - Your Travel Companion",

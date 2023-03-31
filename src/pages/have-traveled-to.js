@@ -42,7 +42,7 @@ export default function HaveTraveledToFeaturePage() {
                             </Link>
                         </div>
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">The Ultimate Travel List Tracking for Digital Nomads</h1>
-                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">At Wanderlust App, we understand that every traveler has a unique journey and story to tell. That's why we've created the Have Traveled To feature, where you can track all the countries you've visited and get fun statistics like "% of the world you've traveled". With this feature, you can keep track of your travel milestones and see how far you've come on your adventure around the world.</p>
+                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">At Wanderlust App, we understand that every traveler has a unique journey and story to tell. That&apos;s why we&apos;ve created the Have Traveled To feature, where you can track all the countries you&apos;ve visited and get fun statistics like &quot;% of the world you&apos;ve traveled&quot;. With this feature, you can keep track of your travel milestones and see how far you&apos;ve come on your adventure around the world.</p>
                         <Link href="/pro" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Get started
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -58,7 +58,7 @@ export default function HaveTraveledToFeaturePage() {
                     <Image width={800} height={600} className="object-contain w-full hidden dark:block" src="/haveTraveledToDark2.png" alt="Wanderlust Have Traveled To" />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Travel achievements</h2>
-                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Have Traveled To feature is designed to help you keep track of the countries you've visited and celebrate your travel achievements. With just a few clicks, you can add countries to your profile and see your progress towards visiting every corner of the world. Plus, with fun statistics like "% of the world you've traveled", you can get a sense of your travel journey in a whole new way.</p>
+                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Our Have Traveled To feature is designed to help you keep track of the countries you&apos;ve visited and celebrate your travel achievements. With just a few clicks, you can add countries to your profile and see your progress towards visiting every corner of the world. Plus, with fun statistics like &quot;% of the world you&apos;ve traveled&quot;, you can get a sense of your travel journey in a whole new way.</p>
                         <Link href="/pro" className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900">
                             Get started
                             <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -71,7 +71,7 @@ export default function HaveTraveledToFeaturePage() {
                             Have Traveled To Tracking Benefits
                         </h2>
                         <p className="mt-4 text-base font-normal text-gray-500 sm:text-xl dark:text-gray-400">
-                            As avid travelers ourselves, we know how fulfilling it is to explore new countries and cultures. That's why we created the Have Traveled To feature, which lets you track all the countries you've visited and get fun statistics for your travels. Here are just a few of the many benefits of using our Have Traveled To feature:
+                            As avid travelers ourselves, we know how fulfilling it is to explore new countries and cultures. That&apos;s why we created the Have Traveled To feature, which lets you track all the countries you&apos;ve visited and get fun statistics for your travels. Here are just a few of the many benefits of using our Have Traveled To feature:
                         </p>
                     </div>
 
@@ -99,7 +99,7 @@ export default function HaveTraveledToFeaturePage() {
                                 Fun Statistics
                             </h3>
                             <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
-                                Get fun statistics like "% of the world you've traveled" and see your travel journey in a whole new way.
+                                Get fun statistics like &quot;% of the world you&apos;ve traveled&quot; and see your travel journey in a whole new way.
                             </p>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ export default function HaveTraveledToFeaturePage() {
                             <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
                         </svg> 
                         <blockquote>
-                            <p className="text-2xl font-medium text-gray-900 dark:text-white">"Wanderlust App's Have Traveled To feature is a game changer. I love being able to track all the countries I've visited and see how far I've come on my travel journey. Plus, the fun statistics like "% of the world you've traveled" have given me a whole new perspective on my adventures. I can't imagine going back to the traditional passport stamps now!"</p>
+                            <p className="text-2xl font-medium text-gray-900 dark:text-white">&quot;Wanderlust App&apos;s Have Traveled To feature is a game changer. I love being able to track all the countries I&apos;ve visited and see how far I&apos;ve come on my travel journey. Plus, the fun statistics like &quot;% of the world you&apos;ve traveled&quot; have given me a whole new perspective on my adventures. I can&apos;t imagine going back to the traditional passport stamps now!&quot;</p>
                         </blockquote>
                         <figcaption className="flex items-center justify-center mt-6 space-x-3">
                             <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">

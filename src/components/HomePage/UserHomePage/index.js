@@ -41,6 +41,7 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
             pathname: `/city/${slug}`,
             query: { breadcrumb: 'search' }
         });
+
         clearCitiesSearch();
     }
 
@@ -62,10 +63,9 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
             })
     }
     
+    // TODO: how can i remove the below
     if (userLoading) return null;
 
-    // w-full sm:w-3/4 py-8 px-4 mx-auto lg:py-16 lg:px-6
-    
     return (
         <div className=" px-2 sm:pl-16 pr-0 flex flex-col items-center w-11/12">
             <div className="mx-auto mt-56 mb-44 sm:text-center sm:flex sm:flex-col sm:items-center sm:justify-center">
@@ -101,8 +101,8 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
                                             <div key={`userhomepage-searchlocations-${location.id}`} className="flex items-center justify-between px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-500" onClick={() => navigateTo(location.slug)}>
                                                 <div className="flex items-center">
                                                     <div className="flex-shrink-0">
-                                                        <img className="h-10 w-10 rounded-full" src={location.image_url_thumb} alt="" />
-                                                    </div>
+                                                        <Image className="h-10 w-10 rounded-full" height={120} width={120} src={location.image_url_thumb} alt={location.name} />
+                                                    </div> 
                                                     <div className="ml-4">
                                                         <div className="text-sm font-medium text-gray-900 dark:text-white">{location.name}</div>
                                                         <div className="text-sm text-gray-500 dark:text-gray-400">{location.country_name}</div>
@@ -213,9 +213,9 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
                     <div className="relative flex mt-4 sm:mt-auto sm:mb-auto h-60 flex-col lg:col-span-5 lg:flex-row">
                         {
                             theme === 'dark' ? (
-                                <Image src="/extension_dark.png" className="rounded-lg object-contain xl:object-cover" fill alt="Wanderlust Extension" />
+                                <Image src="/extension_dark.png" className="rounded-lg object-contain xl:object-cover" fill alt="Wanderlust Extension Web App" />
                             ): (
-                                <Image src="/extension_light.png" className="rounded-lg object-contain xl:object-cover" fill alt="Wanderlust Extension" />
+                                <Image src="/extension_light.png" className="rounded-lg object-contain xl:object-cover" fill alt="Wanderlust Extension Web App" />
                             )
                         }
                     </div>                
@@ -227,7 +227,7 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
                 {
                     posts.map(post => (
                         <div key={`blogCard-${post.slug}-${post.author.id}`}>
-                            <BlogCard post={post} />
+                            <BlogCard post={post} fullHeight={true} />
                         </div>
                     ))
                 }  

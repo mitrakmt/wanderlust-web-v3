@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useState, useEffect } from 'react'
 import { useDebouncedCallback } from 'use-debounce';
 
 // Utils
 import request from '../utils/request'
 import trackStat from '../utils/trackStat';
-import trackClick from "../utils/trackClick";
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -32,10 +32,6 @@ export default function Settings() {
             router.push('/')
         }
     }, [user])
-
-    useEffect(() => {
-        trackClick('settings-view')
-    }, [])
 
     // Context
     const [toasts, setToasts] = useContext(toastsContext);

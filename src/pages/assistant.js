@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 
 // New Components
@@ -35,11 +36,7 @@ export default function Assistant() {
         }
     }, [user])
     
-    // UseEffects
-    useEffect(() => {
-        trackClick('assistant-view')
-    }, [])
-
+    // Functions
     const updateParameters = (key, value) => {
         setTripParameters({
             ...tripParameters,

@@ -1,6 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 // Utils
 import request from '../../utils/request';
@@ -10,8 +10,8 @@ import { useAuth } from '../../hooks/useAuth';
 
 // Components
 import BlogCard from '../../components/BlogCard';
-import trackClick from '../../utils/trackClick';
 import CustomHead from '@/shared_components/CustomHead';
+import Footer from '@/components/Footer';
 
 export async function getStaticProps() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
@@ -26,9 +26,7 @@ export async function getStaticProps() {
 
 export default function Blog({ posts }) {
     // Hooks
-    const { user, userLoading } = useAuth();
-    const router = useRouter();
-
+    const { user } = useAuth();
 
     // State
     const [searchTerm, setSearchTerm] = useState("");
@@ -36,10 +34,6 @@ export default function Blog({ posts }) {
     const [newBlogPosts, setNewBlogPosts] = useState(null);
 
     // UseEffects
-    useEffect(() => {
-        trackClick('blogs-view')
-    }, [])
-
     useEffect(() => {
         if (category || searchTerm) {
             searchBlogPosts()
@@ -82,7 +76,7 @@ export default function Blog({ posts }) {
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
                     <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Digital Nomad Blog</h2>
-                    <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">Learn about the best places around the world, the most beautiful places to see, and everything you'd need as a nomad.</p>
+                    <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">Learn about the best places around the world, the most beautiful places to see, and everything you&apos;d need as a nomad.</p>
                 </div> 
                 {
                     (user?.role === 'publisher' || user?.role === 'superadmin') && (
@@ -131,16 +125,17 @@ export default function Blog({ posts }) {
                 <div className="grid gap-8 lg:grid-cols-2">
                     {!newBlogPosts && posts.map(post => (
                         <div key={`blogsPage-${post.id}`}>
-                            <BlogCard post={post} />
+                            <BlogCard post={post} fullHeight={true} />
                         </div>
                     ))} 
                     {newBlogPosts && newBlogPosts.map(post => (
                         <div key={`blogsPage-${post.id}`}>
-                            <BlogCard post={post} />
+                            <BlogCard post={post} fullHeight={true} />
                         </div>
                     ))} 
                 </div>  
             </div>
+            <Footer />
         </section>
     )
 }

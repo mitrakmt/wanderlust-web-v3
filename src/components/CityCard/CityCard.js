@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
@@ -90,7 +91,7 @@ export default function CityCard({ data, keyId, favorites, index, toggleFavorite
                     src={data.city?.image_url_thumb}
                     alt={data.city?.name}
                     fill
-                    quality={100}
+                    quality={150}
                     sizes="(max-width: 768px) 30vw,
                       (max-width: 1200px) 20vw,
                       33vw"

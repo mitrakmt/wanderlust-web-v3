@@ -139,7 +139,7 @@ export default function GuestHomePage({ router, posts }) {
                     {
                         posts.map(post => (
                             <div key={`guestHomePage-${post.id}-${post.slug}`}>
-                                <BlogCard post={post} />
+                                <BlogCard post={post} fullHeight={true} />
                             </div>
                         ))
                     }
