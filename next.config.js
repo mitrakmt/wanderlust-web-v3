@@ -52,13 +52,14 @@ const nextConfig = {
         permanent: true,
       },
       {
+        
         source: '/the-best-places-to-live-in-spain-c54b259def4e',
-        destination: '/blog/the-best-places-to-live-spain',
+        destination: '/blog/best-places-to-live-spain',
         permanent: true,
       },
       {
         source: '/the-best-places-to-live-in-spain',
-        destination: '/blog/the-best-places-to-live-spain',
+        destination: '/blog/best-places-to-live-spain',
         permanent: true,
       },
       {
@@ -73,12 +74,12 @@ const nextConfig = {
       },
       {
         source: '/the-best-places-to-live-in-bali-5fe6706c80da',
-        destination: '/blog/the-best-places-to-live-bali',
+        destination: '/blog/best-places-to-live-bali',
         permanent: true,
       },
       {
         source: '/the-best-places-to-live-in-bali',
-        destination: '/blog/the-best-places-to-live-bali',
+        destination: '/blog/best-places-to-live-bali',
         permanent: true,
       },
       {
