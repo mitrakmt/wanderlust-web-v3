@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import request from '../utils/request';
 
-export default function CityGoogleSidebar({ showSidebar, setShowSidebar, geocodeByPlaceId, GooglePlacesAutocomplete, setPlaces, places }) {
+export default function CityGoogleSidebar({ placesToTry = false, showSidebar, setShowSidebar, geocodeByPlaceId, GooglePlacesAutocomplete, setPlaces, places }) {
     // STATE
     const [selectedPlace, setSelectedPlace] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
@@ -56,7 +56,67 @@ export default function CityGoogleSidebar({ showSidebar, setShowSidebar, geocode
         })
             .then(res => {
                 if (res.error) {
-                    setErrorMessage('Something went wrong');
+                    setErrorMessage(res.error);
+                    setTimeout(() => {
+                        setErrorMessage(null);
+                    }, 3000)
+                } else {
+                    setPlaces([...places, ...[res.data]]);
+                    setSuccessMessage('Place added successfully');
+                    setSelectedPlace('');
+                    setNewPlaceNotes('')
+                    setSelectedCity(null);
+                    setSearchCitiesText('');
+                    setCities([]);
+                    setCitiesSearchDropdownOpen(false);
+                    setTimeout(() => {
+                        setSuccessMessage(null);
+                    }, 3000)
+                } 
+                setAddPlaceLoading(false);
+            })
+    }
+
+    const addPlaceToTry = async () => {
+        setAddPlaceLoading(true);
+        const geo = await geocodeByPlaceId(selectedPlace.value.place_id, {
+            language: 'en'
+        })
+
+        let countryName;
+        let cityName;
+        
+        for (let i = 0; i < geo[0].address_components.length; i++) {
+            // find the country name
+            if (geo[0].address_components[i].types.find(element => element === 'country')) {
+                // set country name
+                countryName = geo[0].address_components[i].long_name;
+            }
+            // set city name
+            if (geo[0].address_components[i].types.find(element => element === 'locality')) {
+                // set city name
+                cityName = geo[0].address_components[i].long_name;
+            }
+        }
+
+        request(`/placesToTry`, {
+            method: 'POST',
+            body: JSON.stringify({
+                google_id: selectedPlace.value.place_id,
+                name: selectedPlace.label,
+                tags: selectedPlace.value.types,
+                note: newPlaceNotes,
+                city: selectedCity?.id || null,
+                cityName,
+                countryName,
+                latitude: geo[0].geometry.location.lat(),
+                longitude: geo[0].geometry.location.lng(),
+                address: geo[0]?.formatted_address
+            })
+        })
+            .then(res => {
+                if (res.error) {
+                    setErrorMessage(res.error);
                     setTimeout(() => {
                         setErrorMessage(null);
                     }, 3000)
@@ -94,6 +154,9 @@ export default function CityGoogleSidebar({ showSidebar, setShowSidebar, geocode
 
     const searchCities = (text) => {
         if (text.length === 0) {
+            setSearchCitiesText(text);
+            debouncedCitySearch(text)
+            setCitySearching(false);
             setCities([]);
             setCitiesSearchDropdownOpen(false);
             return;
@@ -190,10 +253,14 @@ export default function CityGoogleSidebar({ showSidebar, setShowSidebar, geocode
                     )
                 }
                 
-                <div className="flex justify-center w-full pb-4 space-x-4 md:px-4 mt-4">
-                    <button type="submit" onClick={addPlace} className="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                        Add place
-                    </button>
+                <div className="flex justify-center w-full pb-4 space-x-4 md:px-4 mt-4"> 
+                    {
+                        placesToTry ? <button type="submit" onClick={addPlaceToTry} className="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Add place
+                        </button> : <button type="submit" onClick={addPlace} className="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Add place
+                        </button>
+                    }
                     <button type="button" onClick={clearAddPlaceInfo} className="inline-flex w-full justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         <svg aria-hidden="true" className="w-5 h-5 -ml-1 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                         Cancel

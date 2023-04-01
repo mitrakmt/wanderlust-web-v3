@@ -3,7 +3,7 @@ import { useState } from 'react';
 // Utils
 import request from '../utils/request';
 
-export default function PlacesMap({ closePlaceOverlay, isPublicMap, removePlace, selectedMarker }) {
+export default function PlacesMap({ showAddToFavorites = false, closePlaceOverlay, isPublicMap, removePlace, selectedMarker }) {
     const [mobileNumber, setMobileNumber] = useState('');
     const [showMobileTerms, setShowMobileTerms] = useState(false);
     const [acceptedMobileTerms, setAcceptedMobileTerms] = useState(false);
@@ -30,6 +30,13 @@ export default function PlacesMap({ closePlaceOverlay, isPublicMap, removePlace,
     const triggerAcceptMobileTerms = function () {
         setAcceptedMobileTerms(true);
         setShowMobileTerms(false)
+    }
+
+    const addToFavorites = () => {
+        // Request to add selectedMarker to favorites
+        request('/placesToTry/convertToFavorite', {
+            placeId: selectedMarker.id
+        })
     }
 
     return (
@@ -61,6 +68,11 @@ export default function PlacesMap({ closePlaceOverlay, isPublicMap, removePlace,
                             )
                         }
                     </div>
+                    {
+                        showAddToFavorites && (
+                            <a onClick={addToFavorites} className="cursor-pointer mt-4 inline-flex items-center mx-1 px-4 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:outline-none dark:bg-primary-600 dark:hover:bg-primary-700">Remove & Add to Favorites</a>
+                        )
+                    }
                 </div>
 
                 {/* <div className="mt-4 mb-8">
@@ -111,13 +123,13 @@ export default function PlacesMap({ closePlaceOverlay, isPublicMap, removePlace,
                                 Terms of Service
                             </p>
                             <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                These terms of service ("Terms") apply to your use of the "Send to Mobile" functionality ("Functionality") provided by wanderlustapp.io ("Website"). By using the Functionality, you agree to be bound by these Terms.
+                                These terms of service (&quot;Terms&quot;) apply to your use of the &quot;Send to Mobile&quot; functionality (&quot;Functionality&quot;) provided by wanderlustapp.io (&quot;Website&quot;). By using the Functionality, you agree to be bound by these Terms.
                             </p>
                             <p className="text-xl font-bold leading-relaxed text-gray-500 dark:text-gray-400">
                                 Description of Functionality
                             </p>
                             <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                The Functionality allows you to send a Google location from the Website to your mobile device by entering your mobile phone number and clicking "Send". The Functionality uses your phone number to send you a text message with a link to the Google location.
+                                The Functionality allows you to send a Google location from the Website to your mobile device by entering your mobile phone number and clicking &quot;Send&quot;. The Functionality uses your phone number to send you a text message with a link to the Google location.
                             </p>
                             <p className="text-xl font-bold leading-relaxed text-gray-500 dark:text-gray-400">
                                 User Representations and Warranties
@@ -140,7 +152,7 @@ export default function PlacesMap({ closePlaceOverlay, isPublicMap, removePlace,
                                 Limitations of Liability
                             </p>
                             <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                The Website is not responsible for any costs or charges associated with your use of the Functionality, including but not limited to data usage or messaging fees charged by your mobile carrier. The Functionality is provided "as is" and the Website makes no representations or warranties of any kind, express or implied, regarding the accuracy, reliability, or availability of the Functionality.
+                                The Website is not responsible for any costs or charges associated with your use of the Functionality, including but not limited to data usage or messaging fees charged by your mobile carrier. The Functionality is provided &quot;as is&quot; and the Website makes no representations or warranties of any kind, express or implied, regarding the accuracy, reliability, or availability of the Functionality.
                             </p>
 
                             <p className="text-xl font-bold leading-relaxed text-gray-500 dark:text-gray-400">
@@ -166,7 +178,7 @@ export default function PlacesMap({ closePlaceOverlay, isPublicMap, removePlace,
                                 Governing Law
                             </p>
                             <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                These Terms shall be governed by and construed in accordance with the laws of the United States of America. Any dispute arising out of or in connection with these Terms shall be resolved in accordance with the dispute resolution procedures set forth in the Website's Terms of Use.
+                                These Terms shall be governed by and construed in accordance with the laws of the United States of America. Any dispute arising out of or in connection with these Terms shall be resolved in accordance with the dispute resolution procedures set forth in the Website&apos;s Terms of Use.
                             </p>
                             <p className="text-xl font-bold leading-relaxed text-gray-500 dark:text-gray-400">
                                 Entire Agreement

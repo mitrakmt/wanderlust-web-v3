@@ -29,9 +29,13 @@ export default function PlacesTab({ places, setPlaces, geocodeByPlaceId, GoogleP
         setSearchActive(!searchActive);
     }
 
+    const closeSidebar = () => {
+        setShowSidebar(false);
+    }
+
     return (
         <div className="relative">
-            <Map isPublicMap={false} defaultZoom={2.5} coordinates={[17.1317479, 41.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} removePlace={removePlace} />
+            <Map isPublicMap={false} closeSidebar={closeSidebar} defaultZoom={2.5} coordinates={[17.1317479, 41.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} removePlace={removePlace} />
             
             {/* SIDEBAR  */}
             <div className="text-center flex flex-col m-5 fixed top-32 sm:top-16 right-0 z-50">

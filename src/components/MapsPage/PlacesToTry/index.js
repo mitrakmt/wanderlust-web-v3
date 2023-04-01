@@ -25,9 +25,13 @@ export default function PlacesToTryTab({ places, setPlaces, geocodeByPlaceId, Go
         setShowSidebar(!showSidebar);
     }
 
+    const closeSidebar = () => {
+        setShowSidebar(false);
+    }
+
     return (
         <div className="relative">
-            <Map isPublicMap={false} defaultZoom={2.5} coordinates={[17.1317479, 41.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} removePlace={removePlace} />
+            <Map isPublicMap={false} closeSidebar={closeSidebar} defaultZoom={2.5} coordinates={[17.1317479, 41.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} removePlace={removePlace} />
             
             {/* SIDEBAR  */}
             <div className="text-center flex flex-col m-5 fixed top-32 sm:top-16 right-0 z-50">
@@ -53,7 +57,7 @@ export default function PlacesToTryTab({ places, setPlaces, geocodeByPlaceId, Go
                 </div> */}
             </div>
 
-            <CityGoogleSidebar GooglePlacesAutocomplete={GooglePlacesAutocomplete} geocodeByPlaceId={geocodeByPlaceId} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setPlaces={setPlaces} places={places} />
+            <CityGoogleSidebar placesToTry={true} GooglePlacesAutocomplete={GooglePlacesAutocomplete} geocodeByPlaceId={geocodeByPlaceId} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setPlaces={setPlaces} places={places} />
 
             <div className="fixed bottom-8 md:bottom-4 w-auto right-0 left-0 justify-center flex flex-wrap mt-4 ml-0 sm:ml-16">
                 <div className="flex items-center mr-4 mb-2">

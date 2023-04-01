@@ -19,7 +19,7 @@ const getRandomNumber = () => {
     return Math. floor(Math. random() * (3 - 0 + 1)) + 0;
 }
 
-export default function PlacesMap({ coordinates, isPublicMap, removePlace, places }) {
+export default function PlacesMap({ closeSidebar, coordinates, isPublicMap, removePlace, places }) {
     // State
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [randomNumberSelected] = useState(getRandomNumber());
@@ -63,7 +63,10 @@ export default function PlacesMap({ coordinates, isPublicMap, removePlace, place
                     style={{ cursor: 'pointer' }}
                     anchor="bottom"
                     key={`places_map-${place.google_id}`}
-                    onClick={() => setSelectedMarker(place)}
+                    onClick={() => {
+                        closeSidebar()
+                        setSelectedMarker(place)
+                    }}
                 />
             ))}
 
