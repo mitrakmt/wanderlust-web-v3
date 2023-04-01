@@ -18,6 +18,7 @@ import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
 import ScoreRating from '../../components/ScoreRating/ScoreRating';
 import TextH2 from '../../components/Text/TextH2';
 import TextH3 from '../../components/Text/TextH3';
+import TextH4 from '../../components/Text/TextH4';
 import TextH5 from '../../components/Text/TextH5';
 import TextP from '../../components/Text/TextP';
 import Button from '../../components/Button/Button';
@@ -98,6 +99,7 @@ export default function CityPage({ citySelected, blogs }) {
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [places, setPlaces] = useState([]);
     const [userPlacesToTry, setUserPlacesToTry] = useState([]);
+    const [countryTabSelected, setCountryTabSelected] = useState('about');
 
     // Loading states
     const [imagesLoading, setImagesLoading] = useState(true);
@@ -648,28 +650,75 @@ export default function CityPage({ citySelected, blogs }) {
             {
                 !user?.premium && <ProBanner />
             }
-            {
-                holidays?.length > 0 && (
-                    <div className="w-full my-12">
-                        <TextH3 classes="mb-4">Holidays</TextH3>
-                        <div className="block w-full p-8 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                            <Timeline data={holidays} />
+            <div className="w-full my-8">
+                <div className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div className="p-4">
+                        <p className="text-gray-500 dark:text-gray-400">Country Information</p>
+                    </div>
+                    <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
+                        <li className="mr-2">
+                            <button onClick={() => setCountryTabSelected('about')} type="button" role="tab" className={`inline-block p-4 ${countryTabSelected === 'about' ? "text-primary-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300"} rounded-tl-lg`}>About</button>
+                        </li>
+                        <li className="mr-2">
+                            <button onClick={() => setCountryTabSelected('geographic')} type="button" role="tab" className={`inline-block p-4 ${countryTabSelected === 'geographic' ? "text-primary-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300"}`}>Geographic</button>
+                        </li>
+                        <li className="mr-2">
+                            <button onClick={() => setCountryTabSelected('holidays')} type="button" role="tab" className={`inline-block p-4 ${countryTabSelected === 'holidays' ? "text-primary-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300"}`}>Holidays</button>
+                        </li>
+                        <li className="mr-2">
+                            <button onClick={() => setCountryTabSelected('translations')} type="button" role="tab" className={`inline-block p-4 ${countryTabSelected === 'translations' ? "text-primary-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-primary-500" : "hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300"}`}>Translations</button>
+                        </li>
+                    </ul>
+                    <div id="defaultTabContent">
+                        <div className={`${countryTabSelected === 'about' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800 flex flex-col sm:flex-row`} id="about" role="tabpanel" aria-labelledby="about-tab">
+                            <Image src={citySelected?.country?.image_url_medium} alt={citySelected?.country_name} height={250} width={400} className="rounded-lg" />
+                            <div className="mt-4 sm:mt-0 sm:ml-4">
+                                <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">{citySelected?.country?.official_name}</h2>
+                                <p className="mb-1 text-gray-500 dark:text-gray-400">Native Names: {Object.keys(citySelected?.country?.nativeNames).map((key) => (
+                                    citySelected?.country?.nativeNames[key].common
+                                ))}</p>
+                                <p className="mb-1 text-gray-500 dark:text-gray-400">Currencies: {Object.keys(citySelected?.country?.translations).map((key) => (
+                                    citySelected?.country?.translations[key].name
+                                ))}</p>
+                                <p className="mb-1 text-gray-500 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
+                                <p className="mb-1 text-gray-500 dark:text-gray-400">Population: {citySelected?.country?.population}</p>
+                                <p className="mb-1 text-gray-500 dark:text-gray-400 flex flex-col">Gini Score: {Object.keys(citySelected?.country?.gini).map((key) => (
+                                    <span className="text-xs ml-4" key={`giniScore-${key}`}>{`${key}: ${citySelected?.country?.gini[key]}`}</span>
+                                ))}</p>
+                            </div>
+                        </div>
+                        <div className={`${countryTabSelected === 'geographic' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800`} id="geographic" role="tabpanel" aria-labelledby="geographic-tab">
+                            <p className="mb-1 text-gray-500 dark:text-gray-400">Region: {citySelected?.country?.region}</p>
+                            <p className="mb-1 text-gray-500 dark:text-gray-400">Continent: {citySelected?.country?.continent}</p>
+                            <p className="mb-1 text-gray-500 dark:text-gray-400">Borders: {citySelected?.country?.borders.map((border) => (
+                                <span key={`timezones-${border}`} className="text-xs mr-1">{border}, </span>
+                            ))}</p>
+                            <p className="mb-1 text-gray-500 dark:text-gray-400">Sub Region: {citySelected?.country?.subregion}</p>
+                            <p className="mb-1 text-gray-500 dark:text-gray-400">Lat/Long: {`${citySelected?.country?.latLng.country[0]}, ${citySelected?.country?.latLng.country[1]}`}</p>
+                            <p className="mb-1 text-gray-500 dark:text-gray-400">Timezones: {citySelected?.country?.timezones.map((timezone) => (
+                                <span key={`timezones-${timezone}`} className="text-xs mr-1">{timezone}, </span>
+                            ))}</p>
+                        </div>
+                        <div className={`${countryTabSelected === 'holidays' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800`} id="holidays" role="tabpanel" aria-labelledby="statistics-tab">
+                            {
+                                holidays?.length > 0 ? (
+                                    <div className="w-full my-12">
+                                        <TextH3 classes="mb-4">Holidays</TextH3>
+                                        <div className="block w-full p-8 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                            <Timeline data={holidays} />
+                                        </div>
+                                    </div>
+                                ) : <TextH3 classes="mb-4">No Holidays for this location (yet)!</TextH3>
+                            }
+                        </div>
+                        <div className={`${countryTabSelected === 'translations' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800`} id="translations" role="tabpanel" aria-labelledby="statistics-tab">
+                            <p className="mb-1 text-gray-500 dark:text-gray-400">{Object.keys(citySelected?.country?.translations).map((key) => (
+                                <span key={`translations-${key}`}><span className="font-bold mr-2 text-gray-800 dark:text-gray-300">{key}:</span> {citySelected?.country?.translations[key]}</span>
+                            ))}</p>
                         </div>
                     </div>
-                )
-            }
-            <div className="w-full my-8">
-                <TextH3 classes="mb-4">Country Information</TextH3>
-                <div className="flex flex-col w-full h-auto px-10 pl-0 bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
-                    <div className="flex flex-col w-full p-8 ml-8 leading-normal">
-                        <TextH2>{citySelected?.country_name}</TextH2>
-                        <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Region: {citySelected?.region}</p>
-                        <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
-                        <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">Currency: {citySelected?.country?.currency}</p>
-                    </div>
-                    <Image height={400} width={600} className="static object-cover w-full my-8 rounded-md h-96 md:h-auto md:w-96" src={citySelected?.country?.image_url_medium || citySelected?.image_url_medium} alt={`${citySelected?.country_name}`} />
-
                 </div>
+
             </div>
         </section>
     )
