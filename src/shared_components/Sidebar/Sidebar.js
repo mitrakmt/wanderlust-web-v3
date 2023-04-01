@@ -15,6 +15,7 @@ import MapIcon from './icons/MapIcon';
 import NomadIcon from './icons/NomadIcon';
 import ProfileIcon from './icons/ProfileIcon';
 import ProIcon from './icons/ProIcon';
+import StatsIcon from './icons/StatsIcon';
 import SearchIcon from './icons/SearchIcon';
 import SettingsIcon from './icons/SettingsIcon';
 import ContactIcon from './icons/ContactIcon';
@@ -100,6 +101,13 @@ function Sidebar({ user, router, userLoading, logout }) {
             icon: <NomadIcon />,
             authRequired: true,
             premiumRequired: true
+        },
+        {
+            title: "Stats",
+            path: '/stats',
+            icon: <StatsIcon />,
+            authRequired: true,
+            publisherRequired: true
         },
         {
             title: 'Admin',

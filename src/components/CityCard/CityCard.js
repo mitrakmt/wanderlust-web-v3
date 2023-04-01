@@ -59,7 +59,7 @@ export default function CityCard({ data, keyId, favorites, index, toggleFavorite
           query: { breadcrumb: 'search' },
         }}
       >
-        <div key={keyId} className="flex items-center w-full text-center cursor-pointer group space-between brightness-150 hover:brightness-125 dark:brightness-100 dark:hover:brightness-75" style={{ height: '200px', width: '100%', position: 'relative' }}>
+        <div key={keyId} className="flex px-4 justify-center items-center w-full text-center cursor-pointer group space-between brightness-150 hover:brightness-125 dark:brightness-100 dark:hover:brightness-75" style={{ height: '200px', width: '100%', position: 'relative' }}>
             <div className="z-20 flex flex-col items-center justify-center w-full mt-4 text-center">
                 <div>
                     <h3 className="z-20 text-xl font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>

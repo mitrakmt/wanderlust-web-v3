@@ -89,6 +89,10 @@ export default function BlogPost({ blog, relatedArticles }) {
 
     // UseEffect
     useEffect(() => {
+        request(`/blog/see/${blog?.id}`)
+    }, []);
+
+    useEffect(() => {
         if (blog) {
             request(`/blog-comment/${blog?.id}`)
                 .then(res => {
