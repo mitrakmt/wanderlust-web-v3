@@ -46,12 +46,12 @@ export default function Stats() {
                             <dd className="font-light text-gray-500 dark:text-gray-400">Num. of Posts</dd>
                         </div>
                         <div className="flex flex-col items-center justify-center">
-                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">1B+</dt>
+                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{blogs.reduce((acc, curr) => acc + curr.views, 0)}</dt>
                             <dd className="font-light text-gray-500 dark:text-gray-400">Total Views</dd>
                         </div>
                         <div className="flex flex-col items-center justify-center">
-                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">4M+</dt>
-                            <dd className="font-light text-gray-500 dark:text-gray-400">organizations</dd>
+                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{blogs.reduce((acc, curr) => acc + (curr.timeRead || 0), 0) / 60}</dt>
+                            <dd className="font-light text-gray-500 dark:text-gray-400">Total Time Read (mins)</dd>
                         </div>
                     </dl>
                 </div>
@@ -64,13 +64,16 @@ export default function Stats() {
                                     Title
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-xs">
+                                    Views
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-xs">
+                                    Time Read (mins)
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-xs">
                                     Category
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-xs">
                                     Published On
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-xs">
-                                    Views
                                 </th>
                             </tr>
                         </thead>
@@ -82,13 +85,16 @@ export default function Stats() {
                                             {blog.title}
                                         </th>
                                         <td className="px-6 py-4 text-xs">
+                                            {blog.views}
+                                        </td>
+                                        <td className="px-6 py-4 text-xs">
+                                            {(blog.timeRead / 60) || 0}
+                                        </td>
+                                        <td className="px-6 py-4 text-xs">
                                             {blog.category}
                                         </td>
                                         <td className="px-6 py-4 text-xs">
                                             {blog.publishedOn}
-                                        </td>
-                                        <td className="px-6 py-4 text-xs">
-                                            {blog.views}
                                         </td>
                                     </tr>
                                 ))

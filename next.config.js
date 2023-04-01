@@ -1,7 +1,7 @@
 const { withAxiom } = require('next-axiom');
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   eslint: {
     ignoreDuringBuilds: true,
   },

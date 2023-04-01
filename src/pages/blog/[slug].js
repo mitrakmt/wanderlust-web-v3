@@ -79,7 +79,7 @@ export async function getStaticPaths() {
 
 export default function BlogPost({ blog, relatedArticles }) {
     // Hooks
-    const { user, userLoading } = useAuth();
+    const { user } = useAuth();
     const router = useRouter();
 
     // State
@@ -89,7 +89,19 @@ export default function BlogPost({ blog, relatedArticles }) {
 
     // UseEffect
     useEffect(() => {
-        request(`/blog/see/${blog?.id}`)
+        if (blog.author.username !== user?.username) {
+            request(`/blog/see/${blog?.id}`)
+        }
+    }, []);
+
+    useEffect(() => {
+        if (blog.author.username !== user?.username) {
+            const intervalId = setInterval(() => {
+                request(`/blog/time/${blog?.id}`)
+            }, 5000);
+    
+            return () => clearInterval(intervalId);
+        }
     }, []);
 
     useEffect(() => {

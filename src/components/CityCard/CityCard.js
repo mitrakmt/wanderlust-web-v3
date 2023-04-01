@@ -88,10 +88,10 @@ export default function CityCard({ data, keyId, favorites, index, toggleFavorite
             </div>
             <div className="w-full bg-gray-200 rounded-md min-h-80 aspect-w-1 aspect-h-1 lg:h-80 lg:aspect-none" style={{ position: 'absolute', height: "100%" }}>
                 <Image
-                    src={data.city?.image_url_thumb}
+                    src={data.city?.image_url_small}
                     alt={data.city?.name}
                     fill
-                    quality={90}
+              quality={60}
                     sizes="(max-width: 768px) 30vw,
                       (max-width: 1200px) 20vw,
                       33vw"
