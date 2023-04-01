@@ -50,7 +50,7 @@ export default function Stats() {
                             <dd className="font-light text-gray-500 dark:text-gray-400">Total Views</dd>
                         </div>
                         <div className="flex flex-col items-center justify-center">
-                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{blogs.reduce((acc, curr) => acc + (curr.timeRead || 0), 0) / 60}</dt>
+                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{(blogs.reduce((acc, curr) => acc + (curr.timeRead || 0), 0) / 60).toFixed(1)}</dt>
                             <dd className="font-light text-gray-500 dark:text-gray-400">Total Time Read (mins)</dd>
                         </div>
                     </dl>
@@ -88,7 +88,7 @@ export default function Stats() {
                                             {blog.views}
                                         </td>
                                         <td className="px-6 py-4 text-xs">
-                                            {(blog.timeRead / 60) || 0}
+                                            {((blog.timeRead / 60) || 0).toFixed(1)}
                                         </td>
                                         <td className="px-6 py-4 text-xs">
                                             {blog.category}
