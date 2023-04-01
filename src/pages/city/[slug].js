@@ -636,7 +636,7 @@ export default function CityPage({ citySelected, blogs }) {
                 </div>
 
                 <div className="flex flex-col items-center w-full h-auto bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
-                    <Image height={150} width={150} quality={80} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/photo-1591825729269-caeb344f6df2.jpeg" alt={`Airbnbs in ${citySelected?.name}`} />
+                    <Image height={150} width={150} quality={60} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/photo-1591825729269-caeb344f6df2.jpeg" alt={`Airbnbs in ${citySelected?.name}`} />
                     <div className="flex flex-col justify-between w-full p-4 leading-normal">
                         <div className="flex">
                             <h5 className="mb-2 mr-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">COMING SOON</h5>
@@ -674,30 +674,48 @@ export default function CityPage({ citySelected, blogs }) {
                             <Image src={citySelected?.country?.image_url_medium} alt={citySelected?.country_name} height={250} width={400} className="rounded-lg" />
                             <div className="mt-4 sm:mt-0 sm:ml-4">
                                 <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">{citySelected?.country?.official_name}</h2>
-                                <p className="mb-1 text-gray-500 dark:text-gray-400">Native Names: {Object.keys(citySelected?.country?.nativeNames).map((key) => (
-                                    citySelected?.country?.nativeNames[key].common
-                                ))}</p>
-                                <p className="mb-1 text-gray-500 dark:text-gray-400">Currencies: {Object.keys(citySelected?.country?.translations).map((key) => (
-                                    citySelected?.country?.translations[key].name
-                                ))}</p>
+                                {
+                                    citySelected?.country?.nativeNames && <p className="mb-1 text-gray-500 dark:text-gray-400">Native Names: {Object.keys(citySelected?.country?.nativeNames).map((key) => (
+                                        citySelected?.country?.nativeNames[key].common
+                                    ))}</p>
+                                }
+                                {
+                                    citySelected?.country?.translations && <p className="mb-1 text-gray-500 dark:text-gray-400">Currencies: {Object.keys(citySelected?.country?.translations).map((key) => (
+                                        citySelected?.country?.translations[key].name
+                                    ))}</p>
+                                }
                                 <p className="mb-1 text-gray-500 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
                                 <p className="mb-1 text-gray-500 dark:text-gray-400">Population: {citySelected?.country?.population}</p>
-                                <p className="mb-1 text-gray-500 dark:text-gray-400 flex flex-col">Gini Score: {Object.keys(citySelected?.country?.gini).map((key) => (
-                                    <span className="text-xs ml-4" key={`giniScore-${key}`}>{`${key}: ${citySelected?.country?.gini[key]}`}</span>
-                                ))}</p>
+                                {
+                                    citySelected?.country?.gini && <p className="mb-1 text-gray-500 dark:text-gray-400 flex flex-col">Gini Score: {Object.keys(citySelected?.country?.gini).map((key) => (
+                                        <span className="text-xs ml-4" key={`giniScore-${key}`}>{`${key}: ${citySelected?.country?.gini[key]}`}</span>
+                                    ))}</p>
+                                }
                             </div>
                         </div>
                         <div className={`${countryTabSelected === 'geographic' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800`} id="geographic" role="tabpanel" aria-labelledby="geographic-tab">
-                            <p className="mb-1 text-gray-500 dark:text-gray-400">Region: {citySelected?.country?.region}</p>
-                            <p className="mb-1 text-gray-500 dark:text-gray-400">Continent: {citySelected?.country?.continent}</p>
-                            <p className="mb-1 text-gray-500 dark:text-gray-400">Borders: {citySelected?.country?.borders.map((border) => (
-                                <span key={`timezones-${border}`} className="text-xs mr-1">{border}, </span>
-                            ))}</p>
-                            <p className="mb-1 text-gray-500 dark:text-gray-400">Sub Region: {citySelected?.country?.subregion}</p>
-                            <p className="mb-1 text-gray-500 dark:text-gray-400">Lat/Long: {`${citySelected?.country?.latLng.country[0]}, ${citySelected?.country?.latLng.country[1]}`}</p>
-                            <p className="mb-1 text-gray-500 dark:text-gray-400">Timezones: {citySelected?.country?.timezones.map((timezone) => (
-                                <span key={`timezones-${timezone}`} className="text-xs mr-1">{timezone}, </span>
-                            ))}</p>
+                            {
+                                citySelected?.country?.region && <p className="mb-1 text-gray-500 dark:text-gray-400">Region: {citySelected?.country?.region}</p>
+                            }
+                            {
+                                citySelected?.country?.continent && <p className="mb-1 text-gray-500 dark:text-gray-400">Continent: {citySelected?.country?.continent}</p>
+                            }
+                            {
+                                citySelected?.country?.borders && <p className="mb-1 text-gray-500 dark:text-gray-400">Borders: {citySelected?.country?.borders.map((border) => (
+                                    <span key={`timezones-${border}`} className="text-xs mr-1">{border}, </span>
+                                ))}</p>
+                            }
+                            {
+                                citySelected?.country?.subregion && <p className="mb-1 text-gray-500 dark:text-gray-400">Sub Region: {citySelected?.country?.subregion}</p>
+                            }
+                            {
+                                citySelected?.country?.latLng && <p className="mb-1 text-gray-500 dark:text-gray-400">Lat/Long: {`${citySelected?.country?.latLng.country[0]}, ${citySelected?.country?.latLng.country[1]}`}</p>
+                            }
+                            {
+                                citySelected?.country?.timezones && <p className="mb-1 text-gray-500 dark:text-gray-400">Timezones: {citySelected?.country?.timezones.map((timezone) => (
+                                    <span key={`timezones-${timezone}`} className="text-xs mr-1">{timezone}, </span>
+                                ))}</p>
+                            }
                         </div>
                         <div className={`${countryTabSelected === 'holidays' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800`} id="holidays" role="tabpanel" aria-labelledby="statistics-tab">
                             {
@@ -712,9 +730,11 @@ export default function CityPage({ citySelected, blogs }) {
                             }
                         </div>
                         <div className={`${countryTabSelected === 'translations' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800`} id="translations" role="tabpanel" aria-labelledby="statistics-tab">
-                            <p className="mb-1 text-gray-500 dark:text-gray-400">{Object.keys(citySelected?.country?.translations).map((key) => (
-                                <span key={`translations-${key}`}><span className="font-bold mr-2 text-gray-800 dark:text-gray-300">{key}:</span> {citySelected?.country?.translations[key]}</span>
-                            ))}</p>
+                            {
+                                citySelected?.country?.translations && <p className="mb-1 text-gray-500 dark:text-gray-400">{Object.keys(citySelected?.country?.translations).map((key) => (
+                                    <span key={`translations-${key}`}><span className="font-bold mr-2 text-gray-800 dark:text-gray-300">{key}:</span> {citySelected?.country?.translations[key]}</span>
+                                ))}</p>
+                            }
                         </div>
                     </div>
                 </div>

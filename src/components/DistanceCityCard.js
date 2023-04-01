@@ -76,10 +76,10 @@ export default function CityCard({ city, keyId, index, currentCity, measurements
             </div>
             <div className="w-full bg-gray-200 rounded-md min-h-80 aspect-w-1 aspect-h-1 lg:h-80 lg:aspect-none" style={{ position: 'absolute', height: "100%" }}>
                 <Image
-                    src={city?.image_url_small}
+                    src={city?.image_url_thumb}
                     alt={city?.name}
                     fill
-                    quality={80}
+                    quality={90}
                     sizes="(max-width: 768px) 30vw,
                       (max-width: 1200px) 20vw,
                       33vw"
