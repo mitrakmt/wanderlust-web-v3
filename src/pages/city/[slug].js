@@ -636,7 +636,7 @@ export default function CityPage({ citySelected, blogs }) {
                 </div>
 
                 <div className="flex flex-col items-center w-full h-auto bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
-                    <Image height={150} width={150} quality={60} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/photo-1591825729269-caeb344f6df2.jpeg" alt={`Airbnbs in ${citySelected?.name}`} />
+                    <Image height={150} width={150} quality={80} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/photo-1591825729269-caeb344f6df2.jpeg" alt={`Airbnbs in ${citySelected?.name}`} />
                     <div className="flex flex-col justify-between w-full p-4 leading-normal">
                         <div className="flex">
                             <h5 className="mb-2 mr-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">COMING SOON</h5>
@@ -732,7 +732,7 @@ export default function CityPage({ citySelected, blogs }) {
                         <div className={`${countryTabSelected === 'translations' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800`} id="translations" role="tabpanel" aria-labelledby="statistics-tab">
                             {
                                 citySelected?.country?.translations && <p className="mb-1 text-gray-500 dark:text-gray-400">{Object.keys(citySelected?.country?.translations).map((key) => (
-                                    <span key={`translations-${key}`}><span className="font-bold mr-2 text-gray-800 dark:text-gray-300">{key}:</span> {citySelected?.country?.translations[key]}</span>
+                                    <span key={`translations-${key}`}><span className="font-bold mr-2 text-gray-800 dark:text-gray-300">{key}:</span> {citySelected?.country?.translations[key]}, </span>
                                 ))}</p>
                             }
                         </div>
