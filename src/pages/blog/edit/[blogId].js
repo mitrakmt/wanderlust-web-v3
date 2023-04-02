@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../../../hooks/useAuth';
 
 // Components
-import BlogCreate from '../../../shared_pages/BlogCreate';
+import BlogCreate from '../../../shared_pages/blogCreate';
 
 export default function EditBlogPage() {
     // Hooks
