@@ -40,6 +40,13 @@ export default function CustomHead({ title, description, image, alt, url, conten
                 <meta key="twitter:width" property="twitter:image:width" content="800" />
                 <meta key="twitter:height" property="twitter:image:height" content="600" />
                 <meta key="twitter:alt" property="twitter:image:alt" content={alt} />
+                {
+                    url && <link
+                        rel="canonical"
+                        href={url}
+                        key="canonical"
+                    />
+                }
             </Head>
         </>
     )
