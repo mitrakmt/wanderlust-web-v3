@@ -196,12 +196,12 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: 'best-places-to-live-in-germany-558a32906c44',
+        source: '/best-places-to-live-in-germany-558a32906c44',
         destination: '/blog/best-places-to-live-germany',
         permanent: true
       },
       {
-        source: 'best-places-to-live-in-germany',
+        source: '/best-places-to-live-in-germany',
         destination: '/blog/best-places-to-live-germany',
         permanent: true
       },
@@ -210,8 +210,6 @@ const nextConfig = {
         destination: '/blog',
         permanent: true,
       }
-      
-      
     ]
   },
   rewrites: async () => [
