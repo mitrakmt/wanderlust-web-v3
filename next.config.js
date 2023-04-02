@@ -91,6 +91,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/5-most-beautiful-cities-in-the-world-2b92482b2777',
+        destination: '/blog/top-5-beautiful-beaches',
+        permanent: true,
+      },
+      {
+        source: '/5-most-beautiful-cities-in-the-world',
+        destination: '/blog/top-5-beautiful-beaches',
+        permanent: true,
+      },
+      {
         source: '/the-5-best-restaurants-in-bali-5ef9576f248a',
         destination: '/blog/5-best-restaurants-bali',
         permanent: true,
