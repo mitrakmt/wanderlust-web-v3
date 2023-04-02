@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 // New Components
 import InputWithAddon from '../components/InputWithAddon/InputWithAddon';
@@ -12,7 +13,6 @@ import { useRouter } from 'next/router';
 
 // Utils
 import request from '../utils/request';
-import trackClick from "../utils/trackClick";
 
 export default function Assistant() {
     // State search
@@ -144,7 +144,41 @@ export default function Assistant() {
                 {
                     chatThread.map((message, index) => {
                         return (
-                            <p key={`chatThread-${message.from}-${index}`} className={`text-gray-800 dark:text-gray-200 my-2 w-full md:w-9/12 px-4 py-2 rounded-lg ${message.from === 'user' ? "ml-auto bg-gray-300 dark:bg-gray-900" : "bg-primary-300 dark:bg-primary-900"}`}>{message.message}</p>
+                            <div key={`chatThread-${message.from}-${index}`}>
+                                {
+                                    message.from === 'user' ?
+                                        <div className="chat chat-end">
+                                            <div className="chat-image avatar">
+                                                <div className="w-10 rounded-full">
+                                                    <Image src={user?.profile_image} alt={`${user?.username} profile image`} height={80} width={80} />
+                                                </div>
+                                            </div>
+                                            <div className="chat-header">
+                                                {user?.username}
+                                                {/* <time className="text-xs opacity-50">{Date.now()}</time> */}
+                                            </div>
+                                            <div className="chat-bubble">{ message.message }</div>
+                                            {/* <div className="chat-footer opacity-50">
+                                                Seen at 12:46
+                                            </div> */}
+                                        </div> :
+                                        <div className="chat chat-start">
+                                            <div className="chat-image avatar">
+                                                <div className="w-10 rounded-full">
+                                                    <Image src="/favicon-256x256.png" alt="Wanderlust App Logo" height={80} width={80} />
+                                                </div>
+                                            </div>
+                                            <div className="chat-header">
+                                                Wanderlust Bot
+                                                {/* <time className="text-xs opacity-50">12:45</time> */}
+                                            </div>
+                                            <div className="chat-bubble">{message.message}</div>
+                                            <div className="chat-footer opacity-50">
+                                                Delivered
+                                            </div>
+                                        </div>
+                                }
+                            </div>
                         )
                     })
                 }

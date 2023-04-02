@@ -59,6 +59,7 @@ module.exports = {
       require('@tailwindcss/line-clamp'),
       require('@tailwindcss/typography'),
       require('flowbite/plugin'),
-      require('flowbite-typography')
+      require('flowbite-typography'),
+      require("daisyui")
   ],
 }

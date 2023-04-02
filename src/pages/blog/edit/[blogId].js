@@ -1,15 +1,19 @@
+import {
+    useEffect
+} from 'react';
 import { useRouter } from 'next/router';
 
 // Hooks
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../../hooks/useAuth';
 
 // Components
-import BlogCreate from '../../shared_components/BlogCreate';
+import BlogCreate from '../../../shared_pages/BlogCreate';
 
-export default function CreateBlog() {
+export default function EditBlogPage() {
     // Hooks
     const { user, userLoading } = useAuth();
     const router = useRouter();
+    const { blogId } = router.query
 
     if (!userLoading && user.role === 'user') {
         // Send them back to home
@@ -17,6 +21,6 @@ export default function CreateBlog() {
     }
 
     return (
-        <BlogCreate editing={false} />
+        <BlogCreate editing={true} blogId={blogId} />
     )
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 /* eslint-disable @next/next/no-img-element */
 import CustomHead from '../shared_components/CustomHead';
@@ -75,6 +76,9 @@ export default function Stats() {
                                 <th scope="col" className="px-6 py-3 text-xs">
                                     Published On
                                 </th>
+                                <th scope="col" className="px-6 py-3 text-xs">
+                                    Action
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -95,6 +99,11 @@ export default function Stats() {
                                         </td>
                                         <td className="px-6 py-4 text-xs">
                                             {blog.publishedOn}
+                                        </td>
+                                        <td className="px-6 py-4 text-xs">
+                                            <Link href={`/blog/edit/${blog.id}`}>
+                                                <button>Edit</button>
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))
