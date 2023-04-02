@@ -1,5 +1,3 @@
-const { withAxiom } = require('next-axiom');
-
 const nextConfig = {
   reactStrictMode: false,
   eslint: {
@@ -169,4 +167,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withAxiom(nextConfig)
+module.exports = nextConfig

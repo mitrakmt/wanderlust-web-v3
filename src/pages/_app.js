@@ -29,8 +29,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import '../styles/weather.scss';
 import '../styles/weatherCard.scss';
 
-export { reportWebVitals } from 'next-axiom';
-
 // Fonts
 import { Roboto } from 'next/font/google'
 import CustomHead from '@/shared_components/CustomHead';
