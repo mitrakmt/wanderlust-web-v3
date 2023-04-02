@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../../hooks/useAuth';
 
 // Components
-import BlogCreate from '../../shared_components/BlogCreate';
+import BlogCreate from '../../shared_pages/BlogCreate';
 
 export default function CreateBlog() {
     // Hooks
