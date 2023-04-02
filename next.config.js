@@ -129,7 +129,89 @@ const nextConfig = {
         source: '/bucharest-cost-of-living',
         destination: '/blog/bucharest-cost-of-living',
         permanent: true,
+      },
+      {
+        source: '/cost-of-living-in-canggu-bali-8a1cba59ca1b',
+        destination: '/blog/cost-of-living-canggu-bali',
+        permanent: true,
+      },
+      {
+        source: '/cost-of-living-in-canggu-bali',
+        destination: '/blog/cost-of-living-canggu-bali',
+        permanent: true,
+      },
+      {
+        source: '/tagged/top-5-best',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/categories/ultimate-guides',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/tagged/cost-of-living',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/feed/tagged/luxury-travel',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/feed/tagged/trains',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/tagged/berlin',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/categories/top-5',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/tagged/living-abroad',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/feed/tagged/best-travel-destinations',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/feed/tagged/wanderlusting',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/categories/digital-nomad',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: 'best-places-to-live-in-germany-558a32906c44',
+        destination: '/blog/best-places-to-live-germany',
+        permanent: true
+      },
+      {
+        source: 'best-places-to-live-in-germany',
+        destination: '/blog/best-places-to-live-germany',
+        permanent: true
+      },
+      {
+        source: '/feed/tagged/foodies', 
+        destination: '/blog',
+        permanent: true,
       }
+      
+      
     ]
   },
   rewrites: async () => [
