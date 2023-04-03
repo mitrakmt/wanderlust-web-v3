@@ -13,8 +13,12 @@ export default function PlacesToTryTab({ places, setPlaces, geocodeByPlaceId, Go
     const [showSidebar, setShowSidebar] = useState(false);
 
     // Functions
-    const removePlace = (placeId) => {
+    const removePlace = (placeId, uiOnly = false) => {
         setPlaces(places?.filter((place) => place.id !== placeId))
+
+        if (uiOnly) {
+            return;
+        }
 
         request(`/placesToTry/${placeId}`, {
             method: 'DELETE'

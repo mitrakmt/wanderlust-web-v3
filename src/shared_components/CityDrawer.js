@@ -39,6 +39,12 @@ export default function PlacesMap({ showAddToFavorites = false, closePlaceOverla
             body:  JSON.stringify({
                 placeId: selectedMarker.id
             })
+        }).then(response => {
+            console.log('response', response);
+            if (response.data) {
+                // Remove the selectedMarker from placesToTry list
+                removePlace(selectedMarker.id, true)
+            }
         })
     }
 
