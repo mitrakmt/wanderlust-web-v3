@@ -85,8 +85,10 @@ export default function Stats() {
                             {
                                 blogs?.map(blog => (
                                     <tr key={`statsBlog-${blog.id}`} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" className="px-6 py-4 font-medium text-xs text-gray-900 whitespace-nowrap dark:text-white">
-                                            {blog.title}
+                                        <th scope="row" className="px-6 py-4 font-medium text-xs text-gray-900 whitespace-nowrap dark:text-white hover:text-primary-600 dark:hover:text-primary-600 transition-colors">
+                                            <Link href={`/blog/${blog.slug}`}>
+                                                {blog.title}
+                                            </Link>
                                         </th>
                                         <td className="px-6 py-4 text-xs">
                                             {blog.views}

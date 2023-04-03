@@ -135,7 +135,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
             body.publishedOn = new Date().toLocaleDateString('en-US', options);
         };
 
-
         // Send to API
         request(editing ? `/blog/id/${blogId}` : '`/blog`', {
             method: editing ? `PUT` : 'POST',
@@ -261,7 +260,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
             setContent([...content, { type: 'link', url: '', text: '' }]);
         }
     };
-
 
   const insertObjectAtIndex = (newObject, index) => {
     setContent(prevContent => [
@@ -799,8 +797,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                             )
                         }
                     </div>
-
-                    
                 </div>
             </div>
         </section>

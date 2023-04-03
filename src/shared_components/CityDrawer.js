@@ -35,7 +35,10 @@ export default function PlacesMap({ showAddToFavorites = false, closePlaceOverla
     const addToFavorites = () => {
         // Request to add selectedMarker to favorites
         request('/placesToTry/convertToFavorite', {
-            placeId: selectedMarker.id
+            method: 'PUT',
+            body:  JSON.stringify({
+                placeId: selectedMarker.id
+            })
         })
     }
 
