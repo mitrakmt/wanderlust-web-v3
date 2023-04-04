@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useContext, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -70,8 +71,8 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                     setCategory(blogInfo.data.category);
                     setSummary(blogInfo.data.summary);
                     setRegion(blogInfo.data.region);
-                    setCountry(blogInfo.data.country);
-                    setCity(blogInfo.data.city);
+                    setCountry(blogInfo.data.country.id);
+                    setCity(blogInfo.data.city.id);
                     setMainImage(blogInfo.data.image_url);
                 })
         }
