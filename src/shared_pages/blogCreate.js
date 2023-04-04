@@ -136,7 +136,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         };
 
         // Send to API
-        request(editing ? `/blog/id/${blogId}` : '`/blog`', {
+        request(editing ? `/blog/id/${blogId}` : '/blog', {
             method: editing ? `PUT` : 'POST',
             body
           })
