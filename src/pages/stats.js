@@ -19,7 +19,7 @@ export default function Stats() {
     // UseEffects
     useEffect(() => {
         async function fetchData() {
-            const newBlogs = await request(`/blog/user/${user.username}`)
+            const newBlogs = await request(`/stats/blog/user/${user.username}`)
             setBlogs(newBlogs?.data)
         }
         if (user) {
