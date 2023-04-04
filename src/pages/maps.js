@@ -117,7 +117,7 @@ export default function Maps() {
                 }
                 {
                     currentTab === 'placesToTry' && (
-                        <PlacesToTryTab places={placesToTry} setPlaces={setPlacesToTry} GooglePlacesAutocomplete={GooglePlacesAutocomplete} geocodeByPlaceId={geocodeByPlaceId} />
+                        <PlacesToTryTab places={placesToTry} setPlaces={setPlacesToTry} updateFavoritesList={setPlaces} currentFavorites={places} GooglePlacesAutocomplete={GooglePlacesAutocomplete} geocodeByPlaceId={geocodeByPlaceId} />
                     )
                 }
                 {

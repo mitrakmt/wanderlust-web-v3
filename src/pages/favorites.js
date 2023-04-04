@@ -135,7 +135,7 @@ export default function Favorites() {
                                     return null;
                                 }
                                 return (
-                                    <CityCard key={`favorites-${favorite?.id}-${index}`} user={user} breadcrumb="favorites" setCitySelected={setCitySelected} keyId={`favorites-city-${favorite?.id}-${index}`} data={favorite} index={index} favorites={favorites} hideLikeCount toggleFavorite={removeFavoriteAction} />
+                                    <CityCard priority={index <= 12} key={`favorites-${favorite?.id}-${index}`} user={user} breadcrumb="favorites" setCitySelected={setCitySelected} keyId={`favorites-city-${favorite?.id}-${index}`} data={favorite} index={index} favorites={favorites} hideLikeCount toggleFavorite={removeFavoriteAction} />
                                 )
                             }) :
                         favorites && favorites?.filter((item, index, self) =>

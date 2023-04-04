@@ -1,14 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Utils
 import request from '../utils/request';
 
-export default function PlacesMap({ showAddToFavorites = false, closePlaceOverlay, isPublicMap, removePlace, selectedMarker }) {
+export default function PlacesMap({ updateFavoritesList, currentFavorites = [], showAddToFavorites = false, closePlaceOverlay, isPublicMap, removePlace, selectedMarker }) {
     const [mobileNumber, setMobileNumber] = useState('');
     const [showMobileTerms, setShowMobileTerms] = useState(false);
     const [acceptedMobileTerms, setAcceptedMobileTerms] = useState(false);
+    const [isAlreadyFavorited, setIsAlreadyFavorited] = useState(false);
+
+    // UseEffects
+    useEffect(() => {
+        // Search currentFavorites for selectedMarker.id
+        if (selectedMarker) {
+            if (hasMarkerId(currentFavorites, selectedMarker.google_id)) {
+                setIsAlreadyFavorited(true)
+            }
+        }
+    }, [selectedMarker, currentFavorites]);
 
     // Functions
+    function hasMarkerId(markers, google_id) {
+        return markers.some(marker => marker.google_id === google_id);
+    }
+    
     const viewPlace = () => {
         window.open(`https://www.google.com/maps/place/?q=place_id:${selectedMarker.google_id}`, '_blank');
     }
@@ -43,7 +58,10 @@ export default function PlacesMap({ showAddToFavorites = false, closePlaceOverla
             console.log('response', response);
             if (response.data) {
                 // Remove the selectedMarker from placesToTry list
+                updateFavoritesList([...currentFavorites, ...[selectedMarker]]);
                 removePlace(selectedMarker.id, true)
+                // remove selectedMarker from state
+                closePlaceOverlay()
             }
         })
     }
@@ -78,7 +96,7 @@ export default function PlacesMap({ showAddToFavorites = false, closePlaceOverla
                         }
                     </div>
                     {
-                        showAddToFavorites && (
+                        showAddToFavorites && !isAlreadyFavorited && (
                             <a onClick={addToFavorites} className="cursor-pointer mt-4 inline-flex items-center mx-1 px-4 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:outline-none dark:bg-primary-600 dark:hover:bg-primary-700">Remove & Add to Favorites</a>
                         )
                     }

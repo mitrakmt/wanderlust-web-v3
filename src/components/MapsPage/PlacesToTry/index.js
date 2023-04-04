@@ -7,7 +7,7 @@ import request from '../../../utils/request';
 import Map from './Map';
 import CityGoogleSidebar from '../../../shared_components/CityGoogleSidebar';
 
-export default function PlacesToTryTab({ places, setPlaces, geocodeByPlaceId, GooglePlacesAutocomplete }) {
+export default function PlacesToTryTab({ updateFavoritesList, currentFavorites, places, setPlaces, geocodeByPlaceId, GooglePlacesAutocomplete }) {
     // State
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [showSidebar, setShowSidebar] = useState(false);
@@ -35,7 +35,7 @@ export default function PlacesToTryTab({ places, setPlaces, geocodeByPlaceId, Go
 
     return (
         <div className="relative">
-            <Map isPublicMap={false} closeSidebar={closeSidebar} defaultZoom={2.5} coordinates={[17.1317479, 41.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} removePlace={removePlace} />
+            <Map updateFavoritesList={updateFavoritesList} currentFavorites={currentFavorites} isPublicMap={false} closeSidebar={closeSidebar} defaultZoom={2.5} coordinates={[17.1317479, 41.6531344]} places={selectedFilter ? places.filter(place => { return place.tags.find(element => element === selectedFilter) }) : places} removePlace={removePlace} />
             
             {/* SIDEBAR  */}
             <div className="text-center flex flex-col m-5 fixed top-32 sm:top-16 right-0 z-50">

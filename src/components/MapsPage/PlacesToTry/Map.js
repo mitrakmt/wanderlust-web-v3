@@ -19,7 +19,7 @@ const getRandomNumber = () => {
     return Math. floor(Math. random() * (3 - 0 + 1)) + 0;
 }
 
-export default function PlacesToTryMap({ closeSidebar, coordinates, isPublicMap, removePlace, places }) {
+export default function PlacesToTryMap({ updateFavoritesList, currentFavorites, closeSidebar, coordinates, isPublicMap, removePlace, places }) {
     // State
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [randomNumberSelected] = useState(getRandomNumber());
@@ -67,7 +67,7 @@ export default function PlacesToTryMap({ closeSidebar, coordinates, isPublicMap,
                 />
             ))}
 
-            <CityDrawer showAddToFavorites={true} isPublicMap={isPublicMap} removePlace={removePlace} selectedMarker={selectedMarker} closePlaceOverlay={closePlaceOverlay} />
+            <CityDrawer updateFavoritesList={updateFavoritesList} currentFavorites={currentFavorites} showAddToFavorites={true} isPublicMap={isPublicMap} removePlace={removePlace} selectedMarker={selectedMarker} closePlaceOverlay={closePlaceOverlay} />
         </Map>
     )
 }
