@@ -15,6 +15,8 @@ export default function PlacesMap({ updateFavoritesList, currentFavorites = [], 
         if (selectedMarker) {
             if (hasMarkerId(currentFavorites, selectedMarker.google_id)) {
                 setIsAlreadyFavorited(true)
+            } else {
+                setIsAlreadyFavorited(false)
             }
         }
     }, [selectedMarker, currentFavorites]);

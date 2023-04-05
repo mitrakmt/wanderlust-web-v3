@@ -12,7 +12,7 @@ export default function CitySidebar({ showSidebar, toggleSidebar, toVisit, setTo
     const [cities, setCities] = useState([]);
 
     // State loading
-    const [searchCitiesLoading, setSearchCitiesLoading] = useState(true);
+    const [searchCitiesLoading, setSearchCitiesLoading] = useState(false);
     const [addToVisitLoading, setAddToVisitLoading] = useState(false);
 
     // FUNCTIONS

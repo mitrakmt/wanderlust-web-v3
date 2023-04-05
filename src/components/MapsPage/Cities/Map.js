@@ -80,12 +80,12 @@ export default function TravelListMap({ isPublicMap, coordinates, removeCity, to
                 <div className="w-full">
                     <div className="flex flex-col items-center pb-4">
                         {
-                            selectedMarker?.image_url_small && <Image className="relative w-full h-24 mb-3 shadow-lg" height={80} width={80} src={selectedMarker?.image_url_small} alt={`${selectedMarker?.city}, ${selectedMarker?.country_name}`} />
+                            selectedMarker?.image_url_small && <Image className="relative w-full h-24 mb-3 shadow-lg rounded-lg" height={600} width={400} quality={100} src={selectedMarker?.image_url_small} alt={`${selectedMarker?.city}, ${selectedMarker?.country_name}`} />
                         }
                         <div className="flex flex-col items-center pb-4">
                             <h3 className="mb-6 text-xl font-medium text-gray-900 dark:text-white px-4">{`${selectedMarker?.name}, ${selectedMarker?.country_name}`}</h3>
                             <p className="text-sm text-center text-gray-700 dark:text-gray-200 mt-2">Nomad Cost of Living:</p>
-                            <p className="text-sm text-center text-gray-500 dark:text-gray-400 mb-2">{`$${selectedMarker?.cost_for_nomad_in_usd || "None"} USD / month`}</p>
+                            <p className="text-sm text-center text-gray-500 dark:text-gray-400 mb-2">{`$${selectedMarker?.cost_for_nomad_in_usd.toFixed(0) || "None"} USD / month`}</p>
                             <p className="text-sm text-center text-gray-700 dark:text-gray-200 mt-2">Internet Score:</p>
                             <div className="flex">
                                 <svg aria-hidden="true" className={`w-5 h-5 ${selectedMarker?.internet_score >= 1 ? "text-yellow-400" : "text-gray-500"}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>

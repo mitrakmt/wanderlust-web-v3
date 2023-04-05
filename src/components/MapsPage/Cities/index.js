@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 
 // Utils
 import request from '../../../utils/request';
-import trackStat from '../../../utils/trackStat';
 
 // Components
 import Map from './Map';
@@ -31,11 +30,6 @@ export default function TravelList() {
 
     // State
     const [showSidebar, setShowSidebar] = useState(false);
-
-    // UseEffects
-    useEffect(() => {
-        trackStat({ type: 'tabViews', property: 'tovisit' })
-    }, [])
 
     useEffect(() => {
         request(`/users/tovisit`)

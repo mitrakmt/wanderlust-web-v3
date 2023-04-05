@@ -234,6 +234,16 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         }
     };
 
+    const addSectionVideo = (index) => {
+        const newObject = { type: 'video', alt: '', title: '', description: '', url: '' };
+
+        if (index) {
+            insertObjectAtIndex(newObject, index)
+        } else {
+            setContent([...content, newObject]);
+        }
+    };
+
     const addUserEmbed = (index) => {
         const newObject = { type: 'user', id: '' };
 
@@ -518,7 +528,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Paragraph</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <textarea rows="8" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Paragraph" />
                                             </div>
@@ -530,7 +540,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 2</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
@@ -542,7 +552,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 3</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
@@ -554,7 +564,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 4</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
@@ -566,7 +576,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 5</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
                                             </div>
@@ -578,7 +588,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Image</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/image_default.jpeg" alt="image default" />
                                                 <input type="text" value={section.src} onChange={(e) => handleInputChange(index, e.target.value, 'src')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Or paste an image URL here" />
@@ -588,6 +598,20 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                 </p>
                                             </div>
                                         )
+                                    case 'video':
+                                        return (
+                                            <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
+                                                <div className="flex mb-2 items-center">
+                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Video</label>
+                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
+                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                </div>
+                                                <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/image_default.jpeg" alt="image default" />
+                                                <input type="text" value={section.src} onChange={(e) => handleInputChange(index, e.target.value, 'src')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Or paste an image URL here" />
+                                                <input type="text" value={section.alt} onChange={(e) => handleInputChange(index, e.target.value, 'alt')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Image Alt Text" />
+                                            </div>
+                                        )
                                     case 'city':
                                         return (
                                             <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
@@ -595,7 +619,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">City Embed</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={citySearchText} onChange={updateCitySearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a city" />
                                                 {/* Dropdown that shows selectable cities */}
@@ -624,7 +648,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Country Embed</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={countrySearchText} onChange={updateCountrySearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a country" />
                                                 {/* Dropdown that shows selectable cities */}
@@ -655,7 +679,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Blog Embed</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={blogSearchText} onChange={updateBlogSearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a blog" />
                                                 {/* Dropdown that shows selectable cities */}
@@ -685,7 +709,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">User Embed</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={userSearchText} onChange={updateUserSearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a user" />
                                                 {/* Dropdown that shows selectable cities */}
@@ -715,7 +739,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Place Embed</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={placeSearchText} onChange={updatePlaceSearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a place" />
                                                 {/* Dropdown that shows selectable cities */}
@@ -745,7 +769,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                                     <label className="block text-sm font-medium text-gray-900 dark:text-white">Link Embed</label>
                                                     <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
                                                     <button onClick={() => handleDeleteSection(index)} className="w-20 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
                                                 </div>
                                                 <input type="text" value={section.url} onChange={(e) => handleInputChange(index, e.target.value, 'url')} className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Url" />
                                                 <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Text" />
