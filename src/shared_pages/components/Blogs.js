@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import request from '../../utils/request';
-import moment from 'moment';
+const moment = dynamic(() => import('moment'));
 import Link from 'next/link';
 
 export default function Blogs() {
