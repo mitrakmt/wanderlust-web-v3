@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import dynamic from 'next/dynamic'
-const moment = dynamic(() => import('moment'));
+import moment from 'moment';
 import Image from 'next/image'
 
 // Components
