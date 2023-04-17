@@ -209,7 +209,52 @@ const nextConfig = {
         source: '/feed/tagged/foodies', 
         destination: '/blog',
         permanent: true,
-      }
+      },
+      {
+        source: '/categories/best-of', 
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/feed/tagged/barcelona', 
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/feed/tagged/living-abroad', 
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/followers', 
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/tagged/food', 
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/feed/tagged/bali', 
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/tagged/wanderlusting', 
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/feed/tagged/germany', 
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/tagged/bucharest', 
+        destination: '/blog',
+        permanent: true,
+      },
     ]
   },
   rewrites: async () => [
