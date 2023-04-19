@@ -10,9 +10,9 @@ export default function Footer() {
                         <Link href="/blog"><li className="mb-4">
                             <p className="hover:underline">Blog</p>
                         </li></Link>
-                        <Link href="/countries"><li className="mb-4">
+                        {/* <Link href="/countries"><li className="mb-4">
                             <p className="hover:underline">Countries</p>
-                        </li></Link>
+                        </li></Link> */}
                         <Link href="/faq"><li className="mb-4">
                             <p className="hover:underline">FAQ</p>
                         </li></Link>

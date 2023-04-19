@@ -338,10 +338,10 @@ export default function BlogPost({ blog, relatedArticles }) {
                                         return (
                                             <CityEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
                                         )
-                                    case 'country':
-                                        return (
-                                            <CountryEmbed id={content.id} content={content} key={`blog-${content.type}-${content.id}`} />
-                                        )
+                                    // case 'country':
+                                    //     return (
+                                    //         <CountryEmbed id={content.id} content={content} key={`blog-${content.type}-${content.id}`} />
+                                    //     )
                                     case 'blog':
                                         return (
                                             <BlogEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />

@@ -15,8 +15,15 @@ import CustomHead from '@/shared_components/CustomHead';
 import { useRouter } from 'next/router'
 
 export async function getStaticProps({ params: { slug } }) {
-    const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/countries/slug/${slug}`)
-    const countrySelected = await response.json()
+    let response;
+    let countrySelected;
+
+    if (slug) {
+        response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/countries/slug/${slug}`)
+        if (response) {
+            countrySelected = await response.json()
+        }
+    }
 
     // Get blogs for country
     let countryResponse;
@@ -24,7 +31,9 @@ export async function getStaticProps({ params: { slug } }) {
 
     if (countrySelected?.data?.id) {
         countryResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/country/${countrySelected?.data?.id}`)
-        blogs = await countryResponse.json()
+        if (countryResponse) {
+            blogs = await countryResponse.json()
+        }
     }
 
     // Get cities for country
@@ -33,7 +42,9 @@ export async function getStaticProps({ params: { slug } }) {
 
     if (countrySelected?.data?.id) {
         citiesResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/country/${countrySelected?.data?.id}`)
-        cities = await citiesResponse.json()
+        if (citiesResponse) {
+            cities = await citiesResponse.json()
+        }
     }
 
     return {
