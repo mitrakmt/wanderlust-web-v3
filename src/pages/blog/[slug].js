@@ -10,7 +10,7 @@ import request from '../../utils/request';
 
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
-
+ 
 // Components
 import CustomHead from '../../shared_components/CustomHead';
 import Footer from '../../components/Footer';
@@ -340,7 +340,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                                         )
                                     case 'country':
                                         return (
-                                            <CountryEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                            <CountryEmbed id={content.id} content={content} key={`blog-${content.type}-${content.id}`} />
                                         )
                                     case 'blog':
                                         return (

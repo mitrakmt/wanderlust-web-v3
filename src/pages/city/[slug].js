@@ -688,7 +688,7 @@ export default function CityPage({ citySelected, blogs }) {
                                 <p className="mb-1 text-gray-500 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
                                 <p className="mb-1 text-gray-500 dark:text-gray-400">Population: {citySelected?.country?.population}</p>
                                 {
-                                    citySelected?.country?.gini && <p className="mb-1 text-gray-500 dark:text-gray-400 flex flex-col">Gini Score: {Object.keys(citySelected?.country?.gini).map((key) => (
+                                    citySelected?.country?.gini !== "Not Available" && <p className="mb-1 text-gray-500 dark:text-gray-400 flex flex-col">Gini Score: {Object.keys(citySelected?.country?.gini).map((key) => (
                                         <span className="text-xs ml-4" key={`giniScore-${key}`}>{`${key}: ${citySelected?.country?.gini[key]}`}</span>
                                     ))}</p>
                                 }

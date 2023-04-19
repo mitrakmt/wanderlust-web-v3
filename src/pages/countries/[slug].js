@@ -83,7 +83,6 @@ export default function CountryPage({ countrySelected, blogs, cities }) {
             />
             <BreadCrumb breadCrumbHome={"Countries"} goToHome={() => router.push(`/countries`)} secondName={countrySelected?.name} />
 
-
             {
                 countrySelected?.image_url_medium && 
                     <Image
@@ -120,7 +119,7 @@ export default function CountryPage({ countrySelected, blogs, cities }) {
                     </ul>
                     <div id="defaultTabContent">
                         <div className={`${countryTabSelected === 'about' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800 flex flex-col sm:flex-row`} id="about" role="tabpanel" aria-labelledby="about-tab">
-                            <Image src={countrySelected?.image_url_medium} alt={countrySelected.name} height={250} width={400} className="rounded-lg" />
+                            <Image src={countrySelected?.image_url_medium} alt={countrySelected?.name} height={250} width={400} className="rounded-lg" />
                             <div className="mt-4 sm:mt-0 sm:ml-4">
                                 <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">{countrySelected?.official_name}</h2>
                                 {
@@ -136,7 +135,7 @@ export default function CountryPage({ countrySelected, blogs, cities }) {
                                 <p className="mb-1 text-gray-500 dark:text-gray-400">Capital: {countrySelected?.capital}</p>
                                 <p className="mb-1 text-gray-500 dark:text-gray-400">Population: {countrySelected?.population}</p>
                                 {
-                                    countrySelected?.gini && <p className="mb-1 text-gray-500 dark:text-gray-400 flex flex-col">Gini Score: {Object.keys(countrySelected?.gini).map((key) => (
+                                    countrySelected?.gini !== "Not Available" && <p className="mb-1 text-gray-500 dark:text-gray-400 flex flex-col">Gini Score: {Object.keys(countrySelected?.gini).map((key) => (
                                         <span className="text-xs ml-4" key={`giniScore-${key}`}>{`${key}: ${countrySelected?.gini[key]}`}</span>
                                     ))}</p>
                                 }
