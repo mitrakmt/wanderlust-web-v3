@@ -30,9 +30,9 @@ export default function CountryCard({ country }) {
                 {
                     country?.image_url_thumb &&
                         <Image
-                            src={country?.image_url_thumb}
+                            src={country?.image_url_small}
                             alt={country?.name}
-                            quality={80}
+                            quality={60}
                             width={220}
                             height={140}
                             className="object-cover absolute object-center w-full h-full rounded-md lg:w-full lg:h-full brightness-50"

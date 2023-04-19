@@ -75,7 +75,6 @@ export default function PlacesMap({ updateFavoritesList, currentFavorites = [], 
                 placeId: selectedMarker.id
             })
         }).then(response => {
-            console.log('response', response);
             if (response.data) {
                 // Remove the selectedMarker from placesToTry list
                 updateFavoritesList([...currentFavorites, ...[selectedMarker]]);

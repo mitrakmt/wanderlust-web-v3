@@ -63,7 +63,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
             // Fetch blog information
             request('/blog/id/' + blogId)
                 .then(blogInfo => {
-                    console.log('blogInfo', blogInfo);
                     setBlogOwnerId(blogInfo.data.author.id)
                     setContent(blogInfo.data.content);
                     setTitle(blogInfo.data.title);

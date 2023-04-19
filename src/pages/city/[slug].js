@@ -12,6 +12,7 @@ import removeFavorite from '../../utils/removeFavorite';
 import addFavorite from '../../utils/addFavorite';
 
 // Components
+import Footer from '../../components/Footer';
 import InstagramPost from './instaEmbed';
 import CustomHead from '../../shared_components/CustomHead';
 import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
@@ -740,6 +741,8 @@ export default function CityPage({ citySelected, blogs }) {
                 </div>
 
             </div>
+
+            <Footer />
         </section>
     )
 }

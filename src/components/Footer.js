@@ -10,6 +10,9 @@ export default function Footer() {
                         <Link href="/blog"><li className="mb-4">
                             <p className="hover:underline">Blog</p>
                         </li></Link>
+                        <Link href="/countries"><li className="mb-4">
+                            <p className="hover:underline">Countries</p>
+                        </li></Link>
                         <Link href="/faq"><li className="mb-4">
                             <p className="hover:underline">FAQ</p>
                         </li></Link>
@@ -76,7 +79,7 @@ export default function Footer() {
                     </ul>
                 </div>
             </div>
-            <div className="px-4 py-6 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between">
+            <div className="px-4 py-6 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between rounded-lg">
                 <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2023 <a href="https://wanderlustapp.io" aria-label="Wanderlust App">WanderlustApp™</a>. All Rights Reserved.</span>
                 <div className="flex mt-4 space-x-6 sm:justify-center md:mt-0">
                     <a href="https://www.facebook.com/wanderlustappio" target="_blank" className="text-gray-400 hover:text-gray-900 dark:hover:text-white" aria-label="Read more from Wanderlust on Facebook">

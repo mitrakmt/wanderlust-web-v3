@@ -33,7 +33,6 @@ export async function getStaticProps() {
 // }
 
 export default function CountriesPage({ countries }) {
-    console.log('countries', countries[0])
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <CustomHead
@@ -43,12 +42,13 @@ export default function CountriesPage({ countries }) {
                 image="/cityDetailsDark1.png"
                 alt="Countries - Wanderlust App"
             />
-
             <h1 className="text-2xl mb-4 text-gray-700 dark:text-white">Countries</h1>
-            <div className="w-full flex flex-wrap gap-x-4 gap-y-4">
+            <div className="w-full flex flex-wrap gap-x-8 md:gap-x-4 gap-y-8 md:gap-y-4">
                 {
                     countries && countries?.map(country => (
-                        <CountryCard key={`countryCard-${country?.slug}`} country={country} />
+                        <div className="relative w-52 h-52" key={`countryCard-${country?.slug}`}>
+                            <CountryCard country={country} />
+                        </div>
                     ))
                 }
             </div>
