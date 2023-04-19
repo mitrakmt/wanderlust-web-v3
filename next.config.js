@@ -6,6 +6,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
+  experimental: {
+    largePageDataBytes: 128 * 100000,
+  },
   basePath: '',
   async redirects() {
     return [
