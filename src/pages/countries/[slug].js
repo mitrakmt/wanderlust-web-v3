@@ -19,18 +19,28 @@ export async function getStaticProps({ params: { slug } }) {
     const countrySelected = await response.json()
 
     // Get blogs for country
-    const countryResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/country/${countrySelected?.data?.id}`)
-    const blogs = await countryResponse.json()
+    let countryResponse;
+    let blogs;
+
+    if (countrySelected?.data?.id) {
+        countryResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/country/${countrySelected?.data?.id}`)
+        blogs = await countryResponse.json()
+    }
 
     // Get cities for country
-    const citiesResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/country/${countrySelected?.data?.id}`)
-    const cities = await citiesResponse.json()
+    let citiesResponse;
+    let cities;
+
+    if (countrySelected?.data?.id) {
+        citiesResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/country/${countrySelected?.data?.id}`)
+        cities = await citiesResponse.json()
+    }
 
     return {
         props: {
             countrySelected: countrySelected?.data || {},
-            blogs: blogs.data || [],
-            cities: cities.data || [],
+            blogs: blogs?.data || [],
+            cities: cities?.data || [],
         },
     };
 }

@@ -15,23 +15,6 @@ export async function getStaticProps() {
     };
 }
 
-// export async function getStaticPaths() {
-//     const response = await fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/countries')
-//     const countries = await response.json()
-//     const paths = countries.map((country) => (
-//         {
-//             params: {
-//                 slug: country.slug || country.country_code,
-//             },
-//         }
-//     ))
-
-//     return {
-//         paths,
-//         fallback: false,
-//     }
-// }
-
 export default function CountriesPage({ countries }) {
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
