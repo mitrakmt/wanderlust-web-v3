@@ -19,7 +19,6 @@ import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
 import ScoreRating from '../../components/ScoreRating/ScoreRating';
 import TextH2 from '../../components/Text/TextH2';
 import TextH3 from '../../components/Text/TextH3';
-import TextH4 from '../../components/Text/TextH4';
 import TextH5 from '../../components/Text/TextH5';
 import TextP from '../../components/Text/TextP';
 import Button from '../../components/Button/Button';
@@ -50,7 +49,7 @@ export async function getStaticProps({ params: { slug } }) {
 
     return {
         props: {
-            citySelected: citySelected?.data,
+            citySelected: citySelected?.data || {},
             blogs: blogs.data
         },
     };

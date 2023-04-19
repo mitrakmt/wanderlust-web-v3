@@ -28,7 +28,7 @@ export async function getStaticProps({ params: { slug } }) {
 
     return {
         props: {
-            countrySelected: countrySelected?.data,
+            countrySelected: countrySelected?.data || {},
             blogs: blogs.data || [],
             cities: cities.data || [],
         },
