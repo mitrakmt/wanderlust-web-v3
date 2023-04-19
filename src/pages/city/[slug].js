@@ -50,7 +50,7 @@ export async function getStaticProps({ params: { slug } }) {
     return {
         props: {
             citySelected: citySelected?.data || {},
-            blogs: blogs.data
+            blogs: blogs.data || []
         },
     };
 }
