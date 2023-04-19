@@ -43,12 +43,14 @@ export default function CityCard({ priority = false, data, keyId, favorites, ind
   return (
     <span className="relative transition-all hover:scale-105">
       <div style={{ top: 0, right: 0, padding: '10px 15px', zIndex: 100 }} className="absolute z-20 flex">
-          <FavoriteControl
+        {
+          toggleFavorite && <FavoriteControl
             toggleFavorite={clickFavorite}
             hideTooltip={true}
             currentImageFavoriteStatus={isFavorited}
             noBackground={true}
           />
+        }
         {
           !hideLikeCount && <h3 className="z-20 flex pointer-events-none items-center justify-center text-lg font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>{data?.city?.favorite_count}</h3>
         }
