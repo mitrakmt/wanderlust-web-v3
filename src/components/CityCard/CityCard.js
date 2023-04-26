@@ -52,7 +52,7 @@ export default function CityCard({ priority = false, data, keyId, favorites, ind
           />
         }
         {
-          !hideLikeCount && <h3 className="z-20 flex pointer-events-none items-center justify-center text-lg font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>{data?.city?.favorite_count}</h3>
+          !hideLikeCount && <p className="z-20 flex pointer-events-none items-center justify-center text-lg font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>{data?.city?.favorite_count}</p>
         }
       </div>
       <Link
@@ -72,12 +72,12 @@ export default function CityCard({ priority = false, data, keyId, favorites, ind
               </div>
             </div>
             <div style={{ top: 0, left: 0, padding: '15px' }} className="absolute z-20">
-              <h3 className="z-20 text-xl font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>
+              <p className="z-20 text-xl font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>
                 {index + 1}
-              </h3>
+              </p>
             </div>
             <div style={{ bottom: 0, left: 0, padding: '15px' }} className="absolute z-20">
-              <h3 className="z-20 overflow-hidden text-lg font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>
+              <p className="z-20 overflow-hidden text-lg font-extrabold text-white" style={{ textShadow: '1px 1px 0 rgb(0 0 0 / 35%), 1px 1px 5px rgb(0 0 0 / 50%)' }}>
                   {
                     data?.city?.cost_score >= 4 ?
                     '$' : data.city?.cost_score >= 3 ?
@@ -86,7 +86,7 @@ export default function CityCard({ priority = false, data, keyId, favorites, ind
                     '$$$$' : data.city?.cost_score >= 0 ?
                     '$$$$$' : '$$$$$$'
                   }
-              </h3>
+              </p>
             </div>
             <div className="w-full bg-gray-200 rounded-md min-h-80 aspect-w-1 aspect-h-1 lg:h-80 lg:aspect-none" style={{ position: 'absolute', height: "100%" }}>
               <Image

@@ -99,7 +99,7 @@ export default function GuestHomePage({ router, posts }) {
 
             {/* CTA  */}
             <div className="px-4 py-8 mx-auto text-center my-32 bg-white/90 dark:bg-gray-800/90 rounded-lg">
-                <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Start Exploring</h1>
+                <h2 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Start Exploring</h2>
                 <p className="mb-8 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300 my-8">Wanderlust App let&#39;s you to find, explore and share the best places around the world, and gives you the tools to plan everything you&apos;d need.</p>
                 <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                     <Link href="/signup" className="cursor-pointer inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">

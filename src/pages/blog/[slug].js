@@ -23,39 +23,51 @@ import UserEmbed from '../../components/UserEmbed';
 import BlogEmbed from '../../components/BlogEmbed';
 
 export async function getStaticProps({ params: { slug, city, country } }) {
-    if (!slug) {
-        return;
+    try {
+        if (!slug) {
+            return;
+        }
+
+        const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/${slug}`)
+        const blog = await response.json()
+
+        // Get related articles
+        let relatedArticles;
+
+        if (city) {
+            // Get related articles by city
+            const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${city}?limit=4`)
+            relatedArticles = await relatedResponse.json()
+
+        } else if (country) {
+            // Get related articles by country
+            const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/country/${country}?limit=4`)
+            relatedArticles = await relatedResponse.json()
+
+        } else {
+            // Get related articles by category
+            const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/search?category=${blog?.data.category.replace(/\ /g, '+')}&limit=4`)
+            relatedArticles = await relatedResponse.json()
+            // console.log('relatedArticles,', relatedArticles)
+        }
+
+        return {
+            props: {
+                blog: blog?.data,
+                relatedArticles: relatedArticles.data
+            },
+            revalidate: 320,
+        };
+    } catch (err) {
+        console.log('ERROR HERE', err);
+        return {
+            props: {
+                blog: {},
+                relatedArticles: []
+            },
+            revalidate: 320,
+        };
     }
-
-    const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/${slug}`)
-    const blog = await response.json()
-
-    // Get related articles
-    let relatedArticles;
-
-    if (city) {
-        // Get related articles by city
-        const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${city}?limit=4`)
-        relatedArticles = await relatedResponse.json()
-
-    } else if (country) {
-        // Get related articles by country
-        const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/country/${country}?limit=4`)
-        relatedArticles = await relatedResponse.json()
-
-    } else {
-        // Get related articles by category
-        const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/search?category=${blog?.data.category.replace(/\ /g, '+')}&limit=4`)
-        relatedArticles = await relatedResponse.json()
-    }
-
-    return {
-        props: {
-            blog: blog?.data,
-            relatedArticles: relatedArticles.data
-        },
-        revalidate: 320,
-    };
 }
 
 export async function getStaticPaths() {
@@ -340,7 +352,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                                         )
                                     // case 'country':
                                     //     return (
-                                    //         <CountryEmbed id={content.id} content={content} key={`blog-${content.type}-${content.id}`} />
+                                    //         <CountryEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
                                     //     )
                                     case 'blog':
                                         return (
