@@ -43,41 +43,60 @@ export async function getStaticProps({ params: { slug } }) {
         return;
     }
 
-    const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
-    const citySelected = await response.json()
+    try {
+        const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
+        const citySelected = await response.json()
 
-    let blogs;
+        let blogs;
 
-    // Get blogs for city
-    if (citySelected?.data) {
-        const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${citySelected?.data.id}`)
-        if (blogsResponse) {
-            blogs = await blogsResponse.json()
+        // Get blogs for city
+        if (citySelected?.data?.id) {
+            const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${citySelected?.data.id}`)
+            if (blogsResponse) {
+                blogs = await blogsResponse.json()
+            } else {
+                console.log('bad blog response', blogsResponse);
+            }
         }
-    }
 
-    return {
-        props: {
-            citySelected: citySelected?.data || {},
-            blogs: blogs?.data || {}
-        },
-    };
+        return {
+            props: {
+                citySelected: citySelected?.data || {},
+                blogs: blogs?.data || {}
+            },
+        };
+    } catch (err) {
+        console.log('err in cities static props', err);
+        return {
+            props: {
+                citySelected: {},
+                blogs: {}
+            },
+        };
+    }
 }
 
 export async function getStaticPaths() {
     const response = await fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/cities')
-    const cities = await response.json()
-    const paths = cities.map((city) => (
-        {
-            params: {
-                slug: city.slug,
-            },
+    if (response) {
+        const cities = await response.json()
+        const paths = cities.map((city) => (
+            {
+                params: {
+                    slug: city?.slug || null,
+                },
+            }
+        ))
+    
+        return {
+            paths,
+            fallback: true,
         }
-    ))
-
-    return {
-        paths,
-        fallback: true,
+    } else {
+        return {
+            paths: [],
+            fallback: true,
+        }
     }
 }
 
