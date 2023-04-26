@@ -48,7 +48,6 @@ export async function getStaticProps({ params: { slug, city, country } }) {
             // Get related articles by category
             const relatedResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/search?category=${blog?.data.category.replace(/\ /g, '+')}&limit=4`)
             relatedArticles = await relatedResponse.json()
-            // console.log('relatedArticles,', relatedArticles)
         }
 
         return {

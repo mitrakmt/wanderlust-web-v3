@@ -42,14 +42,18 @@ export async function getStaticProps({ params: { slug } }) {
     const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
     const citySelected = await response.json()
 
+    let blogs;
+
     // Get blogs for city
-    const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${citySelected?.data.id}`)
-    const blogs = await blogsResponse.json()
+    if (citySelected) {
+        const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${citySelected?.data.id}`)
+        blogs = await blogsResponse.json()
+    }
 
     return {
         props: {
             citySelected: citySelected?.data,
-            blogs: blogs.data
+            blogs: blogs?.data || {}
         },
     };
 }
