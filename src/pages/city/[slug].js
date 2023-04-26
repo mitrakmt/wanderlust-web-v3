@@ -42,7 +42,7 @@ export async function getStaticProps({ params: { slug } }) {
     if (!slug) {
         return;
     }
-    
+
     const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
     const citySelected = await response.json()
 
@@ -51,7 +51,9 @@ export async function getStaticProps({ params: { slug } }) {
     // Get blogs for city
     if (citySelected?.data) {
         const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${citySelected?.data.id}`)
-        blogs = await blogsResponse.json()
+        if (blogsResponse) {
+            blogs = await blogsResponse.json()
+        }
     }
 
     return {
