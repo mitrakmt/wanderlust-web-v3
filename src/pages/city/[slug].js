@@ -39,20 +39,24 @@ import { useRouter } from 'next/router'
 import { favoritesContext } from '../../context/FavoritesProvider';
 
 export async function getStaticProps({ params: { slug } }) {
+    if (!slug) {
+        return;
+    }
+    
     const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
     const citySelected = await response.json()
 
     let blogs;
 
     // Get blogs for city
-    if (citySelected) {
+    if (citySelected?.data) {
         const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${citySelected?.data.id}`)
         blogs = await blogsResponse.json()
     }
 
     return {
         props: {
-            citySelected: citySelected?.data,
+            citySelected: citySelected?.data || {},
             blogs: blogs?.data || {}
         },
     };
