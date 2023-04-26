@@ -2,57 +2,163 @@ import Profile from '../../shared_pages/profile';
 
 import CustomHead from '@/shared_components/CustomHead';
 
-// Update for reviews 
-// Revalidate? or something
-// Maybe, i'm not sure. think about it
-// export async function getStaticProps({ params: { slug } }) {
-//     const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
-//     const citySelected = await response.json()
-
-//     return {
-//         props: {
-//             citySelected: citySelected.data
-//         },
-//     };
-// }
-
-// export async function getStaticPaths() {
-//     const response = await fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/cities')
-//     const cities = await response.json()
-//     const paths = cities.map((city) => (
-//         {
-//             params: {
-//                 slug: city.slug,
-//             },
-//         }
-//     ))
-
-//     return {
-//         paths,
-//         fallback: true,
+// useEffect(() => {
+//     async function fetchData(userId) {
+//         const response = await request(`/reviews/count/${userId}`, {
+//             method: 'GET'
+//         })
+//         setReviewCount(response.data)
+//         setLoadingReviewCount(false)
 //     }
-// }
 
-export async function getStaticProps({ paths }) {
-    const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/locations/recommendations`)
-    const recommendedLocations = await response.json()
+//     if (publicUser && profileUser) {
+//         fetchData(profileUser.id);
+//     }
+// }, [profileUser]);
+
+// useEffect(() => {
+//     async function fetchData(userId) {
+//         const response = await request(`/follows/count/${userId}`, {
+//             method: 'GET'
+//         })
+
+//         setFollowCount(response.data)
+//         setLoadingFollowCount(false)
+//     }
+
+//     if (publicUser && profileUser) {
+//         fetchData(profileUser.id);
+//     } else if (!publicUser) {
+//         fetchData(user?.id);
+//     }
+//   }, [profileUser]);
+
+// useEffect(() => {
+//     async function fetchData(userId) {
+//         const response = await request(`/place/user/${userId}`, {
+//             method: 'GET'
+//         })
+
+//         setPlaces(response.data)
+//     }
+
+//     if (publicUser && profileUser) {
+//         fetchData(profileUser.id);
+//     } else if (!publicUser) {
+//         fetchData(user?.id);
+//     }
+// }, [profileUser]); 
+
+// useEffect(() => {
+//     async function fetchData() {
+//         const response = await request(`/place`, {
+//             method: 'GET'
+//         })
+
+//         setUserPlaces(response.data)
+//     }
+
+//     if (user) {
+//         fetchData();
+//     }
+// }, []); 
+
+// useEffect(() => {
+//     async function fetchData() {
+//         const response = await request(`/placesToTry`, {
+//             method: 'GET'
+//         })
+
+//         setUserPlacesToTry(response.data)
+//     }
+
+//     if (user) {
+//         fetchData();
+//     }
+// }, []); 
+
+// Fetch user's content
+// useEffect(() => {
+//     async function fetchData(username) {
+//         const response = await request(`/blog/user/${username}`, {
+//             method: 'GET'
+//         })
+
+//         setContent(response.data.slice(0, 3))
+//     }
+
+//     if (publicUser && profileUser) {
+//         fetchData(profileUser.username);
+//     } else if (!publicUser) {
+//         fetchData(user?.username);
+//     }
+// }, [profileUser]); 
+
+export async function getStaticProps({ params: { username } }) {
+    const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/users/public/username/${username}`)
+    const profileUser = await response.json()
+
+    const recsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/locations/recommendations`)
+    const recommendedLocations = await recsResponse.json()
+
+    const reviewsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/reviews/user/${profileUser.data.id}`)
+    const reviews = await reviewsResponse.json()
+
+    const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/user/${username}`);
+    const blogs = await blogsResponse.json()
+
+    const placesResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/place/user/${profileUser.data.id}`);
+    const places = await placesResponse.json()
+
+    const followCountResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/follows/count/${profileUser.data.id}`);
+    const followCount = await followCountResponse.json()
+    
+    // const reviewCountResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/reviews/count/${profileUser.data.id}`);
+    // const reviewCount = await reviewCountResponse.json()
+
+    // const places = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/place`, {
+    //     method: 'GET'
+    // })
+
+    // const placesToTry = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/placesToTry`, {
+    //     method: 'GET'
+    // })
 
     return {
         props: {
-            recommendedLocations: recommendedLocations.data
+            recommendedLocations: recommendedLocations.data,
+            profileUser: profileUser.data,
+            reviews: reviews.data,
+            blogs: blogs,
+            // .data.slice(3, 0)
+            placesCount: places.data.length,
+            places: places.data,
+            followCount: followCount.data,
+            reviewCount: reviews.data.length,
+            username
         },
         revalidate: 300
     };
 }
 
 export async function getStaticPaths() {
+    const sitemapResponse = await fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/users')
+    const users = await sitemapResponse.json()
+    const paths = users.data.map((user) => (
+        {
+            params: {
+                username: user.username
+            },
+        }
+    ))
+
     return {
-        paths: [],
+        paths,
         fallback: true
     }
 }
 
-export default function PublicProfile({ recommendedLocations }) {
+export default function PublicProfile({ recommendedLocations, profileUser, username, reviews, blogs, places, reviewCount, followCount }) {
     return (
         <>
             {/* <NextSeo
@@ -88,7 +194,17 @@ export default function PublicProfile({ recommendedLocations }) {
                 alt="Wanderlust App"
             />
 
-            <Profile publicUser={true} recommendedLocations={recommendedLocations} />
+            <Profile
+                publicUser={true}
+                providedUser={profileUser}
+                username={username}
+                recommendedLocations={recommendedLocations}
+                reviews={reviews}
+                blogs={blogs}
+                places={places}
+                reviewCount={reviewCount}
+                followCount={followCount}
+            />
         </>
     )
 }
