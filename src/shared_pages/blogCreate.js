@@ -70,9 +70,9 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                     setCategory(blogInfo.data.category);
                     setSummary(blogInfo.data.summary);
                     setRegion(blogInfo.data.region);
-                    setCountry(blogInfo.data.country.id);
-                    setCity(blogInfo.data.city.id);
-                    setMainImage(blogInfo.data.image_url);
+                    setCountry(blogInfo.data?.country?.id);
+                    setCity(blogInfo.data.city?.id);
+                    setMainImage(blogInfo.data?.image_url);
                 })
         }
     }, [blogId]);
