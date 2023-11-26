@@ -186,7 +186,7 @@ export default function BlogPost({ blog, relatedArticles }) {
         <section className="relative ml-0 sm:ml-16 px-2 sm:px-6 py-8">
             <CustomHead
                 title={`${blog?.title} | Wanderlust App Blogs`}
-                description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
+                description={`${blog?.summary}`}
                 image={blog?.image_url}
                 url={`https://www.wanderlustapp.io/blog/${blog?.slug}`}
                 alt={`${blog?.title} - Wanderlust App`}
@@ -208,7 +208,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                 ]}
                 publisherName="Wanderlust App"
                 publisherLogo="https://wanderlust-extension.s3.us-west-2.amazonaws.com/logo.jpg"
-                description={`${blog?.summary}. Read ${blog?.title} and discover what you need to know. Get travel inspiration and tips from Wanderlust App Blogs, and stay up-to-date on the latest travel trends. Let Wanderlust App inspire you to explore new destinations and make the most of your travels.`}
+                description={`${blog?.summary}`}
                 isAccessibleForFree={true}
             />
             <BreadCrumb breadCrumbHome={"Blogs"} goToHome={() => router.push('/blog')} secondName={blog?.title} />
