@@ -426,7 +426,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <CustomHead
                 title="Write a Guide - Wanderlust App"
-                description="Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences. Read our expert advice and stay up-to-date on the latest travel trends. Let Wanderlust App Blogs inspire you to explore new destinations and make the most of your travels."
+                description="Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences."
                 url="https://www.wanderlustapp.io/blog/create"
                 image="/cityDetailsDark1.png"
                 alt="Cities - Wanderlust App"

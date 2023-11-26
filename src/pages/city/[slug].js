@@ -390,7 +390,7 @@ export default function CityPage({ citySelected, blogs }) {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <CustomHead 
                 title={`The Digital Nomad Guide to ${citySelected?.name} ${citySelected?.country_name} | Wanderlust`}
-                description={`Discover ${citySelected?.name} ${citySelected?.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences. From iconic landmarks to hidden gems, Wanderlust App has everything you need to plan your trip to ${citySelected?.name}. Browse our recommendations for the best hotels, restaurants, and activities, and create a custom itinerary based on your interests. Let Wanderlust App help you make the most of your visit to ${citySelected?.name}.`}
+                description={`Discover ${citySelected?.name} ${citySelected?.country_name} with Wanderlust App City Guide. Our comprehensive guide offers in-depth information on local culture, attractions, and experiences.`}
                 image={citySelected?.image_url_medium}
                 url={`https://www.wanderlustapp.co/city/${citySelected?.slug}`}
                 alt={`${citySelected?.name} - City Guide`}

@@ -132,7 +132,7 @@ export default function Assistant() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <CustomHead
                 title="Your Personal Travel Assistant | Wanderlust App AI Assistant"
-                description="Say hello to your personal travel assistant - Wanderlust App AI Assistant. Our AI-powered assistant helps you plan your trips in detail, from finding the best flights and accommodations to creating custom itineraries based on your interests. Our assistant is always learning and improving, so you can trust that your travel plans will be optimized for the best experience. Let Wanderlust App AI Assistant take the stress out of travel planning and help you create unforgettable journeys."
+                description="Say hello to your personal travel assistant - Wanderlust App AI Assistant. Our AI-powered assistant helps you plan your trips in detail, from finding the best flights and accommodations to creating custom itineraries based on your interests."
                 url="https://www.wanderlustapp.io/assistant"
                 image={'/assistantDark1.png'}
                 alt="Wanderlust App AI Assistant"
