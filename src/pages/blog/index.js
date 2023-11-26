@@ -28,7 +28,7 @@ export async function getStaticProps() {
 // either Static metadata
 export const metadata = {
     title: "Travel Inspiration and Tips | Wanderlust App Blogs",
-    description: "Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences. Read our expert advice and stay up-to-date on the latest travel trends. Let Wanderlust App Blogs inspire you to explore new destinations and make the most of your travels.",
+    description: "Get travel inspiration and tips from Wanderlust App Blogs. Our blog section features articles on a wide range of travel-related topics, including destination guides, travel tips, and cultural experiences.",
     url: "https://www.wanderlustapp.io/blog",
     image: "https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg",
     alt: "Wanderlust App"

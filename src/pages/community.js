@@ -165,7 +165,7 @@ export default function Community() {
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <CustomHead 
                 title="Connect with Fellow Nomads | Join the Wanderlust App Community"
-                description="Join the Wanderlust App Community and connect with fellow digital nomads around the world. Our Community page allows you to follow and connect with like-minded travelers, share travel tips, and discover new destinations. Whether you're looking for travel inspiration or want to network with other digital nomads, our community is the perfect place to connect. Join the Wanderlust App Community and enhance your travel experience."
+                description="Join the Wanderlust App Community and connect with fellow digital nomads around the world. Follow and connect with like-minded travelers, share travel tips, and discover new destinations."
                 url="https://www.wanderlustapp.io/community"
                 alt="Wanderlust App Community"
                 image="/communityDark1.png"
