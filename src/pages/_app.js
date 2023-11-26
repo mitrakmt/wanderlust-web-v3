@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/inline-script-id */
 import { useEffect } from 'react';
-import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script'
 
 // Hooks
@@ -95,7 +94,6 @@ export default function MyApp({ Component, pageProps }) {
                                                                         url="https://www.wanderlustapp.io"
                                                                     />
                                                                     <Component {...pageProps} />
-                                                                    <Analytics />
                                                                 </ErrorBoundary>
                                                             </Layout>
                                                         </CommunityProvider>
