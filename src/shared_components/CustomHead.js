@@ -8,6 +8,7 @@ export default function CustomHead({ title, description, image, alt, url, conten
                 <link rel="icon" href="/favicon.ico" />
                 <title>{title}</title>
                 <meta property="fb:app_id" content="5439766236043603" />
+                <meta name="description" content={description} />
                 <meta key="description" property="og:description" content={description} />
                 <meta key="image" property="og:image" content={image} />
                 <meta key="width" property="image:width" content="800" />

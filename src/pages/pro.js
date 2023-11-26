@@ -29,7 +29,6 @@ export default function Pro() {
                 url="https://www.wanderlustapp.io/pro"
                 image="https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg"
                 alt="Nomad Tools - Wanderlust App"
-
             />
 
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
