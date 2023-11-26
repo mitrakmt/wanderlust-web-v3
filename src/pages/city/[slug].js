@@ -40,20 +40,19 @@ import { favoritesContext } from '../../context/FavoritesProvider';
 
 export async function getStaticProps({ params: { slug } }) {
     if (!slug) {
-        return;
+        return { props: {} }; // Return empty props if slug is not provided
     }
 
     try {
-        const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`)
-        const citySelected = await response.json()
+        const response = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/cities/slug/${slug}`);
+        if (!response.ok) throw new Error('Failed to fetch city data');
+        const citySelected = await response.json();
 
-        let blogs;
-
-        // Get blogs for city
+        let blogs = {};
         if (citySelected?.data?.id) {
-            const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${citySelected?.data.id}`)
-            if (blogsResponse) {
-                blogs = await blogsResponse.json()
+            const blogsResponse = await fetch(`https://wanderlust-api-production.up.railway.app/api/v1/blog/city/${citySelected.data.id}`);
+            if (blogsResponse.ok) {
+                blogs = await blogsResponse.json();
             } else {
                 console.log('bad blog response', blogsResponse);
             }
@@ -62,7 +61,7 @@ export async function getStaticProps({ params: { slug } }) {
         return {
             props: {
                 citySelected: citySelected?.data || {},
-                blogs: blogs?.data || {}
+                blogs: blogs?.data || {},
             },
         };
     } catch (err) {
@@ -70,33 +69,29 @@ export async function getStaticProps({ params: { slug } }) {
         return {
             props: {
                 citySelected: {},
-                blogs: {}
+                blogs: {},
             },
         };
     }
 }
 
 export async function getStaticPaths() {
-    const response = await fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/cities')
-    if (response) {
-        const cities = await response.json()
-        const paths = cities.map((city) => (
-            {
-                params: {
-                    slug: city?.slug || null,
-                },
-            }
-        ))
-    
+    const response = await fetch('https://wanderlust-api-production.up.railway.app/api/v1/sitemap/cities');
+    if (response.ok) {
+        const cities = await response.json();
+        const paths = cities.map((city) => ({
+            params: { slug: city?.slug || null },
+        }));
+
         return {
             paths,
             fallback: true,
-        }
+        };
     } else {
         return {
             paths: [],
             fallback: true,
-        }
+        };
     }
 }
 
@@ -703,21 +698,21 @@ export default function CityPage({ citySelected, blogs }) {
                             <div className="mt-4 sm:mt-0 sm:ml-4">
                                 <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">{citySelected?.country?.official_name}</h2>
                                 {
-                                    citySelected?.country?.nativeNames && <p className="mb-1 text-gray-500 dark:text-gray-400">Native Names: {Object.keys(citySelected?.country?.nativeNames).map((key) => (
+                                    citySelected?.country?.nativeNames && <p className="mb-1 text-gray-500 dark:text-gray-400">Native Names: {citySelected?.country?.nativeNames ? Object.keys(citySelected?.country?.nativeNames).map((key) => (
                                         citySelected?.country?.nativeNames[key].common
-                                    ))}</p>
+                                    )): ""}</p>
                                 }
                                 {
-                                    citySelected?.country?.translations && <p className="mb-1 text-gray-500 dark:text-gray-400">Currencies: {Object.keys(citySelected?.country?.translations).map((key) => (
+                                    citySelected?.country?.translations && <p className="mb-1 text-gray-500 dark:text-gray-400">Currencies: {citySelected?.country?.translations ? Object.keys(citySelected?.country?.translations).map((key) => (
                                         citySelected?.country?.translations[key].name
-                                    ))}</p>
+                                    )): ""}</p>
                                 }
                                 <p className="mb-1 text-gray-500 dark:text-gray-400">Capital: {citySelected?.country?.capital}</p>
                                 <p className="mb-1 text-gray-500 dark:text-gray-400">Population: {citySelected?.country?.population}</p>
                                 {
-                                    citySelected?.country?.gini !== "Not Available" && <p className="mb-1 text-gray-500 dark:text-gray-400 flex flex-col">Gini Score: {Object.keys(citySelected?.country?.gini).map((key) => (
+                                    citySelected?.country?.gini !== "Not Available" && <p className="mb-1 text-gray-500 dark:text-gray-400 flex flex-col">Gini Score: {citySelected?.country?.gini ? Object.keys(citySelected?.country?.gini).map((key) => (
                                         <span className="text-xs ml-4" key={`giniScore-${key}`}>{`${key}: ${citySelected?.country?.gini[key]}`}</span>
-                                    ))}</p>
+                                    )): ""}</p>
                                 }
                             </div>
                         </div>
@@ -759,9 +754,9 @@ export default function CityPage({ citySelected, blogs }) {
                         </div>
                         <div className={`${countryTabSelected === 'translations' ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800`} id="translations" role="tabpanel" aria-labelledby="statistics-tab">
                             {
-                                citySelected?.country?.translations && <p className="mb-1 text-gray-500 dark:text-gray-400">{Object.keys(citySelected?.country?.translations).map((key) => (
+                                citySelected?.country?.translations && <p className="mb-1 text-gray-500 dark:text-gray-400">{citySelected?.country?.translations ? Object.keys(citySelected?.country?.translations).map((key) => (
                                     <span key={`translations-${key}`}><span className="font-bold mr-2 text-gray-800 dark:text-gray-300">{key}:</span> {citySelected?.country?.translations[key]}, </span>
-                                ))}</p>
+                                )): ""}</p>
                             }
                         </div>
                     </div>

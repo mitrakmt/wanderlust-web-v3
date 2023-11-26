@@ -22,7 +22,7 @@ const LoadImage = ({ smallImageSrc, largeImageSrc, city, country }) => {
                 className="wanderlustImage"
                 src={largeImageSrc}
                 alt={`${city} ${country}`}
-                onLoadingComplete={() => setBlur(false)}
+                onLoad={() => setBlur(false)}
                 priority
                 fill
             />
