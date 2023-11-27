@@ -134,7 +134,6 @@ export default function GuestHomePage({ router, posts }) {
             {/* FEATURED CITIES */}
             <PopularCities />
 
-
             {/* BLOG  */}
             <div className="py-8 px-4 mx-auto lg:py-16 lg:px-6">
                 <div className="mx-auto text-center lg:mb-16 mb-8">
