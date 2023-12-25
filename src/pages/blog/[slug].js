@@ -217,7 +217,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                     <article className="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                         <header className="mb-4 lg:mb-6 not-format">
                             <address className="flex items-center mb-6 not-italic">
-                                <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                                <div className="flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                     <Image
                                         className="relative mr-4 w-16 h-16 rounded-full"
                                         src={blog?.author.profile_image}
@@ -311,11 +311,11 @@ export default function BlogPost({ blog, relatedArticles }) {
                                         )
                                     case 'h1':
                                         return (
-                                            <h1 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h1>
+                                            <h1 className="mb-6 text-xl leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h1>
                                         )
                                     case 'h2':
                                         return (
-                                            <h2 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h2>
+                                            <h2 className="mb-6 text-xl leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h2>
                                         )
                                     case 'h3':
                                         return (
@@ -347,19 +347,19 @@ export default function BlogPost({ blog, relatedArticles }) {
                                         )
                                     case 'city':
                                         return (
-                                            <CityEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                            <CityEmbed id={content.id} key={`blog-${content.type}-${content.id}-${index}`} />
                                         )
                                     // case 'country':
                                     //     return (
-                                    //         <CountryEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                    //         <CountryEmbed id={content.id} key={`blog-${content.type}-${content.id}-${index}`} />
                                     //     )
                                     case 'blog':
                                         return (
-                                            <BlogEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                            <BlogEmbed id={content.id} key={`blog-${content.type}-${content.id}-${index}`} />
                                         )
                                     case 'user':
                                         return (
-                                            <UserEmbed id={content.id} key={`blog-${content.type}-${content.id}`} />
+                                            <UserEmbed id={content.id} key={`blog-${content.type}-${content.id}-${index}`} />
                                         )
                                     case 'link':
                                         return (
