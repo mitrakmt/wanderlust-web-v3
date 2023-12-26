@@ -18,10 +18,12 @@ export default function RelatedCities({ citySelected }) {
     // USE EFFECTS
     useEffect(() => {
         // fetch related cities
-        request(`/cities/closeByInCountry/${citySelected?.country?.id}/${citySelected.id}`)
-            .then(response => {
-                setRelatedCities(response.data);
-            })
+        if (citySelected) {
+            request(`/cities/closeByInCountry/${citySelected?.country?.id}/${citySelected?.id}`)
+                .then(response => {
+                    setRelatedCities(response.data);
+                })
+        }
     }, [citySelected]);
 
     return (

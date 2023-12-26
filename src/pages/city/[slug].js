@@ -427,7 +427,10 @@ export default function CityPage({ citySelected, blogs }) {
                 </div>
                 
                 <div className="grid-cols-2 gap-4 sm:grid">
-                    <ScoreRating citySelected={citySelected} />
+                    {
+                        citySelected && <ScoreRating citySelected={citySelected} />
+                    }
+                    
                     {
                         weatherCurrent && <WeatherCard current={weatherCurrent} forecast={weatherForecast} location={weatherLocation} />
                     }
@@ -616,7 +619,7 @@ export default function CityPage({ citySelected, blogs }) {
                                 reviews.map((review) => (
                                     <article key={`reviews-${review?.id}`}>
                                         <div className="flex items-center mb-4 space-x-4">
-                                            <Image height={30} width={30} className="w-10 h-10 rounded-full" src={review?.user?.profile_image} alt="" />
+                                            <Image height={30} width={30} className="w-10 h-10 rounded-full" src={review?.user?.profile_image} alt={`${review?.user?.name}`} />
                                             <div className="space-y-1 font-medium dark:text-white">
                                                 <p>{review?.user?.username} <time dateTime="2014-08-16 19:00" className="block text-sm text-gray-500 dark:text-gray-400">Joined on {moment(review?.user?.createdAt).format('MMMM Do YYYY')}</time></p>
                                             </div>
@@ -654,9 +657,9 @@ export default function CityPage({ citySelected, blogs }) {
             <div className="w-full my-12">
                 <TextH3>Airbnbs</TextH3>
                 {/* Show general airbnb info like avg price, avg rating, etc for airbnbs in the area */}
-                <div className="flex mb-4 flex-col w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                {/* <div className="flex mb-4 flex-col w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <p className="text-md font-medium text-gray-500 dark:text-gray-400">Coming soon</p>
-                </div>
+                </div> */}
 
                 <div className="flex flex-col items-center w-full h-auto bg-white border rounded-lg shadow-md md:flex-row dark:border-gray-700 dark:bg-gray-800">
                     <Image height={150} width={150} quality={80} className="static object-cover w-full rounded-t-lg h-56 sm:h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/photo-1591825729269-caeb344f6df2.jpeg" alt={`Airbnbs in ${citySelected?.name}`} />
