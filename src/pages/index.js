@@ -109,7 +109,7 @@ export default function Home({ posts }) {
     trackStat({ type: 'clicks', property: 'locationInfo' })
   }
 
-  if (userLoading) return null;
+  // if (userLoading) return null;
 
   return (
     <section className="relative min-h-screen overflow-scroll max-w-full">
@@ -126,6 +126,7 @@ export default function Home({ posts }) {
         {
           !user ? <GuestHomePage router={router} request={request} posts={posts} /> : <UserHomePage router={router} user={user} userLoading={userLoading} request={request} posts={posts} />
         }
+        {/* <GuestHomePage router={router} request={request} posts={posts} /> */}
         <div className="pl-0 sm:pl-16 w-full">
           <Footer />
         </div>
