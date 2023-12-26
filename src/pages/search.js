@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import CustomHead from '../shared_components/CustomHead';
 import CityCard from '../components/CityCard/CityCard';
 import LoadingCityCard from '../components/LoadingCityCard/LoadingCityCard';
+import Footer from '@/components/Footer';
 
 // Hooks
 import { useRouter } from 'next/router';
@@ -300,6 +301,7 @@ export default function Search({ featuredCities }) {
                         ))
                 }
             </div>
+            <Footer />
         </section>
     )
 }

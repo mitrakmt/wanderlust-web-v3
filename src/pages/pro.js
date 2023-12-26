@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 // Components
 import CustomHead from '../shared_components/CustomHead';
+import Footer from '@/components/Footer';
 import StripeForm from '../components/StripeForm/StripeForm';
 
 // Hooks
@@ -115,6 +116,7 @@ export default function Pro() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </section>
     )
 }
