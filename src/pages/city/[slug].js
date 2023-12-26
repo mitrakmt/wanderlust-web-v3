@@ -251,7 +251,9 @@ export default function CityPage({ citySelected, blogs }) {
                         setReviewsAverage(res.data[0].rating);
                     } else {
                         const average = res.data?.reduce((a, b) => a.rating + b.rating, 0) / res.data?.length;
-                        setReviewsAverage(average.toFixed(2));
+                        if (average) {
+                            setReviewsAverage(average.toFixed(2));
+                        }
                     }
                     
                     setReviewsLoading(false);
