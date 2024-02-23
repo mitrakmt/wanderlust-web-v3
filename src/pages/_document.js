@@ -4,7 +4,10 @@ import Script from 'next/script'
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+          {/* Include your code snippet here */}
+          <meta name="verification" content="460bfd25b57ffced74edf7530b43e59eb4f1c5b7" />
+        </Head>
       <body className="w-full">
         <Main className="overflow-scroll scroll-smooth" />
         <Script
