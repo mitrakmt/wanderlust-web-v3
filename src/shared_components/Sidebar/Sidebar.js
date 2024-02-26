@@ -21,6 +21,7 @@ import SettingsIcon from './icons/SettingsIcon';
 import ContactIcon from './icons/ContactIcon';
 import LoginIcon from './icons/LoginIcon';
 import GuidesIcon from './icons/GuidesIcon';
+import ExtensionIcon from './icons/ExtensionIcon';
 
 // Context
 import { themeContext } from '../../context/ThemeProvider';
@@ -94,6 +95,13 @@ function Sidebar({ user, router, userLoading, logout }) {
             icon: <CommunityIcon />,
             authRequired: false,
             premiumRequired: true
+        },
+        {
+            title: 'Extensions',
+            path: '/extension',
+            icon: <ExtensionIcon />,
+            authRequired: false,
+            premiumRequired: false
         },
         {
             title: 'Nomad',

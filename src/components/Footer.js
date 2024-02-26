@@ -7,6 +7,9 @@ export default function Footer() {
                 <div>
                     <p className="mb-6 text-sm font-bold text-gray-500 uppercase dark:text-gray-400">About</p>
                     <ul className="text-gray-500 dark:text-gray-400">
+                        <Link href="/extension"><li className="mb-4">
+                            <p className="hover:underline">Extensions</p>
+                        </li></Link>
                         <Link href="/blog"><li className="mb-4">
                             <p className="hover:underline">Blog</p>
                         </li></Link>
