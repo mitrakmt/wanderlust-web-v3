@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // Hooks
 import { AuthProvider } from "../hooks/useAuth";
@@ -96,6 +97,7 @@ export default function MyApp({ Component, pageProps }) {
                                                                     />
                                                                     <Component {...pageProps} />
                                                                     <Analytics />
+                                                                    <SpeedInsights />
                                                                 </ErrorBoundary>
                                                             </Layout>
                                                         </CommunityProvider>
