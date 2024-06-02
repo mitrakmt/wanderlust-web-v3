@@ -30,7 +30,7 @@
     "flowbite-typography": "^1.0.3",
     "mapbox-gl": "^2.13.0",
     "moment": "^2.29.4",
-    "next": "^14.0.3",
+    "next": "^14.2.3",
     "next-seo": "^5.15.0",
     "next-sitemap": "^4.2.3",
     "react": "^18.2.0",

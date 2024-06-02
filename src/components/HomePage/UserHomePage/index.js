@@ -182,8 +182,6 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
                 </div>
             </div>
 
-            <PopularTravelers />
-
             {/* Promo for our browser extensions */}
             <section className="bg-white dark:bg-gray-900 rounded-lg my-8 mx-6 p-4">
                 <div className="grid px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -240,6 +238,8 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
                     <button onClick={() => router.push('/blog')} className="py-3 px-5 w-30 text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Explore More of our Articles</button>
                 </div>
             </div>
+
+            <PopularTravelers />
         </div>
     )
 }
