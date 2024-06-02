@@ -4,6 +4,8 @@
 const config = {
   siteUrl: 'https://www.wanderlustapp.io',
   generateRobotsTxt: true,
+  sitemapSize: 7000,
+  generateIndexSitemap: true
 };
 
 module.exports = config;
