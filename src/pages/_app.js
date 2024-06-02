@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script'
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Head from 'next/head';
 
 // Hooks
 import { AuthProvider } from "../hooks/useAuth";
@@ -53,6 +54,9 @@ export default function MyApp({ Component, pageProps }) {
     
     return (
         <div className={`overflow-scroll h-full max-h-screen scroll-smooth ${roboto.variable} font-sans`}>
+            <Head>
+                <meta name="7searchppc" content="te1j72BstIUMDlD7BvMRHdiSCv"/>
+            </Head>
             <Script id="show-banner" strategy="afterInteractive">
                 {`var script = document.createElement('script');
                 script.id = '8acba1dd-2ad0-4759-aae5-8f4949984bd9';
@@ -60,6 +64,9 @@ export default function MyApp({ Component, pageProps }) {
                 script.src = 'https://pageimprove.io';
                 document.head.appendChild(script);`}
             </Script>   
+            <Script>
+                <meta name="7searchppc" content="te1j72BstIUMDlD7BvMRHdiSCv"/>
+            </Script>
             
             <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
 
