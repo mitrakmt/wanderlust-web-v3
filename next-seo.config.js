@@ -2,7 +2,7 @@
 export default {
     metas: {
         title: "Plan Your Dream Trip | Wanderlust App - Your Travel Companion",
-        canonical: 'https://www.wanderlustapp.io',
+        canonical: 'https://wanderlustapp.io',
         openGraph: {
           images: [
             {
@@ -17,7 +17,7 @@ export default {
         openGraph: {
             type: 'website',
             locale: 'en_IE',
-            url: 'https://www.wanderlustapp.io/',
+            url: 'https://wanderlustapp.io/',
             siteName: 'Wanderlust App',
         },
         twitter: {
