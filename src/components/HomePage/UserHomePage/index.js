@@ -186,7 +186,7 @@ export default function UserHomePage({ router, userLoading, request, posts }) {
             <section className="bg-white dark:bg-gray-900 rounded-lg my-8 mx-6 p-4">
                 <div className="grid px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div className="mr-auto place-self-center lg:col-span-7 mb-4">
-                        <h2 className="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Beautiful places on your new tab page</h2>
+                        <h2 className="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-gray-800 dark:text-white">Beautiful places on your new tab page</h2>
                         <p className="mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Transform your new tab page into a beautiful location from around the world with our travel extension. Our extension is perfect for digital nomads who want to explore the world from their browser. Our extension is SEO optimized to help you find the best travel destinations. Install our extension today and start exploring the world from your browser!</p>
                         <div className="flex flex-col sm:flex-row gap-x-4 gap-y-4">
                             <p className="inline-flex font-extrabold items-center justify-center px-5 py-3 mr-3 text-base text-center text-primary-700 rounded-l">

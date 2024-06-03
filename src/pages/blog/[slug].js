@@ -216,7 +216,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                 <div className="flex flex-col justify-between px-4 mx-auto ">
                     <article className="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                         <header className="mb-4 lg:mb-6 not-format">
-                            <address className="flex items-center mb-6 not-italic">
+                            {/* <address className="flex items-center mb-6 not-italic">
                                 <div className="flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                     <Image
                                         className="relative mr-4 w-16 h-16 rounded-full"
@@ -231,12 +231,14 @@ export default function BlogPost({ blog, relatedArticles }) {
                                         <p className="text-base font-light text-gray-500 dark:text-gray-400"><time pubdate="true" dateTime="2022-02-08" title="February 8th, 2022">{blog?.publishedOn}</time></p>
                                     </div>
                                 </div>
-                            </address>
+                            </address> */}
                             <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{blog?.title}</h1>
+                            <p className="text-base font-light text-gray-500 dark:text-gray-400"><time pubdate="true" dateTime="2022-02-08" title="February 8th, 2022">{blog?.publishedOn}</time></p>
                             {/* City info */}
                             {
                                 blog?.city && <CityRow cities={[blog?.city]} pageIndex="1" />
                             }
+
                         </header>
                         {
                             blog?.image_url && (
@@ -509,6 +511,46 @@ export default function BlogPost({ blog, relatedArticles }) {
                     blog?.city && <CityRow cities={[blog?.city]} pageIndex="2" />
                 }
             </main>
+
+            <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+                <div className="relative isolate overflow-hidden dark:bg-gray-900 bg-gray-200 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+                    <svg
+                        viewBox="0 0 1024 1024"
+                        className="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0"
+                        aria-hidden="true"
+                    >
+                        <circle cx={512} cy={512} r={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.7" />
+                        <defs>
+                        <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
+                            <stop stopColor="#7775D6" />
+                            <stop offset={1} stopColor="#E935C1" />
+                        </radialGradient>
+                        </defs>
+                    </svg>
+                    <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+                        <h2 className="text-3xl font-bold tracking-tight dark:text-white text-gray-800 sm:text-4xl">
+                            Discover Premium Features.
+                            <br />
+                            Your ultimate travel app.
+                        </h2>
+                        <p className="mt-6 text-lg leading-8 dark:text-gray-300 text-gray-800">
+                            Unlock the full WanderlustApp experience with our premium subscription. Enjoy exclusive benefits designed to enhance your travel adventures.
+                        </p>
+                        <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
+                            <Link href={`/pro`} className="text-xl font-bold dark:text-white text-gray-800">Learn More</Link>
+                        </div>
+                    </div>
+                    <div className="relative mt-16 h-80 lg:mt-8">
+                        <Image
+                            className="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
+                            width={1824}
+                            height={1080}
+                            src={"/haveTraveledToDark.png"}
+                            alt="Wanderlust screenshot"
+                        />
+                    </div>
+                </div>
+            </div>
 
                 <aside aria-label="Related articles" className="py-8 lg:py-24">
                     <div className="px-4 mx-auto max-w-screen-xl">

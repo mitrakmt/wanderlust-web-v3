@@ -27,12 +27,6 @@ export default function BlogCard({ post, fullHeight }) {
                 <p className="mb-5 font-light text-gray-500 dark:text-gray-400">{post.summary}</p>
             </div>
             <div className="flex justify-between">
-                <div className="flex items-center space-x-4 cursor-pointer" onClick={navigateToProfile}>
-                    <Image className="w-7 h-7 relative rounded-full" src={post.author.profile_image} alt={post.title} height={40} width={40} />
-                    <span className="font-medium dark:text-white hover:text-red-700 transition-colors">
-                        @{post.author.username}
-                    </span>
-                </div>
                 <Link href={`/blog/${post.slug}`} className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
                     Read the article
                     <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
