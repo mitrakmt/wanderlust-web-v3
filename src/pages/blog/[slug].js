@@ -552,18 +552,18 @@ export default function BlogPost({ blog, relatedArticles }) {
                 </div>
             </div>
 
-                <aside aria-label="Related articles" className="py-8 lg:py-24">
-                    <div className="px-4 mx-auto max-w-screen-xl">
-                        <h2 className="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Related articles</h2>
-                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                            {
-                                relatedArticles && relatedArticles.map((article) => (
-                                    <BlogCard post={article} key={`blogPost-relatedArticles-${article.id}`} />
-                                ))
-                            }
-                        </div>
+            <aside aria-label="Related articles" className="py-8 lg:py-24">
+                <div className="px-4 mx-auto max-w-screen-xl">
+                    <h2 className="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Related articles</h2>
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        {
+                            relatedArticles && relatedArticles.map((article) => (
+                                <BlogCard post={article} key={`blogPost-relatedArticles-${article.id}`} />
+                            ))
+                        }
                     </div>
-                </aside>
+                </div>
+            </aside>
 
             {/* <section className="bg-white dark:bg-gray-900">
                 <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
