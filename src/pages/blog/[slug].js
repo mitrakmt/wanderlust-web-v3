@@ -101,21 +101,21 @@ export default function BlogPost({ blog, relatedArticles }) {
 
     // UseEffect
     useEffect(() => {
-        const script = document.createElement('script');
-        script.src = 'https://code.adclickppc.com/7s-banner-ad.js';
-        script.async = true;
-        script.onload = () => {
+        const script1 = document.createElement('script');
+        script1.src = 'https://code.adclickppc.com/7s-banner-ad.js';
+        script1.async = true;
+        script1.onload = () => {
           if (typeof initBannerAd === 'function') {
             initBannerAd(['7SAD15666A19A796405', 'banner', 5]);
+            initBannerAd(['7SAD15666A227A2A0C9', 'banner', 5]);
           }
         };
-        document.body.appendChild(script);
+        document.body.appendChild(script1);
     
         return () => {
-          document.body.removeChild(script);
+          document.body.removeChild(script1);
         };
       }, []);
-
     
     useEffect(() => {
         if (blog.author.username !== user?.username) {
@@ -433,8 +433,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                             </a>
                         </div>
 
-                        <div id="7SAD15666A19A796405" data-7pub="7SAD15666A19A796405"></div>
-
+                        <div id="7SAD15666A227A2A0C9" data-7pub="7SAD15666A227A2A0C9"></div>
 
                         {/* DIVIDER */}
                         <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
