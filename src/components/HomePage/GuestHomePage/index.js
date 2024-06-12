@@ -147,7 +147,7 @@ export default function GuestHomePage({ router, posts }) {
                             </div>
                         ))
                     }
-                </div>  
+                </div>
                 <div className="w-full flex justify-center items-center mt-6">
                     <button onClick={() => router.push('/blog')} className="py-3 px-5 w-30 text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Explore More of our Articles</button>
                 </div>
@@ -155,7 +155,7 @@ export default function GuestHomePage({ router, posts }) {
 
             {/* POPULAR TRAVELERS  */}
             <PopularTravelers />
-            
+
             {/* NEWSLETTER  */}
             {/* <div className="py-8 px-4 mx-auto lg:py-16 lg:px-6 my-20">
                 <div className="mx-auto sm:text-center">

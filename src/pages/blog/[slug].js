@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArticleJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
+import Script from 'next/script'
 
 // Utils
 import request from '../../utils/request';
@@ -99,6 +100,23 @@ export default function BlogPost({ blog, relatedArticles }) {
     const [showCommentDropdown, setShowCommentDropdown] = useState(null);
 
     // UseEffect
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://code.adclickppc.com/7s-banner-ad.js';
+        script.async = true;
+        script.onload = () => {
+          if (typeof initBannerAd === 'function') {
+            initBannerAd(['7SAD15666A19A796405', 'banner', 5]);
+          }
+        };
+        document.body.appendChild(script);
+    
+        return () => {
+          document.body.removeChild(script);
+        };
+      }, []);
+
+    
     useEffect(() => {
         if (blog.author.username !== user?.username) {
             request(`/blog/see/${blog?.id}`)
@@ -252,6 +270,8 @@ export default function BlogPost({ blog, relatedArticles }) {
                                 />
                             )
                         }
+                                    <div id="7SAD15666A19A796405" data-7pub="7SAD15666A19A796405"></div>
+
                         {
                             blog?.content.map((content, index) => {
                                 switch (content.type) {
