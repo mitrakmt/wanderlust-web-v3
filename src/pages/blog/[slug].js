@@ -270,7 +270,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                                 />
                             )
                         }
-                                    <div id="7SAD15666A19A796405" data-7pub="7SAD15666A19A796405"></div>
+                        <div id="7SAD15666A19A796405" data-7pub="7SAD15666A19A796405"></div>
 
                         {
                             blog?.content.map((content, index) => {
@@ -432,6 +432,9 @@ export default function BlogPost({ blog, relatedArticles }) {
                                 </svg>
                             </a>
                         </div>
+
+                        <div id="7SAD15666A19A796405" data-7pub="7SAD15666A19A796405"></div>
+
 
                         {/* DIVIDER */}
                         <div className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
