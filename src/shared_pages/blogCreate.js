@@ -395,6 +395,13 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         setFilteredCountries(filtered);
     };
 
+    const toDashCase = (str) => {
+        return str
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with dashes
+            .replace(/^-+|-+$/g, '');    // Remove leading and trailing dashes
+    };
+
     // Update search text for embeds
     const updateCitySearchText = (e) => {
         setCitySearchText(e.target.value);
@@ -509,6 +516,12 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         setShowPlaces(true);
     }
 
+    const handleTitleChange = (e) => {
+        const newTitle = e.target.value;
+        setTitle(newTitle);
+        setSlug(toDashCase(newTitle));
+    };
+
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <CustomHead
@@ -529,7 +542,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                     <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div className="sm:col-span-2">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blog Title</label>
-                            <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Blog name" />
+                            <input type="text" onChange={handleTitleChange} value={title} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Blog name" />
                         </div>
                         <div className="sm:col-span-2">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blog Slug</label>
