@@ -2,6 +2,8 @@
 import { useState, useContext, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useDropzone } from 'react-dropzone';
+import { s3Config } from '../config/s3Config';
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -32,12 +34,18 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     const [summary, setSummary] = useState("");
     const [region, setRegion] = useState(null);
     const [country, setCountry] = useState(null);
-    const [city, setCity] = useState(null);
     const [mainImage, setMainImage] = useState(null);
     const [content, setContent] = useState([]);
     const [successMessage, setSuccessMessage] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
     const [blogOwnerId, setBlogOwnerId] = useState(null);
+    const [city, setCity] = useState(null);
+    const [cityInputValue, setCityInputValue] = useState('');
+    const [searchCitiesSearchTerm, setSearchCitiesSearchTerm] = useState('');
+    const [citiesSearch, setCitiesSearch] = useState([]);
+    const [searchCitiesLoading, setSearchCitiesLoading] = useState(false);
+    const [showCitySearchDropdown, setShowCitySearchDropdown] = useState(false);
+
 
     const [citySearchText, setCitySearchText] = useState("");
     const [countrySearchText, setCountrySearchText] = useState("");
@@ -84,8 +92,73 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
             router.push('/stats')
         }
     }, [user, blogOwnerId]);
+
+    useEffect(() => {
+        if (searchCitiesSearchTerm) {
+            const delayDebounceFn = setTimeout(() => {
+                searchCities(searchCitiesSearchTerm);
+            }, 300);
+
+            return () => clearTimeout(delayDebounceFn);
+        } else {
+            setCitiesSearch([]);
+            setShowCitySearchDropdown(false);
+        }
+    }, [searchCitiesSearchTerm]);
     
     // Functions
+    const onDrop = async (acceptedFiles) => {
+        const file = acceptedFiles[0];
+        if (file) {
+            try {
+                const uploadUrl = await getUploadUrl(file);
+                await uploadToS3(uploadUrl, file);
+                setMainImage(uploadUrl.split('?')[0]); // Set the image URL without query parameters
+            } catch (error) {
+                console.error('Error uploading image: ', error);
+            }
+        }
+    };
+
+    const getUploadUrl = async (file) => {
+        return new Promise((resolve, reject) => {
+            request(`/api/s3-upload-url?fileName=${file.name}&fileType=${file.type}`, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                const { url } = JSON.parse(body);
+                resolve(url);
+            });
+        });
+    };
+
+    const uploadToS3 = (url, file) => {
+        return new Promise((resolve, reject) => {
+            request.put({
+                url,
+                headers: {
+                    'Content-Type': file.type,
+                },
+                body: file,
+            }, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(body);
+            });
+        });
+    };
+
+    const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
+    const handleCitySelect = (city) => {
+        setCity(city);
+        setCityInputValue(city.name);
+        setShowCitySearchDropdown(false);
+    };
+
     const handleInputChange = (selectedIndex, value, name) => {
         setContent(prevContent => {
           const updatedContent = [...prevContent];
@@ -127,7 +200,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
             region,
             content,
             country,
-            city,
+            city: city.id,
             image_url: mainImage,
         }
 
@@ -379,6 +452,20 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         setShowUsers(true);
     }
 
+    const searchCities = (searchTerm) => {
+        setSearchCitiesLoading(true);
+        request(`/cities/search?name=${searchTerm}`)
+            .then(res => {
+                setCitiesSearch(res.data);
+                setSearchCitiesLoading(false);
+                setShowCitySearchDropdown(true);
+            })
+            .catch(error => {
+                setSearchCitiesLoading(false);
+                console.error("Error fetching cities: ", error);
+            });
+    }
+
     const updateBlogSearchText = (e) => {
         setBlogSearchText(e.target.value);
 
@@ -488,10 +575,35 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                 }
                             </select>
                         </div>
-                        <div>
+                        <div className="relative">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
-                            <input type="text" value={city || ""} onChange={(e) => setCity(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" />
-                        </div> 
+                            <input
+                                type="text"
+                                value={cityInputValue}
+                                onChange={(e) => {
+                                    setCity(null); // Reset selected city when typing
+                                    setCityInputValue(e.target.value);
+                                    setSearchCitiesSearchTerm(e.target.value);
+                                }}
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Search for a city..."
+                            />
+                            {showCitySearchDropdown && (
+                                <ul className="absolute z-10 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg max-h-60 overflow-y-auto">
+                                    {searchCitiesLoading && <li className="p-2">Loading...</li>}
+                                    {!searchCitiesLoading && citiesSearch.length === 0 && <li className="p-2">No cities found</li>}
+                                    {!searchCitiesLoading && citiesSearch.map((city) => (
+                                        <li
+                                            key={city.id}
+                                            className="p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:bg-gray-800 dark:text-white"
+                                            onClick={() => handleCitySelect(city)}
+                                        >
+                                            {city.name}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
                         <div className="sm:col-span-2">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">summary</label>
                             <textarea rows="8" value={summary} onChange={(e) => setSummary(e.target.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Summary for the guide"></textarea>
@@ -499,8 +611,23 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                     </div>
                     <div className="sm:col-span-2 my-4">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Main Guide Image</label>
-                        <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/image_default.jpeg" alt="image default" />
-                        <input type="text" value={mainImage || ""} onChange={(e) => setMainImage(e.target.value)} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Or paste an image URL" />
+                        <div 
+                            {...getRootProps({ className: 'h-40 object-cover max-w-full rounded-lg border-dashed border-2 border-gray-300 flex items-center justify-center' })}
+                        >
+                            <input {...getInputProps()} />
+                            {mainImage ? (
+                                <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src={mainImage} alt="Main Guide" />
+                            ) : (
+                                <p>Drag & Drop your image here, or click to select an image</p>
+                            )}
+                        </div>
+                        <input 
+                            type="text" 
+                            value={mainImage || ""} 
+                            onChange={(e) => setMainImage(e.target.value)} 
+                            className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+                            placeholder="Or paste an image URL" 
+                        />
                     </div>
 
                     <div className="my-8 p-4 gap-y-2 block w-full text-gray-900 border border-gray-200 shadow-sm sm:text-sm dark:bg-gray-900 dark:border-gray-600 dark:text-white block-canvas rounded-lg">

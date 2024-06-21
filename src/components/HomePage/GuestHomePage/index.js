@@ -17,7 +17,7 @@ export default function GuestHomePage({ router, posts }) {
     return (
         <div className=" px-2 sm:pl-16 pr-0 flex flex-col items-center w-10/12">
             <div className="mx-auto mt-56 mb-44 sm:text-center sm:flex sm:flex-col sm:items-center sm:justify-center">
-                <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Helping you to explore the world</h1>
+                <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Wanderlust - Explore the World</h1>
                 <p className="mb-8 text-lg font-bold text-gray-800 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-300">Wanderlust App let&#39;s you to find, explore and share the best places around the world, and gives you the tools to plan everything you&#39;d need.</p>
                 <div className="flex flex-col mt-4 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                     <Link href={'/signup'} className="cursor-pointer inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
