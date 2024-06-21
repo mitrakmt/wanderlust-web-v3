@@ -109,10 +109,11 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     const onDrop = async (acceptedFiles) => {
         const file = acceptedFiles[0];
         if (file) {
+            setImagePreview(URL.createObjectURL(file)); // Update preview
             try {
-                const uploadUrl = await getUploadUrl(file);
-                await uploadToS3(uploadUrl, file);
-                setMainImage(uploadUrl.split('?')[0]); // Set the image URL without query parameters
+                const { url, publicUrl } = await getUploadUrl(file);
+                await uploadToS3(url, file);
+                setMainImage(publicUrl); // Set the public URL of the uploaded image
             } catch (error) {
                 console.error('Error uploading image: ', error);
             }
@@ -121,14 +122,13 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
 
     const getUploadUrl = async (file) => {
         return new Promise((resolve, reject) => {
-            request(`/aws/s3-upload-url?fileName=${file.name}&fileType=${file.type}`, (error, response, body) => {
+            request(`/api/v1/aws/s3-upload-url?fileName=${file.name}&fileType=${file.type}`, (error, response, body) => {
                 if (error) {
                     reject(error);
                     return;
                 }
-                const { publicUrl } = JSON.parse(body);
-                setMainImage(publicUrl)
-                resolve(publicUrl);
+                const { url, publicUrl } = JSON.parse(body);
+                resolve({ url, publicUrl });
             });
         });
     };
@@ -615,8 +615,8 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                             {...getRootProps({ className: 'h-40 object-cover max-w-full rounded-lg border-dashed border-2 border-gray-300 flex items-center justify-center' })}
                         >
                             <input {...getInputProps()} />
-                            {mainImage ? (
-                                <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src={mainImage} alt="Main Guide" />
+                            {imagePreview ? (
+                                <Image className="h-40 object-cover max-w-full rounded-lg" src={imagePreview} alt="Preview" width={160} height={160} />
                             ) : (
                                 <p>Drag & Drop your image here, or click to select an image</p>
                             )}
