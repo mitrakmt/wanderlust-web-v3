@@ -44,7 +44,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     const [citiesSearch, setCitiesSearch] = useState([]);
     const [searchCitiesLoading, setSearchCitiesLoading] = useState(false);
     const [showCitySearchDropdown, setShowCitySearchDropdown] = useState(false);
-
+    const [imagePreview, setImagePreview] = useState(''); 
 
     const [citySearchText, setCitySearchText] = useState("");
     const [countrySearchText, setCountrySearchText] = useState("");
