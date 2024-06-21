@@ -146,6 +146,8 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                     reject(error);
                     return;
                 }
+                console.log('body', body);
+                console.log('response', response);
                 resolve(body);
             });
         });
@@ -177,10 +179,12 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
       }
     
     const publishBlogPost = () => {
-        if (!title || !slug || !category || !summary || !mainImage || content?.length === 0) {
+        if (!title || !slug || !category || !summary || content?.length === 0) {
             setErrorMessage("Please fill out all fields: title, slug, category, summary, mainImage, content");
             return;
         }
+
+        console.log('mainImage', mainImage);
 
         // make sure slug has no spaces 
         if (hasWhiteSpace(slug)) {
