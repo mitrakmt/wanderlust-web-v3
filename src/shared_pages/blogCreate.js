@@ -3,7 +3,6 @@ import { useState, useContext, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useDropzone } from 'react-dropzone';
-import { s3Config } from '../config/s3Config';
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
