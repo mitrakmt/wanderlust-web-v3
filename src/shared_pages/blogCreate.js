@@ -122,7 +122,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
 
     const getUploadUrl = async (file) => {
         return new Promise((resolve, reject) => {
-            request(`/api/v1/aws/s3-upload-url?fileName=${file.name}&fileType=${file.type}`, (error, response, body) => {
+            request(`/aws/s3-upload-url?fileName=${file.name}&fileType=${file.type}`, (error, response, body) => {
                 if (error) {
                     reject(error);
                     return;
