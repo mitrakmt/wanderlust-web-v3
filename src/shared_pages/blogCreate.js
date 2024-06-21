@@ -126,8 +126,9 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                     reject(error);
                     return;
                 }
-                const { url } = JSON.parse(body);
-                resolve(url);
+                const { publicUrl } = JSON.parse(body);
+                setMainImage(publicUrl)
+                resolve(publicUrl);
             });
         });
     };
