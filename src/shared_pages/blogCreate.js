@@ -616,7 +616,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                         >
                             <input {...getInputProps()} />
                             {imagePreview ? (
-                                <Image className="h-40 object-cover max-w-full rounded-lg" src={imagePreview} alt="Preview" width={160} height={160} />
+                                <Image className="h-40 object-cover max-w-full rounded-lg" src={imagePreview} alt="Preview" width={600} height={160} />
                             ) : (
                                 <p>Drag & Drop your image here, or click to select an image</p>
                             )}
