@@ -101,13 +101,13 @@ export default function BlogPost({ blog, relatedArticles }) {
 
     // UseEffect
     useEffect(() => {
-        if (blog.author.username !== user?.username) {
+        if (blog?.author?.username !== user?.username) {
             request(`/blog/see/${blog?.id}`)
         }
     }, []);
 
     useEffect(() => {
-        if (blog.author.username !== user?.username) {
+        if (blog?.author?.username !== user?.username) {
             const intervalId = setInterval(() => {
                 request(`/blog/time/${blog?.id}`)
             }, 5000);
