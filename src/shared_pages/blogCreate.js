@@ -124,7 +124,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
             setImagePreview(URL.createObjectURL(file)); // Update preview
             try {
                 const res = await getUploadUrl(file);
-                console.log('res', res)
                 await uploadToS3(res.url, file);
                 setMainImage(res.publicUrl); // Set the public URL of the uploaded image
             } catch (error) {
@@ -150,9 +149,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
 
     const uploadToS3 = async (url, file) => {
         try {
-            console.log('Uploading to S3:', url);
-            console.log('File details:', file);
-    
             const response = await fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -161,17 +157,13 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                 body: file,
             });
     
-            console.log('Response status:', response.status);
-            console.log('Response headers:', response.headers);
-    
             if (!response.ok) {
                 const errorText = await response.text();
                 console.error('Error response from S3:', errorText);
                 throw new Error('Network response was not ok: ' + response.statusText);
             }
     
-            const body = await response.text(); // S3 PUT response may not have a body
-            console.log('body', body);
+            const body = await response.text();
             return body;
         } catch (error) {
             console.error('Error during upload:', error);
@@ -202,90 +194,60 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         setContent(value);
     };
 
-    const convertHtmlToStructuredData = (html) => {
-        const handler = new DomHandler((error, dom) => {
-            if (error) {
-                throw new Error(error);
+    const convertJsonToReact = (structuredData) => {
+        return structuredData.map((block, index) => {
+            switch (block.type) {
+                case 'p':
+                    return <p key={index}>{block.text}</p>;
+                case 'h1':
+                    return <h1 key={index}>{block.text}</h1>;
+                case 'h2':
+                    return <h2 key={index}>{block.text}</h2>;
+                case 'h3':
+                    return <h3 key={index}>{block.text}</h3>;
+                case 'h4':
+                    return <h4 key={index}>{block.text}</h4>;
+                case 'h5':
+                    return <h5 key={index}>{block.text}</h5>;
+                case 'h6':
+                    return <h6 key={index}>{block.text}</h6>;
+                case 'ul':
+                    return (
+                        <ul key={index}>
+                            {block.items.map((item, liIndex) => (
+                                <li key={liIndex}>{item.text}</li>
+                            ))}
+                        </ul>
+                    );
+                case 'ol':
+                    return (
+                        <ol key={index}>
+                            {block.items.map((item, liIndex) => (
+                                <li key={liIndex}>{item.text}</li>
+                            ))}
+                        </ol>
+                    );
+                case 'a':
+                    return (
+                        <a key={index} href={block.href}>
+                            {block.text}
+                        </a>
+                    );
+                case 'img':
+                    return (
+                        <Image
+                            key={index}
+                            src={block.src}
+                            alt={block.alt}
+                            layout="responsive" // or other layout options
+                            width={500} // set appropriate width
+                            height={300} // set appropriate height
+                        />
+                    );
+                default:
+                    return null;
             }
         });
-    
-        const parser = new Parser(handler, { decodeEntities: true });
-        parser.write(html);
-        parser.end();
-    
-        const structuredData = [];
-    
-        const extractText = (element) => {
-            return element.children
-                .map(child => {
-                    if (child.type === 'text') {
-                        return decode(child.data);
-                    } else if (child.type === 'tag') {
-                        if (child.name === 'strong') {
-                            return `<strong>${extractText(child)}</strong>`;
-                        }
-                        return extractText(child);
-                    }
-                    return '';
-                })
-                .join('');
-        };
-    
-        const traverseNodes = (nodes) => {
-            nodes.forEach(node => {
-                if (node.type === 'tag') {
-                    const tagName = node.name;
-                    const textContent = extractText(node);
-    
-                    switch (tagName) {
-                        case 'p':
-                            structuredData.push({ type: 'p', text: textContent });
-                            break;
-                        case 'h1':
-                            structuredData.push({ type: 'h1', text: textContent });
-                            break;
-                        case 'h2':
-                            structuredData.push({ type: 'h2', text: textContent });
-                            break;
-                        case 'h3':
-                            structuredData.push({ type: 'h3', text: textContent });
-                            break;
-                        case 'h4':
-                            structuredData.push({ type: 'h4', text: textContent });
-                            break;
-                        case 'h5':
-                            structuredData.push({ type: 'h5', text: textContent });
-                            break;
-                        case 'h6':
-                            structuredData.push({ type: 'h6', text: textContent });
-                            break;
-                        case 'ul':
-                            const ulItems = [];
-                            node.children.forEach(child => {
-                                if (child.name === 'li') {
-                                    ulItems.push({ type: 'li', text: extractText(child) });
-                                }
-                            });
-                            structuredData.push({ type: 'ul', items: ulItems });
-                            break;
-                        case 'ol':
-                            const olItems = [];
-                            node.children.forEach(child => {
-                                if (child.name === 'li') {
-                                    olItems.push({ type: 'li', text: extractText(child) });
-                                }
-                            });
-                            structuredData.push({ type: 'ol', items: olItems });
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
-        };
-    
-        traverseNodes(handler.dom);
-        return structuredData;
     };
 
     const convertJsonToHtml = (structuredData) => {
@@ -309,6 +271,10 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                     return `<ul>${block.items.map(item => `<li>${item.text}</li>`).join('')}</ul>`;
                 case 'ol':
                     return `<ol>${block.items.map(item => `<li>${item.text}</li>`).join('')}</ol>`;
+                case 'a':
+                    return `<a href="${block.href}">${block.text}</a>`;
+                case 'img':
+                    return `<img src="${block.src}" alt="${block.alt}" />`;
                 default:
                     return '';
             }
