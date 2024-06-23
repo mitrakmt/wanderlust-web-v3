@@ -120,17 +120,13 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     // Functions
     const onDrop = async (acceptedFiles) => {
         const file = acceptedFiles[0];
-        console.log('file', file);
         if (file) {
             setImagePreview(URL.createObjectURL(file)); // Update preview
             try {
-                console.log('here 1')
-                const { url, publicUrl } = await getUploadUrl(file);
-                console.log('here 1.5')
-                await uploadToS3(url, file);
-                console.log('publicUrl', publicUrl);
-                console.log('url', url);
-                setMainImage(publicUrl); // Set the public URL of the uploaded image
+                const res = await getUploadUrl(file);
+                console.log('res', res)
+                await uploadToS3(res.url, file);
+                setMainImage(res.publicUrl); // Set the public URL of the uploaded image
             } catch (error) {
                 console.error('Error uploading image: ', error);
             }
@@ -145,44 +141,42 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     };
 
     const getUploadUrl = async (file) => {
-        console.log('here 2');
-        try {
-            const response = await fetch(`/aws/s3-upload-url?fileName=${file.name}&fileType=${file.type}`);
-            console.log('response', response);
-    
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-    
-            const body = await response.json();
-            console.log('body', body);
-            const { url, publicUrl } = body;
-            console.log('new publicUrl', publicUrl);
-            return { url, publicUrl };
-        } catch (error) {
-            console.error('Error:', error);
-            throw error;
-        }
+        const uploadUrls = await request(`/aws/s3-upload-url?fileName=${file.name}&fileType=${file.type}`, {
+            method: 'GET'
+        })
+
+        return uploadUrls;
     };
 
-    const uploadToS3 = (url, file) => {
-        return new Promise((resolve, reject) => {
-            request.put({
-                url,
+    const uploadToS3 = async (url, file) => {
+        try {
+            console.log('Uploading to S3:', url);
+            console.log('File details:', file);
+    
+            const response = await fetch(url, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': file.type,
                 },
                 body: file,
-            }, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                    return;
-                }
-                console.log('body', body);
-                console.log('response', response);
-                resolve(body);
             });
-        });
+    
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Error response from S3:', errorText);
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+    
+            const body = await response.text(); // S3 PUT response may not have a body
+            console.log('body', body);
+            return body;
+        } catch (error) {
+            console.error('Error during upload:', error);
+            throw error;
+        }
     };
 
     const removeImage = () => {
