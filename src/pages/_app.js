@@ -31,6 +31,7 @@ import '@/styles/globals.css'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '../styles/weather.scss';
 import '../styles/weatherCard.scss';
+import '../styles/customQuillStyles.css';
 
 // Fonts
 import { Roboto } from 'next/font/google'

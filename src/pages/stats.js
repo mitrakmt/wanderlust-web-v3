@@ -43,15 +43,15 @@ export default function Stats() {
                 <div className="flex items-center justify-center">
                     <dl className="grid max-w-screen-md gap-8 mx-auto text-gray-900 sm:grid-cols-3 dark:text-white">
                         <div className="flex flex-col items-center justify-center">
-                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{ blogs.length }</dt>
+                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{ blogs?.length }</dt>
                             <dd className="font-light text-gray-500 dark:text-gray-400">Num. of Posts</dd>
                         </div>
                         <div className="flex flex-col items-center justify-center">
-                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{blogs.reduce((acc, curr) => acc + curr.views, 0)}</dt>
+                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{blogs?.reduce((acc, curr) => acc + curr.views, 0)}</dt>
                             <dd className="font-light text-gray-500 dark:text-gray-400">Total Views</dd>
                         </div>
                         <div className="flex flex-col items-center justify-center">
-                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{(blogs.reduce((acc, curr) => acc + (curr.timeRead || 0), 0) / 60).toFixed(1)}</dt>
+                            <dt className="mb-2 text-3xl md:text-4xl font-extrabold">{(blogs?.reduce((acc, curr) => acc + (curr.timeRead || 0), 0) / 60).toFixed(1)}</dt>
                             <dd className="font-light text-gray-500 dark:text-gray-400">Total Time Read (mins)</dd>
                         </div>
                     </dl>

@@ -3,6 +3,11 @@ import { useState, useContext, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useDropzone } from 'react-dropzone';
+import dynamic from 'next/dynamic';
+import { Parser } from 'htmlparser2';
+import { DomHandler } from 'domhandler';
+import { decode } from 'html-entities';
+
 
 // Hooks
 import { useAuth } from '../hooks/useAuth';
@@ -15,8 +20,25 @@ import request from '../utils/request';
 
 // Components
 import CustomHead from '@/shared_components/CustomHead';
-import MoveContentButtonsSection from '../pages/blog/components/moveContentButtonsSection';
 import AddSectionButton from './components/AddSectionButton';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+
+import 'react-quill/dist/quill.snow.css';
+
+const toolbarOptions = [
+    [{ 'header': '1' }, { 'header': '2' }, { 'header': [3, 4, 5, 6] }, { 'font': [] }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    ['bold', 'italic', 'underline', 'strike'],
+    ['blockquote', 'code-block'],
+    [{ 'align': [] }],
+    ['link', 'image'],
+    ['clean']  // remove formatting button
+];
+
+const modules = {
+    toolbar: toolbarOptions
+};
 
 export default function CreateBlogPage({ editing = false, blogId = null }) {
     // Context
@@ -34,7 +56,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     const [region, setRegion] = useState(null);
     const [country, setCountry] = useState(null);
     const [mainImage, setMainImage] = useState(null);
-    const [content, setContent] = useState([]);
+    const [content, setContent] = useState('');
     const [successMessage, setSuccessMessage] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
     const [blogOwnerId, setBlogOwnerId] = useState(null);
@@ -46,41 +68,31 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     const [showCitySearchDropdown, setShowCitySearchDropdown] = useState(false);
     const [imagePreview, setImagePreview] = useState(''); 
 
-    const [citySearchText, setCitySearchText] = useState("");
-    const [countrySearchText, setCountrySearchText] = useState("");
-    const [userSearchText, setUserSearchText] = useState("");
-    const [placeSearchText, setPlaceSearchText] = useState("");
-    const [blogSearchText, setBlogSearchText] = useState("");
-
-    const [cities, setCities] = useState([]);
-    const [blogs, setBlogs] = useState([]);
-    const [users, setUsers] = useState([]);
-    const [places, setPlaces] = useState([]);
-    const [filteredCountries, setFilteredCountries] = useState([]);
-
-    const [showCities, setShowCities] = useState(false);
-    const [showBlogs, setShowBlogs] = useState(false);
-    const [showUsers, setShowUsers] = useState(false);
-    const [showPlaces, setShowPlaces] = useState(false);
-    const [showCountries, setShowCountries] = useState(false);
-
     // UseEffect
     useEffect(() => {
         if (editing && blogId) {
             // Fetch blog information
             request('/blog/id/' + blogId)
                 .then(blogInfo => {
+                    console.log('blogInfo.data', blogInfo.data)
                     setBlogOwnerId(blogInfo.data.author.id)
-                    setContent(blogInfo.data.content);
-                    setTitle(blogInfo.data.title);
-                    setSlug(blogInfo.data.slug);
-                    setCategory(blogInfo.data.category);
-                    setSummary(blogInfo.data.summary);
-                    setRegion(blogInfo.data.region);
-                    setCountry(blogInfo.data?.country?.id);
-                    setCity(blogInfo.data.city?.id);
-                    setMainImage(blogInfo.data?.image_url);
+                    setContent(convertJsonToHtml(blogInfo.data.content)); // Ensure content is not undefined
+                    setTitle(blogInfo.data.title || '');
+                    setSlug(blogInfo.data.slug || '');
+                    setCategory(blogInfo.data.category || '');
+                    setSummary(blogInfo.data.summary || '');
+                    setRegion(blogInfo.data.region || null);
+                    setCountry(blogInfo.data?.country?.id || null);
+                    setCity(blogInfo.data.city?.id || null);
+                    setMainImage(blogInfo.data?.image_url || '');
+                    setImagePreview(blogInfo.data?.image_url || '')
+                    setCityInputValue(blogInfo.data.city?.name || ''); // Set the city name
+
                 })
+                .catch(error => {
+                    console.error("Error fetching blog information: ", error);
+                    setErrorMessage("Error fetching blog information");
+                });
         }
     }, [blogId]);
 
@@ -104,15 +116,20 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
             setShowCitySearchDropdown(false);
         }
     }, [searchCitiesSearchTerm]);
-    
+
     // Functions
     const onDrop = async (acceptedFiles) => {
         const file = acceptedFiles[0];
+        console.log('file', file);
         if (file) {
             setImagePreview(URL.createObjectURL(file)); // Update preview
             try {
+                console.log('here 1')
                 const { url, publicUrl } = await getUploadUrl(file);
+                console.log('here 1.5')
                 await uploadToS3(url, file);
+                console.log('publicUrl', publicUrl);
+                console.log('url', url);
                 setMainImage(publicUrl); // Set the public URL of the uploaded image
             } catch (error) {
                 console.error('Error uploading image: ', error);
@@ -120,17 +137,32 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         }
     };
 
+    const toDashCase = (str) => {
+        return str
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with dashes
+            .replace(/^-+|-+$/g, '');    // Remove leading and trailing dashes
+    };
+
     const getUploadUrl = async (file) => {
-        return new Promise((resolve, reject) => {
-            request(`/aws/s3-upload-url?fileName=${file.name}&fileType=${file.type}`, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                    return;
-                }
-                const { url, publicUrl } = JSON.parse(body);
-                resolve({ url, publicUrl });
-            });
-        });
+        console.log('here 2');
+        try {
+            const response = await fetch(`/aws/s3-upload-url?fileName=${file.name}&fileType=${file.type}`);
+            console.log('response', response);
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const body = await response.json();
+            console.log('body', body);
+            const { url, publicUrl } = body;
+            console.log('new publicUrl', publicUrl);
+            return { url, publicUrl };
+        } catch (error) {
+            console.error('Error:', error);
+            throw error;
+        }
     };
 
     const uploadToS3 = (url, file) => {
@@ -153,6 +185,11 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         });
     };
 
+    const removeImage = () => {
+        setMainImage(null);
+        setImagePreview('');
+    };
+
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     const handleCitySelect = (city) => {
@@ -161,308 +198,188 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         setShowCitySearchDropdown(false);
     };
 
-    const handleInputChange = (selectedIndex, value, name) => {
-        setContent(prevContent => {
-          const updatedContent = [...prevContent];
-          updatedContent[selectedIndex] = {
-            ...updatedContent[selectedIndex],
-            [name]: value
-          };
-          return updatedContent;
-        });
+    const handleTitleChange = (e) => {
+        const newTitle = e.target.value;
+        setTitle(newTitle);
+        setSlug(toDashCase(newTitle));
     };
 
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const handleContentChange = (value) => {
+        setContent(value);
+    };
 
-    function hasWhiteSpace(s) {
-        return /\s/g.test(s);
-      }
+    const convertHtmlToStructuredData = (html) => {
+        const handler = new DomHandler((error, dom) => {
+            if (error) {
+                throw new Error(error);
+            }
+        });
+    
+        const parser = new Parser(handler, { decodeEntities: true });
+        parser.write(html);
+        parser.end();
+    
+        const structuredData = [];
+    
+        const extractText = (element) => {
+            return element.children
+                .map(child => {
+                    if (child.type === 'text') {
+                        return decode(child.data);
+                    } else if (child.type === 'tag') {
+                        if (child.name === 'strong') {
+                            return `<strong>${extractText(child)}</strong>`;
+                        }
+                        return extractText(child);
+                    }
+                    return '';
+                })
+                .join('');
+        };
+    
+        const traverseNodes = (nodes) => {
+            nodes.forEach(node => {
+                if (node.type === 'tag') {
+                    const tagName = node.name;
+                    const textContent = extractText(node);
+    
+                    switch (tagName) {
+                        case 'p':
+                            structuredData.push({ type: 'p', text: textContent });
+                            break;
+                        case 'h1':
+                            structuredData.push({ type: 'h1', text: textContent });
+                            break;
+                        case 'h2':
+                            structuredData.push({ type: 'h2', text: textContent });
+                            break;
+                        case 'h3':
+                            structuredData.push({ type: 'h3', text: textContent });
+                            break;
+                        case 'h4':
+                            structuredData.push({ type: 'h4', text: textContent });
+                            break;
+                        case 'h5':
+                            structuredData.push({ type: 'h5', text: textContent });
+                            break;
+                        case 'h6':
+                            structuredData.push({ type: 'h6', text: textContent });
+                            break;
+                        case 'ul':
+                            const ulItems = [];
+                            node.children.forEach(child => {
+                                if (child.name === 'li') {
+                                    ulItems.push({ type: 'li', text: extractText(child) });
+                                }
+                            });
+                            structuredData.push({ type: 'ul', items: ulItems });
+                            break;
+                        case 'ol':
+                            const olItems = [];
+                            node.children.forEach(child => {
+                                if (child.name === 'li') {
+                                    olItems.push({ type: 'li', text: extractText(child) });
+                                }
+                            });
+                            structuredData.push({ type: 'ol', items: olItems });
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+        };
+    
+        traverseNodes(handler.dom);
+        return structuredData;
+    };
+
+    const convertJsonToHtml = (structuredData) => {
+        return structuredData.map(block => {
+            switch (block.type) {
+                case 'p':
+                    return `<p>${block.text}</p>`;
+                case 'h1':
+                    return `<h1>${block.text}</h1>`;
+                case 'h2':
+                    return `<h2>${block.text}</h2>`;
+                case 'h3':
+                    return `<h3>${block.text}</h3>`;
+                case 'h4':
+                    return `<h4>${block.text}</h4>`;
+                case 'h5':
+                    return `<h5>${block.text}</h5>`;
+                case 'h6':
+                    return `<h6>${block.text}</h6>`;
+                case 'ul':
+                    return `<ul>${block.items.map(item => `<li>${item.text}</li>`).join('')}</ul>`;
+                case 'ol':
+                    return `<ol>${block.items.map(item => `<li>${item.text}</li>`).join('')}</ol>`;
+                default:
+                    return '';
+            }
+        }).join('');
+    };
     
     const publishBlogPost = () => {
-        if (!title || !slug || !category || !summary || content?.length === 0) {
+        if (!title || !slug || !category || !summary || !content) {
             setErrorMessage("Please fill out all fields: title, slug, category, summary, mainImage, content");
             return;
         }
-
+    
         console.log('mainImage', mainImage);
-
+    
         // make sure slug has no spaces 
-        if (hasWhiteSpace(slug)) {
-            setErrorMessage("Slug may not contain spaces")
+        if (/\s/g.test(slug)) {
+            setErrorMessage("Slug may not contain spaces");
             return;
         }
-
-        // TODO: make sure city,blog,user, etc have no empty IDs
-
-        setErrorMessage(null)
-
+    
+        setErrorMessage(null);
+    
+        const structuredData = convertHtmlToStructuredData(content);
+    
         let body = {
             title: title.trim(),
             category,
             summary: summary.trim(),
             slug: slug.trim(),
             region,
-            content,
+            content: structuredData,
             country,
-            city: city.id,
-            image_url: mainImage,
-        }
-
-        if (!editing) {
-            body.publishedOn = new Date().toLocaleDateString('en-US', options);
+            city: city?.id,
+            image_url: mainImage || imagePreview,
         };
-
+    
+        if (!editing) {
+            body.publishedOn = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+    
         // Send to API
         request(editing ? `/blog/id/${blogId}` : '/blog', {
-            method: editing ? `PUT` : 'POST',
+            method: editing ? 'PUT' : 'POST',
             body
-          })
-            .then((res) => {
-                if (res.data) {
-                    // Clear states
-                    setTitle("");
-                    setSlug("");
-                    setCategory("");
-                    setSummary("");
-                    setRegion(null);
-                    setCountry(null);
-                    setCity(null);
-                    setMainImage(null);
-                    setContent([]);
-
-                    router.push('/stats')
-                } else {
-                    setErrorMessage("Something went wrong. Please try again.");
-                }
-            })
-
-    };
-
-    const addSectionParagraph = (index) => {
-        const newObject = { type: 'p', text: '' };
-
-        if (index) {
-            insertObjectAtIndex(newObject, index)
-        } else {
-            setContent([...content, newObject]);
-        }
-    };
-
-    const addSectionHeading = (headingType, index) => {
-        const newObject = { type: headingType, text: '' };
-
-        if (index) {
-            insertObjectAtIndex(newObject, index)
-        } else {
-            setContent([...content, newObject]);
-        }
-    };
-
-    const addImage = (index) => {
-        setContent([...content, { type: 'image', src: '', alt: '' }]);
-    };
-
-    const handleDeleteSection = (index) => {
-        setContent(prevContent => {
-            const updatedContent = [...prevContent];
-            updatedContent.splice(index, 1);
-            return updatedContent;
-        });
-    };
-
-    const handleMoveSection = (currentIndex, newIndex) => {
-        // Using setContent
-        setContent(prevContent => {
-            const updatedContent = [...prevContent];
-            const [removed] = updatedContent.splice(currentIndex, 1);
-            updatedContent.splice(newIndex, 0, removed);
-            return updatedContent;
         })
-    };
-
-    const addCityEmbed = (index) => {
-        const newObject = { type: 'city', id: '' };
-
-        if (index) {
-            insertObjectAtIndex(newObject, index)
-        } else {
-            setContent([...content, newObject]);
-        }
-    };
-
-    const addCountryEmbed = (index) => {
-        const newObject = { type: 'country', id: '' };
-
-        if (index) {
-            insertObjectAtIndex(newObject, index)
-        } else {
-            setContent([...content, newObject]);
-        }
-    };
-
-    const addBlogEmbed = (index) => {
-        const newObject = { type: 'blog', id: '' };
-
-        if (index) {
-            insertObjectAtIndex(newObject, index)
-        } else {
-            setContent([...content, newObject]);
-        }
-    };
-
-    const addSectionVideo = (index) => {
-        const newObject = { type: 'video', alt: '', title: '', description: '', url: '' };
-
-        if (index) {
-            insertObjectAtIndex(newObject, index)
-        } else {
-            setContent([...content, newObject]);
-        }
-    };
-
-    const addUserEmbed = (index) => {
-        const newObject = { type: 'user', id: '' };
-
-        if (index) {
-            insertObjectAtIndex(newObject, index)
-        } else {
-            setContent([...content, newObject]);
-        }
-    };
-
-    const addPlaceEmbed = (index) => {
-        const newObject = { type: 'place', id: '' };
-
-        if (index) {
-            insertObjectAtIndex(newObject, index)
-        } else {
-            setContent([...content, newObject]);
-        }
-    };
-
-    const addLinkEmbed = (index) => {
-        if (index) {
-            insertObjectAtIndex({ type: 'link', url: '', text: '' }, index)
-        } else {
-            setContent([...content, { type: 'link', url: '', text: '' }]);
-        }
-    };
-
-  const insertObjectAtIndex = (newObject, index) => {
-    setContent(prevContent => [
-      ...prevContent.slice(0, index + 1),
-      newObject,
-      ...prevContent.slice(index + 1),
-    ]);
-  };
-
-    // Embed select functions
-    const selectIdForEmbed = (newId, selectedIndex) => {
-        setContent(prevContent => {
-            const updatedContent = [...prevContent];
-            updatedContent[selectedIndex] = {
-              ...updatedContent[selectedIndex],
-              id: newId
-            };
-            return updatedContent;
+        .then((res) => {
+            if (res.data) {
+                // Clear states
+                setTitle("");
+                setSlug("");
+                setCategory("");
+                setSummary("");
+                setRegion(null);
+                setCountry(null);
+                setCity(null);
+                setMainImage(null);
+                setContent('');
+    
+                router.push('/stats');
+            } else {
+                setErrorMessage("Something went wrong. Please try again.");
+            }
         });
-
-        // Clear search related values
-        setShowCities(false);
-        setCitySearchText("");
-        setCities([]);
-
-        setShowBlogs(false);
-        setBlogSearchText("");
-        setBlogSearchText([])
-        
-        setShowCountries(false);
-        setCountrySearchText("");
-        setFilteredCountries([]);
-
-        setShowUsers(false);
-        setUserSearchText("");
-        setUsers([]);
-
-        setShowPlaces(false);
-        setPlaceSearchText("");
-        setPlaces([]);
-    }
-
-    const filterCountries = (searchTerm) => {
-        const filtered = countries
-          .filter((country) =>
-            country.name.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-          .slice(0, 5);
-      
-        setFilteredCountries(filtered);
     };
-
-    const toDashCase = (str) => {
-        return str
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with dashes
-            .replace(/^-+|-+$/g, '');    // Remove leading and trailing dashes
-    };
-
-    // Update search text for embeds
-    const updateCitySearchText = (e) => {
-        setCitySearchText(e.target.value);
-
-        if (e.target.value?.length === 0) {
-            setShowCities(false);
-            return;
-        } else if (e.target.value?.length < 3) {
-            return;
-        }
-
-        // request cities from search text
-        request(`/cities/search?name=${e.target.value}`)
-            .then(res => {
-                setShowCities(true);
-                setCities(res.data);
-            })
-    }
-
-    const updateCountrySearchText = (e) => {
-        setCountrySearchText(e.target.value);
-
-        if (e.target.value?.length <= 1) {
-            setShowCountries(false);
-            return;
-        }
-
-        // Filter countries list
-        filterCountries(e.target.value);
-
-        setShowCountries(true);
-    }
-
-    const updateUserSearchText = (e) => {
-        setUserSearchText(e.target.value);
-
-        if (e.target.value?.length === 0) {
-            setShowUsers(false);
-            return;
-        } else if (e.target.value?.length < 3) {
-            return;
-        }
-
-        request(`/users/public/username/${e.target.value}`)
-            .then(res => {
-                if (res.data) {
-                    setShowUsers(true);
-                    setUsers([res.data]);
-                } else {
-                    setUsers([])
-                    setShowUsers(false);
-                }
-            })
-
-        setShowUsers(true);
-    }
-
+    
     const searchCities = (searchTerm) => {
         setSearchCitiesLoading(true);
         request(`/cities/search?name=${searchTerm}`)
@@ -476,55 +393,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                 console.error("Error fetching cities: ", error);
             });
     }
-
-    const updateBlogSearchText = (e) => {
-        setBlogSearchText(e.target.value);
-
-        if (e.target.value?.length === 0) {
-            setShowBlogs(false);
-            return;
-        } else if (e.target.value?.length < 3) {
-            return;
-        }
-
-        request(`/blog/search?searchText=${e.target.value}`)
-            .then(res => {
-                if (res.data) {
-                    setShowBlogs(true);
-                    setBlogs(res.data);
-                } else {
-                    setShowBlogs(false);
-                    setBlogs([]);
-                }
-            })
-
-        setShowBlogs(true);
-    }
-
-    const updatePlaceSearchText = (e) => {
-        setPlaceSearchText(e.target.value);
-
-        if (e.target.value?.length === 0) {
-            setShowPlaces(false);
-            return;
-        } else if (e.target.value?.length < 3) {
-            return;
-        }
-
-        // request(`/cities/search?name=${e.target.value}`)
-        //     .then(res => {
-        //         setShowPlaces(true);
-        //         setPlaces(res.data);
-        //     })
-
-        setShowPlaces(true);
-    }
-
-    const handleTitleChange = (e) => {
-        const newTitle = e.target.value;
-        setTitle(newTitle);
-        setSlug(toDashCase(newTitle));
-    };
 
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
@@ -554,7 +422,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                             <p className="text-xs text-gray-600 italic mt-1">
                                 This slug has an impact on SEO. It should use words relevant to the guide, use keywords, use &quot;-&quot; for spaces, and should not be greater than 140 characters in length. One example of a GOOD slug is: &quot;2023-digital-nomads-guide-to-bali&quot;
                             </p>
-                            
                         </div>
                         <div>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
@@ -565,7 +432,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                                 <option value="Cost of Living">Cost of Living</option>
                                 <option value="Best of">Best of</option>
                                 <option value="Top 5">Top 5</option>
-                                
                             </select>
                         </div>
                         <div>
@@ -622,7 +488,7 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                             )}
                         </div>
                         <div className="sm:col-span-2">
-                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">summary</label>
+                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Summary</label>
                             <textarea rows="8" value={summary} onChange={(e) => setSummary(e.target.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Summary for the guide"></textarea>
                         </div>
                     </div>
@@ -633,7 +499,16 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                         >
                             <input {...getInputProps()} />
                             {imagePreview ? (
-                                <Image className="h-40 object-cover max-w-full rounded-lg" src={imagePreview} alt="Preview" width={600} height={160} />
+                                <div className="relative">
+                                    <Image className="h-40 object-cover max-w-full rounded-lg" src={imagePreview} alt="Preview" width={600} height={160} />
+                                    <button
+                                        type="button"
+                                        onClick={removeImage}
+                                        className="absolute top-0 right-0 mt-2 mr-2 bg-red-600 text-white rounded-full p-2"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
                             ) : (
                                 <p>Drag & Drop your image here, or click to select an image</p>
                             )}
@@ -646,285 +521,23 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                             placeholder="Or paste an image URL" 
                         />
                     </div>
-
                     <div className="my-8 p-4 gap-y-2 block w-full text-gray-900 border border-gray-200 shadow-sm sm:text-sm dark:bg-gray-900 dark:border-gray-600 dark:text-white block-canvas rounded-lg">
                         <div className="flex justify-between items-center">
                             <p className="text-xl font-bold text-gray-900 dark:text-white">Body of Post</p>
                             <button className="px-4 py-2 text-sm font-medium text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">Preview Blog</button>
                         </div>
                         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-                        {
-                            content?.length === 0 && (
-                                <div className="flex flex-col items-center justify-center">
-                                    <p className="text-xl font-bold text-gray-900 dark:text-white">No content added yet</p>
-                                    <p className="text-sm text-gray-600 dark:text-gray-400">Add content to your blog post by clicking the button below</p>
-                                </div>
-                            )
-                        }
-                        {
-                            content.map((section, index) => {
-                                switch (section.type) {
-                                    case 'p':
-                                        return (
-                                            <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Paragraph</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <textarea rows="8" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Paragraph" />
-                                            </div>
-                                        )
-                                    case "h2":
-                                        return (
-                                            <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 2</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
-                                            </div>
-                                        )
-                                    case "h3":
-                                        return (
-                                            <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 3</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
-                                            </div>
-                                        )
-                                    case "h4":
-                                        return (
-                                            <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 4</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
-                                            </div>
-                                        )
-                                    case 'h5':
-                                        return (
-                                            <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Heading 5</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Heading" />
-                                            </div>
-                                        )
-                                    case 'image':
-                                        return (
-                                            <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Image</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/image_default.jpeg" alt="image default" />
-                                                <input type="text" value={section.src} onChange={(e) => handleInputChange(index, e.target.value, 'src')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Or paste an image URL here" />
-                                                <input type="text" value={section.alt} onChange={(e) => handleInputChange(index, e.target.value, 'alt')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Image Alt Text" />
-                                                <p className="text-xs text-gray-600 italic mt-1">
-                                                    Visually, horizontle images are better
-                                                </p>
-                                            </div>
-                                        )
-                                    case 'video':
-                                        return (
-                                            <div className="sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Video</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <Image className="h-40 object-cover max-w-full rounded-lg" width={200} height={100} src="https://wanderlust-extension.s3.us-west-2.amazonaws.com/image_default.jpeg" alt="image default" />
-                                                <input type="text" value={section.src} onChange={(e) => handleInputChange(index, e.target.value, 'src')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Or paste an image URL here" />
-                                                <input type="text" value={section.alt} onChange={(e) => handleInputChange(index, e.target.value, 'alt')} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Image Alt Text" />
-                                            </div>
-                                        )
-                                    case 'city':
-                                        return (
-                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">City Embed</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={citySearchText} onChange={updateCitySearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a city" />
-                                                {/* Dropdown that shows selectable cities */}
-                                                {
-                                                    showCities && <div className="p-2 border-solid border-gray-300">
-                                                        {
-                                                            cities?.map((city) => (
-                                                                <div onClick={() => selectIdForEmbed(city.id, index)} key={`citiesSearch-${city.name}-${city.countryName}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
-                                                                    <p>{city.name}, {city.country_name}</p>
-                                                                </div>
-                                                            ))
-                                                        }
-                                                    </div>
-                                                }
-                                                {
-                                                    // Show name of the city and country
-                                                    section.id && 
-                                                        <p className="mt-2">{section.id}</p>       
-                                                }
-                                            </div>
-                                        )
-                                    case 'country':
-                                        return (
-                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Country Embed</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={countrySearchText} onChange={updateCountrySearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a country" />
-                                                {/* Dropdown that shows selectable cities */}
-                                                {
-                                                    showCountries && <div className="p-2 border-solid border-gray-300">
-                                                        {
-                                                            filteredCountries?.map((country) => (
-                                                                <div onClick={() => selectIdForEmbed(country.id, index)} key={`citiesSearch-${country.name}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
-                                                                    <p>{country.name}</p>
-                                                                </div>
-        
-                                                            ))
-                                                        }
-                                                    </div>
-                                                }
-
-                                                {
-                                                    // Show name of the city and country
-                                                    section.id && 
-                                                        <p className="mt-2">{section.id}</p>       
-                                                }
-                                            </div>
-                                        )
-                                    case 'blog':
-                                        return (
-                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Blog Embed</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={blogSearchText} onChange={updateBlogSearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a blog" />
-                                                {/* Dropdown that shows selectable cities */}
-                                                {
-                                                    showBlogs && <div className="p-2 border-solid border-gray-300">
-                                                        {
-                                                            blogs?.map((blog) => (
-                                                                <div onClick={() => selectIdForEmbed(blog.id, index)} key={`citiesSearch-${blog.slug}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
-                                                                    <p>{blog.slug}</p>
-                                                                </div>
-        
-                                                            ))
-                                                        }
-                                                    </div>
-                                                }
-                                                {
-                                                    // Show blog selected
-                                                    section.id && 
-                                                        <p className="mt-2">{section.id}</p>       
-                                                }
-                                            </div>
-                                        )
-                                    case 'user':
-                                        return (
-                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">User Embed</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={userSearchText} onChange={updateUserSearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a user" />
-                                                {/* Dropdown that shows selectable cities */}
-                                                {
-                                                    showUsers && <div className="p-2 border-solid border-gray-300">
-                                                        {
-                                                            users?.map((user) => (
-                                                                <div onClick={() => selectIdForEmbed(user.id, index)} key={`citiesSearch-${user.username}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
-                                                                    <p>{user.username}</p>
-                                                                </div>
-        
-                                                            ))
-                                                        }
-                                                    </div>
-                                                }
-                                                {
-                                                    // Show user selected
-                                                    section.id && 
-                                                        <p className="mt-2">{section.id}</p>       
-                                                }
-                                            </div>
-                                        )
-                                    case 'place':
-                                        return (
-                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Place Embed</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-18 mr-4 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={placeSearchText} onChange={updatePlaceSearchText} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for a place" />
-                                                {/* Dropdown that shows selectable cities */}
-                                                {
-                                                    showPlaces && <div className="p-2 border-solid border-gray-300">
-                                                        {
-                                                            places?.map((place) => (
-                                                                <div onClick={() => selectIdForEmbed(place.id, index)} key={`citiesSearch-${place.name}-${place.placeName}`} className="cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-800">
-                                                                    <p>{place.name}</p>
-                                                                </div>
-        
-                                                            ))
-                                                        }
-                                                    </div>
-                                                }
-                                                {
-                                                    // Show blog selected
-                                                    section.id && 
-                                                        <p className="mt-2">{section.id}</p>       
-                                                }
-                                            </div>
-                                        )
-                                    case 'link':
-                                        return (
-                                            <div className="relative sm:col-span-2 my-4" key={`createBlog-${section.type}-${index}`}>
-                                                <div className="flex mb-2 items-center">
-                                                    <label className="block text-sm font-medium text-gray-900 dark:text-white">Link Embed</label>
-                                                    <MoveContentButtonsSection index={index} content={content} handleMoveSection={handleMoveSection} />
-                                                    <button onClick={() => handleDeleteSection(index)} className="w-20 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete</button>
-                                                    <AddSectionButton index={index} addPlaceEmbed={addPlaceEmbed} addSectionVideo={addSectionVideo} addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
-                                                </div>
-                                                <input type="text" value={section.url} onChange={(e) => handleInputChange(index, e.target.value, 'url')} className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Url" />
-                                                <input type="text" value={section.text} onChange={(e) => handleInputChange(index, e.target.value, 'text')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Text" />
-                                            </div>
-                                        )
-                                    default:
-                                        return null
-                                }
-                            })
-                        }
-                        <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-                        <AddSectionButton addSectionParagraph={addSectionParagraph} addSectionHeading={addSectionHeading} addImage={addImage} addCityEmbed={addCityEmbed} addCountryEmbed={addCountryEmbed} addBlogEmbed={addBlogEmbed} addUserEmbed={addUserEmbed} addLinkEmbed={addLinkEmbed} />
+                        <ReactQuill
+                            value={content}
+                            onChange={handleContentChange}
+                            modules={modules}
+                            formats={[
+                                'header', 'font', 'size', 'bold', 'italic', 'underline', 'strike',
+                                'blockquote', 'list', 'bullet', 'indent', 'link', 'image', 'align', 'code-block'
+                            ]}
+                        />
+                        {/* <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr> */}
+                        {/* <AddSectionButton addSectionParagraph={() => {}} addSectionHeading={() => {}} addImage={() => {}} addCityEmbed={() => {}} addCountryEmbed={() => {}} addBlogEmbed={() => {}} addUserEmbed={() => {}} addLinkEmbed={() => {}} /> */}
                     </div>
                     {/* Ready to post blog? ask if they've thought about SEO, keywords */}
                     <div className="flex flex-col w-full mt-8 sm:mt-12">
@@ -959,3 +572,4 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
         </section>
     )
 }
+

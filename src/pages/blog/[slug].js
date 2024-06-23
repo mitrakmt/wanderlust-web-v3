@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArticleJsonLd } from 'next-seo';
@@ -98,6 +98,8 @@ export default function BlogPost({ blog, relatedArticles }) {
     const [comments, setBlogComments] = useState([]);
     const [comment, setComment] = useState("");
     const [showCommentDropdown, setShowCommentDropdown] = useState(null);
+
+    console.log('blog', blog)
 
     // UseEffect
     useEffect(() => {
@@ -332,17 +334,33 @@ export default function BlogPost({ blog, relatedArticles }) {
                                         return (
                                             <h5 className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.text}</h5>
                                         )
-                                    case 'list':
+                                    case 'ul':
                                         return (
                                             <ul className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
                                                 {
-                                                    content.content.map((item, contentIndex) => {
-                                                        return (
-                                                            <li key={`blog-list-usercontent-${content.type}-${item}-${contentIndex}`}>{item}</li>
-                                                        )
-                                                    })
+                                                    content.items.map((item, itemIndex) => (
+                                                        <li key={`blog-list-ul-${index}-${itemIndex}`}>
+                                                            {item.text}
+                                                        </li>
+                                                    ))
                                                 }
                                             </ul>
+                                        );
+                                    case 'ol':
+                                        return (
+                                            <ol className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>
+                                                {
+                                                    content.items.map((item, itemIndex) => (
+                                                        <li key={`blog-list-ol-${index}-${itemIndex}`}>
+                                                            {item.text}
+                                                        </li>
+                                                    ))
+                                                }
+                                            </ol>
+                                        );
+                                    case 'blockquote':
+                                        return (
+                                            <blockquote className="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" key={`blog-${content.type}-${index}`}>{content.content}</blockquote>
                                         )
                                     case 'quote':
                                         return (
