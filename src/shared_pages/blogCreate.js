@@ -118,40 +118,6 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     }, [searchCitiesSearchTerm]);
 
     // Functions
-    const convertHtmlToStructuredData = (html) => {
-        const handler = new DomHandler((error, dom) => {
-            if (error) {
-                console.error("Error while parsing HTML:", error);
-                return [];
-            }
-            return dom;
-        });
-    
-        const parser = new Parser(handler);
-        parser.write(html);
-        parser.end();
-    
-        const convertNodeToStructuredData = (node) => {
-            if (node.type === 'text') {
-                return { type: 'text', text: decode(node.data) };
-            }
-    
-            const result = { type: node.name, text: '', items: [] };
-    
-            if (node.children && node.children.length > 0) {
-                result.items = node.children.map(convertNodeToStructuredData);
-            } else if (node.name === 'img') {
-                result.src = node.attribs.src;
-                result.alt = node.attribs.alt || '';
-            } else {
-                result.text = decode(node.children.map(child => child.data || '').join(''));
-            }
-    
-            return result;
-        };
-    
-        return handler.dom.map(convertNodeToStructuredData).filter(node => node.type !== 'text' || node.text.trim() !== '');
-    };
     
     const onDrop = async (acceptedFiles) => {
         const file = acceptedFiles[0];
@@ -228,6 +194,91 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     const handleContentChange = (value) => {
         setContent(value);
     };
+
+    const convertHtmlToStructuredData = (html) => {
+        const handler = new DomHandler((error, dom) => {
+            if (error) {
+                throw new Error(error);
+            }
+        });
+
+        const parser = new Parser(handler, { decodeEntities: true });
+        parser.write(html);
+        parser.end();
+
+        const structuredData = [];
+
+        const extractText = (element) => {
+            return element.children
+                .map(child => {
+                    if (child.type === 'text') {
+                        return decode(child.data);
+                    } else if (child.type === 'tag') {
+                        if (child.name === 'strong') {
+                            return `<strong>${extractText(child)}</strong>`;
+                        }
+                        return extractText(child);
+                    }
+                    return '';
+                })
+                .join('');
+        };
+
+        const traverseNodes = (nodes) => {
+            nodes.forEach(node => {
+                if (node.type === 'tag') {
+                    const tagName = node.name;
+                    const textContent = extractText(node);
+
+                    switch (tagName) {
+                        case 'p':
+                            structuredData.push({ type: 'p', text: textContent });
+                            break;
+                        case 'h1':
+                            structuredData.push({ type: 'h1', text: textContent });
+                            break;
+                        case 'h2':
+                            structuredData.push({ type: 'h2', text: textContent });
+                            break;
+                        case 'h3':
+                            structuredData.push({ type: 'h3', text: textContent });
+                            break;
+                        case 'h4':
+                            structuredData.push({ type: 'h4', text: textContent });
+                            break;
+                        case 'h5':
+                            structuredData.push({ type: 'h5', text: textContent });
+                            break;
+                        case 'h6':
+                            structuredData.push({ type: 'h6', text: textContent });
+                            break;
+                        case 'ul':
+                            const ulItems = [];
+                            node.children.forEach(child => {
+                                if (child.name === 'li') {
+                                    ulItems.push({ type: 'li', text: extractText(child) });
+                                }
+                            });
+                            structuredData.push({ type: 'ul', items: ulItems });
+                            break;
+                        case 'ol':
+                            const olItems = [];
+                            node.children.forEach(child => {
+                                if (child.name === "li") {
+                                    olItems.push({ type: "li", text: extractText(child) });
+                                    }
+                                    });
+                                    structuredData.push({ type: "ol", items: olItems });
+                                    break;
+                                    default:
+                                    break;
+                                    }
+                                    }
+                                    });
+                                    };traverseNodes(handler.dom);
+                                    return structuredData;
+                                };
+                                
 
     const convertJsonToReact = (structuredData) => {
         return structuredData.map((block, index) => {
