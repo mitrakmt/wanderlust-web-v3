@@ -118,6 +118,41 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
     }, [searchCitiesSearchTerm]);
 
     // Functions
+    const convertHtmlToStructuredData = (html) => {
+        const handler = new DomHandler((error, dom) => {
+            if (error) {
+                console.error("Error while parsing HTML:", error);
+                return [];
+            }
+            return dom;
+        });
+    
+        const parser = new Parser(handler);
+        parser.write(html);
+        parser.end();
+    
+        const convertNodeToStructuredData = (node) => {
+            if (node.type === 'text') {
+                return { type: 'text', text: decode(node.data) };
+            }
+    
+            const result = { type: node.name, text: '', items: [] };
+    
+            if (node.children && node.children.length > 0) {
+                result.items = node.children.map(convertNodeToStructuredData);
+            } else if (node.name === 'img') {
+                result.src = node.attribs.src;
+                result.alt = node.attribs.alt || '';
+            } else {
+                result.text = decode(node.children.map(child => child.data || '').join(''));
+            }
+    
+            return result;
+        };
+    
+        return handler.dom.map(convertNodeToStructuredData).filter(node => node.type !== 'text' || node.text.trim() !== '');
+    };
+    
     const onDrop = async (acceptedFiles) => {
         const file = acceptedFiles[0];
         if (file) {
