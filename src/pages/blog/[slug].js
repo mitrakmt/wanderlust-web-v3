@@ -371,7 +371,7 @@ export default function BlogPost({ blog, relatedArticles }) {
                                             <CityEmbed id={content.id} key={`blog-${content.type}-${content.id}-${index}`} />
                                         )
                                     // case 'country':
-                                    //     return (
+                                    //     return ( 
                                     //         <CountryEmbed id={content.id} key={`blog-${content.type}-${content.id}-${index}`} />
                                     //     )
                                     case 'blog':
@@ -383,6 +383,10 @@ export default function BlogPost({ blog, relatedArticles }) {
                                             <UserEmbed id={content.id} key={`blog-${content.type}-${content.id}-${index}`} />
                                         )
                                     case 'link':
+                                        return (
+                                            <a href={content.url} target="_blank" title={content.text} className="px-6 py-4 rounded-full bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-200 no-underline hover:text-primary-600 dark:hover:text-primary-600 transition-colors">{content.text}</a>
+                                        )
+                                    case 'a':
                                         return (
                                             <a href={content.url} target="_blank" title={content.text} className="px-6 py-4 rounded-full bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-200 no-underline hover:text-primary-600 dark:hover:text-primary-600 transition-colors">{content.text}</a>
                                         )

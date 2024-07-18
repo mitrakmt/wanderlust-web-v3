@@ -252,6 +252,12 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                         case 'h6':
                             structuredData.push({ type: 'h6', text: textContent });
                             break;
+                        case 'link':
+                            structuredData.push({ type: 'link', text: textContent });
+                            break;
+                        case 'a':
+                            structuredData.push({ type: 'link', text: textContent });
+                            break;
                         case 'ul':
                             const ulItems = [];
                             node.children.forEach(child => {
@@ -266,18 +272,19 @@ export default function CreateBlogPage({ editing = false, blogId = null }) {
                             node.children.forEach(child => {
                                 if (child.name === "li") {
                                     olItems.push({ type: "li", text: extractText(child) });
-                                    }
-                                    });
-                                    structuredData.push({ type: "ol", items: olItems });
-                                    break;
-                                    default:
-                                    break;
-                                    }
-                                    }
-                                    });
-                                    };traverseNodes(handler.dom);
-                                    return structuredData;
-                                };
+                                }
+                            });
+                            structuredData.push({ type: "ol", items: olItems });
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                });
+            };
+            traverseNodes(handler.dom);
+            return structuredData;
+        };
                                 
 
     const convertJsonToReact = (structuredData) => {
