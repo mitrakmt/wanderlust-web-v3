@@ -7,16 +7,6 @@ export default function Document() {
       <Head>
           {/* Include your code snippet here */}
         <meta name="verification" content="460bfd25b57ffced74edf7530b43e59eb4f1c5b7" />
-        <script
-            id="hydro_config"
-            type="text/javascript"
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.Hydro_tagId = "e30a9634-8798-4872-9366-27b30c358235";
-              `,
-            }}
-          />
-          <script id="hydro_script" src="https://track.hydro.online/" async />
         </Head>
       <body className="w-full">
         <Main className="overflow-scroll scroll-smooth" />

@@ -272,11 +272,19 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'lh3.ggpht.com',
+      },
+      {
+        protocol: 'https',
         hostname: '**.unsplash.com',
       },
       {
         protocol: 'https',
         hostname: '**.wanderlust-extension.s3.us-west-2.amazonaws.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'maps.googleapis.com',
       },
       {
         protocol: 'https',

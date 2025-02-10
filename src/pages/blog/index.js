@@ -10,7 +10,6 @@ import { useAuth } from '../../hooks/useAuth';
 
 // Components
 import BlogCard from '../../components/BlogCard';
-import CustomHead from '@/shared_components/CustomHead';
 import Footer from '@/components/Footer';
 
 export async function getStaticProps() {
@@ -33,7 +32,7 @@ export const metadata = {
     image: "https://uploads-ssl.webflow.com/62893f6b6c73c80d757c8d0d/629378f07e3c95055ebae0ca_Screen%20Shot%202022-05-29%20at%204.38.07%20PM%20(1).jpg",
     alt: "Wanderlust App"
 };
-  
+
 export default function Blog({ posts }) {
     // Hooks
     const { user } = useAuth();
@@ -72,14 +71,14 @@ export default function Blog({ posts }) {
     const updateSearch = (e) => {
         setSearchTerm(e.target.value);
     };
-    
+
     return (
         <section className="relative ml-0 sm:ml-16 px-6 py-8">
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
                     <h1 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Digital Nomad Blog</h1>
                     <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">Learn about the best places around the world, the most beautiful places to see, and everything you&apos;d need as a nomad.</p>
-                </div> 
+                </div>
                 {
                     (user?.role === 'publisher' || user?.role === 'superadmin') && (
                         <div className="flex mb-4 justify-center">
